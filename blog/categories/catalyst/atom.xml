@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Catalyst | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/catalyst/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-05T21:47:14+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[catalyst]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/04/catalyst/"/>
+    <updated>2012-07-04T19:02:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/04/catalyst</id>
+    <content type="html"><![CDATA[<h2>DBIx::Class로 스키마 관리하기</h2>
+
+<p><a href="http://advent.perl.kr/2011/2011-12-17.html">jeen</a>님이 발표한 스키마 관리 하기
+입니다.</p>
+
+<p>jeen님의 글을 보게 되면 기존의 스키마를 관리하는 방법은 sql의 잦은 교체시 많은 문제점이
+발생하고 있다고 서술 합니다.</p>
+
+<p>스키마 관리를 좀더 편하게 하기 위하여 마지막에 서술 하는
+<a href="https://metacpan.org/module/dbicdump">dbicdump</a>를 사용하여 간편하게 스키마 관리를 해보도록
+합니다.</p>
+
+<p>dbicdump를 사용하기 위해 필요한 ResultBase.pm과 schema.pl파일을 만들어 보도록 하겠습니다.</p>
+
+<h2>schema/schema.pl</h2>
+
+<p><a href="http://rumidier.github.com/blog/2012/07/02/catalyst/">schema.pl 설명</a></p>
+
+<p>[% codeblock schema.pl %]</p>
+
+<pre><code>my $DB_NAME     = $ENV{DB}          || 'DB_NAME';
+my $DB_USER     = $ENV{DB_USER}     || 'DB_USER';
+my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'DB_PASSWORD';
+
+{
+    schema_class =&gt; "Silex::Schema",
+    connect_info =&gt; {
+        dsn               =&gt; "dbi:mysql:$DB_NAME:127.0.0.1",
+        user              =&gt; $DB_USER,
+        pass              =&gt; $DB_PASSWORD,
+        mysql_enable_utf8  =&gt; 1,
+    },
+    loader_options =&gt; {
+        dump_directory     =&gt; 'lib',
+        naming             =&gt; { ALL =&gt; 'v8' },
+        skip_load_external =&gt; 1,
+        relationships      =&gt; 1,
+        use_moose          =&gt; 1,
+        only_autoclean     =&gt; 1,
+        col_collision_map  =&gt; 'column_%s',
+        result_base_class =&gt; 'MyApp::Schema::ResultBase',
+        overwrite_modifications =&gt; 1,
+        datetime_undef_if_invalid =&gt; 1,
+        custom_column_info =&gt; sub {
+            my ($table, $col_name, $col_info) = @_;
+
+            if ($col_name eq 'password') {
+                return { %{ $col_info },
+                         encode_column =&gt; 1,
+                         encode_class  =&gt; 'Digest',
+                         encode_args   =&gt; { algorithm =&gt; 'SHA-1', format =&gt; 'hex' },
+                         encode_check_method =&gt; 'check_password' };
+            } # DB password 설정
+            if ($col_name eq 'created_on') {
+                return { %{ $col_info }, set_on_create =&gt; 1, inflate_datetime =&gt; 1 };
+            } # DB created_on 설정
+
+            if ($col_name eq 'updated_on') {
+                return { %{ $col_info }, set_on_create =&gt; 1, set_on_update =&gt; 1, inflate_datetime =&gt; 1 };
+            } # DB updated_on 설정
+        },
+    },
+}
+</code></pre>
+
+<p>[% endcodeblock %]</p>
+
+<p>lib/MyApp/Schema/ResultBase.pm</p>
+
+<p>ResultBase 클래스의 제약 문제 때문에 result_base_class 값을 지정해 줌으로써 모든 결과
+ 클래스들은 DBIx::Class::Core가 아닌 MyApp::Schema::ResultBase를 상속받게 합니다.
+MyApp::Schema::ResultBase는 개인이 정의 해주는것 이므로 아래를 참조 합니다.</p>
+
+<p>MD5 체크섬 값 아래에 중복되는 코드를 매번 적어주어야 했습니다.
+이렇게 사용할 컴포넌트들을 결과클래스 별로 지정하는 대신 ResultBase 클래스를 읽어들입니다.
+사실 이처럼 ResultBase를 놓고 여기에 컴포넌트를 일괄해서 읽어들이는 방식은
+Cookbook 문서에서도 스타트업 속도 향상을 위해 권장하고 있습니다. - <a href="http://advent.perl.kr/2011/2011-12-17.html">by Jeen</a> -</p>
+
+<p>그리고 컴포넌트의 사용을 위한 컬럼의 속성은 custom_column_info 속성에 코드를 등록해 지정할 수 있습니다.(schema.pl 하단 참조)
+ 위의 코드처럼 등록하면 created_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set_on_create 옵션이 모든 결과클래스에 추가됩니다.
+(이거 멋지다..)</p>
+
+<p>[% codeblock ResultBase.pm %]</p>
+
+<pre><code>package MyApp::Schema::ResultBase;
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
+
+extends 'DBIx::Class::Core';
+
+__PACKAGE__-&gt;load_components(qw/
+InflateColumn::DateTime
+TimeStamp
+/);
+
+__PACKAGE__-&gt;meta-&gt;make_immutable;
+
+1;
+</code></pre>
+
+<p>[% endcodeblock %]</p>
+
+<p>위의 두가지 코드를 작성 하였다면 준비는 끝났습니다.
+(<strong>dbicdump는 db 정보를 덤프해서 스키마를 작성</strong>하는 것으로 코드 작성및 작성 후에라도
+db가 정의 되어 있어야 합니다.)</p>
+
+<h2>dbicdump 사용하기</h2>
+
+<p>아래를 실행한후 lib/MyApp/Schema/Result에 .pm 파일들이 새로 생성되거나 수정 되었다면 확인을 해보라</p>
+
+<pre><code>$ dbicdump -Ilib schema/schema.pl
+</code></pre>
+
+<h2>MakeFile.pl 모듈 추가</h2>
+
+<p>다른 모듈이 더 추가 될수 있습니다 에러 메세지를 확인 하고 필요한 모듈을 더 설치 하세요.</p>
+
+<pre><code>requires "DBIx::Class::TimeStamp";
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

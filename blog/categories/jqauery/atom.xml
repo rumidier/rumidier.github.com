@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jQauery | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/jqauery/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-05T21:47:14+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery]]></title>
+    <link href="http://rumidier.github.com/blog/2012/05/22/jquery/"/>
+    <updated>2012-05-22T16:57:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/05/22/jquery</id>
+    <content type="html"><![CDATA[<p>셀렉터</p>
+
+<pre><code>:first  
+:last   
+:fisrt-child 
+:last-child
+:only-child
+:nth-child(n)
+:nth-child(even|odd)
+:nth-child(Xn+Y)
+:even / :odd
+:eq(n)
+:gt(n)
+:lt(n)
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

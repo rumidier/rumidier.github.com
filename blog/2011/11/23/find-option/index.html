@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>find option - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="find find [경로] [옵션들] [판정 조건] [행동] |옵션 |의미 |
+|------------------|-------------------------------------------------------------|
+|-depth |디렉터리 자체를 보기 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2011/11/23/find-option/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Find Option</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-23T11:29:00+09:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>find</h2>
+
+<p>find [경로] [옵션들] [판정 조건] [행동]</p>
+
+<pre><code>|옵션              |의미                                                         |
+|------------------|-------------------------------------------------------------|
+|-depth            |디렉터리 자체를 보기 전에 디렉터리의 항목들을 먼저 검색한다  |
+|-follow           |기호링크(symbolic link)들을 따라간다                         |
+|- maxdepths N     |디렉터리의 하위 디렉터리들을 최대 N수준까지만 검색한다.      |
+|-mount (또는 -xdev|다른 파일 시스템의 디렉터리들은 검색하지 않는다.             |
+
+|판정            |의미                                                                |
+|----------------|--------------------------------------------------------------------|
+|-atime N        |파일이 N일 전에 마지막으로 접근 되었음.                             |
+|-mtime N        |파일이 N일 전에 마지막으로 수정되었음.                              |
+|-name 패턴      |경로를 제외한 파일이름이 패턴과 매치, 쉘에 확장을 거치지 않으려면 ""|
+|-newer 다른파일 |파일이 *다른파일*보다 새것임                                        |
+|-type C         |파일의 종류가 *C* 인지 검사.(ex:디렉터리 d, 파일 f)                 |
+|-user 사용자이름|파일의 소유자가 *사용자이름*에 해당하는 사용자임.                   |
+
+
+|연산자|연산자(긴 형태)|의미                    |
+|------|---------------|------------------------|
+|!     |-not           |판정의 부정(역)         |
+|-a    |-and           |두 판정 모두 참이어야 참|
+|-o    |-or            |둘 중 하나만 참이어도 참|
+
+|행동      |의미                                      |
+|----------|------------------------------------------|
+|-exec 명령|주어진 명령을 주행, 행동 끝에 \;첨부      |
+|-ok 명령  |명령을 수행하되 수행전 확인을 받음 \; 첨부|
+|-print    |파일 이름 출력                            |
+|-ls       |현재 파일에 대해 ls -dil 명령을 수행한다  |
+</code></pre>
+
+<p>() 회피는 \로 해야 한다</p>
+
+<p>(-news X -o -name &#8220;_*&#8221; )</p>
+
+<p>X라는 파일보다 새것이면서 _시작 하는 파일 찾기</p>
+
+<p>현재 디렉터리에서 while2라는 파일보다 최근에 수정된 파일 찾기(디렉터리 포함됨)</p>
+
+<pre><code>$find . -newer while2 -print
+</code></pre>
+
+<p>현재 디렉터리에서 while2 디렉터리를 제외한 파일만 찾기</p>
+
+<pre><code>$find . -newer while2 -type f -print
+</code></pre>
+
+<p>파일 이름이 밑줄로 시작하거나 while2보다 새것 찾기</p>
+
+<pre><code>$find . \( -name "_*" -or -newer while2 \) -type f -print
+</code></pre>
+
+<p>파일을 찾아서 행동 시키기</p>
+
+<pre><code>$find . -newer while2 -type f -exec ls -l {} \;
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-23T11:29:00+09:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2011/11/23/find-option/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2011/11/23/find-option/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/11/19/blogging-basics/" title="Previous Post: Blogging basics">&laquo; Blogging basics</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/11/23/grep/" title="Next Post: grep">grep &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/04/catalyst/">catalyst</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/02/catalyst/">catalyst</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/25/catalyst/">catalyst</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2011/11/23/find-option/';
+        var disqus_url = 'http://rumidier.github.com/blog/2011/11/23/find-option/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

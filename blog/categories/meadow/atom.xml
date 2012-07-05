@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: meadow | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/meadow/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-05T21:47:14+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Meadow]]></title>
+    <link href="http://rumidier.github.com/blog/2012/05/18/meadow/"/>
+    <updated>2012-05-18T19:37:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/05/18/meadow</id>
+    <content type="html"><![CDATA[<p>[잡담]
+매일 매일 똑같은 모듈만 만지작 거리니까
+진사마가 Furl을 사용해 보라고 권하였다..
+그래도 빨리 하나 써서 주어야 하니까 그건 다음에..
+크리스마스때...!!?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[meadow]]></title>
+    <link href="http://rumidier.github.com/blog/2012/05/14/meadow/"/>
+    <updated>2012-05-14T15:15:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/05/14/meadow</id>
+    <content type="html"><![CDATA[<h2>[잡담]</h2>
+
+<ol>
+<li>카탈 시작 정리(carton install 좀 까먹지마...)</li>
+<li>MYSQL 유저 추가</li>
+<li>MYSQL Dump 하는법</li>
+</ol>
+
+
+<p>뭔가 블로그질을 하려면 똑바로 하고 싶은데 똑바로 하려면
+엄청나게  시간이 들가고 짧게 짧게 가자..</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,1121 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="서버파일 전송 $ scp [option] [파일] [위치]
+&lt;option&gt;
+-r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사 예제 $ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c . ">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/page/3/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/14/ubuntu-scp/">Ubuntu SCP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T15:08:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/14/ubuntu-scp/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>서버파일 전송</p>
+
+<pre><code>$ scp [option] [파일] [위치]
+&lt;option&gt;
+-r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사
+</code></pre>
+
+<p>예제</p>
+
+<pre><code>$ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c .
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/14/git-rabase/">Git Rebase</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T12:11:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/14/git-rabase/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>브랜치를 나누기 쉬운 git-flow쓰지만 코드 확인이 불편 하다.
+그래서 <a href="http://aanoaa.github.com/">형석님</a> git - rabase를 사용해 본다.</p>
+
+<p>다른 사람이 내게 pull-request를 날리게 되면 이게 잘돌아 가는지 확인이
+필요하다.</p>
+
+<p>remote branch 확인 하는 방법</p>
+
+<pre><code>$ git branch -a 또는 git branch -av
+</code></pre>
+
+<p>pull-request된 브랜치 명이 있다면 보이게 된다.</p>
+
+<pre><code>remotes/origin/#1-test
+</code></pre>
+
+<p>remote 상태 확인 하러 가기</p>
+
+<pre><code>$ git checkout "#1-test"
+</code></pre>
+
+<p>pull-request된 내용이 이상이 없을때는 github 홈페이지에서 허락을 하게 되면
+master와 합쳐 지게 된다.
+merge가 안된다는 명시를 하게 되면 현재 pull-request가 branch의 분기 시점이
+현재 master와 차이(다른 커밋 메세지)가 포함 되어 있기 때문에
+master 브랜치를 최신상태로 만들어 주고 rebase 해주어야 한다.</p>
+
+<pre><code>$ git pull origin master
+</code></pre>
+
+<p>분기된 master이력이 최신으로 변경되었다면.</p>
+
+<pre><code>$ git checkout "branch-name"
+$ git rebase master
+# conflict?
+# $ vim conflict.file -&gt; 수정
+</code></pre>
+
+<p>conflict이 일어 났을시 bracnh명이 유지 될때와 유지 되지 않을때가 있다.</p>
+
+<p>유지시</p>
+
+<pre><code>$ git rebase --continue
+</code></pre>
+
+<p>(no branch)상태</p>
+
+<pre><code>$ git rebae --skip
+</code></pre>
+
+<p>conflict 처리 될때까지 반복</p>
+
+<p>모든 문제의 해결을 했다면</p>
+
+<pre><code>$ git push origin "#1-test"
+</code></pre>
+
+<p>이제 github 홈페이지 에서 확인 절차를 밟으면 된다.
+확인이 끝났다면 master branch에서</p>
+
+<pre><code>(master) $ git pull
+</code></pre>
+
+<h2>pull-request를 보낼시</h2>
+
+<p>pull-request를 보낼때 또한 마스터의 가장 최근 이력을 기초로 한다.
+가장 최신상태에서</p>
+
+<p>push를 해주고 github 홈페이지 에서 pull-request를 보내게 되면 마스터가
+알아서 처리 해주게 된다.</p>
+
+<pre><code>$ git push origin "#1-test"
+</code></pre>
+
+<h2>git 기본사항</h2>
+
+<p>모든 branch 확인 하는 방법</p>
+
+<pre><code>$ git bracnh -a
+</code></pre>
+
+<p>remote 삭제 하는 방법</p>
+
+<pre><code>$ git push origin :remote주소
+</code></pre>
+
+<p>brach 삭제 하는 방법</p>
+
+<pre><code>$ git branch -d "branch name"
+</code></pre>
+
+<h2>remote 주소 변경하기</h2>
+
+<pre><code>$ git remote show origin # remote 상태 확인
+</code></pre>
+
+<p>push시 경로와 비밀번호 쓰라고 나오는 경우가 생겼는데
+이런 경우 remote의 상태를 확인후 http://&#8230;..되있는 경우가 있다
+이때는 주소를 http://가 아닌 ssh 주소로 해주면 나오지 않게 된다.</p>
+
+<p>git 홈피에서 ssh 주소를 복사해오기</p>
+
+<pre><code>$ git remote add aaa "ssh 주소 copy"
+$ git remote rm origin
+$ git remote show origin
+$ git remote rename aaa origin
+$ git remote show origin 으로 확인 및 푸쉬 해봄
+</code></pre>
+
+<h2>마무리</h2>
+
+<p>merge된 branch 알아 보기
+merge가 안된 branch는 표시 안되니 표시 된건
+가차 없이 지워 버리자</p>
+
+<pre><code>$ git br --merged
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/29/jeonyeog-geomsaeggwa-cihwan/">전역 검색과 치환</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-29T22:24:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/12/29/jeonyeog-geomsaeggwa-cihwan/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>전역 검색과 치환</h3>
+
+<p>버퍼의 x행과 효애 사이에서 패턴(pattern)을 찾아 치환 문자열(replacement)로 까누다
+패턴은 정규 표현식이다.</p>
+
+<p>1~10번째 줄에서 weeble르 wobble로 대체한다.</p>
+
+<pre><code>:[x,y]s/patern/replacement/flags
+:1,10s/weeble/wobble
+</code></pre>
+
+<h3>마크 하기</h3>
+
+<p>어떤 위치에서 ma라고 입력하면 그 위치에 a 표시(mark)을 한다</p>
+
+<p>a표시로 이동</p>
+
+<pre><code>`a
+</code></pre>
+
+<p>a표시행의 맨앞으로 이동</p>
+
+<pre><code>'a
+</code></pre>
+
+<p>마크를 이용한 줄에서의 치환
+&#8216;a행에서 .현재 행을 의미</p>
+
+<pre><code>:'a, .s/weeble/wobble/
+</code></pre>
+
+<p>마크를 사용한 복사와 삭제
+복사를 시작할 위치에서 y를 누르고 `a를 사용하게 되면 현재 위치에서 마크위치까지를
+복사하게 된다(삭제는 y대신 d사용)</p>
+
+<pre><code> :y`a
+</code></pre>
+
+<p>레지스터에 저장하기
+a-z, A-Z를 사용가능 하며 소문자는 한개만 대문자는 기존에 추가 된다</p>
+
+<pre><code>"ayy : 한줄 저장
+"ay`a : 현재 행부터 마크까지 저장
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/29/vim-r/">Vim: :r</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-29T22:21:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/12/29/vim-r/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>다른 파일 포함하기 :r</h3>
+
+<p>:r foo.txt</p>
+
+<pre><code>현재 파일 위치밑에 foo.txt의 내용을 복사한다
+</code></pre>
+
+<p>:r!ls -F</p>
+
+<pre><code>ls의 표준 출력이 복사 되어진다.
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/25/cjpeg/">Cjpeg</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-25T18:05:00+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/25/cjpeg/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>출력 재지정</p>
+
+<pre><code>$ cjpeg image.gif &gt; image.jpg
+</code></pre>
+
+<p>실습</p>
+
+<pre><code>#!/bin/sh
+for image in * .gif
+do
+  cjpeg $image &gt; ${image%%gif}jpg
+done
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/25/param/">Param</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-25T17:43:00+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/25/param/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>매개변수 치환 구문</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>매개변수 치환 구문</th>
+<th>결과                                                                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>${param:-default} </td>
+<td>param이 널이면 default의 값                                         |</td>
+</tr>
+<tr>
+<td></td>
+<td>${#param}         </td>
+<td>param의 길이                                                        |</td>
+</tr>
+<tr>
+<td></td>
+<td>${param%word}     </td>
+<td>param의 끝에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분  |</td>
+</tr>
+<tr>
+<td></td>
+<td>${param%%word}    </td>
+<td>param의 끝에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분    |</td>
+</tr>
+<tr>
+<td></td>
+<td>${param#word}     </td>
+<td>param의 시작에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분|</td>
+</tr>
+<tr>
+<td></td>
+<td>${param##word}    </td>
+<td>param의 시작에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분  |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>실습-매개변수 처리</p>
+
+<figure class='code'><figcaption><span>shell</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</span><span class='line'>
+</span><span class='line'>unset foo
+</span><span class='line'>echo ${foo:-bar}
+</span><span class='line'>
+</span><span class='line'>foo=fud
+</span><span class='line'>
+</span><span class='line'>echo ${foo:-bar}
+</span><span class='line'>foo=/usr/bin/X11/startx
+</span><span class='line'>echo ${foo#*/}
+</span><span class='line'>echo ${foo##*/}
+</span><span class='line'>
+</span><span class='line'>bar=/usr/local/etc/local/networks
+</span><span class='line'>echo ${bar%local*}
+</span><span class='line'>echo ${bar%%%local*}
+</span><span class='line'>
+</span><span class='line'>exit 0</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/25/shell-jeonggyu-pyohyeonsig/">Shell 정규 표현식</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-25T17:27:00+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/25/shell-jeonggyu-pyohyeonsig/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>정규 표현식</p>
+
+<p>특수 문자</p>
+
+<pre><code>|문자|의미                                               |
+|----|---------------------------------------------------|
+|^   |한 줄의 시작을 뜻하는 앵커(anchor)                 |
+|$   |한 줄의 끝을 뜻하는 앵커                           |
+|.   |임의의 문자 하나                                   |
+|[ ] |일반적으론 하나검사 1-10이면 1에서 부터 10까지 검사|
+
+보통의 문자로 취급하게 하려면 앞에 \를 붙인다 \$
+</code></pre>
+
+<p>대괄호쌍 안에서 문자 범위 지정</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>부합 패턴 </th>
+<th>의미                     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>[:alnum:] </td>
+<td>영문자 또는 숫자         |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:alpha:] </td>
+<td>영문자                   |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:ascii:] </td>
+<td>ASCII 문자               |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:blank:] </td>
+<td>빈칸 또는 탭             |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:cntrl:] </td>
+<td>ASCII 제어 문자          |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:digit:] </td>
+<td>숫자                     |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:graph:] </td>
+<td>비제어, 비공백 문자      |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:lower:] </td>
+<td>소문자                   |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:print:] </td>
+<td>인쇄 가능 문자           |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:punct:] </td>
+<td>문장 부호                |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:space:] </td>
+<td>공백 문자(수직 탭도 포함)|</td>
+</tr>
+<tr>
+<td></td>
+<td>[:upper:] </td>
+<td>대문자                   |</td>
+</tr>
+<tr>
+<td></td>
+<td>[:xdigit:]</td>
+<td>16진 숫자                |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>-E 옵션 활성화</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>옵션 </th>
+<th>의미                                              </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>?    </td>
+<td>표현식이 있어도 없어도 되지만 한번만 부합해야 한다|</td>
+</tr>
+<tr>
+<td></td>
+<td>*    </td>
+<td>0회 이상 부합 해야 한다                           |</td>
+</tr>
+<tr>
+<td></td>
+<td>+    </td>
+<td>1회 이상 부합                                     |</td>
+</tr>
+<tr>
+<td></td>
+<td>{n}  </td>
+<td>n회 반복해서 부합                                 |</td>
+</tr>
+<tr>
+<td></td>
+<td>{n, }</td>
+<td>n회 이상 반복 부합                                |</td>
+</tr>
+<tr>
+<td></td>
+<td>{n,m}</td>
+<td>n회 이상 m회 이하 반복 부합                       | </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>실습</p>
+
+<p>e로 끝나는 줄 찾기</p>
+
+<pre><code>$ grep e$ words2.txt
+</code></pre>
+
+<p>a로 끝나는 단어들이 있는 줄 찾기</p>
+
+<pre><code>$ grep a[[:blank:]] words2.txt
+</code></pre>
+
+<p>Th로 시작하는 세 글자 단어 찾기</p>
+
+<pre><code>$ grep Th.[[:space:]] words2.txt
+</code></pre>
+
+<p>열자 짜리 소문자 찾기</p>
+
+<p>   $ grep -E [a-z]{10} word.txt</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/24/path/">PATH</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-24T23:04:00+09:00" pubdate data-updated="true">Nov 24<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/24/path/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>$PATH에 <em>추가</em> 하기</p>
+
+<pre><code>echo PATH=$PATH:/foo/bar/baz
+</code></pre>
+
+<p>$PATH를 <em>바꾸기</em></p>
+
+<pre><code>echo PATH=경로....
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/24/shell-key/">Shell Key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-24T18:18:00+09:00" pubdate data-updated="true">Nov 24<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/24/shell-key/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ctrl + u</p>
+
+<p>커서 위치 부터 처음 까지 삭제</p>
+
+<pre><code>$ echo rumidier-linux bul-la bul-la.....&lt;--
+$
+
+$ echo rumidier-linux&lt;--- bul-la bul-la.....
+$ bul-la bul-la.....
+</code></pre>
+
+<p>Ctrl + c</p>
+
+<p>명령 실행후 중지</p>
+
+<p>Ctrl + z</p>
+
+<p>명령 일시 정지 (재시작은 fg입력)</p>
+
+<p>Ctrl + s</p>
+
+<p>터미널 출력 멈춤</p>
+
+<p>Ctrl + q</p>
+
+<p>터미널 출력 재시작</p>
+
+<p>이런 키들이 문제가 된다면?</p>
+
+<pre><code>stty function key
+function : 기능
+key      : key 조합 (^컨트롤)
+</code></pre>
+
+<p>현재 터미널의 설정 내용</p>
+
+<pre><code>$ stty -a
+</code></pre>
+
+<p>지금껏 사용 하다 갑자기 이상해졌다면</p>
+
+<pre><code>$ ssty sane
+</code></pre>
+
+<p>Ctrl + c</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/23/grep/">Grep</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-23T12:17:00+09:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/23/grep/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>grep 명령</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>옵션</th>
+<th>의미                                                                   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>-c  </td>
+<td>패턴과 부합한 줄을 출력하는 대신 그런 줄들의 개수를 출력한다.          |</td>
+</tr>
+<tr>
+<td></td>
+<td>-E  </td>
+<td>확장된 정규표현식을 활성화한다.                                        |</td>
+</tr>
+<tr>
+<td></td>
+<td>-h  </td>
+<td>부합한 줄을 출력할 때 파일 이름은 출력하지 않는다.                     |</td>
+</tr>
+<tr>
+<td></td>
+<td>-i  </td>
+<td>대소문자를 구분하지 않는다.                                            |</td>
+</tr>
+<tr>
+<td></td>
+<td>-l  </td>
+<td>부합한 줄을 담은 파일 이름만 출력하고 부합한 줄 자체는 출력하지 않는다.|</td>
+</tr>
+<tr>
+<td></td>
+<td>-v  </td>
+<td>패턴을 뒤집는다. 즉, 주어진 패턴과 부합하지 않은 줄들을 출력한다.      |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>파일에서 in이라는 문자열 찾기</p>
+
+<pre><code>$ grep in words.txt
+</code></pre>
+
+<p>파일들에서 in을 찾고 매치 되는 갯수 출력</p>
+
+<pre><code>$ grep -c in words.txt words2.txt
+</code></pre>
+
+<p>파일들에서 in을 찾고 매치 되지 않는 갯수 출력</p>
+
+<pre><code>$grep -c -v in words.txt words2.txt
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/04/catalyst/">catalyst</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/02/catalyst/">catalyst</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/25/catalyst/">catalyst</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

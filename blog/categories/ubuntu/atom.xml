@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ubuntu | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-05T21:47:14+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu SCP]]></title>
+    <link href="http://rumidier.github.com/blog/2012/05/14/ubuntu-scp/"/>
+    <updated>2012-05-14T15:08:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/05/14/ubuntu-scp</id>
+    <content type="html"><![CDATA[<p>서버파일 전송</p>
+
+<pre><code>$ scp [option] [파일] [위치]
+&lt;option&gt;
+-r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사
+</code></pre>
+
+<p>예제</p>
+
+<pre><code>$ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c .
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

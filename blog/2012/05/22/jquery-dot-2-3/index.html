@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.2-3 - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="jQuery 정의 필터 셀렉터. 대상 엘리먼트를 식별해내는 데 강력한 기능을 준다. 셀렉터 :animated 현재 애니메이션이 적용되고 있는 엘리먼트를 선택한다.
+:button 모든 버튼을 선택한다.(input[type=submit], input[type=reset &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/05/22/jquery-dot-2-3/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">jQuery.2-3</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T17:06:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>jQuery 정의 필터 셀렉터. 대상 엘리먼트를 식별해내는 데 강력한 기능을 준다.</h2>
+
+<p>셀렉터</p>
+
+<pre><code>:animated
+  현재 애니메이션이 적용되고 있는 엘리먼트를 선택한다.
+:button
+  모든 버튼을 선택한다.(input[type=submit], input[type=reset], input[type=button], button)
+:checkbox
+  체크박스 엘리먼트만 선택(input[type=checkbox])
+:checked
+  선택된 체크박스나 라디오 버튼만을 선택한다.
+:contains(foo)
+  텍스트 foo를 포함하는 엘리먼트만 선택한다.
+:disabled
+  인터페이스에서 비활서오하 상태인 모든 폼 엘리먼트를 선택한다.
+:enabled
+  인터페이스에서 활성화 상태인 모든 폼 엘리먼트를 선택한다.
+:file
+  모든 파일 엘리먼트를 선택한다.(input[type=file])
+:header
+  헤더 엘리먼트만 선택한다.
+:hidden
+  감춰진 엘리먼트만 선택한다
+:image
+  폼 이미지를 선택한다 (input[type=image])
+:input
+  폼엘리먼트만 선택(input, select, textarea, button)
+:not(filter)
+  필터의 값을 반대로 변경
+:parent
+  빈 엘리먼트를 제외하고, 텍트스도 포함해서 자식 엘리먼트를 가지는 엘리먼트를 선택한다.
+:password
+  패스워드 엘리먼트만 선택한다.(input[type=password])
+:radio
+  라디오 버튼 엘리먼트만 선택한다(input[type=radio])
+:reset
+  리셋 버튼을 선택한다.(input[type=reset]이나 button[type=reset])
+:selected
+  선택된 엘리먼트만 선택한다.
+:submit
+  전송 버튼을 선택한다.(button[type=submit]이나 input[type=submit])
+:text
+  텍스트 엘리먼트만 선택한다.(input[type=text])
+:visble
+  보이는(visible)엘리먼트만 선택한다.
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T17:06:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jquery/'>jQuery</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/05/22/jquery-dot-2-3/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/05/22/jquery-dot-2-3/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/22/jquery/" title="Previous Post: jQuery">&laquo; jQuery</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/22/jquery-dot-2-4/" title="Next Post: jQuery.2-4">jQuery.2-4 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/04/catalyst/">catalyst</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/02/catalyst/">catalyst</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/25/catalyst/">catalyst</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/05/22/jquery-dot-2-3/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/05/22/jquery-dot-2-3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

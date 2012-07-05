@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Running | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/running/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-05T21:47:14+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PATH]]></title>
+    <link href="http://rumidier.github.com/blog/2011/11/24/path/"/>
+    <updated>2011-11-24T23:04:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2011/11/24/path</id>
+    <content type="html"><![CDATA[<p>$PATH에 <em>추가</em> 하기</p>
+
+<pre><code>echo PATH=$PATH:/foo/bar/baz
+</code></pre>
+
+<p>$PATH를 <em>바꾸기</em></p>
+
+<pre><code>echo PATH=경로....
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell key]]></title>
+    <link href="http://rumidier.github.com/blog/2011/11/24/shell-key/"/>
+    <updated>2011-11-24T18:18:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2011/11/24/shell-key</id>
+    <content type="html"><![CDATA[<p>Ctrl + u</p>
+
+<p>커서 위치 부터 처음 까지 삭제</p>
+
+<pre><code>$ echo rumidier-linux bul-la bul-la.....&lt;--
+$
+
+$ echo rumidier-linux&lt;--- bul-la bul-la.....
+$ bul-la bul-la.....
+</code></pre>
+
+<p>Ctrl + c</p>
+
+<p>명령 실행후 중지</p>
+
+<p>Ctrl + z</p>
+
+<p>명령 일시 정지 (재시작은 fg입력)</p>
+
+<p>Ctrl + s</p>
+
+<p>터미널 출력 멈춤</p>
+
+<p>Ctrl + q</p>
+
+<p>터미널 출력 재시작</p>
+
+<p>이런 키들이 문제가 된다면?</p>
+
+<pre><code>stty function key
+function : 기능
+key      : key 조합 (^컨트롤)
+</code></pre>
+
+<p>현재 터미널의 설정 내용</p>
+
+<pre><code>$ stty -a
+</code></pre>
+
+<p>지금껏 사용 하다 갑자기 이상해졌다면</p>
+
+<pre><code>$ ssty sane
+</code></pre>
+
+<p>Ctrl + c</p>
+]]></content>
+  </entry>
+  
+</feed>
