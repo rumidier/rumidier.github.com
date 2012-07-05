@@ -1,0 +1,13 @@
+---
+layout: post
+title: "New blog"
+date: 2011-11-14 18:59
+comments: true
+categories: 
+---
+
+# Hi!!
+
+- rumidier
+- blog
+- Hi! HaHaHa

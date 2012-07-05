@@ -1,0 +1,17 @@
+---
+layout: post
+title: "vim: :r"
+date: 2011-12-29 22:21
+comments: true
+categories: 
+---
+
+### 다른 파일 포함하기 :r
+
+:r foo.txt
+
+    현재 파일 위치밑에 foo.txt의 내용을 복사한다
+
+:r!ls -F
+ 
+    ls의 표준 출력이 복사 되어진다.

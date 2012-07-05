@@ -1,0 +1,67 @@
+---
+layout: post
+title: "Perl"
+date: 2012-05-25 17:28
+comments: true
+categories:  Perl
+---
+
+### 목록으로 부터 중복된 값 제거
+
+### 해결 방안
+hash를 이용하여 목록에 존재하는 각 값을 한번만 저장하고, keys 함수를
+이용하여 이를 활용하면 된다. 이때, 프로그래머는 코드를 보다 짧고 빠르게
+해주는 펄의 다양한 아이디어를 적용할 수 있다.
+
+일반적인 방법
+-----------------
+해쉬값을 체크하고 값이 존재 하지 않는다면 배열을 생성한다.
+
+{% codeblock uniq값 구하기 %}
+my %seen = ();
+my @uniq = ();
+foreach my $item (@list) {
+    unless ($seen{$item}) {
+        # 한번도 나타 나지 않은 값에 대해서만 처리
+	$seen{$item} = 1;
+	push(@uniq, $item);
+    }
+}
+{% endcodeblock %}
+
+좀더 빠른 처리 방법 - 01
+-----------------
+이전에 나타내는 값이 없는 값을 처리할 경우 이를 해쉬에 저장 하게 된다 (++연산자는 카운팅 기능) 
+
+{% codeblock uniq값 구하기 %}
+my %seen = ();
+my @uniq = ();
+foreach my $item (@list) {
+    push @uniq, $item unless $seen{$item}++;
+}
+{% endcodeblock %}
+
+좀더 빠른 처리 방법 - 02
+-----------------
+해쉬에 저장 하고 그 키값 만은 추출 한다. (순서가 뒤죽박죽이다)
+
+{% codeblock uniq값 구하기 %}
+my %seen = ();
+foreach my $item (@list) {
+    $seen{$item}++;
+}
+my @uniq = keys %seen;
+{% endcodeblock %}
+
+좀더 빠른 처리 방법 - 03
+-----------------
+
+{% codeblock uniq값 구하기 %}
+my %seen = ();
+my @uniq = grep { ! $seen{$_}++ } @list;
+{% endcodeblock %}
+
+
+exam-code
+------------------
+https://gist.github.com/2786790
