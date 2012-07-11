@@ -24,55 +24,55 @@ dbicdump를 사용하기 위해 필요한 ResultBase.pm과 schema.pl파일을 �
 
 [schema.pl 설명](http://rumidier.github.com/blog/2012/07/02/catalyst/)
 
-[% codeblock schema.pl %]
-    my $DB_NAME     = $ENV{DB}          || 'DB_NAME';
-    my $DB_USER     = $ENV{DB_USER}     || 'DB_USER';
-    my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'DB_PASSWORD';
-    
-    {
-        schema_class => "Silex::Schema",
-        connect_info => {
-            dsn               => "dbi:mysql:$DB_NAME:127.0.0.1",
-            user              => $DB_USER,
-            pass              => $DB_PASSWORD,
-            mysql_enable_utf8  => 1,
-        },
-        loader_options => {
-            dump_directory     => 'lib',
-            naming             => { ALL => 'v8' },
-            skip_load_external => 1,
-            relationships      => 1,
-            use_moose          => 1,
-            only_autoclean     => 1,
-            col_collision_map  => 'column_%s',
-            result_base_class => 'MyApp::Schema::ResultBase',
-            overwrite_modifications => 1,
-            datetime_undef_if_invalid => 1,
-            custom_column_info => sub {
-                my ($table, $col_name, $col_info) = @_;
-    
-                if ($col_name eq 'password') {
-                    return { %{ $col_info },
-                             encode_column => 1,
-                             encode_class  => 'Digest',
-                             encode_args   => { algorithm => 'SHA-1', format => 'hex' },
-                             encode_check_method => 'check_password' };
-                } # DB password 설정
-                if ($col_name eq 'created_on') {
-                    return { %{ $col_info }, set_on_create => 1, inflate_datetime => 1 };
-                } # DB created_on 설정
-    
-                if ($col_name eq 'updated_on') {
-                    return { %{ $col_info }, set_on_create => 1, set_on_update => 1, inflate_datetime => 1 };
-                } # DB updated_on 설정
-            },
-        },
-    }
-[% endcodeblock %]
+{% codeblock schema.pl %}
+my $DB_NAME     = $ENV{DB}           || 'DB_NAME';
+my $DB_USER     = $ENV{DB_USER}     || 'DB_USER';
+my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'DB_PASSWORD';
 
-lib/MyApp/Schema/ResultBase.pm
+{
+schema_class => "Silex::Schema",
+connect_info => {
+	dsn               => "dbi:mysql:$DB_NAME:127.0.0.1",
+	user              => $DB_USER,
+	pass              => $DB_PASSWORD,
+	mysql_enable_utf8  => 1,
+},
+loader_options => {
+	dump_directory     => 'lib',
+	naming             => { ALL => 'v8' },
+	skip_load_external => 1,
+	relationships      => 1,
+	use_moose          => 1,
+	only_autoclean     => 1,
+	col_collision_map  => 'column_%s',
+	result_base_class => 'MyApp::Schema::ResultBase',
+	overwrite_modifications => 1,
+	datetime_undef_if_invalid => 1,
+	custom_column_info => sub {
+	my ($table, $col_name, $col_info) = @_;
 
-ResultBase 클래스의 제약 문제 때문에 result\_base\_class 값을 지정해 줌으로써 모든 결과
+	if ($col_name eq 'password') {
+		return { %{ $col_info },
+			encode_column => 1,
+			encode_class  => 'Digest',
+			encode_args   => { algorithm => 'SHA-1', format => 'hex' },
+			encode_check_method => 'check_password' };
+	} # DB password 설정
+	if ($col_name eq 'created_on') {
+		return { %{ $col_info }, set_on_create => 1, inflate_datetime => 1 };
+	} # DB created_on 설정
+
+	if ($col_name eq 'updated_on') {
+		return { %{ $col_info }, set_on_create => 1, set_on_update => 1, inflate_datetime => 1 };
+	} # DB updated_on 설정
+	},
+	},
+}
+{% endcodeblock %}
+
+## lib/MyApp/Schema/ResultBase.pm
+
+ResultBase 클래스의 제약 문제 때문에 result_base_class 값을 지정해 줌으로써 모든 결과
  클래스들은 DBIx::Class::Core가 아닌 MyApp::Schema::ResultBase를 상속받게 합니다.
 MyApp::Schema::ResultBase는 개인이 정의 해주는것 이므로 아래를 참조 합니다.
 
@@ -81,27 +81,27 @@ MD5 체크섬 값 아래에 중복되는 코드를 매번 적어주어야 했습
 사실 이처럼 ResultBase를 놓고 여기에 컴포넌트를 일괄해서 읽어들이는 방식은
 Cookbook 문서에서도 스타트업 속도 향상을 위해 권장하고 있습니다. - [by Jeen](http://advent.perl.kr/2011/2011-12-17.html) -
 
-그리고 컴포넌트의 사용을 위한 컬럼의 속성은 custom\_column\_info 속성에 코드를 등록해 지정할 수 있습니다.(schema.pl 하단 참조)
- 위의 코드처럼 등록하면 created\_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set\_on\_create 옵션이 모든 결과클래스에 추가됩니다.
+그리고 컴포넌트의 사용을 위한 컬럼의 속성은 custom_column_info 속성에 코드를 등록해 지정할 수 있습니다.(schema.pl 하단 참조)
+ 위의 코드처럼 등록하면 created_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set_on_create 옵션이 모든 결과클래스에 추가됩니다.
 (이거 멋지다..)
 
-[% codeblock ResultBase.pm %]
-    package MyApp::Schema::ResultBase;
-    use Moose;
-    use MooseX::NonMoose;
-    use namespace::autoclean;
+{% codeblock ResultBase %}
+package MyApp::Schema::ResultBase;
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
 
-    extends 'DBIx::Class::Core';
+extends 'DBIx::Class::Core';
 
-    __PACKAGE__->load_components(qw/
-	InflateColumn::DateTime
-	TimeStamp
-    /);
+__PACKAGE__->load_components(qw/
+  InflateColumn::DateTime
+  TimeStamp
+/);
 
-    __PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable;
 
-    1;
-[% endcodeblock %]
+1;
+{% endcodeblock %}
 
 위의 두가지 코드를 작성 하였다면 준비는 끝났습니다.
 (**dbicdump는 db 정보를 덤프해서 스키마를 작성**하는 것으로 코드 작성및 작성 후에라도
