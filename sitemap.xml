@@ -130,14 +130,42 @@
     </url>
     <url>
         <loc>http://rumidier.github.com/blog/2012/07/04/catalyst/</loc>
-        <lastmod>2012-07-05T21:43:14+09:00</lastmod>
+        <lastmod>2012-07-11T18:57:00+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rumidier.github.com/blog/2012/07/11/catalyst-login/</loc>
+        <lastmod>2012-07-12T22:08:11+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rumidier.github.com/blog/2012/07/11/catalyst-signup/</loc>
+        <lastmod>2012-07-13T15:48:56+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rumidier.github.com/blog/2012/07/11/list/</loc>
+        <lastmod>2012-07-13T16:11:41+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rumidier.github.com/blog/2012/07/12/list-view/</loc>
+        <lastmod>2012-07-12T13:48:40+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rumidier.github.com/blog/2012/07/12/list-write/</loc>
+        <lastmod>2012-07-12T13:54:16+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rumidier.github.com/blog/2012/07/12/list-edit/</loc>
+        <lastmod>2012-07-13T16:26:17+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rumidier.github.com/blog/2012/07/12/side-function/</loc>
+        <lastmod>2012-07-12T20:16:38+09:00</lastmod>
     </url>
     <url>
         <loc>http://rumidier.github.com/</loc>
-        <lastmod>2012-07-05T21:43:14+09:00</lastmod>
+        <lastmod>2012-07-13T16:26:17+09:00</lastmod>
     </url>
     <url>
         <loc>http://rumidier.github.com/blog/archives/</loc>
-        <lastmod>2012-07-05T21:43:14+09:00</lastmod>
+        <lastmod>2012-07-13T16:26:17+09:00</lastmod>
     </url>
 </urlset>

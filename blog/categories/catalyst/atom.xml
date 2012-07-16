@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Catalyst | Meadows of wild horses]]></title>
+  <title><![CDATA[Category: catalyst | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/catalyst/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-07-06T13:44:22+09:00</updated>
+  <updated>2012-07-16T13:38:36+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -15,129 +15,335 @@
   
   <entry>
     <title type="html"><![CDATA[catalyst]]></title>
-    <link href="http://rumidier.github.com/blog/2012/07/04/catalyst/"/>
-    <updated>2012-07-04T19:02:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/07/04/catalyst</id>
-    <content type="html"><![CDATA[<h2>DBIx::Class로 스키마 관리하기</h2>
+    <link href="http://rumidier.github.com/blog/2012/06/25/catalyst/"/>
+    <updated>2012-06-25T19:11:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/06/25/catalyst</id>
+    <content type="html"><![CDATA[<h2>Error message</h2>
 
-<p><a href="http://advent.perl.kr/2011/2011-12-17.html">jeen</a>님이 발표한 스키마 관리 하기
-입니다.</p>
+<p>기존에 사용되던 myweb.conf 파일의
+ERROR 500.tt 메세지로 인해 에러 메세지가 제대로 보이지 않아
+삭제 했습니다.</p>
 
-<p>jeen님의 글을 보게 되면 기존의 스키마를 관리하는 방법은 sql의 잦은 교체시 많은 문제점이
-발생하고 있다고 서술 합니다.</p>
+<pre><code>$ vi myweb.conf
+ERROR 500.tt 삭제
+</code></pre>
 
-<p>스키마 관리를 좀더 편하게 하기 위하여 마지막에 서술 하는
-<a href="https://metacpan.org/module/dbicdump">dbicdump</a>를 사용하여 간편하게 스키마 관리를 해보도록
-합니다.</p>
+<h2>Makefile.PL 모듈 추가</h2>
 
-<p>dbicdump를 사용하기 위해 필요한 ResultBase.pm과 schema.pl파일을 만들어 보도록 하겠습니다.</p>
+<pre><code>$ vi Makefile.PL
+require DateTime::Format::MYSQL
+</code></pre>
 
-<h2>schema/schema.pl</h2>
+<h2>DB 날짜 입력</h2>
 
-<p><a href="http://rumidier.github.com/blog/2012/07/02/catalyst/">schema.pl 설명</a></p>
+<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
 
-<p>[% codeblock schema.pl %]</p>
+<p>등록시 날짜 생성을 위해 POSIX모듈을 사용합니다. 현재시간에</p>
 
-<pre><code>my $DB_NAME     = $ENV{DB}          || 'DB_NAME';
-my $DB_USER     = $ENV{DB_USER}     || 'DB_USER';
-my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'DB_PASSWORD';
+<p>형식을 DB와 같이  "%Y-%m-%d% %H:%M:%S" 만들어 입력합니다.</p>
 
-{
-    schema_class =&gt; "Silex::Schema",
-    connect_info =&gt; {
-        dsn               =&gt; "dbi:mysql:$DB_NAME:127.0.0.1",
-        user              =&gt; $DB_USER,
-        pass              =&gt; $DB_PASSWORD,
-        mysql_enable_utf8  =&gt; 1,
-    },
-    loader_options =&gt; {
-        dump_directory     =&gt; 'lib',
-        naming             =&gt; { ALL =&gt; 'v8' },
-        skip_load_external =&gt; 1,
-        relationships      =&gt; 1,
-        use_moose          =&gt; 1,
-        only_autoclean     =&gt; 1,
-        col_collision_map  =&gt; 'column_%s',
-        result_base_class =&gt; 'MyApp::Schema::ResultBase',
-        overwrite_modifications =&gt; 1,
-        datetime_undef_if_invalid =&gt; 1,
-        custom_column_info =&gt; sub {
-            my ($table, $col_name, $col_info) = @_;
+<pre><code>sub write :Local :Args(0) {
+...
+use POSIX qw(strftime);
 
-            if ($col_name eq 'password') {
-                return { %{ $col_info },
-                         encode_column =&gt; 1,
-                         encode_class  =&gt; 'Digest',
-                         encode_args   =&gt; { algorithm =&gt; 'SHA-1', format =&gt; 'hex' },
-                         encode_check_method =&gt; 'check_password' };
-            } # DB password 설정
-            if ($col_name eq 'created_on') {
-                return { %{ $col_info }, set_on_create =&gt; 1, inflate_datetime =&gt; 1 };
-            } # DB created_on 설정
+my $time = strftime "%Y-%m-%d% %H:%M:%S", localtime;
+my %row = (
+applicant  =&gt; $c-&gt;req-&gt;params-&gt;{applicant},
+title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
+content    =&gt; $c-&gt;req-&gt;params-&gt;{content},
+created_on =&gt; "$time",
+updated_on =&gt; "$time",
+);
+...
+</code></pre>
 
-            if ($col_name eq 'updated_on') {
-                return { %{ $col_info }, set_on_create =&gt; 1, set_on_update =&gt; 1, inflate_datetime =&gt; 1 };
-            } # DB updated_on 설정
-        },
-    },
+<h2>list 페이지 쿼리문 수정</h2>
+
+<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
+
+<p>생성될 날짜순으로 출력하기 위한 쿼리문 작성
+search의 첫번째 인자는 where문으로써 무시 하기 위해서는 빈 해쉬레퍼를 줍니다.</p>
+
+<pre><code>sub index :Path :Args(0) {
+...
+my $opt  = { 'order_by' =&gt; { -desc =&gt; 'me.created_on' } };
+my $rs = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({}, $opt);
+...
+</code></pre>
+
+<h2>list.tt, list/view.tt 페이지 수정</h2>
+
+<p>root/templates/bootstrap/src/list/index.tt
+root/templates/bootstrap/src/list/view.tt</p>
+
+<p>날짜 0000-00-00 형식으로 출력 지정</p>
+
+<pre><code>&lt;td align=center height=20 bgcolor=white&gt;[% list.created_on.ymd %]
+</code></pre>
+
+<h2>기타</h2>
+
+<p>날짜 관련 예제</p>
+
+<pre><code>#!/usr/bin/env perl 
+
+use 5.010;
+use strict;
+use warnings;
+use POSIX qw(strftime);
+use DateTime;
+
+say "POSOX";
+say POSIX::strftime('%Y-%m-%d %H:%M:%S', localtime);
+
+say "DateTime";
+say DateTime-&gt;now( time_zone =&gt; 'local' )-&gt;strftime('%Y-%m-%d %H:%M:%S');
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[catalyst]]></title>
+    <link href="http://rumidier.github.com/blog/2012/06/19/catalyst/"/>
+    <updated>2012-06-19T17:31:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/06/19/catalyst</id>
+    <content type="html"><![CDATA[<h2>/list/write.tt 페이지</h2>
+
+<p><a href="https://gist.github.com/2953030">write.tt</a></p>
+
+<h2>form action</h2>
+
+<pre><code>&lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt;
+</code></pre>
+
+<h2>direction setting</h2>
+
+<pre><code>&lt;td colspan=10 align=center&gt;
+  &lt;input type=submit class="btn btn-primary" value="글 저장하기"&gt;
+  &amp;nbsp;&amp;nbsp;
+  &lt;input type=reset class="btn btn-primary" value="다시 쓰기"&gt;
+  &amp;nbsp;&amp;nbsp;
+  &lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
+&lt;/td&gt;
+</code></pre>
+
+<h2>list -> write</h2>
+
+<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
+
+sub write :Local :Args(0) {
+my ( $self, $c ) = @_;
+
+if ($c-&gt;req-&gt;method eq 'POST') {
+    my %row = (
+    name    =&gt; $c-&gt;req-&gt;params-&gt;{name},
+    title   =&gt; $c-&gt;req-&gt;params-&gt;{title},
+    content =&gt; $c-&gt;req-&gt;params-&gt;{content},
+    );
+    $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;update_or_create(\%row);
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
+}
 }
 </code></pre>
 
-<p>[% endcodeblock %]</p>
+<h2>/list/view.tt 페이지</h2>
 
-<p>lib/MyApp/Schema/ResultBase.pm</p>
+<p><a href="https://gist.github.com/2953088">view.tt</a></p>
 
-<p>ResultBase 클래스의 제약 문제 때문에 result_base_class 값을 지정해 줌으로써 모든 결과
- 클래스들은 DBIx::Class::Core가 아닌 MyApp::Schema::ResultBase를 상속받게 합니다.
-MyApp::Schema::ResultBase는 개인이 정의 해주는것 이므로 아래를 참조 합니다.</p>
+<h2>인자 출력</h2>
 
-<p>MD5 체크섬 값 아래에 중복되는 코드를 매번 적어주어야 했습니다.
-이렇게 사용할 컴포넌트들을 결과클래스 별로 지정하는 대신 ResultBase 클래스를 읽어들입니다.
-사실 이처럼 ResultBase를 놓고 여기에 컴포넌트를 일괄해서 읽어들이는 방식은
-Cookbook 문서에서도 스타트업 속도 향상을 위해 권장하고 있습니다. - <a href="http://advent.perl.kr/2011/2011-12-17.html">by Jeen</a> -</p>
+<pre><code>// 제목
+&lt;tr&gt;
+  &lt;td height=20 colspan=4 align=center bgcolor=#999999&gt;
+&lt;font color=white&gt;&lt;b&gt;[% users.title %]&lt;/b&gt;&lt;/font&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
 
-<p>그리고 컴포넌트의 사용을 위한 컬럼의 속성은 custom_column_info 속성에 코드를 등록해 지정할 수 있습니다.(schema.pl 하단 참조)
- 위의 코드처럼 등록하면 created_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set_on_create 옵션이 모든 결과클래스에 추가됩니다.
-(이거 멋지다..)</p>
+// 이름
+&lt;tr&gt;
+  &lt;td width=50 height=20 align=center bgcolor=#EEEEEE&gt;글쓴이&lt;/td&gt;
+  &lt;td width=240 bgcolor=white&gt;[% users.name %]&lt;/td&gt;
+&lt;/tr&gt;
 
-<p>[% codeblock ResultBase.pm %]</p>
-
-<pre><code>package MyApp::Schema::ResultBase;
-use Moose;
-use MooseX::NonMoose;
-use namespace::autoclean;
-
-extends 'DBIx::Class::Core';
-
-__PACKAGE__-&gt;load_components(qw/
-InflateColumn::DateTime
-TimeStamp
-/);
-
-__PACKAGE__-&gt;meta-&gt;make_immutable;
-
-1;
+// 내용
+&lt;tr&gt;
+  &lt;td bgcolor=white colspan=4 style="table-layout:fixed;"&gt;
+&lt;font color=black&gt;
+  [% users.content %]
+&lt;/font&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
 </code></pre>
 
-<p>[% endcodeblock %]</p>
+<h2>list page redirect</h2>
 
-<p>위의 두가지 코드를 작성 하였다면 준비는 끝났습니다.
-(<strong>dbicdump는 db 정보를 덤프해서 스키마를 작성</strong>하는 것으로 코드 작성및 작성 후에라도
-db가 정의 되어 있어야 합니다.)</p>
-
-<h2>dbicdump 사용하기</h2>
-
-<p>아래를 실행한후 lib/MyApp/Schema/Result에 .pm 파일들이 새로 생성되거나 수정 되었다면 확인을 해보라</p>
-
-<pre><code>$ dbicdump -Ilib schema/schema.pl
+<pre><code>&lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
 </code></pre>
 
-<h2>MakeFile.pl 모듈 추가</h2>
+<h2>list -> view</h2>
 
-<p>다른 모듈이 더 추가 될수 있습니다 에러 메세지를 확인 하고 필요한 모듈을 더 설치 하세요.</p>
+<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
 
-<pre><code>requires "DBIx::Class::TimeStamp";
+sub view :Local :CaptureArgs(1) {
+my ( $self, $c, $user_id) = @_;
+
+my $rs = $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;find($user_id);
+$c-&gt;stash-&gt;{users} = $rs;
+}
 </code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[catalyst]]></title>
+    <link href="http://rumidier.github.com/blog/2012/06/18/catalyst/"/>
+    <updated>2012-06-18T16:13:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/06/18/catalyst</id>
+    <content type="html"><![CDATA[<h2>기본 화면 출력후 무엇을 하지?</h2>
+
+<h2>list.tt 페이지를 만들어 기본 게시판 화면을 꾸민다</h2>
+
+<p>root/templates/bootstrap/src/list/index.tt</p>
+
+<p>아래와 같이 기본 .tt를 생성한다. 아직까지는 list명단에
+자료가 없기 때문에 아무것도 보이지 않는다.</p>
+
+<p><a href="https://gist.github.com/2947721">index.tt</a></p>
+
+<h2>DonDB.sql을 만들어 준다.</h2>
+
+<p>INT == int(11), signed는 디폴트로 정의 되어 있다.</p>
+
+<p>DEFAULT값은 절대 NULL이 되게 하여서는 안된다.</p>
+
+<p>timestamp로 잡을시 문제가 될수 있다.</p>
+
+<p>DATETIME는 만든날짜와 수정된 날짜가 있어야 문제를 줄일수 있다.</p>
+
+<pre><code>CREATE TABLE charge (
+id         INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+applicant  VARCHAR(32) NOT NULL DEFAULT '',
+title      VARCHAR(128) NOT NULL DEFAULT '',
+content    TEXT NOT NULL DEFAULT '',
+created_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+updated_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></pre>
+
+<h2>DB 적용</h2>
+
+<pre><code>$ mysql -u ID -p Don_db &lt; DonDB.sql
+</code></pre>
+
+<h2>DB 구성(Model)은 어떻게 할까?</h2>
+
+<pre><code>$ ./script/silex_web_donnenwa_create.pl model DonDB DBIC::Schema \ 
+Silex::Schema create=static dbi:mysql:DonDB_db:localhost ID PASSWORD
+</code></pre>
+
+<p>lib/Silex/Web/Donnenwa/Model/DonDB.pm 생성됨</p>
+
+<h2>DB 구성 하면 늘어나는 모듈이 잇다.</h2>
+
+<p>Makefile.PL 추가</p>
+
+<pre><code>require Catalyst::Model::DBIC::Schema
+require DBD::mysql
+</code></pre>
+
+<p>인스톨</p>
+
+<pre><code>$ carton install
+</code></pre>
+
+<h2>DB 구성을 하면 어떻게 가져오게 될까?</h2>
+
+<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
+
+<pre><code>sub index :Path :Args(0) {
+my ( $self, $c ) = @_;
+
+my $rs = $c-&gt;model('DonDB')-&gt;resultset('List');
+$c-&gt;stash-&gt;{lists} = [ $rs-&gt;all ];
+}
+</code></pre>
+
+<h2>마지막 화면 구성</h2>
+
+<p>root/templates/bootstrap/src/list/index.tt
+index.tt 안에 템플릿 툴킷 집어넣는데라고 표시 된곳에 집어 넣는다</p>
+
+<pre><code>[% FOREACH list IN lists %]
+  &lt;!-- 행 시작 --&gt;
+  &lt;tr&gt;
+&lt;!-- 번호 --&gt;
+&lt;td height=20 bgcolor=white align=center&gt;
+  &lt;p&gt;[% list.id %]&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 번호 끝 --&gt;
+
+&lt;!-- 제목 --&gt;
+&lt;td height=20 bgcolor=white&gt;&amp;nbsp;
+  &lt;p&gt;[% list.title %]&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 제목 끝 --&gt;
+&lt;!-- 이름 --&gt;
+&lt;td align=center height=20 bgcolor=white&gt;
+  &lt;font color=black&gt;
+    &lt;p&gt;[% list.name %]&lt;/p&gt;
+  &lt;/font&gt;
+&lt;/td&gt;
+&lt;!-- 이름 끝 --&gt;
+&lt;!-- 날짜 --&gt;
+&lt;td align=center height=20 bgcolor=white&gt;
+  &lt;p&gt;날짜 다음&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 날짜 끝 --&gt;
+&lt;!-- 조회 수 --&gt;
+&lt;td align=center height=20 bgcolor=white&gt;
+  &lt;p&gt;조회수 나중에 구현&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 조회 수 끝 --&gt;
+  &lt;/tr&gt;
+&lt;!-- 행 끝 --&gt;
+[% END %]
+</code></pre>
+
+<p>가져 왔다 근데 한글이 깨진다
+(DB 데이터 집어 넣을때도 utf8적용이 되야 한다.)</p>
+
+<p>lib/Silex/Web/Donnenwa/Model/DonDB.pm</p>
+
+<pre><code>connect_info =&gt; {
+    dsn =&gt; 'dbi:mysql:auth_db:localhost',
+    user =&gt; 'don',
+    password =&gt; 'gksdud09',
+}
+
+추가
+    mysql_enable_utf8 =&gt; 1,
+
+connect_info =&gt; {
+    dsn =&gt; 'dbi:mysql:auth_db:localhost',
+    user =&gt; 'don',
+    password =&gt; 'gksdud09',
+    mysql_enable_utf8 =&gt; 1,
+}
+</code></pre>
+
+<h2>추가사항</h2>
+
+<p>현재 상태는 DB에 등록된 내용이 들어가 있는지 확인과 출력이 되는지 확인을 위해
+만들어 졌다.</p>
+
+<p>sql및 write버튼 미동작등 수행 할것이 많으 므로 기본 와꾸만 잡혀서 정보가 제대로 넘어
+오는지 확인만 하자.</p>
+
+<p>[참고]</p>
+
+<p><a href="http://search.cpan.org/~bricas/Catalyst-Model-DBIC-0.17/lib/Catalyst/Model/DBIC.pm">Catalyst::Model::DBIC</a></p>
+
+<p><a href="http://search.cpan.org/~rkitover/Catalyst-Model-DBIC-Schema-0.60/lib/Catalyst/Model/DBIC/Schema.pm">Catalyst::Model::DBIC::Schema</a></p>
 ]]></content>
   </entry>
   

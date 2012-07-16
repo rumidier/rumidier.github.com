@@ -9,9 +9,9 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="DBIx::Class로 스키마 관리하기 jeen님이 발표한 스키마 관리 하기
-입니다. jeen님의 글을 보게 되면 기존의 스키마를 관리하는 방법은 sql의 잦은 교체시 많은 문제점이
-발생하고 있다고 서술 합니다. 스키마 관리를 좀더 편하게 하기 위하여 마지막에 서술 &hellip;">
+  <meta name="description" content="Action - approval, refuse approval refuse Approval은 청구 목록에 대하여 승인 기능을
+refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다. 승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +72,716 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/12/side-function/">Side-function</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T14:03:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/side-function/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Action - approval, refuse</h2>
+
+<p><a href="https://gist.github.com/3096325">approval</a></p>
+
+<p><a href="https://gist.github.com/3096321">refuse</a></p>
+
+<p>Approval은 청구 목록에 대하여 승인 기능을
+refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다.</p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 거부 리스트 상태
+에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<p>거부 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 승인 리스트 상태
+에서 활성화가 되고 action 을 취할수 있게 한다.</p>
+
+<p>/list/view/user_id</p>
+
+<p>아래와 같이 id 값과 함께 전달 할수 있다.</p>
+
+<pre><code>&lt;a href="[% c.uri_for('/list/approval', charge.id) %]" class="btn btn-primary"&gt;승인&lt;/a&gt;
+&lt;a href="[% c.uri_for('/list/refuse', charge.id) %]" class="btn btn-primary"&gt;거부&lt;/a&gt;
+</code></pre>
+
+<p>CaputreArgs(1) 옵션으로 $id 값(들)을 받을수 있게 된다.</p>
+
+<pre><code>sub approval :Local :CaptureArgs(1) {
+    my ( $self, $c, $id ) = @_;
+    my @target_ids = split ',', $id;
+
+sub refuse :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>@target_id의 모든 값(들)을 status값이 2 or 3로 업데이트 한다.
+업데이트는 검색을 한 값들을 대상으로 update를 하게 된다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+
+# 승인
+my $approval = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '2' });
+# 거부
+my $refuse = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '3' });
+</code></pre>
+
+<p>flash기능으로 messages값을 전달하여 조건에 맞을시 메세지를 출력 시키도록 한다.(/list/index.tt 참고)
+조건은 approval, refuse기능이 정상 작동 되었는지를 검사 하게 된다.</p>
+
+<pre><code>if ($query_status) {
+    $c-&gt;flash-&gt;{messages} = 'Success message.';
+}
+else {
+    $c-&gt;flash-&gt;{messages} = 'No status Item.';
+}
+</code></pre>
+
+<p>템플릿에 쓰일 status값과 함께 전체 목록으로 redirect 시키도록 한다.</p>
+
+<pre><code>$c-&gt;stash-&gt;{status} = '2'; #상태에 맞는 status값
+$c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
+</code></pre>
+
+<h2>Action - delete</h2>
+
+<p><a href="https://gist.github.com/3096329">delete</a></p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기, 거부, 수정 상태
+ 에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+&lt;a href="[% c.uri_for('/list/delete', charge.id) %]" class="btn btn-primary"&gt;삭제&lt;/a&gt;
+</code></pre>
+
+<p>다른 기능과 같이 CaptureArgs(1)를 받는다.</p>
+
+<pre><code>sub delete :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>다른 기능과 달리 update_all 이 아닌 delete_all를 통하여 내용을 삭제 한다.</p>
+
+<pre><code>my $charge = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in =&gt; \@target_ids } })-&gt;delete_all;
+</code></pre>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-edit/">List-edit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:56:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-edit/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>청구 내역 수정</h2>
+
+<p><a href="https://gist.github.com/3095912">List-edit-action</a></p>
+
+<p>수정 되어야할 $edit_id를 받을수 있어햐 한다.</p>
+
+<pre><code>sub edit :Local :CaptureArgs(1) {
+my ( $self, $c, $edit_id ) = @_;
+</code></pre>
+
+<p>수정할 폼을 제출 했을때 업데이트 동작 혹은 정보 출력을 하여야 한다.</p>
+
+<pre><code>if ($c-&gt;req-&gt;method eq 'POST') {
+    my @messages;
+
+    push @messages, 'amount is invaild' if ($c-&gt;req-&gt;params-&gt;{amount} !~ /^\d+$/);
+    push @messages, 'title is required' unless ($c-&gt;req-&gt;params-&gt;{title});
+
+    if (@messages) {
+    $c-&gt;flash(
+        messages =&gt; @messages,
+        comment  =&gt; $c-&gt;req-&gt;params-&gt;{comment},
+        title    =&gt; $c-&gt;req-&gt;params-&gt;{title},
+        amount   =&gt; $c-&gt;req-&gt;params-&gt;{amount},
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$c-&gt;req-&gt;params-&gt;{charge_id}"));
+    }
+
+    my $time = strftime "%Y-%m-%d %H:%M:%S", localtime;
+    my %row = (
+    id         =&gt; $c-&gt;req-&gt;params-&gt;{charge_id},
+    amount     =&gt; $c-&gt;req-&gt;params-&gt;{amount},
+    user       =&gt; $c-&gt;req-&gt;params-&gt;{charge_user},
+    title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
+    comment    =&gt; $c-&gt;req-&gt;params-&gt;{comment},
+    updated_on =&gt; "$time",
+    );
+    $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;update_or_create(\%row);
+
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$row{id}"));
+}
+else {
+    my $editer = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;find($edit_id);
+
+    $c-&gt;stash(
+    editer =&gt; $editer,
+    );
+}
+}
+</code></pre>
+
+<p><a href="https://gist.github.com/3095922">List-edit.tt</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-write/">List-write</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:49:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-write/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://gist.github.com/3095879">List-write.tt</a>
+<a href="https://gist.github.com/3095901">List-write-action</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-view/">List-view</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:41:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-view/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://gist.github.com/3095846">List-view-action</a>
+<a href="https://gist.github.com/3095858">List-view.tt</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/list/">List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T23:06:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/list/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>청구 목록 페이지</h2>
+
+<p><a href="https://gist.github.com/3095682">List.pm - index</a></p>
+
+<p><a href="https://gist.github.com/3095679">/list/index.tt</a></p>
+
+<h2>List Controller - Query option</h2>
+
+<p>등록 날짜 역순 출력을 위한 내림 차수 옵션을 준다.</p>
+
+<pre><code>my %attr  = ( 'order_by' =&gt; { -desc =&gt; 'me.id' } );
+
+my $total_charge;
+my %cond    = ();
+</code></pre>
+
+<p>현재 가르켜야 할 페이지 정보가 없다면 1페이지로 하게 한다.</p>
+
+<pre><code>my $page    = $c-&gt;req-&gt;params-&gt;{page};
+$attr{page} = $page || 1;
+</code></pre>
+
+<p>status 옵션이 정의 되지 않았다면 전체(대기/승인/거부) 검색을 할수 있게 한다.</p>
+
+<pre><code>my $status  = $c-&gt;req-&gt;param("status") || $c-&gt;stash-&gt;{"status"} || '0'; #수정 필요
+</code></pre>
+
+<p>status 옵션 없으면 전체 있으면 상태 검색 할수 있게 한다.</p>
+
+<pre><code>%cond         = ( status =&gt; $status ) if $status;
+$total_charge = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search(\%cond, \%attr);
+</code></pre>
+
+<p>Data::Pageset활용 하여 페이징 할수 있다.</p>
+
+<pre><code>my $page_info =
+Data::Pageset-&gt;new(
+    {
+    ( map { $_ =&gt; $total_charge-&gt;pager-&gt;$_ } qw/entries_per_page total_entries current_page/ ),
+    mode =&gt; "slide",
+    pages_per_set =&gt; 10,
+    }
+);
+
+$c-&gt;stash(
+    lists   =&gt; [ $total_charge-&gt;all ],
+    status  =&gt; $status,
+    pageset =&gt; $page_info,
+);
+}
+</code></pre>
+
+<h2>List - View</h2>
+
+<p>성공 혹은 실패 메세지 출력을 할수 있게 한다.</p>
+
+<pre><code>[% IF messages %]
+&lt;div class="alert fade in"&gt;
+&lt;button class="close" data-dismiss="alert"&gt;&amp;times;&lt;/button&gt;
+[% messages %]
+&lt;/div&gt;
+[% END %]
+</code></pre>
+
+<p>탭 등록으로 원하는 상태의 값들만 보여 줄수 있게 한다.</p>
+
+<pre><code>&lt;div class="container-fluid"&gt;
+  &lt;div class="row-fluid"&gt;
+&lt;div class="span2"&gt;
+  &lt;ul class="nav nav-tabs nav-stacked"&gt;
+    &lt;li class="active"&gt;&lt;a href="/list"&gt;전체&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/list?status=1"&gt;대기&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/list?status=2"&gt;승인&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/list?status=3"&gt;거부&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>현재 경로가 어떻게 되는지 확인 할수 있도록 한다.</p>
+
+<pre><code>&lt;div class="span10"&gt;
+  &lt;ul class="breadcrumb"&gt;
+    &lt;li&gt;목록
+        &lt;span class="divider"&gt;/&lt;/span&gt;
+    &lt;/li&gt;      
+    &lt;li class="active"&gt;
+    [% IF status == "1" %]
+        &lt;b&gt; 대기 &lt;/b&gt;
+    [% ELSIF status == "2" %]
+        &lt;b&gt; 승인 &lt;/b&gt;
+    [% ELSIF status == "3" %]
+        &lt;b&gt; 거부 &lt;/b&gt;
+    [% ELSE %]
+        &lt;b&gt; 전체 &lt;/b&gt;
+    [% END %]     
+    &lt;/li&gt;
+  &lt;/ul&gt;
+</code></pre>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/Data::Pageset">Data::Pageset</a></p>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/catalyst-signup/">Catalyst-signup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T22:55:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/catalyst-signup/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Signup Controller <a href="https://gist.github.com/3090526">Login.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Login.pm
+# 내용 추가
+</code></pre>
+
+<h2>:Private</h2>
+
+<p>forword 혹은 detach로만 접근이 가능 하며, URL로 부터 바로 접근이 불가능 합니다.</p>
+
+<pre><code>sub signup :Path('/signup') :Args(0) {
+my ( $self, $c ) = @_;
+
+$c-&gt;detach('signup_POST') if $c-&gt;req-&gt;method eq 'POST';
+}
+
+sub signup_POST :Private {
+my ( $self, $c ) = @_;
+</code></pre>
+
+<h2>Validation - Empty Value</h2>
+
+<p>입력값중에 빈값이 있으면 안돼므로 빈값인지 확인 하여 빈값일시 메세지를
+출력 할수 있게 작업한다.</p>
+
+<pre><code>my $user_name = $c-&gt;req-&gt;param('user_name') || '';
+my $email     = $c-&gt;req-&gt;param('email')     || '';
+my $password  = $c-&gt;req-&gt;param('password')  || '';
+
+my @messages;
+push @messages, 'Input the user name'     unless $user_name;
+push @messages, 'Input the user email'    unless $email;
+push @messages, 'Input the user password' unless $password;
+
+if (@messages) {
+    $c-&gt;flash(
+        messages =&gt; @messages,
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+</code></pre>
+
+<h2>Validation - DB Unique search</h2>
+
+<p>User table에 user_name과 email이 동일한 값이 있는지 확인 하여 동일한
+값이 있을시 error_msg를 출력 할수 있게 한다.</p>
+
+<pre><code>my $cond = {};
+$cond-&gt;{'me.user_name'} = "$user_name";
+my $name_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
+if ($name_search-&gt;count) {
+    $c-&gt;flash(
+        messages =&gt; 'Using ID again input the New ID',
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+
+$cond = {} if $cond;
+$cond-&gt;{'me.email'} = "$email";
+my $email_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
+if ($email_search-&gt;count) {
+    $c-&gt;flash(
+        messages      =&gt; 'Using email again input the New email',
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+</code></pre>
+
+<h2>유저 등록</h2>
+
+<p>Validation이 통과 했다면 테이블에 등록 할수 있게 한다.
+실패시 signup페이지로 다시 이동 하며</p>
+
+<pre><code>my $time    = strftime "%Y-%m-%d %H:%M:%S", localtime;
+my $created = $c-&gt;model('DonDB::User')-&gt;create({
+    user_name  =&gt; $user_name,
+    email      =&gt; $email,
+    password   =&gt; $password,
+    created_on =&gt; "$time",
+    updated_on =&gt; "$time",
+});
+
+$c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri) unless $created;
+</code></pre>
+
+<h2>유저 등록 - 확인</h2>
+
+<p>등록후 이름과 패스워드를 확인하여 다음 페이지 혹은 tdpfjaptpwldhk 냐혀ㅔvpdlwlfmf ghcnfgksek.</p>
+
+<pre><code>if ($c-&gt;authenticate({ user_name =&gt; $user_name, password =&gt; $password } )) {
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for($c-&gt;controller('List')-&gt;action_for('index')));
+} else {
+    $c-&gt;stash(error_msg =&gt; "Bad username or password."); # maybe flash?
+    $c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>Signup View.tt <a href="https://gist.github.com/3090541">signup.tt</a></p>
+
+<pre><code>$ vi root/templates/default/src/login/signup.tt
+# 내용 추가
+</code></pre>
+
+<h2>jquery 미사용</h2>
+
+<p>현재 Validation은 컨트롤 단에서만 검사 한다
+추가가 필요함</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/catalyst-login/">Catalyst-Login</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T20:44:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/catalyst-login/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://metacpan.org/module/Catalyst::Manual::Tutorial::05_Authentication">Catalyst::Manual::Tutorial::05_Authentication</a></p>
+
+<h2>Load plugins</h2>
+
+<p>/lib/MyApp.pm</p>
+
+<pre><code>$ vi ./lib/MyApp/Web/MyApp.pm
+
+# 아래에 다음과 같이 추가
+use Catalyst qw/
+-Debug
+ConfigLoader
+Static::Simple
+Unicode::Encoding
+
+StackTrace
+
+Authentication
+
+Session
+Session::Store::File
+Session::State::Cookie
+/;
+</code></pre>
+
+<p>MakeFile.PL</p>
+
+<pre><code>$ vi Makefile.PL
+
+# 추가
+requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Session';
+requires 'Catalyst::Plugin::Session::Store::File';
+requires 'Catalyst::Plugin::Session::State::Cookie';
+
+$ carton install
+</code></pre>
+
+<p>MyApp.conf</p>
+
+<pre><code>$vi MyApp.conf
+
+# 추가
+&lt;Plugin::Authentication&gt;
+&lt;default&gt;
+    password_type clear
+    user_model    DB::User
+    class         SimpleDB
+&lt;/default&gt;
+&lt;/Plugin::Authentication&gt;
+</code></pre>
+
+<h2>Add Login and Logout Controllers</h2>
+
+<p>Controller 생성</p>
+
+<pre><code>$ script/myapp_create.pl controller Login
+$ script/myapp_create.pl controller Logout
+</code></pre>
+
+<p>Login <a href="https://gist.github.com/3089985">Login.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Login.pm
+</code></pre>
+
+<p>Logout <a href="https://gist.github.com/3090013">Logout.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Logout.pm
+</code></pre>
+
+<h2>Add Valid User Check</h2>
+
+<p>Root <a href="https://gist.github.com/3090343">Root.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Root.pm
+</code></pre>
+
+<h2>추가 해야 할점</h2>
+
+<p>현재는 DB에 유저의 password가 암호화 되지 않음 문서상
+다음 내용에 나오기 때문에 추가가 필요함</p>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/04/catalyst/">Catalyst</a></h1>
     
     
@@ -115,56 +825,97 @@
 
 <p><a href="http://rumidier.github.com/blog/2012/07/02/catalyst/">schema.pl 설명</a></p>
 
-<p>[% codeblock schema.pl %]</p>
+<figure class='code'><figcaption><span>schema.pl </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$DB_NAME</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB</span><span class="p">}</span>           <span class="o">||</span> <span class="s">&#39;DB_NAME&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$DB_USER</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_USER</span><span class="p">}</span>     <span class="o">||</span> <span class="s">&#39;DB_USER&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$DB_PASSWORD</span> <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_PASSWORD</span><span class="p">}</span> <span class="o">||</span> <span class="s">&#39;DB_PASSWORD&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">schema_class</span> <span class="o">=&gt;</span> <span class="s">&quot;Silex::Schema&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="n">connect_info</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">dsn</span>               <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:$DB_NAME:127.0.0.1&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">user</span>              <span class="o">=&gt;</span> <span class="nv">$DB_USER</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">pass</span>              <span class="o">=&gt;</span> <span class="nv">$DB_PASSWORD</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">mysql_enable_utf8</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'><span class="n">loader_options</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">dump_directory</span>     <span class="o">=&gt;</span> <span class="s">&#39;lib&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">naming</span>             <span class="o">=&gt;</span> <span class="p">{</span> <span class="n">ALL</span> <span class="o">=&gt;</span> <span class="s">&#39;v8&#39;</span> <span class="p">},</span>
+</span><span class='line'>  <span class="n">skip_load_external</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">relationships</span>      <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">use_moose</span>          <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">only_autoclean</span>     <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">col_collision_map</span>  <span class="o">=&gt;</span> <span class="s">&#39;column_%s&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">result_base_class</span> <span class="o">=&gt;</span> <span class="s">&#39;MyApp::Schema::ResultBase&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">overwrite_modifications</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">datetime_undef_if_invalid</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">custom_column_info</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>  <span class="k">my</span> <span class="p">(</span><span class="nv">$table</span><span class="p">,</span> <span class="nv">$col_name</span><span class="p">,</span> <span class="nv">$col_info</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;password&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span>
+</span><span class='line'>          <span class="n">encode_column</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>          <span class="n">encode_class</span>  <span class="o">=&gt;</span> <span class="s">&#39;Digest&#39;</span><span class="p">,</span>
+</span><span class='line'>          <span class="n">encode_args</span>   <span class="o">=&gt;</span> <span class="p">{</span> <span class="n">algorithm</span> <span class="o">=&gt;</span> <span class="s">&#39;SHA-1&#39;</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=&gt;</span> <span class="s">&#39;hex&#39;</span> <span class="p">},</span>
+</span><span class='line'>          <span class="n">encode_check_method</span> <span class="o">=&gt;</span> <span class="s">&#39;check_password&#39;</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB password 설정</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;created_on&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB created_on 설정</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;updated_on&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">set_on_update</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB updated_on 설정</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>my $DB_NAME     = $ENV{DB}          || 'DB_NAME';
-my $DB_USER     = $ENV{DB_USER}     || 'DB_USER';
-my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'DB_PASSWORD';
 
-{
-    schema_class =&gt; "Silex::Schema",
-    connect_info =&gt; {
-        dsn               =&gt; "dbi:mysql:$DB_NAME:127.0.0.1",
-        user              =&gt; $DB_USER,
-        pass              =&gt; $DB_PASSWORD,
-        mysql_enable_utf8  =&gt; 1,
-    },
-    loader_options =&gt; {
-        dump_directory     =&gt; 'lib',
-        naming             =&gt; { ALL =&gt; 'v8' },
-        skip_load_external =&gt; 1,
-        relationships      =&gt; 1,
-        use_moose          =&gt; 1,
-        only_autoclean     =&gt; 1,
-        col_collision_map  =&gt; 'column_%s',
-        result_base_class =&gt; 'MyApp::Schema::ResultBase',
-        overwrite_modifications =&gt; 1,
-        datetime_undef_if_invalid =&gt; 1,
-        custom_column_info =&gt; sub {
-            my ($table, $col_name, $col_info) = @_;
-
-            if ($col_name eq 'password') {
-                return { %{ $col_info },
-                         encode_column =&gt; 1,
-                         encode_class  =&gt; 'Digest',
-                         encode_args   =&gt; { algorithm =&gt; 'SHA-1', format =&gt; 'hex' },
-                         encode_check_method =&gt; 'check_password' };
-            } # DB password 설정
-            if ($col_name eq 'created_on') {
-                return { %{ $col_info }, set_on_create =&gt; 1, inflate_datetime =&gt; 1 };
-            } # DB created_on 설정
-
-            if ($col_name eq 'updated_on') {
-                return { %{ $col_info }, set_on_create =&gt; 1, set_on_update =&gt; 1, inflate_datetime =&gt; 1 };
-            } # DB updated_on 설정
-        },
-    },
-}
-</code></pre>
-
-<p>[% endcodeblock %]</p>
-
-<p>lib/MyApp/Schema/ResultBase.pm</p>
+<h2>lib/MyApp/Schema/ResultBase.pm</h2>
 
 <p>ResultBase 클래스의 제약 문제 때문에 result_base_class 값을 지정해 줌으로써 모든 결과
  클래스들은 DBIx::Class::Core가 아닌 MyApp::Schema::ResultBase를 상속받게 합니다.
@@ -179,26 +930,38 @@ Cookbook 문서에서도 스타트업 속도 향상을 위해 권장하고 있�
  위의 코드처럼 등록하면 created_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set_on_create 옵션이 모든 결과클래스에 추가됩니다.
 (이거 멋지다..)</p>
 
-<p>[% codeblock ResultBase.pm %]</p>
+<figure class='code'><figcaption><span>ResultBase </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package MyApp::Schema::ResultBase;
+</span><span class='line'>use Moose;
+</span><span class='line'>use MooseX::NonMoose;
+</span><span class='line'>use namespace::autoclean;
+</span><span class='line'>
+</span><span class='line'>extends 'DBIx::Class::Core';
+</span><span class='line'>
+</span><span class='line'>__PACKAGE__->load_components(qw/
+</span><span class='line'>  InflateColumn::DateTime
+</span><span class='line'>  TimeStamp
+</span><span class='line'>/);
+</span><span class='line'>
+</span><span class='line'>__PACKAGE__->meta->make_immutable;
+</span><span class='line'>
+</span><span class='line'>1;</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>package MyApp::Schema::ResultBase;
-use Moose;
-use MooseX::NonMoose;
-use namespace::autoclean;
-
-extends 'DBIx::Class::Core';
-
-__PACKAGE__-&gt;load_components(qw/
-InflateColumn::DateTime
-TimeStamp
-/);
-
-__PACKAGE__-&gt;meta-&gt;make_immutable;
-
-1;
-</code></pre>
-
-<p>[% endcodeblock %]</p>
 
 <p>위의 두가지 코드를 작성 하였다면 준비는 끝났습니다.
 (<strong>dbicdump는 db 정보를 덤프해서 스키마를 작성</strong>하는 것으로 코드 작성및 작성 후에라도
@@ -699,1290 +1462,6 @@ say DateTime-&gt;now( time_zone =&gt; 'local' )-&gt;strftime('%Y-%m-%d %H:%M:%S'
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/19/catalyst/">Catalyst</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-19T17:31:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/19/catalyst/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>/list/write.tt 페이지</h2>
-
-<p><a href="https://gist.github.com/2953030">write.tt</a></p>
-
-<h2>form action</h2>
-
-<pre><code>&lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt;
-</code></pre>
-
-<h2>direction setting</h2>
-
-<pre><code>&lt;td colspan=10 align=center&gt;
-  &lt;input type=submit class="btn btn-primary" value="글 저장하기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;input type=reset class="btn btn-primary" value="다시 쓰기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-&lt;/td&gt;
-</code></pre>
-
-<h2>list -> write</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub write :Local :Args(0) {
-my ( $self, $c ) = @_;
-
-if ($c-&gt;req-&gt;method eq 'POST') {
-    my %row = (
-    name    =&gt; $c-&gt;req-&gt;params-&gt;{name},
-    title   =&gt; $c-&gt;req-&gt;params-&gt;{title},
-    content =&gt; $c-&gt;req-&gt;params-&gt;{content},
-    );
-    $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;update_or_create(\%row);
-    $c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
-}
-}
-</code></pre>
-
-<h2>/list/view.tt 페이지</h2>
-
-<p><a href="https://gist.github.com/2953088">view.tt</a></p>
-
-<h2>인자 출력</h2>
-
-<pre><code>// 제목
-&lt;tr&gt;
-  &lt;td height=20 colspan=4 align=center bgcolor=#999999&gt;
-&lt;font color=white&gt;&lt;b&gt;[% users.title %]&lt;/b&gt;&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-
-// 이름
-&lt;tr&gt;
-  &lt;td width=50 height=20 align=center bgcolor=#EEEEEE&gt;글쓴이&lt;/td&gt;
-  &lt;td width=240 bgcolor=white&gt;[% users.name %]&lt;/td&gt;
-&lt;/tr&gt;
-
-// 내용
-&lt;tr&gt;
-  &lt;td bgcolor=white colspan=4 style="table-layout:fixed;"&gt;
-&lt;font color=black&gt;
-  [% users.content %]
-&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
-
-<h2>list page redirect</h2>
-
-<pre><code>&lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-</code></pre>
-
-<h2>list -> view</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub view :Local :CaptureArgs(1) {
-my ( $self, $c, $user_id) = @_;
-
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;find($user_id);
-$c-&gt;stash-&gt;{users} = $rs;
-}
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/18/catalyst/">Catalyst</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-18T16:13:00+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/18/catalyst/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>기본 화면 출력후 무엇을 하지?</h2>
-
-<h2>list.tt 페이지를 만들어 기본 게시판 화면을 꾸민다</h2>
-
-<p>root/templates/bootstrap/src/list/index.tt</p>
-
-<p>아래와 같이 기본 .tt를 생성한다. 아직까지는 list명단에
-자료가 없기 때문에 아무것도 보이지 않는다.</p>
-
-<p><a href="https://gist.github.com/2947721">index.tt</a></p>
-
-<h2>DonDB.sql을 만들어 준다.</h2>
-
-<p>INT == int(11), signed는 디폴트로 정의 되어 있다.</p>
-
-<p>DEFAULT값은 절대 NULL이 되게 하여서는 안된다.</p>
-
-<p>timestamp로 잡을시 문제가 될수 있다.</p>
-
-<p>DATETIME는 만든날짜와 수정된 날짜가 있어야 문제를 줄일수 있다.</p>
-
-<pre><code>CREATE TABLE charge (
-id         INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-applicant  VARCHAR(32) NOT NULL DEFAULT '',
-title      VARCHAR(128) NOT NULL DEFAULT '',
-content    TEXT NOT NULL DEFAULT '',
-created_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-updated_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-</code></pre>
-
-<h2>DB 적용</h2>
-
-<pre><code>$ mysql -u ID -p Don_db &lt; DonDB.sql
-</code></pre>
-
-<h2>DB 구성(Model)은 어떻게 할까?</h2>
-
-<pre><code>$ ./script/silex_web_donnenwa_create.pl model DonDB DBIC::Schema \ 
-Silex::Schema create=static dbi:mysql:DonDB_db:localhost ID PASSWORD
-</code></pre>
-
-<p>lib/Silex/Web/Donnenwa/Model/DonDB.pm 생성됨</p>
-
-<h2>DB 구성 하면 늘어나는 모듈이 잇다.</h2>
-
-<p>Makefile.PL 추가</p>
-
-<pre><code>require Catalyst::Model::DBIC::Schema
-require DBD::mysql
-</code></pre>
-
-<p>인스톨</p>
-
-<pre><code>$ carton install
-</code></pre>
-
-<h2>DB 구성을 하면 어떻게 가져오게 될까?</h2>
-
-<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
-
-<pre><code>sub index :Path :Args(0) {
-my ( $self, $c ) = @_;
-
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('List');
-$c-&gt;stash-&gt;{lists} = [ $rs-&gt;all ];
-}
-</code></pre>
-
-<h2>마지막 화면 구성</h2>
-
-<p>root/templates/bootstrap/src/list/index.tt
-index.tt 안에 템플릿 툴킷 집어넣는데라고 표시 된곳에 집어 넣는다</p>
-
-<pre><code>[% FOREACH list IN lists %]
-  &lt;!-- 행 시작 --&gt;
-  &lt;tr&gt;
-&lt;!-- 번호 --&gt;
-&lt;td height=20 bgcolor=white align=center&gt;
-  &lt;p&gt;[% list.id %]&lt;/p&gt;
-&lt;/td&gt;
-&lt;!-- 번호 끝 --&gt;
-
-&lt;!-- 제목 --&gt;
-&lt;td height=20 bgcolor=white&gt;&amp;nbsp;
-  &lt;p&gt;[% list.title %]&lt;/p&gt;
-&lt;/td&gt;
-&lt;!-- 제목 끝 --&gt;
-&lt;!-- 이름 --&gt;
-&lt;td align=center height=20 bgcolor=white&gt;
-  &lt;font color=black&gt;
-    &lt;p&gt;[% list.name %]&lt;/p&gt;
-  &lt;/font&gt;
-&lt;/td&gt;
-&lt;!-- 이름 끝 --&gt;
-&lt;!-- 날짜 --&gt;
-&lt;td align=center height=20 bgcolor=white&gt;
-  &lt;p&gt;날짜 다음&lt;/p&gt;
-&lt;/td&gt;
-&lt;!-- 날짜 끝 --&gt;
-&lt;!-- 조회 수 --&gt;
-&lt;td align=center height=20 bgcolor=white&gt;
-  &lt;p&gt;조회수 나중에 구현&lt;/p&gt;
-&lt;/td&gt;
-&lt;!-- 조회 수 끝 --&gt;
-  &lt;/tr&gt;
-&lt;!-- 행 끝 --&gt;
-[% END %]
-</code></pre>
-
-<p>가져 왔다 근데 한글이 깨진다
-(DB 데이터 집어 넣을때도 utf8적용이 되야 한다.)</p>
-
-<p>lib/Silex/Web/Donnenwa/Model/DonDB.pm</p>
-
-<pre><code>connect_info =&gt; {
-    dsn =&gt; 'dbi:mysql:auth_db:localhost',
-    user =&gt; 'don',
-    password =&gt; 'gksdud09',
-}
-
-추가
-    mysql_enable_utf8 =&gt; 1,
-
-connect_info =&gt; {
-    dsn =&gt; 'dbi:mysql:auth_db:localhost',
-    user =&gt; 'don',
-    password =&gt; 'gksdud09',
-    mysql_enable_utf8 =&gt; 1,
-}
-</code></pre>
-
-<h2>추가사항</h2>
-
-<p>현재 상태는 DB에 등록된 내용이 들어가 있는지 확인과 출력이 되는지 확인을 위해
-만들어 졌다.</p>
-
-<p>sql및 write버튼 미동작등 수행 할것이 많으 므로 기본 와꾸만 잡혀서 정보가 제대로 넘어
-오는지 확인만 하자.</p>
-
-<p>[참고]</p>
-
-<p><a href="http://search.cpan.org/~bricas/Catalyst-Model-DBIC-0.17/lib/Catalyst/Model/DBIC.pm">Catalyst::Model::DBIC</a></p>
-
-<p><a href="http://search.cpan.org/~rkitover/Catalyst-Model-DBIC-Schema-0.60/lib/Catalyst/Model/DBIC/Schema.pm">Catalyst::Model::DBIC::Schema</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/15/catalyst/">Catalyst</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-15T17:56:00+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/15/catalyst/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>init catalyst project in silex</h1>
-
-<p>카탈리스트 시작을 위해 Helper를 준비합니다.</p>
-
-<pre><code>$ git clone git://github.com/aanoaa/Catalyst-Helper-View-TTSilex.git
-...
-$ git clone git://github.com/aanoaa/Catalyst-Helper-Carton.git
-...
-$ cd Catalyst-Helper-View-TTSilex/
-$ git checkout develop
-$ dzil build
-...
-$ cd Catalyst-Helper-View-TTSilex-v0.0.1/
-$ perl Makefile.PL
-...
-$ make &amp;&amp; make install
-...
-$ cd ../../Catalyst-Helper-Carton/
-$ dzil build
-$ cd Catalyst-Helper-Carton-v0.0.1/
-$ perl Makefile.PL
-...
-$ make &amp;&amp; make install
-</code></pre>
-
-<p>catalyst.pl을 사용 하여  Foo::Web을 생성합니다.</p>
-
-<pre><code>$ cd ~/yourworkspace/
-$ catalyst.pl Foo::Web
-...
-</code></pre>
-
-<p>파일명을 수정하여 줍니다.</p>
-
-<pre><code>$ cd Foo-Web/
-$ mv foo_web.psgi app.psgi
-</code></pre>
-
-<p>스크립트를 사용하게 되면 .conf.new 파일이 생성이 되며 .conf파일에 붙여줍니다.</p>
-
-<pre><code>$ script/foo_web_create.pl view Bootstrap TTSilex
-...
-$ vi foo_web.conf &lt;&lt;--- foo_web.conf.new
-</code></pre>
-
-<p>카툰을 설치 하고 Make 파일에 추가 하라는 메세지가 나옵니다.</p>
-
-<pre><code>$ script/foo_web_create.pl Carton
-...
-$ vim Makefile.PL    # add dependencies
-</code></pre>
-
-<p>위의 단계에서 명시된 모듈 및 추가 필요 모듈</p>
-
-<pre><code>//명시
-requires "Starman";
-requires "Devel::Cover";
-requires "Perl::Metrics::Lite";
-requires "TAP::Formatter::JUnit";
-
-//추가
-requires 'Catalyst::Plugin::Unicode::Encoding';
-requires "Catalyst::View::TT";
-</code></pre>
-
-<p>한글 인코딩 문제</p>
-
-<pre><code>$ lib/Foo/Web.pm
-
-use utf8;
-use Catalyst qw/
--Debug
-ConfigLoader
-Static::Simple
-#추가
-Unicode::Encoding
-/;
-</code></pre>
-
-<p>인스톨</p>
-
-<pre><code>$ carton install
-...
-</code></pre>
-
-<p>부분 인스톨</p>
-
-<pre><code>$ carton install &lt;모듈네임&gt; 합니다.
-</code></pre>
-
-<h2>Controller 생성</h2>
-
-<pre><code>$ script/foo_web_create.pl controller List
-
-$ cd lib/Foo/Web/Controller
-$ vi List.pm
-// 주석처리
-# $c-&gt;response-&gt;body('Matched Foo::Web::Controller::List in List.');
-</code></pre>
-
-<h2>View 생성</h2>
-
-<pre><code>$ mkdir root/templates/bootstap/src/list
-$ cd root/templates/bootstrap/src/list
-$ vi index.tt
-  &lt;p&gt;나는 지금 한글을 테스트 중입니다.&lt;/p&gt; 작성
-</code></pre>
-
-<h2>실행</h2>
-
-<pre><code>$ ./run
-</code></pre>
-
-<h2>.gitignore</h2>
-
-<pre><code># inspire by github/gitignore
-blib/
-.build/
-_build/
-cover_db/
-inc/
-Build
-Build.bat
-.last_cover_stats
-Makefile
-Makefile.old
-MANIFEST.bak
-META.yml
-MYMETA.yml
-nytprof.out
-pm_to_blib
-# custom
-local/
-.sass-cache/
-tt_cache/
-.carton/
-*.log
-session
-MYMETA.json
-carton.lock
-</code></pre>
-
-<h2>script/bootstrap.pl</h2>
-
-<p>이건 헬퍼 없습니다.
-프로젝트마다 손으로 복사합니다.</p>
-
-<p>https://gist.github.com/2761721</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/13/learn-jquery-5jang/">Learn jQuery 5장</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-13T17:29:00+09:00" pubdate data-updated="true">Jun 13<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/13/learn-jquery-5jang/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Source</h2>
-
-<p><a href="https://gist.github.com/2922803">예제.html</a></p>
-
-<p><a href="https://gist.github.com/2922807">예제 css </a></p>
-
-<p><a href="https://gist.github.com/2922804">예제 js  </a></p>
-
-<h2>본문</h2>
-
-<h2>속성 추가하기</h2>
-
-<p>id속성값을 개별적으로 attr()으로 적용 해주기 위해 each()를 사용하여 적용하여 주고 있다.
-index는 0부터 시작하여 증가한다.</p>
-
-<pre><code>$(document).ready(function() {
-  $('div.chapter a[href*=wikipedia]').each(function(index) {
-var $thisLink = $(this);
-$(this).attr({
-  'rel': 'external',
-  'id': 'wikilink-' + index,
-  'title': $thisLink.text() + '에 대한 자세한 정보는 위키 피디아에 있습니다.'
-});
-  });
-});
-</code></pre>
-
-<h2>앵커 삽입</h2>
-
-<p>앵커 위치를 정하기 위해 body에 prependTo()로 삽입한다.
-앵커 버튼이 굳이 다 있을 필요는 없고 화면 밖에 존재 부터 하기 위해
-p:gt(4) 5번째(0부터 시작) 문단 부터 적용 시킨다</p>
-
-<pre><code>$('&lt;a href="#top"&gt;맨 앞으로 돌아가기&lt;/a&gt;').insertAfter('div.chapter p:gt(4)');
-$('&lt;a id="top" name="top"&gt;&lt;/a&gt;').prependTo('body');
-</code></pre>
-
-<h2>주석 표시, 숫자 부여, 컨텍스트 연결</h2>
-
-<p>챕터가 끝난지점 후에 리스트 목록인 &gt;ol&lt;만들어준다.
-클래스가 footnote</p>
-
-<pre><code>$('&lt;ol id="notes"&gt;&lt;/ol&gt;').insertAfter('div.chapter');
-$('span.footnote').each(function(index) {
-  $(this).before('&lt;a href="#foot-note-' + (index+1) +
-'" id="context-' + (index+1) + '" class="context"&gt;&lt;sup&gt;'
-+ (index+1) + '&lt;/sup&gt;&lt;/a&gt;')
-  .appendTo('#notes')
-  .append( '&amp;nbsp;(&lt;a href="#context-' + (index+1) + '"&gt;context &lt;/a&gt;)' )
-  .wrap('&lt;li id="foot-note-' + (index+1) + '"&gt;&lt;/li&gt;');
-});
-</code></pre>
-
-<h2>Command Action</h2>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/12/learn-jquery-4jang/">Learn jQuery 4장</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-12T16:49:00+09:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/12/learn-jquery-4jang/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Source</h2>
-
-<p><a href="https://gist.github.com/2915965">예제.html</a></p>
-
-<p><a href="https://gist.github.com/2915963">예제 css </a></p>
-
-<p><a href="https://gist.github.com/2915969">예제 js  </a></p>
-
-<h2>본문</h2>
-
-<h2>인라인 CSS 변경</h2>
-
-<p>폰트 크기 구하기</p>
-
-<pre><code>$('div.speech').css('fontSize')
-</code></pre>
-
-<p>반환된 값이 숫자와 단위 문자열이 합쳐져 있으므로 각각 나누기 위해 변수를 따로 저장
-변수 이름에 $는 변수명에 쓰이며 jQuery객체를 저장하고 있다는 의미로 사용된다.</p>
-
-<pre><code>var $speech     = $('div.speech');
-var currentSize = $speech.css('fontSize');
-</code></pre>
-
-<p>문자열에서 숫자까지만 변환하여 추출(10진수 옵션 설정)
-숫자가 아니면 NaN(Not a Number)반환</p>
-
-<pre><code>var num         = parseFloat(currentSize, 10);
-</code></pre>
-
-<p>fontSize의 유닛을 구함(px, em)</p>
-
-<pre><code>var unit        = currentSize.slice(-2);
-</code></pre>
-
-<p>현재 클릭된 버튼의 아이디를 확인하여 숫자연산 후
-css에 fontSize 적용</p>
-
-<pre><code>if (this.id == 'switcher-large') {
-  num *= 1.4;
-} else if (this.id == 'switcher-small') {
-  num /= 1.4;
-}
-$speech.css('fontSize', num + unit);
-</code></pre>
-
-<figure class='code'><figcaption><span>css-part </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$('div.button').click(function() {
-</span><span class='line'>  var $speech     = $('div.speech');
-</span><span class='line'>  var currentSize = $speech.css('fontSize');
-</span><span class='line'>  var num         = parseFloat(currentSize, 10);
-</span><span class='line'>  var unit        = currentSize.slice(-2);
-</span><span class='line'>
-</span><span class='line'>  if (this.id == 'switcher-large') {
-</span><span class='line'>    num *= 1.4;
-</span><span class='line'>  } else if (this.id == 'switcher-small') {
-</span><span class='line'>    num /= 1.4;
-</span><span class='line'>  }
-</span><span class='line'>  $speech.css('fontSize', num + unit);
-</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>hide와 show</h2>
-
-<p>jQuery 효과에 속도를 지정할때는 &#8216;slow&#8217;, &#8216;normal&#8217;, &#8216;fast&#8217;(각각 0.6, 0.4 0.2초)를 지정할수 있으며
-밀리초 단위의 시간을 조정할수 있다(근데 난 차이를 모르겠다..)</p>
-
-<pre><code>$('document).ready(function() {
-  $('div.speech p:eq(1)').hide();
-  $('span.more').click(function() {
-$('div.sppech p:eq(1)').show();
-$(this).hide();
-  });
-});
-</code></pre>
-
-<p>show는 .animate()메서드의 약식 메서드이다.</p>
-
-<pre><code>$(document).ready(function() {
-  $('p:eq(1)').hide();
-  $('span.more').click(function() {
-$('p:eq(1)').animate({height: 'show', width: 'show', opactity: 'show'}, 'slow');
-$(this).hide();
-  });
-});
-</code></pre>
-
-<h2>사용자형 애니메이션 생성하기</h2>
-
-<p>버튼의 높이를 키우면서 이동, 이동이 멈추면 크기 고정</p>
-
-<pre><code>$(document).ready(function() {
-  $('div.label').click(function() {
-$('div.butoon').animate({left: 650, height: 38}, 'slow');
-  });
-});
-</code></pre>
-
-<h2>숫자 이해하기</h2>
-
-<p>height의 38값인 이유는 우리가 버튼을 50으로 만들기 위해서 이다.
-css에 padding은 5px, border는 1px 로 정의 하였으므로 top + bottom값을
-더한후(12) 50 - 12 = 38값이 나오게 되었다.</p>
-
-<h2>CSS로 위치 변경</h2>
-
-<p>.animate()를 사용하여 작업할때 CSS속성이 relative 또는 absolute로 설정 되어있어야 한다
-모든 블록 요소가 가지는 CSS position 속성은 static이다.</p>
-
-<h2>버튼의 너비 계산</h2>
-
-<p>버튼의 넓이와 패딩 보더 넓이를 모두 구하여 더해준후 div.speech p의 넓이에 맞추어서
-값을 구하였다. 그렇게 함으로써 글자 오른쪽 모서리에 맞춤이 이루어 진다.</p>
-
-<pre><code>$(document).ready(function() {
-  $('div.label').click(function() {
-  var paraWidth        = $('div.speech p').width();
-  var $button          = $('div.button');
-  var buttonWidth      = $button.width();
-  var paddingRight     = $button.css('paddingRight');
-  var paddingLeft      = $button.css('paddingLeft');
-  var borderRightWidth = $button.css('borderRightWidth');
-  var borderLeftWidth  = $button.css('borderLeftWidth');
-
-  //총너비 연산
-  var totalButtonWidth =
-  parseInt(buttonWidth, 10) +
-  parseInt(paddingRight, 10) +
-  parseInt(paddingLeft, 10) +
-  parseInt(borderRightWidth, 10) +
-  parseInt(borderLeftWidth, 10);
-  var rightSide = paraWidth - totalButtonWiidth;
-  $button.animate({left: rightSide, height: 38}, 'slow');
-  });
-});
-</code></pre>
-
-<h2>동시효과</h2>
-
-<p>불투명해짐과 배경색이 동시에 변경되며 이동을 한후 불투명도가 들어오고 사라지게 된다</p>
-
-<pre><code>$('div.label').click(function() {
-  $('div.button')
-  .fadeTo('slow', 0.5)
-  .animate({left: 650}, 'slow')
-  .fadeTo('slow', 1.0)
-  .css('backgroundColor', '#f00')
-  .slideUP('slow');
-});
-</code></pre>
-
-<h2>연속효과</h2>
-
-<p>버튼을 클릭 하게 되면 투명해지고 이동한다. 그리고 투명도를 다시 돌리고나서
-배경색을 변경한다. 그리고 사라진다 이게 연속적으로 이루어 지게 되어있다.
-콜백을 이용하여 효과들이 모두 진행된 후에 그 다음 순서로 배경색을 바꾸는
-비효과 메서드를 적용 하였다.</p>
-
-<pre><code>$('div.label').click(function() {
-  $('div.button')
-  .fadeTo('slow', 0.5)
-  .animate({left: 650}, 'slow')
-  .fadeTo('slow', 1.0, function() {
-$(this).css('backgroundColor', '#f00')
-  }).slideUP('slow');
-});
-</code></pre>
-
-<h2>다중 효과</h2>
-
-<pre><code>$('div.speech p:eq(3)').css('backgroundColor', '#fcf').hide();
-$('div.speech p:eq(2)').css('backgroundColor', '#cff').click(function() {
-  var $thisPar = $(this)
-  $(this).next().slideDown('slow', function() {
-$thisPar.slideUp('slow');
-  });
-});
-</code></pre>
-
-<h2>Command action</h2>
-
-<ul>
-<li><p>fadeIn()과 fadeOut(): 불투명도(opacity)</p>
-
-<p><strong>fadeOut(speed, callback)</strong></p>
-
-<p>일치하는 엘리먼트 중 드러난 엘리먼트의 불투명도 0%로 줄여가면서 화면에서 제거한다. 불투명
-도가 변경되는 지속시간은 speed 매개변수에 따라 변한다. 이미 감춰진 엘리먼트는 영향을 받지 않
-는다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>speed</p>
-
-<p>(Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
-
-<p>가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
-
-<p>callback</p>
-
-<p>(Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
-받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
-
-<p><strong>반환값</strong></p>
-
-<p>확장집합</p></li>
-<li><p>fadeTo: 불투명도(opacity)</p>
-
-<p><strong>fadeOut(speed, opacity, callback)</strong></p>
-
-<p>확장 엘리먼트의 불투명도를 현재의 러정 값에서 opacity 매개변수 값으로 설정한다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>speed</p>
-
-<p>(Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
-
-<p>가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
-
-<p>opacity (Number)</p>
-
-<p>(Number) 0.0에서 1.0 사이의 값으로 엘리먼트에 적용될 불투명도 값</p>
-
-<p>callback</p>
-
-<p>(Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
-받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
-
-<p><strong>반환값</strong></p>
-
-<p>확장집합</p></li>
-<li><p>slideDown()과 slideUp(): 높이(height)</p>
-
-<p><strong>slideDown(speed, callback)</strong></p>
-
-<p>감춰진 모든 일치하는 엘리먼트가 높이 값이 증가하면서 나타난다. 드러나 잇는 엘리먼트는
-영향을 받지 않는다</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>speed</p>
-
-<p>(Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
-
-<p>  가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
-
-<p>callback</p>
-
-<p>  (Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
-  받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
-
-<p><strong>반환값</strong></p>
-
-<p>확장집합</p>
-
-<p><strong>slideDown(speed, callback)</strong></p>
-
-<p>감춰진 모든 일치하는 엘리먼트가 점차적으로 높이 값이 감소하면서 화면에서 제거된다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>speed</p>
-
-<p>  (Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
-
-<p>  가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
-
-<p>callback</p>
-
-<p>  (Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
-  받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
-
-<p><strong>반환값</strong></p>
-
-<p>확장집합</p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/11/learn-jquery-3jang/">Learn jQuery 3장</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-11T18:17:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/11/learn-jquery-3jang/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Source</h2>
-
-<p><a href="https://gist.github.com/2909211">예제.html</a></p>
-
-<p><a href="https://gist.github.com/2909213">예제 css </a></p>
-
-<p><a href="https://gist.github.com/2909224">예제 js  </a></p>
-
-<h2>본문 - 이벤트 트리거 사용하는 방법</h2>
-
-<h2>button click event</h2>
-
-<p>페이지 시작시 노말페이지로 보이도록 모든 클래스를 해제한다.
-removeClass()는 다른 파악되지 않은 Class까지 해제 하지만 현재 예제
-코드 에서는 생각치 않도록 쓴다.</p>
-
-<pre><code>$('body').removeClass();
-</code></pre>
-
-<p>현재 버튼이 클릭된 id값을 확인하여 일치 하였을경우
-클래스를 추가 하도록 한다.</p>
-
-<pre><code>if (this.id == 'switcher-narrow') {
-  $('body').addClass('narrow');
-}
-else if (this.id == 'switcher-large') {
-  $('body').addClass('large');
-}
-</code></pre>
-
-<p>강조되는 글씨를 표현하기 위해 우선 클래스를 해제하고
-현재 버튼에 클래스를 추가 해준다.</p>
-
-<pre><code>$('#switcher .button').removeClass('selected');
-$(this).addClass('selected');
-</code></pre>
-
-<p>이벤트 객체 사용시 버블링을 중단 하기 위해 다음과 같이 추가해 준다.
-(버블링을 추가안해줄시 노말 버튼 클릭시에도 버튼칸이 사라지게 된다.)</p>
-
-<pre><code>event.stopPropagation();
-</code></pre>
-
-<p>부분 코드</p>
-
-<figure class='code'><figcaption><span>부분코드 - 01 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').click(function(event) {
-</span><span class='line'>  $('body').removeClass();
-</span><span class='line'>
-</span><span class='line'>  if (this.id == 'switcher-narrow') {
-</span><span class='line'>    $('body').addClass('narrow');
-</span><span class='line'>  }
-</span><span class='line'>  else if (this.id == 'switcher-large') {
-</span><span class='line'>    $('body').addClass('large');
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  $('#switcher .button').removeClass('selected');
-</span><span class='line'>  $(this).addClass('selected');
-</span><span class='line'>
-</span><span class='line'>  event.stopPropagation();
-</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>버튼 강조하기</h2>
-
-<p>버튼에 hover(마우스 가져다 대면) 띠면(체인으로) hover삭제</p>
-
-<p>부분 코드</p>
-
-<figure class='code'><figcaption><span>부분코드 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').hover(function() {
-</span><span class='line'>    $(this).addClass('hover');
-</span><span class='line'>    }, function() {
-</span><span class='line'>      $(this).removeClass('hover');
-</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>이벤트 핸들러</h2>
-
-<p>핸들러를 나중에 다시 사용할 수 있도록 핸들러 함수에 이름을 부여</p>
-
-<pre><code>var toggleStyleSwitcher = function() {
-  $('switcher .button').toggleClass('hidden');
-};
-</code></pre>
-
-<p>핸들러를 활성화 시켜준다.</p>
-
-<pre><code>$('#switcher').click(toggleStyleSwitcher);
-</code></pre>
-
-<p>노말 상태에서만 토글 기능 활성화</p>
-
-<pre><code>$('switcher-normal').click(function() {
-  $('#switcher').click(toggleStyleSwitcher);
-});
-
-$('#switcher-narrow, #switcher-large').click(function() {
-  $('#switcher').unbind('click', toggleStyleSwitcher);
-});
-</code></pre>
-
-<p>시작시 접힘 기능(인자를 지정하지 않는경우 히벤트에 해당하는 행위를 발생시킴)</p>
-
-<pre><code>$('#switcher').click();
-</code></pre>
-
-<h2>Command action</h2>
-
-<p><strong>unbind(event Type, listener)</strong></p>
-
-<p><strong>unbind(event)</strong></p>
-
-<p>확장 집합의 모든 엘리먼트에서 전달된 매개변수에 따라 핸들러를 선택적으로 제거한다.</p>
-
-<p>매개변수를 제공하지 않으면 엘리먼트의 모든 리스터를 제거한다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>  <strong>eventType</strong></p>
-
-<pre><code>   (String)매개변수를 제공하면 지정된 이벤트 타입에 할당된 리스너만 제거한다.
-</code></pre>
-
-<p>  <strong>listener</strong></p>
-
-<pre><code>  (Function)매개변수를 제공하면 지정된 리스너와 동일한 것만 제거한다.
-</code></pre>
-
-<p>  <strong>eventType</strong></p>
-
-<pre><code>  (Event) Event 인스턴스의 정보로 알 수 있는 이벤트가 발생했을 대 호출될 리스너를
-  제거한다
-</code></pre>
-
-<p><strong>반환값</strong></p>
-
-<p>확장 집합</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/11/lear-jquery-2jang-02/">Lear jQuery 2장-02</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-11T14:26:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/11/lear-jquery-2jang-02/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Source</h2>
-
-<p><a href="https://gist.github.com/2908591">예제.html</a></p>
-
-<p><a href="https://gist.github.com/2908588">예제 css </a></p>
-
-<p><a href="https://gist.github.com/2908628">예제 js  </a></p>
-
-<h2>본문 - 테이블행에 징검다리 색깔 입히기</h2>
-
-<h2>사용자 정의 선택자</h2>
-
-<p>class명 horizontal를 가진 div 집합의 두번째 항목 선택
-$(&#8216;div.horizontal:eq(1)&#8217;)
-두번째 항목이 1인 이유는 자바스크립트 배열에서 인덱스는
-0에서 부터 시작 하며 jQuery또한 마찬가지이다.
-단, css는 1을 기반으로 한다.</p>
-
-<p>헤더 행 스타일 입히기</p>
-
-<pre><code>$('th').addClass('table-heading');
-//&lt;th class=table-heading'&gt;
-</code></pre>
-
-<p>odd,even 색 입히기</p>
-
-<pre><code>$('tr:not(:has(th)):even').addClass('even');
-$('tr:not(:has(th)):odd').addClass('odd');
-//odd와 even의 색 정의는 css에 정의 되어있다.
-</code></pre>
-
-<p>테이블에서 특정단어 포함 셀만 강조</p>
-
-<pre><code>$('td:contains("Henry")').addClass('highlight');
-//td에 Henry 단어가 포함 된열 강조
-// highlight의 색 정의는 .css에 정의 되어있다.
-</code></pre>
-
-<p>Henry를 포함한 셀을 찾아낸후 모든 하위레벨에 클래스 추가</p>
-
-<pre><code>$('td:contains("Henry")').siblings().addClass('highlight');
-</code></pre>
-
-<p>Henry를 포함한 부모를 찾아 인덱스가 0보다 큰셀들을(0은 최상 부모) 순회하면 클래스추가</p>
-
-<pre><code>$('td:contains("Henry")').parent().find('td:gt(0)').addClass('highlight');
-</code></pre>
-
-<p>Henry를 포함한 셀을 찾아 부모를 찾고 그 안의 모든 셀을 찾은후 Henry를 포함한 셀을
-필터링한후 클래스추가(Henry만 적용을 하지 않음)</p>
-
-<pre><code>$('td:contains("Henry")').parent().find('td').not(':contains('Henry")')).addClass('highlight');
-</code></pre>
-
-<p>Henry를 포함하고 있는 셀을 찾아낸 후에 그것의 부모를 얻어와서 자식들 중에 두번째 셀을
-찾아서 클래스를 추가하고 가장 최근의 .find()를 취소한 후에 다시 자식들 중에서 세 번째 셀을
-찾아서 클래스를 추가한다.</p>
-
-<pre><code>$('td:contains("Henry")') //Henry셀을 찾고
-.parent()  //부모를 찾아서
-.find('td:eq(1)') //부모의 두번째 셀을 찾아
-.addClass('highlight') //강조 하고(클래스 추가)
-.end() // 다시 부모로 돌아와
-.find('td:eq(2)') // 세번째를 찾아서
-.addClass('highlight'); //강조 한다(클래스 추가)
-</code></pre>
-
-<h2>Command Action</h2>
-
-<p><strong>addClass(names)</strong></p>
-
-<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에 추가한다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
-
-<p>반환값 - 확장집합</p>
-
-<hr />
-
-<p><strong>removeClass(names)</strong></p>
-
-<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에서 삭제한다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
-
-<p><strong>반환값</strong></p>
-
-<p>확장집합</p>
-
-<hr />
-
-<p><strong>siblings()</strong></p>
-
-<p>확장 엘리먼트의 모든 형제를포함 하는 확장 집합을 반환</p>
-
-<hr />
-
-<p><strong>find(selector)</strong></p>
-
-<p>  원본의 모든 엘리먼트 중 전달된 셀렉터 표현식과 일치하는 엘리먼트로 구성된 새로운 확장 집합
-  을 반환한다. 확장 집합에 포함된 엘리먼트의 자손 엘리먼트도 전달된 표현식과 일치하는지 평가</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>selector (String) 반환될 집합의 일부가 될 엘리먼트가 일치하는 셀렉터</p>
-
-<p><strong>반환값</strong></p>
-
-<p>새로 생성된 확장 집합</p>
-
-<p>변수 wrappedSet에 할당된 확장 집합에서 p문단 인용문(&gt;cite&lt; 엘리먼트)로 구성된 확장 집합은
-두가지로 표현 된다</p>
-
-<pre><code>wrappedSet.find('p cite')
-$('p cite', wrappedSet)
-</code></pre>
-
-<hr />
-
-<p><strong>parent()</strong></p>
-
-<p>  확장 집합 내에 있는 모든 확장 엘리먼트의 바로 위 부모로 구성된 확장 집합을 반환한다.</p>
-
-<p><strong>parents()</strong></p>
-
-<p>  모든 확장 엘리먼트의 조상으로 구성된 확장 집합을 반환한다. 바로 위 부모와
-  상위의 모든 소상이 포함 되지만 문서 루트(document root)는 포함 되지 않는다(?)</p>
-
-<hr />
-
-<p><strong>end()</strong></p>
-
-<p>  jQuery 커맨드 체인에서 사용하며 이전 확장 집합으로 돌아간다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>  없음</p>
-
-<p><strong>반환값</strong></p>
-
-<p>이전 확장 집합</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1998,15 +1477,15 @@ $('p cite', wrappedSet)
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/07/04/catalyst/">catalyst</a>
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/07/02/catalyst/">catalyst</a>
+        <a href="/blog/2012/07/12/list-edit/">list-edit</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/06/25/catalyst/">catalyst</a>
+        <a href="/blog/2012/07/12/list-write/">list-write</a>
       </li>
     
   </ul>

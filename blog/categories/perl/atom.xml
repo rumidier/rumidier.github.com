@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Perl | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-07-06T13:44:22+09:00</updated>
+  <updated>2012-07-16T13:38:36+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -36,56 +36,108 @@
 
 <p><a href="http://rumidier.github.com/blog/2012/07/02/catalyst/">schema.pl 설명</a></p>
 
-<p>[% codeblock schema.pl %]</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>schema.pl </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$DB_NAME</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB</span><span class="p">}</span>           <span class="o">||</span> <span class="s">&#39;DB_NAME&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$DB_USER</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_USER</span><span class="p">}</span>     <span class="o">||</span> <span class="s">&#39;DB_USER&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$DB_PASSWORD</span> <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_PASSWORD</span><span class="p">}</span> <span class="o">||</span> <span class="s">&#39;DB_PASSWORD&#39;</span><span class="p">;</span><span class="sr">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span><span class="p">{</span>
+</span><span class='line'><span class="n">schema_class</span> <span class="o">=&gt;</span> <span class="s">&quot;Silex::Schema&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="n">connect_info</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="sr">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;</span><span class="n">dsn</span>               <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&quot;dbi:mysql:$DB_NAME:127.0.0.1&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="n">user</span>              <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$DB_USER</span><span class="p">,</span>
+</span><span class='line'><span class="n">pass</span>              <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$DB_PASSWORD</span><span class="p">,</span>
+</span><span class='line'><span class="n">mysql_enable_utf8</span>  <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="sr">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span><span class="p">},</span>
+</span><span class='line'><span class="n">loader_options</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="sr">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;</span><span class="n">dump_directory</span>     <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;lib&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="n">naming</span>             <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="p">{</span> <span class="n">ALL</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;v8&#39;</span> <span class="p">},</span>
+</span><span class='line'><span class="n">skip_load_external</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="n">relationships</span>      <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="n">use_moose</span>          <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="n">only_autoclean</span>     <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="n">col_collision_map</span>  <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;column_%s&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="n">result_base_class</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;MyApp::Schema::ResultBase&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="n">overwrite_modifications</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="n">datetime_undef_if_invalid</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="n">custom_column_info</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$table</span><span class="p">,</span> <span class="nv">$col_name</span><span class="p">,</span> <span class="nv">$col_info</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;password&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span>
+</span><span class='line'>        <span class="n">encode_column</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">encode_class</span>  <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;Digest&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">encode_args</span>   <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="p">{</span> <span class="n">algorithm</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;SHA-1&#39;</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;hex&#39;</span> <span class="p">},</span>
+</span><span class='line'>        <span class="n">encode_check_method</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="s">&#39;check_password&#39;</span> <span class="p">};</span>
+</span><span class='line'><span class="p">}</span> <span class="c1"># DB password 설정</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;created_on&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span> <span class="p">};</span>
+</span><span class='line'><span class="p">}</span> <span class="c1"># DB created_on 설정</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;updated_on&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">set_on_update</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="mi">1</span> <span class="p">};</span>
+</span><span class='line'><span class="p">}</span> <span class="c1"># DB updated_on 설정</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'><span class="sr">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>my $DB_NAME     = $ENV{DB}          || 'DB_NAME';
-my $DB_USER     = $ENV{DB_USER}     || 'DB_USER';
-my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'DB_PASSWORD';
-
-{
-    schema_class =&gt; "Silex::Schema",
-    connect_info =&gt; {
-        dsn               =&gt; "dbi:mysql:$DB_NAME:127.0.0.1",
-        user              =&gt; $DB_USER,
-        pass              =&gt; $DB_PASSWORD,
-        mysql_enable_utf8  =&gt; 1,
-    },
-    loader_options =&gt; {
-        dump_directory     =&gt; 'lib',
-        naming             =&gt; { ALL =&gt; 'v8' },
-        skip_load_external =&gt; 1,
-        relationships      =&gt; 1,
-        use_moose          =&gt; 1,
-        only_autoclean     =&gt; 1,
-        col_collision_map  =&gt; 'column_%s',
-        result_base_class =&gt; 'MyApp::Schema::ResultBase',
-        overwrite_modifications =&gt; 1,
-        datetime_undef_if_invalid =&gt; 1,
-        custom_column_info =&gt; sub {
-            my ($table, $col_name, $col_info) = @_;
-
-            if ($col_name eq 'password') {
-                return { %{ $col_info },
-                         encode_column =&gt; 1,
-                         encode_class  =&gt; 'Digest',
-                         encode_args   =&gt; { algorithm =&gt; 'SHA-1', format =&gt; 'hex' },
-                         encode_check_method =&gt; 'check_password' };
-            } # DB password 설정
-            if ($col_name eq 'created_on') {
-                return { %{ $col_info }, set_on_create =&gt; 1, inflate_datetime =&gt; 1 };
-            } # DB created_on 설정
-
-            if ($col_name eq 'updated_on') {
-                return { %{ $col_info }, set_on_create =&gt; 1, set_on_update =&gt; 1, inflate_datetime =&gt; 1 };
-            } # DB updated_on 설정
-        },
-    },
-}
-</code></pre>
-
-<p>[% endcodeblock %]</p>
-
-<p>lib/MyApp/Schema/ResultBase.pm</p>
+<h2>lib/MyApp/Schema/ResultBase.pm</h2>
 
 <p>ResultBase 클래스의 제약 문제 때문에 result_base_class 값을 지정해 줌으로써 모든 결과
  클래스들은 DBIx::Class::Core가 아닌 MyApp::Schema::ResultBase를 상속받게 합니다.
@@ -100,26 +152,37 @@ Cookbook 문서에서도 스타트업 속도 향상을 위해 권장하고 있�
  위의 코드처럼 등록하면 created_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set_on_create 옵션이 모든 결과클래스에 추가됩니다.
 (이거 멋지다..)</p>
 
-<p>[% codeblock ResultBase.pm %]</p>
-
-<pre><code>package MyApp::Schema::ResultBase;
-use Moose;
-use MooseX::NonMoose;
-use namespace::autoclean;
-
-extends 'DBIx::Class::Core';
-
-__PACKAGE__-&gt;load_components(qw/
-InflateColumn::DateTime
-TimeStamp
-/);
-
-__PACKAGE__-&gt;meta-&gt;make_immutable;
-
-1;
-</code></pre>
-
-<p>[% endcodeblock %]</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ResultBase </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package MyApp::Schema::ResultBase;
+</span><span class='line'>use Moose;
+</span><span class='line'>use MooseX::NonMoose;
+</span><span class='line'>use namespace::autoclean;&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>extends 'DBIx::Class::Core';&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>&lt;strong>PACKAGE&lt;/strong>->load_components(qw/
+</span><span class='line'>  InflateColumn::DateTime
+</span><span class='line'>  TimeStamp
+</span><span class='line'>/);&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>&lt;strong>PACKAGE&lt;/strong>->meta->make_immutable;&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>1;</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>위의 두가지 코드를 작성 하였다면 준비는 끝났습니다.
 (<strong>dbicdump는 db 정보를 덤프해서 스키마를 작성</strong>하는 것으로 코드 작성및 작성 후에라도

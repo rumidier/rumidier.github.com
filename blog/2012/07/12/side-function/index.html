@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Side-function - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="Action - approval, refuse approval refuse Approval은 청구 목록에 대하여 승인 기능을
+refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다. 승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/07/12/side-function/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Side-function</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T14:03:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Action - approval, refuse</h2>
+
+<p><a href="https://gist.github.com/3096325">approval</a></p>
+
+<p><a href="https://gist.github.com/3096321">refuse</a></p>
+
+<p>Approval은 청구 목록에 대하여 승인 기능을
+refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다.</p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 거부 리스트 상태
+에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<p>거부 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 승인 리스트 상태
+에서 활성화가 되고 action 을 취할수 있게 한다.</p>
+
+<p>/list/view/user_id</p>
+
+<p>아래와 같이 id 값과 함께 전달 할수 있다.</p>
+
+<pre><code>&lt;a href="[% c.uri_for('/list/approval', charge.id) %]" class="btn btn-primary"&gt;승인&lt;/a&gt;
+&lt;a href="[% c.uri_for('/list/refuse', charge.id) %]" class="btn btn-primary"&gt;거부&lt;/a&gt;
+</code></pre>
+
+<p>CaputreArgs(1) 옵션으로 $id 값(들)을 받을수 있게 된다.</p>
+
+<pre><code>sub approval :Local :CaptureArgs(1) {
+    my ( $self, $c, $id ) = @_;
+    my @target_ids = split ',', $id;
+
+sub refuse :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>@target_id의 모든 값(들)을 status값이 2 or 3로 업데이트 한다.
+업데이트는 검색을 한 값들을 대상으로 update를 하게 된다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+
+# 승인
+my $approval = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '2' });
+# 거부
+my $refuse = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '3' });
+</code></pre>
+
+<p>flash기능으로 messages값을 전달하여 조건에 맞을시 메세지를 출력 시키도록 한다.(/list/index.tt 참고)
+조건은 approval, refuse기능이 정상 작동 되었는지를 검사 하게 된다.</p>
+
+<pre><code>if ($query_status) {
+    $c-&gt;flash-&gt;{messages} = 'Success message.';
+}
+else {
+    $c-&gt;flash-&gt;{messages} = 'No status Item.';
+}
+</code></pre>
+
+<p>템플릿에 쓰일 status값과 함께 전체 목록으로 redirect 시키도록 한다.</p>
+
+<pre><code>$c-&gt;stash-&gt;{status} = '2'; #상태에 맞는 status값
+$c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
+</code></pre>
+
+<h2>Action - delete</h2>
+
+<p><a href="https://gist.github.com/3096329">delete</a></p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기, 거부, 수정 상태
+ 에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+&lt;a href="[% c.uri_for('/list/delete', charge.id) %]" class="btn btn-primary"&gt;삭제&lt;/a&gt;
+</code></pre>
+
+<p>다른 기능과 같이 CaptureArgs(1)를 받는다.</p>
+
+<pre><code>sub delete :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>다른 기능과 달리 update_all 이 아닌 delete_all를 통하여 내용을 삭제 한다.</p>
+
+<pre><code>my $charge = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in =&gt; \@target_ids } })-&gt;delete_all;
+</code></pre>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T14:03:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/catalyst/'>Catalyst</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/07/12/side-function/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/07/12/side-function/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/12/list-edit/" title="Previous Post: list-edit">&laquo; list-edit</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-edit/">list-edit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-write/">list-write</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/07/12/side-function/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/07/12/side-function/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
