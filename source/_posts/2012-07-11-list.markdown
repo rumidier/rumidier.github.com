@@ -1,0 +1,105 @@
+---
+layout: post
+title: "list"
+date: 2012-07-11 23:06
+comments: true
+categories: Catalyst perl
+---
+
+## 청구 목록 페이지
+
+[List.pm - index](https://gist.github.com/3095682)
+
+[/list/index.tt](https://gist.github.com/3095679)
+
+## List Controller - Query option
+
+등록 날짜 역순 출력을 위한 내림 차수 옵션을 준다.
+	my %attr  = ( 'order_by' => { -desc => 'me.id' } );
+
+	my $total_charge;
+	my %cond    = ();
+
+현재 가르켜야 할 페이지 정보가 없다면 1페이지로 하게 한다.
+
+	my $page    = $c->req->params->{page};
+	$attr{page} = $page || 1;
+
+status 옵션이 정의 되지 않았다면 전체(대기/승인/거부) 검색을 할수 있게 한다.
+
+	my $status  = $c->req->param("status") || $c->stash->{"status"} || '0'; #수정 필요
+
+
+status 옵션 없으면 전체 있으면 상태 검색 할수 있게 한다.
+
+	%cond         = ( status => $status ) if $status;
+	$total_charge = $c->model('DonDB')->resultset('Charge')->search(\%cond, \%attr);
+
+Data::Pageset활용 하여 페이징 할수 있다.
+
+	my $page_info =
+	Data::Pageset->new(
+	    {
+		( map { $_ => $total_charge->pager->$_ } qw/entries_per_page total_entries current_page/ ),
+		mode => "slide",
+		pages_per_set => 10,
+	    }
+	);
+
+	$c->stash(
+	    lists   => [ $total_charge->all ],
+	    status  => $status,
+	    pageset => $page_info,
+	);
+    }
+
+
+## List - View
+
+성공 혹은 실패 메세지 출력을 할수 있게 한다.
+
+    [% IF messages %]
+    <div class="alert fade in">
+	<button class="close" data-dismiss="alert">&times;</button>
+	[% messages %]
+    </div>
+    [% END %]
+
+탭 등록으로 원하는 상태의 값들만 보여 줄수 있게 한다.
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+	<div class="span2">
+	  <ul class="nav nav-tabs nav-stacked">
+	    <li class="active"><a href="/list">전체</a></li>
+	    <li><a href="/list?status=1">대기</a></li>
+	    <li><a href="/list?status=2">승인</a></li>
+	    <li><a href="/list?status=3">거부</a></li>
+	  </ul>
+	</div>
+
+현재 경로가 어떻게 되는지 확인 할수 있도록 한다.
+
+	<div class="span10">
+	  <ul class="breadcrumb">
+	    <li>목록
+		    <span class="divider">/</span>
+	    </li>      
+	    <li class="active">
+		[% IF status == "1" %]
+		    <b> 대기 </b>
+		[% ELSIF status == "2" %]
+		    <b> 승인 </b>
+		[% ELSIF status == "3" %]
+		    <b> 거부 </b>
+		[% ELSE %]
+		    <b> 전체 </b>
+		[% END %]	  
+	    </li>
+	  </ul>
+
+## CPAN
+
+[Data::Pageset](https://metacpan.org/module/Data::Pageset)
+
+[DBIx::Class::Manual::DocMap](https://metacpan.org/module/DBIx::Class::Manual::DocMap)
