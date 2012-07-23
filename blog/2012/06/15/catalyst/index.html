@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Catalyst - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="init catalyst project in silex 카탈리스트 시작을 위해 Helper를 준비합니다. $ git clone git://github.com/aanoaa/Catalyst-Helper-View-TTSilex.git
+...
+$ git clone git &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/06/15/catalyst/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Catalyst</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-15T17:56:00+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>init catalyst project in silex</h1>
+
+<p>카탈리스트 시작을 위해 Helper를 준비합니다.</p>
+
+<pre><code>$ git clone git://github.com/aanoaa/Catalyst-Helper-View-TTSilex.git
+...
+$ git clone git://github.com/aanoaa/Catalyst-Helper-Carton.git
+...
+$ cd Catalyst-Helper-View-TTSilex/
+$ git checkout develop
+$ dzil build
+...
+$ cd Catalyst-Helper-View-TTSilex-v0.0.1/
+$ perl Makefile.PL
+...
+$ make &amp;&amp; make install
+...
+$ cd ../../Catalyst-Helper-Carton/
+$ dzil build
+$ cd Catalyst-Helper-Carton-v0.0.1/
+$ perl Makefile.PL
+...
+$ make &amp;&amp; make install
+</code></pre>
+
+<p>catalyst.pl을 사용 하여  Foo::Web을 생성합니다.</p>
+
+<pre><code>$ cd ~/yourworkspace/
+$ catalyst.pl Foo::Web
+...
+</code></pre>
+
+<p>파일명을 수정하여 줍니다.</p>
+
+<pre><code>$ cd Foo-Web/
+$ mv foo_web.psgi app.psgi
+</code></pre>
+
+<p>스크립트를 사용하게 되면 .conf.new 파일이 생성이 되며 .conf파일에 붙여줍니다.</p>
+
+<pre><code>$ script/foo_web_create.pl view Bootstrap TTSilex
+...
+$ vi foo_web.conf &lt;&lt;--- foo_web.conf.new
+</code></pre>
+
+<p>카툰을 설치 하고 Make 파일에 추가 하라는 메세지가 나옵니다.</p>
+
+<pre><code>$ script/foo_web_create.pl Carton
+...
+$ vim Makefile.PL    # add dependencies
+</code></pre>
+
+<p>위의 단계에서 명시된 모듈 및 추가 필요 모듈</p>
+
+<pre><code>//명시
+requires "Starman";
+requires "Devel::Cover";
+requires "Perl::Metrics::Lite";
+requires "TAP::Formatter::JUnit";
+
+//추가
+requires 'Catalyst::Plugin::Unicode::Encoding';
+requires "Catalyst::View::TT";
+</code></pre>
+
+<p>한글 인코딩 문제</p>
+
+<pre><code>$ lib/Foo/Web.pm
+
+use utf8;
+use Catalyst qw/
+-Debug
+ConfigLoader
+Static::Simple
+#추가
+Unicode::Encoding
+/;
+</code></pre>
+
+<p>인스톨</p>
+
+<pre><code>$ carton install
+...
+</code></pre>
+
+<p>부분 인스톨</p>
+
+<pre><code>$ carton install &lt;모듈네임&gt; 합니다.
+</code></pre>
+
+<h2>Controller 생성</h2>
+
+<pre><code>$ script/foo_web_create.pl controller List
+
+$ cd lib/Foo/Web/Controller
+$ vi List.pm
+// 주석처리
+# $c-&gt;response-&gt;body('Matched Foo::Web::Controller::List in List.');
+</code></pre>
+
+<h2>View 생성</h2>
+
+<pre><code>$ mkdir root/templates/bootstap/src/list
+$ cd root/templates/bootstrap/src/list
+$ vi index.tt
+  &lt;p&gt;나는 지금 한글을 테스트 중입니다.&lt;/p&gt; 작성
+</code></pre>
+
+<h2>실행</h2>
+
+<pre><code>$ ./run
+</code></pre>
+
+<h2>.gitignore</h2>
+
+<pre><code># inspire by github/gitignore
+blib/
+.build/
+_build/
+cover_db/
+inc/
+Build
+Build.bat
+.last_cover_stats
+Makefile
+Makefile.old
+MANIFEST.bak
+META.yml
+MYMETA.yml
+nytprof.out
+pm_to_blib
+# custom
+local/
+.sass-cache/
+tt_cache/
+.carton/
+*.log
+session
+MYMETA.json
+carton.lock
+</code></pre>
+
+<h2>script/bootstrap.pl</h2>
+
+<p>이건 헬퍼 없습니다.
+프로젝트마다 손으로 복사합니다.</p>
+
+<p>https://gist.github.com/2761721</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-15T17:56:00+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/perl/'>Perl</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/06/15/catalyst/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/06/15/catalyst/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/13/learn-jquery-5jang/" title="Previous Post: Learn jQuery 5장">&laquo; Learn jQuery 5장</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/18/catalyst/" title="Next Post: catalyst">catalyst &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-edit/">list-edit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-write/">list-write</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/06/15/catalyst/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/06/15/catalyst/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

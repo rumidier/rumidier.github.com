@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-16T13:38:36+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PHP]]></title>
+    <link href="http://rumidier.github.com/blog/2012/05/15/php/"/>
+    <updated>2012-05-15T13:02:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/05/15/php</id>
+    <content type="html"><![CDATA[<h3>str_split_unicode(), mb_strlen, mb_substr</h3>
+
+<p>한글 3줄 개행제한 및 10자 자르기 코드</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>split_word.php </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&amp;lt;?</span>
+</span><span class='line'><span class="x">$Val1     = &quot;가나다라마바사아아아아아\n아자차카야제커거\n미나다가라서여&quot;;</span>
+</span><span class='line'><span class="x">$word     = split(&quot;\n&quot;, $Val1);</span>
+</span><span class='line'><span class="x">$arr_cnt  = count($word);</span>
+</span><span class='line'><span class="x">$full_arr = array();&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;for ($i = 0; $i &amp;lt;= $arr_cnt-1; $i++) {</span>
+</span><span class='line'><span class="x">  $str = str_split_unicode($word[$i], 10);&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;  if ($full_arr) {&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;$full_arr = array_merge((array)$full_arr, (array)$str);</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;  }</span>
+</span><span class='line'><span class="x">  else {&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;$full_arr = array_merge((array)$str);</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;  }</span>
+</span><span class='line'><span class="x">}&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;if (count($full_arr) &gt;= 4) {</span>
+</span><span class='line'><span class="x">  echo &quot;Error&quot;.&quot;\n&quot;;</span>
+</span><span class='line'><span class="x">  exit;</span>
+</span><span class='line'><span class="x">}&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;print_r($full_arr);&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;function str_split_unicode($str, $l) {</span>
+</span><span class='line'><span class="x">  $ret = array();</span>
+</span><span class='line'><span class="x">  $len = mb_strlen($str, &quot;UTF-8&quot;);&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;  for ($i = 0; $i &amp;lt; $len; $i += $l) {&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;$ret[] = mb_substr($str, $i, $l, &quot;UTF-8&quot;);</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;  }&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;  return $ret;</span>
+</span><span class='line'><span class="x">}</span>
+</span><span class='line'><span class="x">?&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

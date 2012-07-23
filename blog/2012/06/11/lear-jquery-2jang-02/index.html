@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Lear jQuery 2장-02 - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="Source 예제.html 예제 css 예제 js 본문 - 테이블행에 징검다리 색깔 입히기 사용자 정의 선택자 class명 horizontal를 가진 div 집합의 두번째 항목 선택
+$(&#8216;div.horizontal:eq(1)&#8217;)
+두번째 항목이 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/06/11/lear-jquery-2jang-02/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Lear jQuery 2장-02</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-11T14:26:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Source</h2>
+
+<p><a href="https://gist.github.com/2908591">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2908588">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2908628">예제 js  </a></p>
+
+<h2>본문 - 테이블행에 징검다리 색깔 입히기</h2>
+
+<h2>사용자 정의 선택자</h2>
+
+<p>class명 horizontal를 가진 div 집합의 두번째 항목 선택
+$(&#8216;div.horizontal:eq(1)&#8217;)
+두번째 항목이 1인 이유는 자바스크립트 배열에서 인덱스는
+0에서 부터 시작 하며 jQuery또한 마찬가지이다.
+단, css는 1을 기반으로 한다.</p>
+
+<p>헤더 행 스타일 입히기</p>
+
+<pre><code>$('th').addClass('table-heading');
+//&lt;th class=table-heading'&gt;
+</code></pre>
+
+<p>odd,even 색 입히기</p>
+
+<pre><code>$('tr:not(:has(th)):even').addClass('even');
+$('tr:not(:has(th)):odd').addClass('odd');
+//odd와 even의 색 정의는 css에 정의 되어있다.
+</code></pre>
+
+<p>테이블에서 특정단어 포함 셀만 강조</p>
+
+<pre><code>$('td:contains("Henry")').addClass('highlight');
+//td에 Henry 단어가 포함 된열 강조
+// highlight의 색 정의는 .css에 정의 되어있다.
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아낸후 모든 하위레벨에 클래스 추가</p>
+
+<pre><code>$('td:contains("Henry")').siblings().addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 부모를 찾아 인덱스가 0보다 큰셀들을(0은 최상 부모) 순회하면 클래스추가</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td:gt(0)').addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아 부모를 찾고 그 안의 모든 셀을 찾은후 Henry를 포함한 셀을
+필터링한후 클래스추가(Henry만 적용을 하지 않음)</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td').not(':contains('Henry")')).addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함하고 있는 셀을 찾아낸 후에 그것의 부모를 얻어와서 자식들 중에 두번째 셀을
+찾아서 클래스를 추가하고 가장 최근의 .find()를 취소한 후에 다시 자식들 중에서 세 번째 셀을
+찾아서 클래스를 추가한다.</p>
+
+<pre><code>$('td:contains("Henry")') //Henry셀을 찾고
+.parent()  //부모를 찾아서
+.find('td:eq(1)') //부모의 두번째 셀을 찾아
+.addClass('highlight') //강조 하고(클래스 추가)
+.end() // 다시 부모로 돌아와
+.find('td:eq(2)') // 세번째를 찾아서
+.addClass('highlight'); //강조 한다(클래스 추가)
+</code></pre>
+
+<h2>Command Action</h2>
+
+<p><strong>addClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에 추가한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p>반환값 - 확장집합</p>
+
+<hr />
+
+<p><strong>removeClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에서 삭제한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p>
+
+<hr />
+
+<p><strong>siblings()</strong></p>
+
+<p>확장 엘리먼트의 모든 형제를포함 하는 확장 집합을 반환</p>
+
+<hr />
+
+<p><strong>find(selector)</strong></p>
+
+<p>  원본의 모든 엘리먼트 중 전달된 셀렉터 표현식과 일치하는 엘리먼트로 구성된 새로운 확장 집합
+  을 반환한다. 확장 집합에 포함된 엘리먼트의 자손 엘리먼트도 전달된 표현식과 일치하는지 평가</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>selector (String) 반환될 집합의 일부가 될 엘리먼트가 일치하는 셀렉터</p>
+
+<p><strong>반환값</strong></p>
+
+<p>새로 생성된 확장 집합</p>
+
+<p>변수 wrappedSet에 할당된 확장 집합에서 p문단 인용문(&gt;cite&lt; 엘리먼트)로 구성된 확장 집합은
+두가지로 표현 된다</p>
+
+<pre><code>wrappedSet.find('p cite')
+$('p cite', wrappedSet)
+</code></pre>
+
+<hr />
+
+<p><strong>parent()</strong></p>
+
+<p>  확장 집합 내에 있는 모든 확장 엘리먼트의 바로 위 부모로 구성된 확장 집합을 반환한다.</p>
+
+<p><strong>parents()</strong></p>
+
+<p>  모든 확장 엘리먼트의 조상으로 구성된 확장 집합을 반환한다. 바로 위 부모와
+  상위의 모든 소상이 포함 되지만 문서 루트(document root)는 포함 되지 않는다(?)</p>
+
+<hr />
+
+<p><strong>end()</strong></p>
+
+<p>  jQuery 커맨드 체인에서 사용하며 이전 확장 집합으로 돌아간다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>  없음</p>
+
+<p><strong>반환값</strong></p>
+
+<p>이전 확장 집합</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-11T14:26:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/learn/'>Learn</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/06/11/lear-jquery-2jang-02/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/06/11/lear-jquery-2jang-02/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/30/jquery-01/" title="Previous Post: jQuery-01">&laquo; jQuery-01</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/11/learn-jquery-3jang/" title="Next Post: Learn jQuery 3장">Learn jQuery 3장 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-edit/">list-edit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-write/">list-write</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/06/11/lear-jquery-2jang-02/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/06/11/lear-jquery-2jang-02/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

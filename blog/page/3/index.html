@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="3장 요약 .bind()나 .click()를 사용하여 사용자의 클릭을 반응하는 코드로 페이지 스타일 변경 가능
+클릭되는 요소가 무엇이냐에 따라서 서로다른 동작들을 수행하기 위한 이벤트 컨텍스트
+를 사용함. 거기에다 하나의 핸들러가 여러 요소에 연결되는 경우도 알아봄 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/page/3/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/24/learn-jquery/">Learn jQuery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-24T12:49:00+09:00" pubdate data-updated="true">May 24<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/24/learn-jquery/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>3장 요약</h2>
+
+<ul>
+<li>.bind()나 .click()를 사용하여 사용자의 클릭을 반응하는 코드로 페이지 스타일 변경 가능</li>
+<li>클릭되는 요소가 무엇이냐에 따라서 서로다른 동작들을 수행하기 위한 이벤트 컨텍스트
+를 사용함. 거기에다 하나의 핸들러가 여러 요소에 연결되는 경우도 알아봄</li>
+<li>.toggle()를 사용하여 페이지의 요소를 펼치거나 접을 수 있음</li>
+<li>.hover()를 사용하여 마우스 커서 위치에 있는 요소를 강조</li>
+<li>.stopPropagation(), preventDefault()를 이용하여 이벤트에 응답해야 하는 요소를 선별</li>
+<li>이벤트 핸들러를 제거하기 위해 .unbind()를 호출</li>
+<li>.trigger()를 사용하여 실행하고 싶은 이벤트 핸들러와 연결</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/22/jquery-dot-2-4/">jQuery.2-4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T20:14:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/22/jquery-dot-2-4/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>메서드</p>
+
+<pre><code>childeren()
+  확장 엘리먼트의 고유한 자식으로 구성된 확장 집합을 반환한다.
+contents()
+  확장 집합에서 엘리먼트의 콘텐츠로 구성된 확장 집합을 반환한다. 여기에는
+텍스트 노드도 포함되며 주로 &amp;lt;iframe&amp;gt;엘리먼트의 콘텐츠를 얻고자 사용한다.
+next()
+  확장 집합 내의 각 확장 엘리먼트 바로 다음에 나오는 형제로 구성된 확장 집합을 반환
+nextAll()
+  확장 집합 내의 각 확장 엘리먼트 다음에 나오는 모든 형제로 구성된 확장 집합을 반환
+parents()
+  확장 집합 내에 있는 모든 확장 엘리먼트의 바로 위 부모로 구성된 확장 집합을 반환
+prev()
+  확장 집합 내의 각 확장 엘리먼트 바로 이전에 나오는 형제로 구성된 확장 집합을 반환
+prevAll()
+  확장 집합 내의 각 확장 엘리먼트 이전에 나오는 모든 형제로 구성된 확장 집합을 반환
+siblings()
+  확장 엘리먼트의 모든 형제를 포함하는 확장 집합을 반환
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/22/jquery-dot-2-3/">jQuery.2-3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T17:06:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/22/jquery-dot-2-3/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>jQuery 정의 필터 셀렉터. 대상 엘리먼트를 식별해내는 데 강력한 기능을 준다.</h2>
+
+<p>셀렉터</p>
+
+<pre><code>:animated
+  현재 애니메이션이 적용되고 있는 엘리먼트를 선택한다.
+:button
+  모든 버튼을 선택한다.(input[type=submit], input[type=reset], input[type=button], button)
+:checkbox
+  체크박스 엘리먼트만 선택(input[type=checkbox])
+:checked
+  선택된 체크박스나 라디오 버튼만을 선택한다.
+:contains(foo)
+  텍스트 foo를 포함하는 엘리먼트만 선택한다.
+:disabled
+  인터페이스에서 비활서오하 상태인 모든 폼 엘리먼트를 선택한다.
+:enabled
+  인터페이스에서 활성화 상태인 모든 폼 엘리먼트를 선택한다.
+:file
+  모든 파일 엘리먼트를 선택한다.(input[type=file])
+:header
+  헤더 엘리먼트만 선택한다.
+:hidden
+  감춰진 엘리먼트만 선택한다
+:image
+  폼 이미지를 선택한다 (input[type=image])
+:input
+  폼엘리먼트만 선택(input, select, textarea, button)
+:not(filter)
+  필터의 값을 반대로 변경
+:parent
+  빈 엘리먼트를 제외하고, 텍트스도 포함해서 자식 엘리먼트를 가지는 엘리먼트를 선택한다.
+:password
+  패스워드 엘리먼트만 선택한다.(input[type=password])
+:radio
+  라디오 버튼 엘리먼트만 선택한다(input[type=radio])
+:reset
+  리셋 버튼을 선택한다.(input[type=reset]이나 button[type=reset])
+:selected
+  선택된 엘리먼트만 선택한다.
+:submit
+  전송 버튼을 선택한다.(button[type=submit]이나 input[type=submit])
+:text
+  텍스트 엘리먼트만 선택한다.(input[type=text])
+:visble
+  보이는(visible)엘리먼트만 선택한다.
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/22/jquery/">jQuery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T16:57:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/22/jquery/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>셀렉터</p>
+
+<pre><code>:first  
+:last   
+:fisrt-child 
+:last-child
+:only-child
+:nth-child(n)
+:nth-child(even|odd)
+:nth-child(Xn+Y)
+:even / :odd
+:eq(n)
+:gt(n)
+:lt(n)
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/18/meadow/">Meadow</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-18T19:37:00+09:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/18/meadow/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>[잡담]
+매일 매일 똑같은 모듈만 만지작 거리니까
+진사마가 Furl을 사용해 보라고 권하였다..
+그래도 빨리 하나 써서 주어야 하니까 그건 다음에..
+크리스마스때&#8230;!!?</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/15/php/">PHP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-15T13:02:00+09:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/15/php/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>str_split_unicode(), mb_strlen, mb_substr</h3>
+
+<p>한글 3줄 개행제한 및 10자 자르기 코드</p>
+
+<figure class='code'><figcaption><span>split_word.php </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?</span>
+</span><span class='line'><span class="nv">$Val1</span>     <span class="o">=</span> <span class="s2">&quot;가나다라마바사아아아아아</span><span class="se">\n</span><span class="s2">아자차카야제커거</span><span class="se">\n</span><span class="s2">미나다가라서여&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$word</span>     <span class="o">=</span> <span class="nb">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nv">$Val1</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$arr_cnt</span>  <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$word</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$full_arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$arr_cnt</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$str</span> <span class="o">=</span> <span class="nx">str_split_unicode</span><span class="p">(</span><span class="nv">$word</span><span class="p">[</span><span class="nv">$i</span><span class="p">],</span> <span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$full_arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$full_arr</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">((</span><span class="k">array</span><span class="p">)</span><span class="nv">$full_arr</span><span class="p">,</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span><span class="nv">$str</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$full_arr</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">((</span><span class="k">array</span><span class="p">)</span><span class="nv">$str</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$full_arr</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="s2">&quot;Error&quot;</span><span class="o">.</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">exit</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nv">$full_arr</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">str_split_unicode</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$ret</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>  <span class="nv">$len</span> <span class="o">=</span> <span class="nb">mb_strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$len</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">+=</span> <span class="nv">$l</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$ret</span><span class="p">[]</span> <span class="o">=</span> <span class="nb">mb_substr</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$i</span><span class="p">,</span> <span class="nv">$l</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/14/meadow/">Meadow</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T15:15:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/14/meadow/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>[잡담]</h2>
+
+<ol>
+<li>카탈 시작 정리(carton install 좀 까먹지마&#8230;)</li>
+<li>MYSQL 유저 추가</li>
+<li>MYSQL Dump 하는법</li>
+</ol>
+
+
+<p>뭔가 블로그질을 하려면 똑바로 하고 싶은데 똑바로 하려면
+엄청나게  시간이 들가고 짧게 짧게 가자..</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/14/ubuntu-scp/">Ubuntu SCP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T15:08:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/14/ubuntu-scp/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>서버파일 전송</p>
+
+<pre><code>$ scp [option] [파일] [위치]
+&lt;option&gt;
+-r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사
+</code></pre>
+
+<p>예제</p>
+
+<pre><code>$ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c .
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/14/git-rabase/">Git Rebase</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T12:11:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/14/git-rabase/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>브랜치를 나누기 쉬운 git-flow쓰지만 코드 확인이 불편 하다.
+그래서 <a href="http://aanoaa.github.com/">형석님</a> git - rabase를 사용해 본다.</p>
+
+<p>다른 사람이 내게 pull-request를 날리게 되면 이게 잘돌아 가는지 확인이
+필요하다.</p>
+
+<p>remote branch 확인 하는 방법</p>
+
+<pre><code>$ git branch -a 또는 git branch -av
+</code></pre>
+
+<p>pull-request된 브랜치 명이 있다면 보이게 된다.</p>
+
+<pre><code>remotes/origin/#1-test
+</code></pre>
+
+<p>remote 상태 확인 하러 가기</p>
+
+<pre><code>$ git checkout "#1-test"
+</code></pre>
+
+<p>pull-request된 내용이 이상이 없을때는 github 홈페이지에서 허락을 하게 되면
+master와 합쳐 지게 된다.
+merge가 안된다는 명시를 하게 되면 현재 pull-request가 branch의 분기 시점이
+현재 master와 차이(다른 커밋 메세지)가 포함 되어 있기 때문에
+master 브랜치를 최신상태로 만들어 주고 rebase 해주어야 한다.</p>
+
+<pre><code>$ git pull origin master
+</code></pre>
+
+<p>분기된 master이력이 최신으로 변경되었다면.</p>
+
+<pre><code>$ git checkout "branch-name"
+$ git rebase master
+# conflict?
+# $ vim conflict.file -&gt; 수정
+</code></pre>
+
+<p>conflict이 일어 났을시 bracnh명이 유지 될때와 유지 되지 않을때가 있다.</p>
+
+<p>유지시</p>
+
+<pre><code>$ git rebase --continue
+</code></pre>
+
+<p>(no branch)상태</p>
+
+<pre><code>$ git rebae --skip
+</code></pre>
+
+<p>conflict 처리 될때까지 반복</p>
+
+<p>모든 문제의 해결을 했다면</p>
+
+<pre><code>$ git push origin "#1-test"
+</code></pre>
+
+<p>이제 github 홈페이지 에서 확인 절차를 밟으면 된다.
+확인이 끝났다면 master branch에서</p>
+
+<pre><code>(master) $ git pull
+</code></pre>
+
+<h2>pull-request를 보낼시</h2>
+
+<p>pull-request를 보낼때 또한 마스터의 가장 최근 이력을 기초로 한다.
+가장 최신상태에서</p>
+
+<p>push를 해주고 github 홈페이지 에서 pull-request를 보내게 되면 마스터가
+알아서 처리 해주게 된다.</p>
+
+<pre><code>$ git push origin "#1-test"
+</code></pre>
+
+<h2>git 기본사항</h2>
+
+<p>모든 branch 확인 하는 방법</p>
+
+<pre><code>$ git bracnh -a
+</code></pre>
+
+<p>remote 삭제 하는 방법</p>
+
+<pre><code>$ git push origin :remote주소
+</code></pre>
+
+<p>brach 삭제 하는 방법</p>
+
+<pre><code>$ git branch -d "branch name"
+</code></pre>
+
+<h2>remote 주소 변경하기</h2>
+
+<pre><code>$ git remote show origin # remote 상태 확인
+</code></pre>
+
+<p>push시 경로와 비밀번호 쓰라고 나오는 경우가 생겼는데
+이런 경우 remote의 상태를 확인후 http://&#8230;..되있는 경우가 있다
+이때는 주소를 http://가 아닌 ssh 주소로 해주면 나오지 않게 된다.</p>
+
+<p>git 홈피에서 ssh 주소를 복사해오기</p>
+
+<pre><code>$ git remote add aaa "ssh 주소 copy"
+$ git remote rm origin
+$ git remote show origin
+$ git remote rename aaa origin
+$ git remote show origin 으로 확인 및 푸쉬 해봄
+</code></pre>
+
+<h2>마무리</h2>
+
+<p>merge된 branch 알아 보기
+merge가 안된 branch는 표시 안되니 표시 된건
+가차 없이 지워 버리자</p>
+
+<pre><code>$ git br --merged
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/29/jeonyeog-geomsaeggwa-cihwan/">전역 검색과 치환</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-29T22:24:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/12/29/jeonyeog-geomsaeggwa-cihwan/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>전역 검색과 치환</h3>
+
+<p>버퍼의 x행과 효애 사이에서 패턴(pattern)을 찾아 치환 문자열(replacement)로 까누다
+패턴은 정규 표현식이다.</p>
+
+<p>1~10번째 줄에서 weeble르 wobble로 대체한다.</p>
+
+<pre><code>:[x,y]s/patern/replacement/flags
+:1,10s/weeble/wobble
+</code></pre>
+
+<h3>마크 하기</h3>
+
+<p>어떤 위치에서 ma라고 입력하면 그 위치에 a 표시(mark)을 한다</p>
+
+<p>a표시로 이동</p>
+
+<pre><code>`a
+</code></pre>
+
+<p>a표시행의 맨앞으로 이동</p>
+
+<pre><code>'a
+</code></pre>
+
+<p>마크를 이용한 줄에서의 치환
+&#8216;a행에서 .현재 행을 의미</p>
+
+<pre><code>:'a, .s/weeble/wobble/
+</code></pre>
+
+<p>마크를 사용한 복사와 삭제
+복사를 시작할 위치에서 y를 누르고 `a를 사용하게 되면 현재 위치에서 마크위치까지를
+복사하게 된다(삭제는 y대신 d사용)</p>
+
+<pre><code> :y`a
+</code></pre>
+
+<p>레지스터에 저장하기
+a-z, A-Z를 사용가능 하며 소문자는 한개만 대문자는 기존에 추가 된다</p>
+
+<pre><code>"ayy : 한줄 저장
+"ay`a : 현재 행부터 마크까지 저장
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-edit/">list-edit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/list-write/">list-write</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

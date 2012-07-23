@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Learn | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/learn/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-16T13:38:36+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learn jQuery 3장]]></title>
+    <link href="http://rumidier.github.com/blog/2012/06/11/learn-jquery-3jang/"/>
+    <updated>2012-06-11T18:17:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/06/11/learn-jquery-3jang</id>
+    <content type="html"><![CDATA[<h2>Source</h2>
+
+<p><a href="https://gist.github.com/2909211">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2909213">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2909224">예제 js  </a></p>
+
+<h2>본문 - 이벤트 트리거 사용하는 방법</h2>
+
+<h2>button click event</h2>
+
+<p>페이지 시작시 노말페이지로 보이도록 모든 클래스를 해제한다.
+removeClass()는 다른 파악되지 않은 Class까지 해제 하지만 현재 예제
+코드 에서는 생각치 않도록 쓴다.</p>
+
+<pre><code>$('body').removeClass();
+</code></pre>
+
+<p>현재 버튼이 클릭된 id값을 확인하여 일치 하였을경우
+클래스를 추가 하도록 한다.</p>
+
+<pre><code>if (this.id == 'switcher-narrow') {
+  $('body').addClass('narrow');
+}
+else if (this.id == 'switcher-large') {
+  $('body').addClass('large');
+}
+</code></pre>
+
+<p>강조되는 글씨를 표현하기 위해 우선 클래스를 해제하고
+현재 버튼에 클래스를 추가 해준다.</p>
+
+<pre><code>$('#switcher .button').removeClass('selected');
+$(this).addClass('selected');
+</code></pre>
+
+<p>이벤트 객체 사용시 버블링을 중단 하기 위해 다음과 같이 추가해 준다.
+(버블링을 추가안해줄시 노말 버튼 클릭시에도 버튼칸이 사라지게 된다.)</p>
+
+<pre><code>event.stopPropagation();
+</code></pre>
+
+<p>부분 코드</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>부분코드 - 01 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').click(function(event) {
+</span><span class='line'>  $('body').removeClass();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  if (this.id == 'switcher-narrow') {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>$('body').addClass('narrow');
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }
+</span><span class='line'>  else if (this.id == 'switcher-large') {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>$('body').addClass('large');
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  $('#switcher .button').removeClass('selected');
+</span><span class='line'>  $(this).addClass('selected');&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  event.stopPropagation();
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>버튼 강조하기</h2>
+
+<p>버튼에 hover(마우스 가져다 대면) 띠면(체인으로) hover삭제</p>
+
+<p>부분 코드</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>부분코드 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').hover(function() {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>$(this).addClass('hover');
+</span><span class='line'>}, function() {
+</span><span class='line'>  $(this).removeClass('hover');
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  });</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>이벤트 핸들러</h2>
+
+<p>핸들러를 나중에 다시 사용할 수 있도록 핸들러 함수에 이름을 부여</p>
+
+<pre><code>var toggleStyleSwitcher = function() {
+  $('switcher .button').toggleClass('hidden');
+};
+</code></pre>
+
+<p>핸들러를 활성화 시켜준다.</p>
+
+<pre><code>$('#switcher').click(toggleStyleSwitcher);
+</code></pre>
+
+<p>노말 상태에서만 토글 기능 활성화</p>
+
+<pre><code>$('switcher-normal').click(function() {
+  $('#switcher').click(toggleStyleSwitcher);
+});
+
+$('#switcher-narrow, #switcher-large').click(function() {
+  $('#switcher').unbind('click', toggleStyleSwitcher);
+});
+</code></pre>
+
+<p>시작시 접힘 기능(인자를 지정하지 않는경우 히벤트에 해당하는 행위를 발생시킴)</p>
+
+<pre><code>$('#switcher').click();
+</code></pre>
+
+<h2>Command action</h2>
+
+<p><strong>unbind(event Type, listener)</strong></p>
+
+<p><strong>unbind(event)</strong></p>
+
+<p>확장 집합의 모든 엘리먼트에서 전달된 매개변수에 따라 핸들러를 선택적으로 제거한다.</p>
+
+<p>매개변수를 제공하지 않으면 엘리먼트의 모든 리스터를 제거한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>  <strong>eventType</strong></p>
+
+<pre><code>   (String)매개변수를 제공하면 지정된 이벤트 타입에 할당된 리스너만 제거한다.
+</code></pre>
+
+<p>  <strong>listener</strong></p>
+
+<pre><code>  (Function)매개변수를 제공하면 지정된 리스너와 동일한 것만 제거한다.
+</code></pre>
+
+<p>  <strong>eventType</strong></p>
+
+<pre><code>  (Event) Event 인스턴스의 정보로 알 수 있는 이벤트가 발생했을 대 호출될 리스너를
+  제거한다
+</code></pre>
+
+<p><strong>반환값</strong></p>
+
+<p>확장 집합</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lear jQuery 2장-02]]></title>
+    <link href="http://rumidier.github.com/blog/2012/06/11/lear-jquery-2jang-02/"/>
+    <updated>2012-06-11T14:26:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/06/11/lear-jquery-2jang-02</id>
+    <content type="html"><![CDATA[<h2>Source</h2>
+
+<p><a href="https://gist.github.com/2908591">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2908588">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2908628">예제 js  </a></p>
+
+<h2>본문 - 테이블행에 징검다리 색깔 입히기</h2>
+
+<h2>사용자 정의 선택자</h2>
+
+<p>class명 horizontal를 가진 div 집합의 두번째 항목 선택
+$('div.horizontal:eq(1)')
+두번째 항목이 1인 이유는 자바스크립트 배열에서 인덱스는
+0에서 부터 시작 하며 jQuery또한 마찬가지이다.
+단, css는 1을 기반으로 한다.</p>
+
+<p>헤더 행 스타일 입히기</p>
+
+<pre><code>$('th').addClass('table-heading');
+//&lt;th class=table-heading'&gt;
+</code></pre>
+
+<p>odd,even 색 입히기</p>
+
+<pre><code>$('tr:not(:has(th)):even').addClass('even');
+$('tr:not(:has(th)):odd').addClass('odd');
+//odd와 even의 색 정의는 css에 정의 되어있다.
+</code></pre>
+
+<p>테이블에서 특정단어 포함 셀만 강조</p>
+
+<pre><code>$('td:contains("Henry")').addClass('highlight');
+//td에 Henry 단어가 포함 된열 강조
+// highlight의 색 정의는 .css에 정의 되어있다.
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아낸후 모든 하위레벨에 클래스 추가</p>
+
+<pre><code>$('td:contains("Henry")').siblings().addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 부모를 찾아 인덱스가 0보다 큰셀들을(0은 최상 부모) 순회하면 클래스추가</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td:gt(0)').addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아 부모를 찾고 그 안의 모든 셀을 찾은후 Henry를 포함한 셀을
+필터링한후 클래스추가(Henry만 적용을 하지 않음)</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td').not(':contains('Henry")')).addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함하고 있는 셀을 찾아낸 후에 그것의 부모를 얻어와서 자식들 중에 두번째 셀을
+찾아서 클래스를 추가하고 가장 최근의 .find()를 취소한 후에 다시 자식들 중에서 세 번째 셀을
+찾아서 클래스를 추가한다.</p>
+
+<pre><code>$('td:contains("Henry")') //Henry셀을 찾고
+.parent()  //부모를 찾아서
+.find('td:eq(1)') //부모의 두번째 셀을 찾아
+.addClass('highlight') //강조 하고(클래스 추가)
+.end() // 다시 부모로 돌아와
+.find('td:eq(2)') // 세번째를 찾아서
+.addClass('highlight'); //강조 한다(클래스 추가)
+</code></pre>
+
+<h2>Command Action</h2>
+
+<p><strong>addClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에 추가한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p>반환값 - 확장집합</p>
+
+<hr />
+
+<p><strong>removeClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에서 삭제한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p>
+
+<hr />
+
+<p><strong>siblings()</strong></p>
+
+<p>확장 엘리먼트의 모든 형제를포함 하는 확장 집합을 반환</p>
+
+<hr />
+
+<p><strong>find(selector)</strong></p>
+
+<p>  원본의 모든 엘리먼트 중 전달된 셀렉터 표현식과 일치하는 엘리먼트로 구성된 새로운 확장 집합
+  을 반환한다. 확장 집합에 포함된 엘리먼트의 자손 엘리먼트도 전달된 표현식과 일치하는지 평가</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>selector (String) 반환될 집합의 일부가 될 엘리먼트가 일치하는 셀렉터</p>
+
+<p><strong>반환값</strong></p>
+
+<p>새로 생성된 확장 집합</p>
+
+<p>변수 wrappedSet에 할당된 확장 집합에서 p문단 인용문(&gt;cite&lt; 엘리먼트)로 구성된 확장 집합은
+두가지로 표현 된다</p>
+
+<pre><code>wrappedSet.find('p cite')
+$('p cite', wrappedSet)
+</code></pre>
+
+<hr />
+
+<p><strong>parent()</strong></p>
+
+<p>  확장 집합 내에 있는 모든 확장 엘리먼트의 바로 위 부모로 구성된 확장 집합을 반환한다.</p>
+
+<p><strong>parents()</strong></p>
+
+<p>  모든 확장 엘리먼트의 조상으로 구성된 확장 집합을 반환한다. 바로 위 부모와
+  상위의 모든 소상이 포함 되지만 문서 루트(document root)는 포함 되지 않는다(?)</p>
+
+<hr />
+
+<p><strong>end()</strong></p>
+
+<p>  jQuery 커맨드 체인에서 사용하며 이전 확장 집합으로 돌아간다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>  없음</p>
+
+<p><strong>반환값</strong></p>
+
+<p>이전 확장 집합</p>
+]]></content>
+  </entry>
+  
+</feed>

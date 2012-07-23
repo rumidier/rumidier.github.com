@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: caltalyst | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/caltalyst/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-16T13:38:36+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[catalyst]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/02/catalyst/"/>
+    <updated>2012-07-02T18:13:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/02/catalyst</id>
+    <content type="html"><![CDATA[<h1>DB confing 셋팅 정보</h1>
+
+<pre><code>my $DB_NAME     = $ENV{DB_NAME}     || 'NAME';
+my $DB_USER     = $ENV{DB_USER}     || 'USER';
+my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'PASSWORD';
+</code></pre>
+
+<h1>옵션 내용</h1>
+
+<h2>DBIx::Class::Schema::Loader::Base</h2>
+
+<pre><code>schema_class =&gt; name of the schema class we are building,
+</code></pre>
+
+<p>적용</p>
+
+<pre><code>schema_class =&gt; "Project::Schema",
+</code></pre>
+
+<hr />
+
+<ul>
+<li>dump_directory</li>
+</ul>
+
+
+<p>The value of this option is a perl libdir pathname. Within that directory this module will create a baseline manual DBIx::Class::Schema module set, based on what it creates at runtime.</p>
+
+<p>The created schema class will have the same classname as the one on which you are setting this option (and the ResultSource classes will be based on this name as well).</p>
+
+<p>Normally you wouldn't hard-code this setting in your schema class, as it is meant for one-time manual usage.</p>
+
+<p>See "dump_to_dir" in DBIx::Class::Schema::Loader for examples of the recommended way to access this functionality.</p>
+
+<p>적용</p>
+
+<pre><code>dump_directory =&gt; 'lib',
+</code></pre>
+
+<hr />
+
+<p>naming</p>
+
+<p>Static schemas (ones dumped to disk) will, by default, use the new-style relationship names</p>
+
+<p>and singularized Results, unless you're overwriting an existing dump made by an older version</p>
+
+<p>of DBIx::Class::Schema::Loader, in which case the backward compatible RelBuilder will be activated,</p>
+
+<p>and the appropriate monikerization used.</p>
+
+<p>Specifying</p>
+
+<pre><code>naming =&gt; 'current'
+</code></pre>
+
+<p>will disable the backward-compatible RelBuilder and use the new-style relationship names along with singularized Results, even when overwriting a dump made with an earlier version.</p>
+
+<p>The option also takes a hashref:</p>
+
+<pre><code>naming =&gt; {
+    relationships    =&gt; 'v8',
+    monikers         =&gt; 'v8',
+    column_accessors =&gt; 'v8',
+    force_ascii      =&gt; 1,
+}
+</code></pre>
+
+<p>or</p>
+
+<pre><code>naming =&gt; { ALL =&gt; 'v8', force_ascii =&gt; 1 }
+</code></pre>
+
+<p>The keys are:</p>
+
+<p>ALL</p>
+
+<p>Set "relationships", "monikers" and "column_accessors" to the specified value.</p>
+
+<p>relationships</p>
+
+<p>How to name relationship accessors.</p>
+
+<p>monikers</p>
+
+<p>How to name Result classes.</p>
+
+<p>column_accessors</p>
+
+<p>How to name column accessors in Result classes.</p>
+
+<p>force_ascii</p>
+
+<p>For "v8" mode and later, uses String::ToIdentifier::EN instead of String::ToIdentifier::EM::Unicode to force monikers and other identifiers to ASCII.</p>
+
+<p>The values can be:</p>
+
+<p>current</p>
+
+<p>Latest style, whatever that happens to be.</p>
+
+<p>v4</p>
+
+<p>Unsingularlized monikers, has_many only relationships with no _id stripping.</p>
+
+<p>v5</p>
+
+<p>Monikers singularized as whole words, might_have relationships for FKs on UNIQUE constraints, _id stripping for belongs_to relationships.</p>
+
+<p>Some of the _id stripping edge cases in 0.05003 have been reverted for the v5 RelBuilder.</p>
+
+<p>v6</p>
+
+<p>All monikers and relationships are inflected using Lingua::EN::Inflect::Phrase, and there is more aggressive _id stripping from relationship names.</p>
+
+<p>In general, there is very little difference between v5 and v6 schemas.</p>
+
+<p>v7</p>
+
+<p>This mode is identical to v6 mode, except that monikerization of CamelCase table names is also done better (but best in v8.)</p>
+
+<p>CamelCase column names in case-preserving mode will also be handled better for relationship name inflection (but best in v8.) See "preserve_case".</p>
+
+<p>In this mode, CamelCase "column_accessors" are normalized based on case transition instead of just being lowercased, so FooId becomes foo_id.</p>
+
+<p>v8</p>
+
+<p>(EXPERIMENTAL)</p>
+
+<p>The default mode is "v7", to get "v8" mode, you have to specify it in "naming" explicitly until 0.08 comes out.</p>
+
+<p>"monikers" and "column_accessors" are created using String::ToIdentifier::EN::Unicode or String::ToIdentifier::EN if "force_ascii" is set; this is only significant for names with non-\w characters such as ..</p>
+
+<p>CamelCase identifiers with words in all caps, e.g. VLANValidID are supported correctly in this mode.</p>
+
+<p>For relationships, belongs_to accessors are made from column names by stripping postfixes other than _id as well, for example just Id, _?ref, _?cd, _?code and _?num, case insensitively.</p>
+
+<p>적용</p>
+
+<pre><code>naming =&gt; { ALL =&gt; 'v8' },
+</code></pre>
+
+<hr />
+
+<p>relationships</p>
+
+<p>How to name relationship accessors.</p>
+
+<p>적용</p>
+
+<pre><code>relationships =&gt; 1,
+
+# 왜 여기만 1이지? ALL =&gt; v8이었는데?
+</code></pre>
+
+<hr />
+
+<p>skip_load_external</p>
+
+<p>Skip loading of other classes in @INC. The default is to merge all other classes with the same name found in @INC into the schema file we are creating.</p>
+
+<p>적용</p>
+
+<pre><code>skip\_load_external =&gt; 1,
+</code></pre>
+
+<hr />
+
+<p>use_moose</p>
+
+<p>Creates Schema and Result classes that use Moose, MooseX::NonMoose and MooseX::MarkAsMethods (or namespace::autoclean, see below). The default content after the md5 sum also makes the classes immutable.</p>
+
+<p>It is safe to upgrade your existing Schema to this option.</p>
+
+<p>적용</p>
+
+<pre><code>use_moose          =&gt; 1,
+</code></pre>
+
+<hr />
+
+<p>only_autoclean</p>
+
+<p>By default, we use MooseX::MarkAsMethods to remove imported functions from your generated classes. It uses namespace::autoclean to do this, after telling your object's metaclass that any operator overloads in your class are methods, which will cause namespace::autoclean to spare them from removal.</p>
+
+<p>This prevents the "Hey, where'd my overloads go?!" effect.</p>
+
+<p>If you don't care about operator overloads, enabling this option falls back to just using namespace::autoclean itself.</p>
+
+<p>If none of the above made any sense, or you don't have some pressing need to only use namespace::autoclean, leaving this set to the default is recommended.</p>
+
+<p>적용</p>
+
+<pre><code>only_autoclean     =&gt; 1,
+</code></pre>
+
+<hr />
+
+<p>col_collision_map</p>
+
+<p>This option controls how accessors for column names which collide with perl methods are named. See "COLUMN ACCESSOR COLLISIONS" for more information.</p>
+
+<p>This option takes either a single sprintf format or a hashref of strings which are compiled to regular expressions that map to sprintf formats.</p>
+
+<p>Examples:</p>
+
+<pre><code>col_collision_map =&gt; 'column_%s'
+
+col_collision_map =&gt; { '(.*)' =&gt; 'column_%s' }
+
+col_collision_map =&gt; { '(foo).*(bar)' =&gt; 'column_%s_%s' }
+</code></pre>
+
+<p>적용</p>
+
+<pre><code>col_collision_map  =&gt; 'column_%s',
+</code></pre>
+
+<hr />
+
+<p>result_base_class</p>
+
+<p>Base class for your table classes (aka result classes). Defaults to 'DBIx::Class::Core'.</p>
+
+<p>적용</p>
+
+<pre><code>result_base_class =&gt; 'Evid::Schema::ResultBase',
+</code></pre>
+
+<hr />
+
+<p>overwrite_modifications</p>
+
+<p>Default false. If false, when updating existing files, Loader will refuse to modify any Loader-generated code that has been modified since its last run (as determined by the checksum Loader put in its comment lines).</p>
+
+<p>If true, Loader will discard any manual modifications that have been made to Loader-generated code.</p>
+
+<p>Again, you should be using version control on your schema classes. Be careful with this option.</p>
+
+<p>적용</p>
+
+<pre><code>overwrite_modifications =&gt; 1,
+</code></pre>
+
+<hr />
+
+<p>datetime_undef_if_invalid</p>
+
+<p>Pass a 0 for this option when using MySQL if you DON'T want datetime_undef_if_invalid => 1 in your column info for DATE, DATETIME and TIMESTAMP columns.</p>
+
+<p>The default is recommended to deal with data such as 00/00/00 which sometimes ends up in such columns in MySQL.</p>
+
+<p>적용</p>
+
+<pre><code>datetime_undef_if_invalid =&gt; 1,
+</code></pre>
+
+<hr />
+
+<p>custom_column_info</p>
+
+<p>Hook for adding extra attributes to the column_info for a column.</p>
+
+<p>Must be a coderef that returns a hashref with the extra attributes.</p>
+
+<p>Receives the table object (which stringifies to the unqualified table name), column name and column_info.</p>
+
+<p>For example:</p>
+
+<pre><code>custom_column_info =&gt; sub {
+my ($table, $column_name, $column_info) = @_;
+
+if ($column_name eq 'dog' &amp;&amp; $column_info-&gt;{default_value} eq 'snoopy') {
+    return { is_snoopy =&gt; 1 };
+}
+},
+</code></pre>
+
+<p>적용</p>
+
+<pre><code>{
+loader_options =&gt; {
+    custom_column_info =&gt; sub {
+    my ($table, $col_name, $col_info) = @_;
+
+    if ($col_name eq 'password') {
+        return { %{ $col_info },
+            encode_column =&gt; 1,
+            encode_class  =&gt; 'Digest',
+            encode_args   =&gt; { algorithm =&gt; 'SHA-1', format =&gt; 'hex' },
+            encode_check_method =&gt; 'check_password' };
+    }
+
+    if ($col_name eq 'created_at') {
+        return { %{ $col_info }, set_on_create =&gt; 1, inflate_datetime =&gt; 1 };
+    }
+
+    if ($col_name eq 'update_at') {
+        return { %{ $col_info }, set_on_create =&gt; 1, set_on_update =&gt; 1, inflate_datetime =&gt; 1 };
+    }
+
+    if ($col_name eq 'data') {
+        return { %{ $col_info }, serializer_class =&gt; 'JSON' };
+    }
+    },
+},
+}
+</code></pre>
+
+<hr />
+
+<h2>cpan dbicdump</h2>
+
+<pre><code>connect_info =&gt; {
+dsn               =&gt; "dbi:mysql:$DB_NAME:127.0.0.1",
+user              =&gt; $DB_USER,
+pass              =&gt; $DB_PASSWORD,
+mysql_enable_utf8  =&gt; 1,
+},
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
