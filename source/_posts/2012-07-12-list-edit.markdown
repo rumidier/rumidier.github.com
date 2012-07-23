@@ -1,0 +1,59 @@
+---
+layout: post
+title: "list-edit"
+date: 2012-07-12 13:56
+comments: true
+categories: Catalyst perl
+---
+
+## 청구 내역 수정 
+
+[List-edit-action](https://gist.github.com/3095912)
+
+수정 되어야할 $edit_id를 받을수 있어햐 한다.
+
+    sub edit :Local :CaptureArgs(1) {
+	my ( $self, $c, $edit_id ) = @_;
+
+수정할 폼을 제출 했을때 업데이트 동작 혹은 정보 출력을 하여야 한다.
+
+	if ($c->req->method eq 'POST') {
+	    my @messages;
+
+	    push @messages, 'amount is invaild' if ($c->req->params->{amount} !~ /^\d+$/);
+	    push @messages, 'title is required' unless ($c->req->params->{title});
+
+	    if (@messages) {
+		$c->flash(
+			messages => @messages,
+			comment  => $c->req->params->{comment},
+			title    => $c->req->params->{title},
+			amount   => $c->req->params->{amount},
+		);
+
+		return $c->res->redirect($c->uri_for("/list/view/$c->req->params->{charge_id}"));
+	    }
+
+	    my $time = strftime "%Y-%m-%d %H:%M:%S", localtime;
+	    my %row = (
+		id         => $c->req->params->{charge_id},
+		amount     => $c->req->params->{amount},
+		user       => $c->req->params->{charge_user},
+		title      => $c->req->params->{title},
+		comment    => $c->req->params->{comment},
+		updated_on => "$time",
+	    );
+	    $c->model('DonDB')->resultset('Charge')->update_or_create(\%row);
+
+	    $c->res->redirect($c->uri_for("/list/view/$row{id}"));
+	}
+	else {
+	    my $editer = $c->model('DonDB')->resultset('Charge')->find($edit_id);
+
+	    $c->stash(
+		editer => $editer,
+	    );
+	}
+    }
+
+[List-edit.tt](https://gist.github.com/3095922)

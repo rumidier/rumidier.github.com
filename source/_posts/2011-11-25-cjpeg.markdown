@@ -1,0 +1,20 @@
+---
+layout: post
+title: "cjpeg"
+date: 2011-11-25 18:05
+comments: true
+categories: Beginning Linux
+---
+
+출력 재지정
+
+    $ cjpeg image.gif > image.jpg
+
+
+실습
+
+    #!/bin/sh
+    for image in * .gif
+    do
+      cjpeg $image > ${image%%gif}jpg
+    done

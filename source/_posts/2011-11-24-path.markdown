@@ -1,0 +1,15 @@
+---
+layout: post
+title: "PATH"
+date: 2011-11-24 23:04
+comments: true
+categories: Running Linux
+---
+
+$PATH에 *추가* 하기
+
+    echo PATH=$PATH:/foo/bar/baz
+
+$PATH를 *바꾸기*
+
+    echo PATH=경로....

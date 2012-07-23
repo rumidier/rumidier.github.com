@@ -1,0 +1,84 @@
+---
+layout: post
+title: "catalyst"
+date: 2012-06-25 19:11
+comments: true
+categories: catalyst
+---
+
+## Error message
+
+기존에 사용되던 myweb.conf 파일의
+ERROR 500.tt 메세지로 인해 에러 메세지가 제대로 보이지 않아
+삭제 했습니다.
+
+    $ vi myweb.conf
+    ERROR 500.tt 삭제
+
+## Makefile.PL 모듈 추가
+
+    $ vi Makefile.PL
+    require DateTime::Format::MYSQL
+
+## DB 날짜 입력
+
+lib/Silex/Web/Donnenwa/Controller/List.pm 
+
+등록시 날짜 생성을 위해 POSIX모듈을 사용합니다. 현재시간에
+
+형식을 DB와 같이  "%Y-%m-%d% %H:%M:%S" 만들어 입력합니다.
+
+    sub write :Local :Args(0) {
+    ...
+    use POSIX qw(strftime);
+
+    my $time = strftime "%Y-%m-%d% %H:%M:%S", localtime;
+    my %row = (
+	applicant  => $c->req->params->{applicant},
+	title      => $c->req->params->{title},
+	content    => $c->req->params->{content},
+	created_on => "$time",
+	updated_on => "$time",
+    );
+    ...
+
+## list 페이지 쿼리문 수정
+
+lib/Silex/Web/Donnenwa/Controller/List.pm 
+
+생성될 날짜순으로 출력하기 위한 쿼리문 작성
+search의 첫번째 인자는 where문으로써 무시 하기 위해서는 빈 해쉬레퍼를 줍니다.
+
+    sub index :Path :Args(0) {
+    ...
+    my $opt  = { 'order_by' => { -desc => 'me.created_on' } };
+    my $rs = $c->model('DonDB')->resultset('Charge')->search({}, $opt);
+    ...
+
+
+## list.tt, list/view.tt 페이지 수정
+
+root/templates/bootstrap/src/list/index.tt
+root/templates/bootstrap/src/list/view.tt
+
+날짜 0000-00-00 형식으로 출력 지정
+
+    <td align=center height=20 bgcolor=white>[% list.created_on.ymd %]
+
+## 기타
+
+날짜 관련 예제
+
+    #!/usr/bin/env perl 
+
+    use 5.010;
+    use strict;
+    use warnings;
+    use POSIX qw(strftime);
+    use DateTime;
+    
+    say "POSOX";
+    say POSIX::strftime('%Y-%m-%d %H:%M:%S', localtime);
+    
+    say "DateTime";
+    say DateTime->now( time_zone => 'local' )->strftime('%Y-%m-%d %H:%M:%S');

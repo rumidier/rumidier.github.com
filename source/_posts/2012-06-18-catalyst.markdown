@@ -1,0 +1,149 @@
+---
+layout: post
+title: "catalyst"
+date: 2012-06-18 16:13
+comments: true
+categories: catalyst
+---
+
+## 기본 화면 출력후 무엇을 하지?
+
+list.tt 페이지를 만들어 기본 게시판 화면을 꾸민다
+-------------------------------------------------
+
+root/templates/bootstrap/src/list/index.tt
+
+아래와 같이 기본 .tt를 생성한다. 아직까지는 list명단에
+자료가 없기 때문에 아무것도 보이지 않는다.
+
+[index.tt](https://gist.github.com/2947721)
+
+
+## DonDB.sql을 만들어 준다.
+
+INT == int(11), signed는 디폴트로 정의 되어 있다.
+
+DEFAULT값은 절대 NULL이 되게 하여서는 안된다.
+
+timestamp로 잡을시 문제가 될수 있다.
+
+DATETIME는 만든날짜와 수정된 날짜가 있어야 문제를 줄일수 있다.
+
+    CREATE TABLE charge (
+	id         INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	applicant  VARCHAR(32) NOT NULL DEFAULT '',
+	title      VARCHAR(128) NOT NULL DEFAULT '',
+	content    TEXT NOT NULL DEFAULT '',
+	created_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	updated_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+## DB 적용
+
+    $ mysql -u ID -p Don_db < DonDB.sql
+
+## DB 구성(Model)은 어떻게 할까?
+
+    $ ./script/silex_web_donnenwa_create.pl model DonDB DBIC::Schema \ 
+    Silex::Schema create=static dbi:mysql:DonDB_db:localhost ID PASSWORD
+
+lib/Silex/Web/Donnenwa/Model/DonDB.pm 생성됨
+
+
+## DB 구성 하면 늘어나는 모듈이 잇다.
+
+Makefile.PL 추가
+
+    require Catalyst::Model::DBIC::Schema
+    require DBD::mysql
+
+인스톨
+
+    $ carton install
+
+
+## DB 구성을 하면 어떻게 가져오게 될까?
+
+lib/Silex/Web/Donnenwa/Controller/List.pm
+
+    sub index :Path :Args(0) {
+	my ( $self, $c ) = @_;
+
+	my $rs = $c->model('DonDB')->resultset('List');
+	$c->stash->{lists} = [ $rs->all ];
+    }
+
+## 마지막 화면 구성
+
+root/templates/bootstrap/src/list/index.tt
+index.tt 안에 템플릿 툴킷 집어넣는데라고 표시 된곳에 집어 넣는다
+
+    [% FOREACH list IN lists %]
+      <!-- 행 시작 -->
+      <tr>
+	<!-- 번호 -->
+	<td height=20 bgcolor=white align=center>
+      <p>[% list.id %]</p>
+	</td>
+	<!-- 번호 끝 -->
+
+	<!-- 제목 -->
+	<td height=20 bgcolor=white>&nbsp;
+      <p>[% list.title %]</p>
+	</td>
+	<!-- 제목 끝 -->
+	<!-- 이름 -->
+	<td align=center height=20 bgcolor=white>
+	  <font color=black>
+	    <p>[% list.name %]</p>
+	  </font>
+	</td>
+	<!-- 이름 끝 -->
+	<!-- 날짜 -->
+	<td align=center height=20 bgcolor=white>
+	  <p>날짜 다음</p>
+	</td>
+	<!-- 날짜 끝 -->
+	<!-- 조회 수 -->
+	<td align=center height=20 bgcolor=white>
+	  <p>조회수 나중에 구현</p>
+	</td>
+    <!-- 조회 수 끝 -->
+      </tr>
+    <!-- 행 끝 -->
+    [% END %]
+
+가져 왔다 근데 한글이 깨진다
+(DB 데이터 집어 넣을때도 utf8적용이 되야 한다.)
+
+lib/Silex/Web/Donnenwa/Model/DonDB.pm 
+
+    connect_info => {
+        dsn => 'dbi:mysql:auth_db:localhost',
+        user => 'don',
+        password => 'gksdud09',
+    }
+
+    추가
+        mysql_enable_utf8 => 1,
+
+    connect_info => {
+        dsn => 'dbi:mysql:auth_db:localhost',
+        user => 'don',
+        password => 'gksdud09',
+        mysql_enable_utf8 => 1,
+    }
+
+## 추가사항
+
+현재 상태는 DB에 등록된 내용이 들어가 있는지 확인과 출력이 되는지 확인을 위해
+만들어 졌다.
+
+sql및 write버튼 미동작등 수행 할것이 많으 므로 기본 와꾸만 잡혀서 정보가 제대로 넘어
+오는지 확인만 하자.
+
+[참고]
+
+[Catalyst::Model::DBIC](http://search.cpan.org/~bricas/Catalyst-Model-DBIC-0.17/lib/Catalyst/Model/DBIC.pm)
+
+[Catalyst::Model::DBIC::Schema](http://search.cpan.org/~rkitover/Catalyst-Model-DBIC-Schema-0.60/lib/Catalyst/Model/DBIC/Schema.pm)

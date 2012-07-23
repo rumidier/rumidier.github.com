@@ -1,0 +1,54 @@
+---
+layout: post
+title: "jQuery.2-3"
+date: 2012-05-22 17:06
+comments: true
+categories: jQuery
+---
+
+## jQuery 정의 필터 셀렉터. 대상 엘리먼트를 식별해내는 데 강력한 기능을 준다.
+
+셀렉터
+
+    :animated
+      현재 애니메이션이 적용되고 있는 엘리먼트를 선택한다.
+    :button
+      모든 버튼을 선택한다.(input[type=submit], input[type=reset], input[type=button], button)
+    :checkbox
+      체크박스 엘리먼트만 선택(input[type=checkbox])
+    :checked
+      선택된 체크박스나 라디오 버튼만을 선택한다.
+    :contains(foo)
+      텍스트 foo를 포함하는 엘리먼트만 선택한다.
+    :disabled
+      인터페이스에서 비활서오하 상태인 모든 폼 엘리먼트를 선택한다.
+    :enabled
+      인터페이스에서 활성화 상태인 모든 폼 엘리먼트를 선택한다.
+    :file
+      모든 파일 엘리먼트를 선택한다.(input[type=file])
+    :header
+      헤더 엘리먼트만 선택한다.
+    :hidden
+      감춰진 엘리먼트만 선택한다
+    :image
+      폼 이미지를 선택한다 (input[type=image])
+    :input
+      폼엘리먼트만 선택(input, select, textarea, button)
+    :not(filter)
+      필터의 값을 반대로 변경
+    :parent
+      빈 엘리먼트를 제외하고, 텍트스도 포함해서 자식 엘리먼트를 가지는 엘리먼트를 선택한다.
+    :password
+      패스워드 엘리먼트만 선택한다.(input[type=password])
+    :radio
+      라디오 버튼 엘리먼트만 선택한다(input[type=radio])
+    :reset
+      리셋 버튼을 선택한다.(input[type=reset]이나 button[type=reset])
+    :selected
+      선택된 엘리먼트만 선택한다.
+    :submit
+      전송 버튼을 선택한다.(button[type=submit]이나 input[type=submit])
+    :text
+      텍스트 엘리먼트만 선택한다.(input[type=text])
+    :visble
+      보이는(visible)엘리먼트만 선택한다.

@@ -1,0 +1,56 @@
+---
+layout: post
+title: "shell key"
+date: 2011-11-24 18:18
+comments: true
+categories: Running Linux
+---
+
+Ctrl + u
+
+커서 위치 부터 처음 까지 삭제
+
+    $ echo rumidier-linux bul-la bul-la.....<--
+    $
+
+    $ echo rumidier-linux<--- bul-la bul-la.....
+    $ bul-la bul-la.....
+
+Ctrl + c
+
+명령 실행후 중지
+
+Ctrl + z
+
+명령 일시 정지 (재시작은 fg입력)
+
+
+
+
+Ctrl + s
+
+터미널 출력 멈춤
+
+Ctrl + q
+
+터미널 출력 재시작
+
+이런 키들이 문제가 된다면?
+
+    stty function key
+    function : 기능
+    key      : key 조합 (^컨트롤)
+
+
+현재 터미널의 설정 내용
+
+    $ stty -a
+
+지금껏 사용 하다 갑자기 이상해졌다면
+
+    $ ssty sane
+
+
+
+Ctrl + c
+

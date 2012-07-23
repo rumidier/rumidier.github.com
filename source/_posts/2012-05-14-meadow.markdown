@@ -1,0 +1,16 @@
+---
+layout: post
+title: "meadow"
+date: 2012-05-14 15:15
+comments: true
+categories: meadow
+---
+
+## [잡담]
+
+1. 카탈 시작 정리(carton install 좀 까먹지마...)
+2. MYSQL 유저 추가
+3. MYSQL Dump 하는법
+
+뭔가 블로그질을 하려면 똑바로 하고 싶은데 똑바로 하려면
+엄청나게  시간이 들가고 짧게 짧게 가자..

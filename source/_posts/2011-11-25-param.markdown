@@ -1,0 +1,40 @@
+---
+layout: post
+title: "param"
+date: 2011-11-25 17:43
+comments: true
+categories: Beginnig Linux
+---
+
+매개변수 치환 구문
+
+|매개변수 치환 구문|결과                                                                |
+|------------------|--------------------------------------------------------------------|
+|${param:-default} |param이 널이면 default의 값                                         |
+|${#param}         |param의 길이                                                        |
+|${param%word}     |param의 끝에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분  |
+|${param%%word}    |param의 끝에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분    |
+|${param#word}     |param의 시작에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분|
+|${param##word}    |param의 시작에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분  |
+
+실습-매개변수 처리
+
+{% codeblock shell%}
+#!/bin/sh
+
+unset foo
+echo ${foo:-bar}
+
+foo=fud
+
+echo ${foo:-bar}
+foo=/usr/bin/X11/startx
+echo ${foo#*/}
+echo ${foo##*/}
+
+bar=/usr/local/etc/local/networks
+echo ${bar%local*}
+echo ${bar%%%local*}
+
+exit 0
+{% endcodeblock %}

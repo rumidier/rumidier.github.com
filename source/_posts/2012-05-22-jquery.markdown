@@ -1,0 +1,22 @@
+---
+layout: post
+title: "jQuery"
+date: 2012-05-22 16:57
+comments: true
+categories: jQauery
+---
+
+셀렉터  
+
+	:first  
+	:last   
+	:fisrt-child 
+	:last-child
+	:only-child
+	:nth-child(n)
+	:nth-child(even|odd)
+	:nth-child(Xn+Y)
+	:even / :odd
+	:eq(n)
+	:gt(n)
+	:lt(n)
