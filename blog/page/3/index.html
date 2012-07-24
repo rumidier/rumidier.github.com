@@ -9,9 +9,9 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="핵심정리(Le-04) 변화를 주기 위해서 여러 효과들을 적용하다 보면, 이 효과들이 한 번에 동작하는지 또는 순서
-대로 동작하는지를 기억하기가 쉽지 않을 수 있다. 도움을 주기 위해 간단히 몇 가지 요점을
-정리해 보았다. 요소들의 단일 집합에서 효과들은 하나의 . &hellip;">
+  <meta name="description" content="DOM 조작 메서드 핵심정리(Le-05) DOM을 조작할 수 있도록 jQuery가 제공하는 메서드들은 광범위하기 때문에 어떤 작업을
+처리할 때 어떤 메서드들이 어느 경우에 도움을 줄 수 있는지를 한눈에 보여줄 수 있도록
+관련된 메서드들을 기능별 범주로 나누어 보았다 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/30/jquery-01/">jQuery-01</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-30T17:45:00+09:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/30/jquery-01/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>DOM 조작 메서드 핵심정리(Le-05)</h3>
+
+<p>DOM을 조작할 수 있도록 jQuery가 제공하는 메서드들은 광범위하기 때문에 어떤 작업을
+처리할 때 어떤 메서드들이 어느 경우에 도움을 줄 수 있는지를 한눈에 보여줄 수 있도록
+관련된 메서드들을 기능별 범주로 나누어 보았다.</p>
+
+<ol>
+<li><p>새로운 요소를 검색된 요소 <strong>안에</strong> 삽입하기 위한 메서드</p>
+
+<ul>
+<li>.append()</li>
+<li>.appendTo()</li>
+<li>.prepend()</li>
+<li>.prependTo()</li>
+</ul>
+</li>
+<li><p>새로운 요소를 검색된 요소 <strong>전/후에</strong> 삽입하기 위한 메서드</p>
+
+<ul>
+<li>.after()</li>
+<li>.insertAfter()</li>
+<li>.before()</li>
+<li>.insertBefore()</li>
+</ul>
+</li>
+<li><p>새로운 요소로 검색된 요소를 <strong>감싸면서</strong> 삽입하기 위한 메서드</p>
+
+<ul>
+<li>.wrap()</li>
+</ul>
+</li>
+<li><p>검색된 요소를 새로운 요소 또는 텍스트로 대치하기 위한 메서드</p>
+
+<ul>
+<li>.html()</li>
+<li>.text()</li>
+</ul>
+</li>
+<li><p>실제 삭제 하지 않고 도큐먼트에서 검색된 요소와 자식들을 <strong>제거하기</strong> 위한 메서드</p>
+
+<ul>
+<li>.remove()</li>
+</ul>
+</li>
+</ol>
+
+
+<h3>요약</h3>
+
+<p>DOM과 관련된 jQuery 메서드를 사용하여 콘텐츠를 생성해보거나 복사하는 데 사용하기도 하고 조립하거나
+장식하는 데에도 사용하였다. 그리고 웹 페이지상의 문장을 주석으로 변경해 보거나 인용표시나 링크로
+또는 스타일이 적용된 인용 문구로 변경해 볼 때에도 jQuery 메서드들을 사용해 보았다</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -698,54 +787,6 @@ siblings()
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/14/ubuntu-scp/">Ubuntu SCP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-14T15:08:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/14/ubuntu-scp/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>서버파일 전송</p>
-
-<pre><code>$ scp [option] [파일] [위치]
-&lt;option&gt;
--r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사
-</code></pre>
-
-<p>예제</p>
-
-<pre><code>$ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c .
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -763,15 +804,15 @@ siblings()
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/24/templet-br/">Templet_br</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/07/23/don-release/">Don release</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/12/side-function/">Side-function</a>
       </li>
     
   </ul>

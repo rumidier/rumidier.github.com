@@ -206,6 +206,8 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
 
 <h2>경로명 변경</h2>
 
+<p>의존성이 걸려있는 모든 내역들을 grep 명령어로 찾아 아래와 같이 수정해 주었다.</p>
+
 <p>변경전</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -270,8 +272,11 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
 </span><span class='line'>Sil::Don::Web</span></code></pre></td></tr></table></div></figure>
 
 
-<p>p.s 내용을 모두 바꾸어 준후 Sil_web_Don.conf 파일명을 수정 안해주어
-한참 고생 했다.. 경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
+<h2>변경후 문제점</h2>
+
+<p>내용 수정후 서버 실행이 app.psgi에서 모듈을 찾지 못한다고 하였다.
+이유는 Sil_web_Don.conf 파일명을 수정 해주지 않았기에 발생한 문제였다.
+경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
 </div>
 
 
@@ -320,6 +325,8 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
         <a class="basic-alignment left" href="/blog/2012/07/23/don-release/" title="Previous Post: Don release">&laquo; Don release</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/07/24/templet-br/" title="Next Post: Templet_br">Templet_br &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -339,15 +346,15 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/24/templet-br/">Templet_br</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/07/23/don-release/">Don release</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/12/side-function/">Side-function</a>
       </li>
     
   </ul>

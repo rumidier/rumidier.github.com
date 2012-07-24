@@ -9,9 +9,9 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="브랜치를 나누기 쉬운 git-flow쓰지만 코드 확인이 불편 하다.
-그래서 형석님 git - rabase를 사용해 본다. 다른 사람이 내게 pull-request를 날리게 되면 이게 잘돌아 가는지 확인이
-필요하다. remote branch 확인 하는 방법 $ git &hellip;">
+  <meta name="description" content="서버파일 전송 $ scp [option] [파일] [위치]
+&lt;option&gt;
+-r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사 예제 $ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c . ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/14/ubuntu-scp/">Ubuntu SCP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T15:08:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/14/ubuntu-scp/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>서버파일 전송</p>
+
+<pre><code>$ scp [option] [파일] [위치]
+&lt;option&gt;
+-r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사
+</code></pre>
+
+<p>예제</p>
+
+<pre><code>$ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c .
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -942,103 +990,6 @@ key      : key 조합 (^컨트롤)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/11/23/find-option/">Find Option</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-23T11:29:00+09:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2011</time>
-        
-         | <a href="/blog/2011/11/23/find-option/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>find</h2>
-
-<p>find [경로] [옵션들] [판정 조건] [행동]</p>
-
-<pre><code>|옵션              |의미                                                         |
-|------------------|-------------------------------------------------------------|
-|-depth            |디렉터리 자체를 보기 전에 디렉터리의 항목들을 먼저 검색한다  |
-|-follow           |기호링크(symbolic link)들을 따라간다                         |
-|- maxdepths N     |디렉터리의 하위 디렉터리들을 최대 N수준까지만 검색한다.      |
-|-mount (또는 -xdev|다른 파일 시스템의 디렉터리들은 검색하지 않는다.             |
-
-|판정            |의미                                                                |
-|----------------|--------------------------------------------------------------------|
-|-atime N        |파일이 N일 전에 마지막으로 접근 되었음.                             |
-|-mtime N        |파일이 N일 전에 마지막으로 수정되었음.                              |
-|-name 패턴      |경로를 제외한 파일이름이 패턴과 매치, 쉘에 확장을 거치지 않으려면 ""|
-|-newer 다른파일 |파일이 *다른파일*보다 새것임                                        |
-|-type C         |파일의 종류가 *C* 인지 검사.(ex:디렉터리 d, 파일 f)                 |
-|-user 사용자이름|파일의 소유자가 *사용자이름*에 해당하는 사용자임.                   |
-
-
-|연산자|연산자(긴 형태)|의미                    |
-|------|---------------|------------------------|
-|!     |-not           |판정의 부정(역)         |
-|-a    |-and           |두 판정 모두 참이어야 참|
-|-o    |-or            |둘 중 하나만 참이어도 참|
-
-|행동      |의미                                      |
-|----------|------------------------------------------|
-|-exec 명령|주어진 명령을 주행, 행동 끝에 \;첨부      |
-|-ok 명령  |명령을 수행하되 수행전 확인을 받음 \; 첨부|
-|-print    |파일 이름 출력                            |
-|-ls       |현재 파일에 대해 ls -dil 명령을 수행한다  |
-</code></pre>
-
-<p>() 회피는 \로 해야 한다</p>
-
-<p>(-news X -o -name &#8220;_*&#8221; )</p>
-
-<p>X라는 파일보다 새것이면서 _시작 하는 파일 찾기</p>
-
-<p>현재 디렉터리에서 while2라는 파일보다 최근에 수정된 파일 찾기(디렉터리 포함됨)</p>
-
-<pre><code>$find . -newer while2 -print
-</code></pre>
-
-<p>현재 디렉터리에서 while2 디렉터리를 제외한 파일만 찾기</p>
-
-<pre><code>$find . -newer while2 -type f -print
-</code></pre>
-
-<p>파일 이름이 밑줄로 시작하거나 while2보다 새것 찾기</p>
-
-<pre><code>$find . \( -name "_*" -or -newer while2 \) -type f -print
-</code></pre>
-
-<p>파일을 찾아서 행동 시키기</p>
-
-<pre><code>$find . -newer while2 -type f -exec ls -l {} \;
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -1056,15 +1007,15 @@ key      : key 조합 (^컨트롤)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/24/templet-br/">Templet_br</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/07/23/don-release/">Don release</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/12/side-function/">Side-function</a>
       </li>
     
   </ul>

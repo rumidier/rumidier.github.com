@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Catalyst | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/catalyst/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-07-24T14:27:02+09:00</updated>
+  <updated>2012-07-24T15:01:14+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -87,6 +87,8 @@ lib
 
 <h2>경로명 변경</h2>
 
+<p>의존성이 걸려있는 모든 내역들을 grep 명령어로 찾아 아래와 같이 수정해 주었다.</p>
+
 <p>변경전</p>
 
 <p>```
@@ -125,8 +127,11 @@ Sil::Don::Web::View::Download::CS
 Sil::Don::Web
 ```</p>
 
-<p>p.s 내용을 모두 바꾸어 준후 Sil_web_Don.conf 파일명을 수정 안해주어
-한참 고생 했다.. 경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
+<h2>변경후 문제점</h2>
+
+<p>내용 수정후 서버 실행이 app.psgi에서 모듈을 찾지 못한다고 하였다.
+이유는 Sil_web_Don.conf 파일명을 수정 해주지 않았기에 발생한 문제였다.
+경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
 ]]></content>
   </entry>
   

@@ -9,12 +9,8 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Sil::Web::Don 변경 Sil::Schema는 Sil의 공용 스키마가 아닌데도 불구 하고 그렇게 보일수도 있는
-상태 이다 이를 바꾸기 위해서
-Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
-명시 해주는것과 같다. 변경전 1
-2
-3 &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +65,44 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/24/templet-br/">Templet_br</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-24T14:28:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/24/templet-br/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -209,6 +243,8 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
 
 <h2>경로명 변경</h2>
 
+<p>의존성이 걸려있는 모든 내역들을 grep 명령어로 찾아 아래와 같이 수정해 주었다.</p>
+
 <p>변경전</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -273,8 +309,11 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
 </span><span class='line'>Sil::Don::Web</span></code></pre></td></tr></table></div></figure>
 
 
-<p>p.s 내용을 모두 바꾸어 준후 Sil_web_Don.conf 파일명을 수정 안해주어
-한참 고생 했다.. 경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
+<h2>변경후 문제점</h2>
+
+<p>내용 수정후 서버 실행이 app.psgi에서 모듈을 찾지 못한다고 하였다.
+이유는 Sil_web_Don.conf 파일명을 수정 해주지 않았기에 발생한 문제였다.
+경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
 </div>
   
   
@@ -1119,216 +1158,6 @@ $ script/myapp_create.pl controller Logout
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/04/catalyst/">Catalyst</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-04T19:02:00+09:00" pubdate data-updated="true">Jul 4<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/04/catalyst/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>DBIx::Class로 스키마 관리하기</h2>
-
-<p><a href="http://advent.perl.kr/2011/2011-12-17.html">jeen</a>님이 발표한 스키마 관리 하기
-입니다.</p>
-
-<p>jeen님의 글을 보게 되면 기존의 스키마를 관리하는 방법은 sql의 잦은 교체시 많은 문제점이
-발생하고 있다고 서술 합니다.</p>
-
-<p>스키마 관리를 좀더 편하게 하기 위하여 마지막에 서술 하는
-<a href="https://metacpan.org/module/dbicdump">dbicdump</a>를 사용하여 간편하게 스키마 관리를 해보도록
-합니다.</p>
-
-<p>dbicdump를 사용하기 위해 필요한 ResultBase.pm과 schema.pl파일을 만들어 보도록 하겠습니다.</p>
-
-<h2>schema/schema.pl</h2>
-
-<p><a href="http://rumidier.github.com/blog/2012/07/02/catalyst/">schema.pl 설명</a></p>
-
-<figure class='code'><figcaption><span>schema.pl </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$DB_NAME</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB</span><span class="p">}</span>           <span class="o">||</span> <span class="s">&#39;DB_NAME&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$DB_USER</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_USER</span><span class="p">}</span>     <span class="o">||</span> <span class="s">&#39;DB_USER&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$DB_PASSWORD</span> <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_PASSWORD</span><span class="p">}</span> <span class="o">||</span> <span class="s">&#39;DB_PASSWORD&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="n">schema_class</span> <span class="o">=&gt;</span> <span class="s">&quot;Silex::Schema&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="n">connect_info</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">dsn</span>               <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:$DB_NAME:127.0.0.1&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">user</span>              <span class="o">=&gt;</span> <span class="nv">$DB_USER</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">pass</span>              <span class="o">=&gt;</span> <span class="nv">$DB_PASSWORD</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">mysql_enable_utf8</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'><span class="p">},</span>
-</span><span class='line'><span class="n">loader_options</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">dump_directory</span>     <span class="o">=&gt;</span> <span class="s">&#39;lib&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">naming</span>             <span class="o">=&gt;</span> <span class="p">{</span> <span class="n">ALL</span> <span class="o">=&gt;</span> <span class="s">&#39;v8&#39;</span> <span class="p">},</span>
-</span><span class='line'>  <span class="n">skip_load_external</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">relationships</span>      <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">use_moose</span>          <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">only_autoclean</span>     <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">col_collision_map</span>  <span class="o">=&gt;</span> <span class="s">&#39;column_%s&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">result_base_class</span> <span class="o">=&gt;</span> <span class="s">&#39;MyApp::Schema::ResultBase&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">overwrite_modifications</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">datetime_undef_if_invalid</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">custom_column_info</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>  <span class="k">my</span> <span class="p">(</span><span class="nv">$table</span><span class="p">,</span> <span class="nv">$col_name</span><span class="p">,</span> <span class="nv">$col_info</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;password&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span>
-</span><span class='line'>          <span class="n">encode_column</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>          <span class="n">encode_class</span>  <span class="o">=&gt;</span> <span class="s">&#39;Digest&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="n">encode_args</span>   <span class="o">=&gt;</span> <span class="p">{</span> <span class="n">algorithm</span> <span class="o">=&gt;</span> <span class="s">&#39;SHA-1&#39;</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=&gt;</span> <span class="s">&#39;hex&#39;</span> <span class="p">},</span>
-</span><span class='line'>          <span class="n">encode_check_method</span> <span class="o">=&gt;</span> <span class="s">&#39;check_password&#39;</span> <span class="p">};</span>
-</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB password 설정</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;created_on&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="p">};</span>
-</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB created_on 설정</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;updated_on&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">set_on_update</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="p">};</span>
-</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB updated_on 설정</span>
-</span><span class='line'>  <span class="p">},</span>
-</span><span class='line'>  <span class="p">},</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>lib/MyApp/Schema/ResultBase.pm</h2>
-
-<p>ResultBase 클래스의 제약 문제 때문에 result_base_class 값을 지정해 줌으로써 모든 결과
- 클래스들은 DBIx::Class::Core가 아닌 MyApp::Schema::ResultBase를 상속받게 합니다.
-MyApp::Schema::ResultBase는 개인이 정의 해주는것 이므로 아래를 참조 합니다.</p>
-
-<p>MD5 체크섬 값 아래에 중복되는 코드를 매번 적어주어야 했습니다.
-이렇게 사용할 컴포넌트들을 결과클래스 별로 지정하는 대신 ResultBase 클래스를 읽어들입니다.
-사실 이처럼 ResultBase를 놓고 여기에 컴포넌트를 일괄해서 읽어들이는 방식은
-Cookbook 문서에서도 스타트업 속도 향상을 위해 권장하고 있습니다. - <a href="http://advent.perl.kr/2011/2011-12-17.html">by Jeen</a> -</p>
-
-<p>그리고 컴포넌트의 사용을 위한 컬럼의 속성은 custom_column_info 속성에 코드를 등록해 지정할 수 있습니다.(schema.pl 하단 참조)
- 위의 코드처럼 등록하면 created_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set_on_create 옵션이 모든 결과클래스에 추가됩니다.
-(이거 멋지다..)</p>
-
-<figure class='code'><figcaption><span>ResultBase </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>package MyApp::Schema::ResultBase;
-</span><span class='line'>use Moose;
-</span><span class='line'>use MooseX::NonMoose;
-</span><span class='line'>use namespace::autoclean;
-</span><span class='line'>
-</span><span class='line'>extends 'DBIx::Class::Core';
-</span><span class='line'>
-</span><span class='line'>__PACKAGE__->load_components(qw/
-</span><span class='line'>  InflateColumn::DateTime
-</span><span class='line'>  TimeStamp
-</span><span class='line'>/);
-</span><span class='line'>
-</span><span class='line'>__PACKAGE__->meta->make_immutable;
-</span><span class='line'>
-</span><span class='line'>1;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>위의 두가지 코드를 작성 하였다면 준비는 끝났습니다.
-(<strong>dbicdump는 db 정보를 덤프해서 스키마를 작성</strong>하는 것으로 코드 작성및 작성 후에라도
-db가 정의 되어 있어야 합니다.)</p>
-
-<h2>dbicdump 사용하기</h2>
-
-<p>아래를 실행한후 lib/MyApp/Schema/Result에 .pm 파일들이 새로 생성되거나 수정 되었다면 확인을 해보라</p>
-
-<pre><code>$ dbicdump -Ilib schema/schema.pl
-</code></pre>
-
-<h2>MakeFile.pl 모듈 추가</h2>
-
-<p>다른 모듈이 더 추가 될수 있습니다 에러 메세지를 확인 하고 필요한 모듈을 더 설치 하세요.</p>
-
-<pre><code>requires "DBIx::Class::TimeStamp";
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1344,15 +1173,15 @@ db가 정의 되어 있어야 합니다.)</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/24/templet-br/">Templet_br</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/07/23/don-release/">Don release</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/12/side-function/">Side-function</a>
       </li>
     
   </ul>

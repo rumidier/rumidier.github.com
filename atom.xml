@@ -4,7 +4,7 @@
   <title><![CDATA[Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-07-24T14:27:02+09:00</updated>
+  <updated>2012-07-24T15:01:14+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Templet_br]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/24/templet-br/"/>
+    <updated>2012-07-24T14:28:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/24/templet-br</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Don-Change-space]]></title>
@@ -127,6 +136,8 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
 
 <h2>경로명 변경</h2>
 
+<p>의존성이 걸려있는 모든 내역들을 grep 명령어로 찾아 아래와 같이 수정해 주었다.</p>
+
 <p>변경전</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -191,8 +202,11 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
 </span><span class='line'>Sil::Don::Web</span></code></pre></td></tr></table></div></figure>
 
 
-<p>p.s 내용을 모두 바꾸어 준후 Sil_web_Don.conf 파일명을 수정 안해주어
-한참 고생 했다.. 경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
+<h2>변경후 문제점</h2>
+
+<p>내용 수정후 서버 실행이 app.psgi에서 모듈을 찾지 못한다고 하였다.
+이유는 Sil_web_Don.conf 파일명을 수정 해주지 않았기에 발생한 문제였다.
+경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
 ]]></content>
   </entry>
   
@@ -2477,66 +2491,6 @@ $('p cite', wrappedSet)
 <p><strong>반환값</strong></p>
 
 <p>이전 확장 집합</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[jQuery-01]]></title>
-    <link href="http://rumidier.github.com/blog/2012/05/30/jquery-01/"/>
-    <updated>2012-05-30T17:45:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/05/30/jquery-01</id>
-    <content type="html"><![CDATA[<h3>DOM 조작 메서드 핵심정리(Le-05)</h3>
-
-<p>DOM을 조작할 수 있도록 jQuery가 제공하는 메서드들은 광범위하기 때문에 어떤 작업을
-처리할 때 어떤 메서드들이 어느 경우에 도움을 줄 수 있는지를 한눈에 보여줄 수 있도록
-관련된 메서드들을 기능별 범주로 나누어 보았다.</p>
-
-<ol>
-<li><p>새로운 요소를 검색된 요소 <strong>안에</strong> 삽입하기 위한 메서드</p>
-
-<ul>
-<li>.append()</li>
-<li>.appendTo()</li>
-<li>.prepend()</li>
-<li>.prependTo()</li>
-</ul>
-</li>
-<li><p>새로운 요소를 검색된 요소 <strong>전/후에</strong> 삽입하기 위한 메서드</p>
-
-<ul>
-<li>.after()</li>
-<li>.insertAfter()</li>
-<li>.before()</li>
-<li>.insertBefore()</li>
-</ul>
-</li>
-<li><p>새로운 요소로 검색된 요소를 <strong>감싸면서</strong> 삽입하기 위한 메서드</p>
-
-<ul>
-<li>.wrap()</li>
-</ul>
-</li>
-<li><p>검색된 요소를 새로운 요소 또는 텍스트로 대치하기 위한 메서드</p>
-
-<ul>
-<li>.html()</li>
-<li>.text()</li>
-</ul>
-</li>
-<li><p>실제 삭제 하지 않고 도큐먼트에서 검색된 요소와 자식들을 <strong>제거하기</strong> 위한 메서드</p>
-
-<ul>
-<li>.remove()</li>
-</ul>
-</li>
-</ol>
-
-
-<h3>요약</h3>
-
-<p>DOM과 관련된 jQuery 메서드를 사용하여 콘텐츠를 생성해보거나 복사하는 데 사용하기도 하고 조립하거나
-장식하는 데에도 사용하였다. 그리고 웹 페이지상의 문장을 주석으로 변경해 보거나 인용표시나 링크로
-또는 스타일이 적용된 인용 문구로 변경해 볼 때에도 jQuery 메서드들을 사용해 보았다</p>
 ]]></content>
   </entry>
   
