@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Don release - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="Donnenwa Open DNS 요구
+Apache2 설정
+supervisior 설정
+확인 DNS 요구 도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
+브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨) Apache2 설정 1
+2
+3 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/07/23/don-release/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Don Release</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-23T18:49:00+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Donnenwa Open</h2>
+
+<ol>
+<li>DNS 요구</li>
+<li>Apache2 설정</li>
+<li>supervisior 설정</li>
+<li>확인</li>
+</ol>
+
+
+<h3>DNS 요구</h3>
+
+<p>도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
+브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨)</p>
+
+<h3>Apache2 설정</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh rumidier@bu….접속
+</span><span class='line'>$ cd /etc/apache2/
+</span><span class='line'>$ cd sites-available
+</span><span class='line'>$ vi user.site.kr (작성)
+</span><span class='line'>$ cd ../
+</span><span class='line'>$ cd sites-enable
+</span><span class='line'>$ ln -s 타킷-경로
+</span><span class='line'>$ ~/etc/init.d/apache2 restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>supervisior 설정</h3>
+
+<p>슈퍼 바이저는 서버가 죽었다 다시 살아 났을시 수동이 아닌 자동으로 서버를 뛰워주기 위해 필요한 기능이다.</p>
+
+<p>돈내놔는 carton을 사용하고 plackup으로 뛰우며 플라넥스와는 다르게 worker의 갯수가 존재 하지 않는다. 포트 설정은 아파치에서 해준 포트를 명시 해준후 디렉토리와 유저, 환경 등록을 해주면 끝이 난다.
+환경경로는 carton과 plackup 경로도 알아야 하는거 같다(이 부분은 설명이 더 필요)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /etc
+</span><span class='line'>$ vi supervisord.conf
+</span><span class='line'>
+</span><span class='line'>[program:Donnenwa] 
+</span><span class='line'>command=/usr/local/bin/carton exec -Ilib -- /home/USER Donnenwa/local/bin/plackup -Ilib -a /home/USER/Donnenwa
+</span><span class='line'>app.psgi --host 127.0.0.1 --port You_port(ex:3000)  
+</span><span class='line'>directory=/home/User/Donnenwa 
+</span><span class='line'>user=USER 
+</span><span class='line'>environment=PATH=/usr/local/bin:/usr/bin:/bin,HOME=/home/USER
+</span><span class='line'>stdout_logfile=/home/USER/logs/stdout 
+</span><span class='line'>stderr_logfile=/home/USER/logs/stderr 
+</span><span class='line'>
+</span><span class='line'>$ sudo supervisorctl
+</span><span class='line'>supervisor&gt; status
+</span><span class='line'>….
+</span><span class='line'>supervisor&gt; update
+</span><span class='line'>supervisor&gt; exit
+</span><span class='line'>$ 서버 실행 확인 끝</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>더 물어 봐야 할것</h3>
+
+<ol>
+<li>supervisor의 셋팅을 무엇을 참조 하는가?</li>
+<li>도메인 등록은 어떻게 하는가?</li>
+<li>apach2 설정은 어떻게 하는가?</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-23T18:49:00+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/server/'>Server</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/07/23/don-release/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/07/23/don-release/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/12/side-function/" title="Previous Post: Side-function">&laquo; Side-function</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/07/24/don-change-space/" title="Next Post: Don-Change-space">Don-Change-space &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/23/don-release/">Don release</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/07/23/don-release/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/07/23/don-release/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

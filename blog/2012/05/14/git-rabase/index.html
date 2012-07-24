@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>git rebase - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="브랜치를 나누기 쉬운 git-flow쓰지만 코드 확인이 불편 하다.
+그래서 형석님 git - rabase를 사용해 본다. 다른 사람이 내게 pull-request를 날리게 되면 이게 잘돌아 가는지 확인이
+필요하다. remote branch 확인 하는 방법 $ git &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/05/14/git-rabase/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Git Rebase</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T12:11:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>브랜치를 나누기 쉬운 git-flow쓰지만 코드 확인이 불편 하다.
+그래서 <a href="http://aanoaa.github.com/">형석님</a> git - rabase를 사용해 본다.</p>
+
+<p>다른 사람이 내게 pull-request를 날리게 되면 이게 잘돌아 가는지 확인이
+필요하다.</p>
+
+<p>remote branch 확인 하는 방법</p>
+
+<pre><code>$ git branch -a 또는 git branch -av
+</code></pre>
+
+<p>pull-request된 브랜치 명이 있다면 보이게 된다.</p>
+
+<pre><code>remotes/origin/#1-test
+</code></pre>
+
+<p>remote 상태 확인 하러 가기</p>
+
+<pre><code>$ git checkout "#1-test"
+</code></pre>
+
+<p>pull-request된 내용이 이상이 없을때는 github 홈페이지에서 허락을 하게 되면
+master와 합쳐 지게 된다.
+merge가 안된다는 명시를 하게 되면 현재 pull-request가 branch의 분기 시점이
+현재 master와 차이(다른 커밋 메세지)가 포함 되어 있기 때문에
+master 브랜치를 최신상태로 만들어 주고 rebase 해주어야 한다.</p>
+
+<pre><code>$ git pull origin master
+</code></pre>
+
+<p>분기된 master이력이 최신으로 변경되었다면.</p>
+
+<pre><code>$ git checkout "branch-name"
+$ git rebase master
+# conflict?
+# $ vim conflict.file -&gt; 수정
+</code></pre>
+
+<p>conflict이 일어 났을시 bracnh명이 유지 될때와 유지 되지 않을때가 있다.</p>
+
+<p>유지시</p>
+
+<pre><code>$ git rebase --continue
+</code></pre>
+
+<p>(no branch)상태</p>
+
+<pre><code>$ git rebae --skip
+</code></pre>
+
+<p>conflict 처리 될때까지 반복</p>
+
+<p>모든 문제의 해결을 했다면</p>
+
+<pre><code>$ git push origin "#1-test"
+</code></pre>
+
+<p>이제 github 홈페이지 에서 확인 절차를 밟으면 된다.
+확인이 끝났다면 master branch에서</p>
+
+<pre><code>(master) $ git pull
+</code></pre>
+
+<h2>pull-request를 보낼시</h2>
+
+<p>pull-request를 보낼때 또한 마스터의 가장 최근 이력을 기초로 한다.
+가장 최신상태에서</p>
+
+<p>push를 해주고 github 홈페이지 에서 pull-request를 보내게 되면 마스터가
+알아서 처리 해주게 된다.</p>
+
+<pre><code>$ git push origin "#1-test"
+</code></pre>
+
+<h2>git 기본사항</h2>
+
+<p>모든 branch 확인 하는 방법</p>
+
+<pre><code>$ git bracnh -a
+</code></pre>
+
+<p>remote 삭제 하는 방법</p>
+
+<pre><code>$ git push origin :remote주소
+</code></pre>
+
+<p>brach 삭제 하는 방법</p>
+
+<pre><code>$ git branch -d "branch name"
+</code></pre>
+
+<h2>remote 주소 변경하기</h2>
+
+<pre><code>$ git remote show origin # remote 상태 확인
+</code></pre>
+
+<p>push시 경로와 비밀번호 쓰라고 나오는 경우가 생겼는데
+이런 경우 remote의 상태를 확인후 http://&#8230;..되있는 경우가 있다
+이때는 주소를 http://가 아닌 ssh 주소로 해주면 나오지 않게 된다.</p>
+
+<p>git 홈피에서 ssh 주소를 복사해오기</p>
+
+<pre><code>$ git remote add aaa "ssh 주소 copy"
+$ git remote rm origin
+$ git remote show origin
+$ git remote rename aaa origin
+$ git remote show origin 으로 확인 및 푸쉬 해봄
+</code></pre>
+
+<h2>마무리</h2>
+
+<p>merge된 branch 알아 보기
+merge가 안된 branch는 표시 안되니 표시 된건
+가차 없이 지워 버리자</p>
+
+<pre><code>$ git br --merged
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-14T12:11:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/05/14/git-rabase/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/05/14/git-rabase/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/12/29/jeonyeog-geomsaeggwa-cihwan/" title="Previous Post: 전역 검색과 치환">&laquo; 전역 검색과 치환</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/14/ubuntu-scp/" title="Next Post: Ubuntu SCP">Ubuntu SCP &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/23/don-release/">Don release</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/05/14/git-rabase/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/05/14/git-rabase/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

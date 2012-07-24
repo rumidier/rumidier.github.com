@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-24T14:27:02+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging basics]]></title>
+    <link href="http://rumidier.github.com/blog/2011/11/19/blogging-basics/"/>
+    <updated>2011-11-19T21:12:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2011/11/19/blogging-basics</id>
+    <content type="html"><![CDATA[<h1>Mark Down</h1>
+
+<h1>header 1</h1>
+
+<h2>header 2</h2>
+
+<h1>header 1</h1>
+
+<h2>header 2</h2>
+
+<h3>header 3</h3>
+
+<blockquote><p>blockquote 입니다.</p>
+
+<p>두번째 blockquote 입니다</p></blockquote>
+
+<p>문법 강조</p>
+
+<p>강조 되는 단어는 <em>rumidier</em> 입니다.</p>
+
+<p>강조하는 단어는 <em>rumidier</em> 입니다.</p>
+
+<p>별표를 두개씩 써도 되며 굵게 합니다 <strong>rumidier</strong>
+또한 언더바 두개도 됩니다 <strong>rumidier</strong></p>
+
+<p>리스트 ul(* + -) 와 ol (1. string) 입니다.</p>
+
+<p>ul:</p>
+
+<ul>
+<li>first.</li>
+<li>second.</li>
+<li>trhid.</li>
+<li>fisrt</li>
+<li>second</li>
+<li>third</li>
+<li>fisrt</li>
+<li>second</li>
+<li>third</li>
+</ul>
+
+
+<p>ol:
+1. first
+2. second
+3. third</p>
+
+<p>block:</p>
+
+<pre><code>tab:
+칸뛰우기를 하고 있고
+들여 쓰기를 하게 되면
+이렇게 이쁘게 칸이 나온다
+</code></pre>
+
+<p>링크 걸기:
+누르게 되면 링크를 열게 된다 <a href="http://naver.com">naver.com</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,1 +1,1458 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="Sil::Web::Don 변경 Sil::Schema는 Sil의 공용 스키마가 아닌데도 불구 하고 그렇게 보일수도 있는
+상태 이다 이를 바꾸기 위해서
+Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
+명시 해주는것과 같다. 변경전 1
+2
+3 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-24T14:20:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/24/don-change-space/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Sil::Web::Don 변경</h2>
+
+<p>Sil::Schema는 Sil의 공용 스키마가 아닌데도 불구 하고 그렇게 보일수도 있는
+상태 이다 이를 바꾸기 위해서
+Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
+명시 해주는것과 같다.</p>
+
+<p>변경전</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lib
+</span><span class='line'>`-- Sil
+</span><span class='line'>    |-- Schema
+</span><span class='line'>    |   |-- Result
+</span><span class='line'>    |   |   |-- Charge.pm
+</span><span class='line'>    |   |   `-- User.pm
+</span><span class='line'>    |   `-- ResultBase.pm
+</span><span class='line'>    |-- Schema.pm
+</span><span class='line'>    `-- Web
+</span><span class='line'>        |-- Don
+</span><span class='line'>        |   |-- Controller
+</span><span class='line'>        |   |   |-- Deposit.pm
+</span><span class='line'>        |   |   |-- List.pm
+</span><span class='line'>        |   |   |-- Login.pm
+</span><span class='line'>        |   |   |-- Logout.pm
+</span><span class='line'>        |   |   `-- Root.pm
+</span><span class='line'>        |   |-- Model
+</span><span class='line'>        |   |   `-- DonDB.pm
+</span><span class='line'>        |   `-- View
+</span><span class='line'>        |       |-- Bootstrap.pm
+</span><span class='line'>        |       `-- Download
+</span><span class='line'>        |           `-- CSV.pm
+</span><span class='line'>        `-- Don.pm</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 변경후</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> lib
+</span><span class='line'>└── Sil
+</span><span class='line'>    └── Don
+</span><span class='line'>        ├── Schema
+</span><span class='line'>        │   ├── Result
+</span><span class='line'>        │   │   ├── Charge.pm
+</span><span class='line'>        │   │   └── User.pm
+</span><span class='line'>        │   └── ResultBase.pm
+</span><span class='line'>        ├── Schema.pm
+</span><span class='line'>        ├── Web
+</span><span class='line'>        │   ├── Controller
+</span><span class='line'>        │   │   ├── Deposit.pm
+</span><span class='line'>        │   │   ├── List.pm
+</span><span class='line'>        │   │   ├── Login.pm
+</span><span class='line'>        │   │   ├── Logout.pm
+</span><span class='line'>        │   │   └── Root.pm
+</span><span class='line'>        │   ├── Model
+</span><span class='line'>        │   │   └── DonDB.pm
+</span><span class='line'>        │   └── View
+</span><span class='line'>        │       ├── Bootstrap.pm
+</span><span class='line'>        │       └── Download
+</span><span class='line'>        │           └── CSV.pm
+</span><span class='line'>        └── Web.pm</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>경로명 변경</h2>
+
+<p>변경전</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sil::Schema::Result::Charge
+</span><span class='line'>Sil::Schema::Result::User
+</span><span class='line'>Sil::Schema::ResultBase
+</span><span class='line'>Sil::Schema
+</span><span class='line'>
+</span><span class='line'>Sil::Web::Don::Controller::Deposit
+</span><span class='line'>Sil::Web::Don::Controller::List
+</span><span class='line'>Sil::Web::Don::Controller::Login
+</span><span class='line'>Sil::Web::Don::Controller::Logout
+</span><span class='line'>Sil::Web::Don::Controller::Root
+</span><span class='line'>Sil::Web::Don::Model::DonDB
+</span><span class='line'>Sil::Web::Don::View::Bootstrap
+</span><span class='line'>Sil::Web::Don::View::Download::CS
+</span><span class='line'>Sil::Web::Don</span></code></pre></td></tr></table></div></figure>
+
+
+<p>변경후</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sil::Don::Schema::Result::Charge
+</span><span class='line'>Sil::Don::Schema::Result::User
+</span><span class='line'>Sil::Don::Schema::ResultBase
+</span><span class='line'>Sil::Don::Schema
+</span><span class='line'>
+</span><span class='line'>Sil::Don::Web::Controller::Deposit
+</span><span class='line'>Sil::Don::Web::Controller::List
+</span><span class='line'>Sil::Don::Web::Controller::Login
+</span><span class='line'>Sil::Don::Web::Controller::Logout
+</span><span class='line'>Sil::Don::Web::Controller::Root
+</span><span class='line'>Sil::Don::Web::Model::DonDB
+</span><span class='line'>Sil::Don::Web::View::Bootstrap
+</span><span class='line'>Sil::Don::Web::View::Download::CS
+</span><span class='line'>Sil::Don::Web</span></code></pre></td></tr></table></div></figure>
+
+
+<p>p.s 내용을 모두 바꾸어 준후 Sil_web_Don.conf 파일명을 수정 안해주어
+한참 고생 했다.. 경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/23/don-release/">Don Release</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-23T18:49:00+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/23/don-release/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Donnenwa Open</h2>
+
+<ol>
+<li>DNS 요구</li>
+<li>Apache2 설정</li>
+<li>supervisior 설정</li>
+<li>확인</li>
+</ol>
+
+
+<h3>DNS 요구</h3>
+
+<p>도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
+브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨)</p>
+
+<h3>Apache2 설정</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh rumidier@bu….접속
+</span><span class='line'>$ cd /etc/apache2/
+</span><span class='line'>$ cd sites-available
+</span><span class='line'>$ vi user.site.kr (작성)
+</span><span class='line'>$ cd ../
+</span><span class='line'>$ cd sites-enable
+</span><span class='line'>$ ln -s 타킷-경로
+</span><span class='line'>$ ~/etc/init.d/apache2 restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>supervisior 설정</h3>
+
+<p>슈퍼 바이저는 서버가 죽었다 다시 살아 났을시 수동이 아닌 자동으로 서버를 뛰워주기 위해 필요한 기능이다.</p>
+
+<p>돈내놔는 carton을 사용하고 plackup으로 뛰우며 플라넥스와는 다르게 worker의 갯수가 존재 하지 않는다. 포트 설정은 아파치에서 해준 포트를 명시 해준후 디렉토리와 유저, 환경 등록을 해주면 끝이 난다.
+환경경로는 carton과 plackup 경로도 알아야 하는거 같다(이 부분은 설명이 더 필요)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /etc
+</span><span class='line'>$ vi supervisord.conf
+</span><span class='line'>
+</span><span class='line'>[program:Donnenwa] 
+</span><span class='line'>command=/usr/local/bin/carton exec -Ilib -- /home/USER Donnenwa/local/bin/plackup -Ilib -a /home/USER/Donnenwa
+</span><span class='line'>app.psgi --host 127.0.0.1 --port You_port(ex:3000)  
+</span><span class='line'>directory=/home/User/Donnenwa 
+</span><span class='line'>user=USER 
+</span><span class='line'>environment=PATH=/usr/local/bin:/usr/bin:/bin,HOME=/home/USER
+</span><span class='line'>stdout_logfile=/home/USER/logs/stdout 
+</span><span class='line'>stderr_logfile=/home/USER/logs/stderr 
+</span><span class='line'>
+</span><span class='line'>$ sudo supervisorctl
+</span><span class='line'>supervisor&gt; status
+</span><span class='line'>….
+</span><span class='line'>supervisor&gt; update
+</span><span class='line'>supervisor&gt; exit
+</span><span class='line'>$ 서버 실행 확인 끝</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>더 물어 봐야 할것</h3>
+
+<ol>
+<li>supervisor의 셋팅을 무엇을 참조 하는가?</li>
+<li>도메인 등록은 어떻게 하는가?</li>
+<li>apach2 설정은 어떻게 하는가?</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/side-function/">Side-function</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T14:03:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/side-function/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Action - approval, refuse</h2>
+
+<p><a href="https://gist.github.com/3096325">approval</a></p>
+
+<p><a href="https://gist.github.com/3096321">refuse</a></p>
+
+<p>Approval은 청구 목록에 대하여 승인 기능을
+refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다.</p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 거부 리스트 상태
+에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<p>거부 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 승인 리스트 상태
+에서 활성화가 되고 action 을 취할수 있게 한다.</p>
+
+<p>/list/view/user_id</p>
+
+<p>아래와 같이 id 값과 함께 전달 할수 있다.</p>
+
+<pre><code>&lt;a href="[% c.uri_for('/list/approval', charge.id) %]" class="btn btn-primary"&gt;승인&lt;/a&gt;
+&lt;a href="[% c.uri_for('/list/refuse', charge.id) %]" class="btn btn-primary"&gt;거부&lt;/a&gt;
+</code></pre>
+
+<p>CaputreArgs(1) 옵션으로 $id 값(들)을 받을수 있게 된다.</p>
+
+<pre><code>sub approval :Local :CaptureArgs(1) {
+    my ( $self, $c, $id ) = @_;
+    my @target_ids = split ',', $id;
+
+sub refuse :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>@target_id의 모든 값(들)을 status값이 2 or 3로 업데이트 한다.
+업데이트는 검색을 한 값들을 대상으로 update를 하게 된다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+
+# 승인
+my $approval = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '2' });
+# 거부
+my $refuse = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '3' });
+</code></pre>
+
+<p>flash기능으로 messages값을 전달하여 조건에 맞을시 메세지를 출력 시키도록 한다.(/list/index.tt 참고)
+조건은 approval, refuse기능이 정상 작동 되었는지를 검사 하게 된다.</p>
+
+<pre><code>if ($query_status) {
+    $c-&gt;flash-&gt;{messages} = 'Success message.';
+}
+else {
+    $c-&gt;flash-&gt;{messages} = 'No status Item.';
+}
+</code></pre>
+
+<p>템플릿에 쓰일 status값과 함께 전체 목록으로 redirect 시키도록 한다.</p>
+
+<pre><code>$c-&gt;stash-&gt;{status} = '2'; #상태에 맞는 status값
+$c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
+</code></pre>
+
+<h2>Action - delete</h2>
+
+<p><a href="https://gist.github.com/3096329">delete</a></p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기, 거부, 수정 상태
+ 에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+&lt;a href="[% c.uri_for('/list/delete', charge.id) %]" class="btn btn-primary"&gt;삭제&lt;/a&gt;
+</code></pre>
+
+<p>다른 기능과 같이 CaptureArgs(1)를 받는다.</p>
+
+<pre><code>sub delete :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>다른 기능과 달리 update_all 이 아닌 delete_all를 통하여 내용을 삭제 한다.</p>
+
+<pre><code>my $charge = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in =&gt; \@target_ids } })-&gt;delete_all;
+</code></pre>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-edit/">List-edit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:56:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-edit/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>청구 내역 수정</h2>
+
+<p><a href="https://gist.github.com/3095912">List-edit-action</a></p>
+
+<p>수정 되어야할 $edit_id를 받을수 있어햐 한다.</p>
+
+<pre><code>sub edit :Local :CaptureArgs(1) {
+my ( $self, $c, $edit_id ) = @_;
+</code></pre>
+
+<p>수정할 폼을 제출 했을때 업데이트 동작 혹은 정보 출력을 하여야 한다.</p>
+
+<pre><code>if ($c-&gt;req-&gt;method eq 'POST') {
+    my @messages;
+
+    push @messages, 'amount is invaild' if ($c-&gt;req-&gt;params-&gt;{amount} !~ /^\d+$/);
+    push @messages, 'title is required' unless ($c-&gt;req-&gt;params-&gt;{title});
+
+    if (@messages) {
+    $c-&gt;flash(
+        messages =&gt; @messages,
+        comment  =&gt; $c-&gt;req-&gt;params-&gt;{comment},
+        title    =&gt; $c-&gt;req-&gt;params-&gt;{title},
+        amount   =&gt; $c-&gt;req-&gt;params-&gt;{amount},
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$c-&gt;req-&gt;params-&gt;{charge_id}"));
+    }
+
+    my $time = strftime "%Y-%m-%d %H:%M:%S", localtime;
+    my %row = (
+    id         =&gt; $c-&gt;req-&gt;params-&gt;{charge_id},
+    amount     =&gt; $c-&gt;req-&gt;params-&gt;{amount},
+    user       =&gt; $c-&gt;req-&gt;params-&gt;{charge_user},
+    title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
+    comment    =&gt; $c-&gt;req-&gt;params-&gt;{comment},
+    updated_on =&gt; "$time",
+    );
+    $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;update_or_create(\%row);
+
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$row{id}"));
+}
+else {
+    my $editer = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;find($edit_id);
+
+    $c-&gt;stash(
+    editer =&gt; $editer,
+    );
+}
+}
+</code></pre>
+
+<p><a href="https://gist.github.com/3095922">List-edit.tt</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-write/">List-write</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:49:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-write/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://gist.github.com/3095879">List-write.tt</a>
+<a href="https://gist.github.com/3095901">List-write-action</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-view/">List-view</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:41:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-view/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://gist.github.com/3095846">List-view-action</a>
+<a href="https://gist.github.com/3095858">List-view.tt</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/list/">List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T23:06:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/list/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>청구 목록 페이지</h2>
+
+<p><a href="https://gist.github.com/3095682">List.pm - index</a></p>
+
+<p><a href="https://gist.github.com/3095679">/list/index.tt</a></p>
+
+<h2>List Controller - Query option</h2>
+
+<p>등록 날짜 역순 출력을 위한 내림 차수 옵션을 준다.</p>
+
+<pre><code>my %attr  = ( 'order_by' =&gt; { -desc =&gt; 'me.id' } );
+
+my $total_charge;
+my %cond    = ();
+</code></pre>
+
+<p>현재 가르켜야 할 페이지 정보가 없다면 1페이지로 하게 한다.</p>
+
+<pre><code>my $page    = $c-&gt;req-&gt;params-&gt;{page};
+$attr{page} = $page || 1;
+</code></pre>
+
+<p>status 옵션이 정의 되지 않았다면 전체(대기/승인/거부) 검색을 할수 있게 한다.</p>
+
+<pre><code>my $status  = $c-&gt;req-&gt;param("status") || $c-&gt;stash-&gt;{"status"} || '0'; #수정 필요
+</code></pre>
+
+<p>status 옵션 없으면 전체 있으면 상태 검색 할수 있게 한다.</p>
+
+<pre><code>%cond         = ( status =&gt; $status ) if $status;
+$total_charge = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search(\%cond, \%attr);
+</code></pre>
+
+<p>Data::Pageset활용 하여 페이징 할수 있다.</p>
+
+<pre><code>my $page_info =
+Data::Pageset-&gt;new(
+    {
+    ( map { $_ =&gt; $total_charge-&gt;pager-&gt;$_ } qw/entries_per_page total_entries current_page/ ),
+    mode =&gt; "slide",
+    pages_per_set =&gt; 10,
+    }
+);
+
+$c-&gt;stash(
+    lists   =&gt; [ $total_charge-&gt;all ],
+    status  =&gt; $status,
+    pageset =&gt; $page_info,
+);
+}
+</code></pre>
+
+<h2>List - View</h2>
+
+<p>성공 혹은 실패 메세지 출력을 할수 있게 한다.</p>
+
+<pre><code>[% IF messages %]
+&lt;div class="alert fade in"&gt;
+&lt;button class="close" data-dismiss="alert"&gt;&amp;times;&lt;/button&gt;
+[% messages %]
+&lt;/div&gt;
+[% END %]
+</code></pre>
+
+<p>탭 등록으로 원하는 상태의 값들만 보여 줄수 있게 한다.</p>
+
+<pre><code>&lt;div class="container-fluid"&gt;
+  &lt;div class="row-fluid"&gt;
+&lt;div class="span2"&gt;
+  &lt;ul class="nav nav-tabs nav-stacked"&gt;
+    &lt;li class="active"&gt;&lt;a href="/list"&gt;전체&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/list?status=1"&gt;대기&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/list?status=2"&gt;승인&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/list?status=3"&gt;거부&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>현재 경로가 어떻게 되는지 확인 할수 있도록 한다.</p>
+
+<pre><code>&lt;div class="span10"&gt;
+  &lt;ul class="breadcrumb"&gt;
+    &lt;li&gt;목록
+        &lt;span class="divider"&gt;/&lt;/span&gt;
+    &lt;/li&gt;      
+    &lt;li class="active"&gt;
+    [% IF status == "1" %]
+        &lt;b&gt; 대기 &lt;/b&gt;
+    [% ELSIF status == "2" %]
+        &lt;b&gt; 승인 &lt;/b&gt;
+    [% ELSIF status == "3" %]
+        &lt;b&gt; 거부 &lt;/b&gt;
+    [% ELSE %]
+        &lt;b&gt; 전체 &lt;/b&gt;
+    [% END %]     
+    &lt;/li&gt;
+  &lt;/ul&gt;
+</code></pre>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/Data::Pageset">Data::Pageset</a></p>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/catalyst-signup/">Catalyst-signup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T22:55:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/catalyst-signup/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Signup Controller <a href="https://gist.github.com/3090526">Login.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Login.pm
+# 내용 추가
+</code></pre>
+
+<h2>:Private</h2>
+
+<p>forword 혹은 detach로만 접근이 가능 하며, URL로 부터 바로 접근이 불가능 합니다.</p>
+
+<pre><code>sub signup :Path('/signup') :Args(0) {
+my ( $self, $c ) = @_;
+
+$c-&gt;detach('signup_POST') if $c-&gt;req-&gt;method eq 'POST';
+}
+
+sub signup_POST :Private {
+my ( $self, $c ) = @_;
+</code></pre>
+
+<h2>Validation - Empty Value</h2>
+
+<p>입력값중에 빈값이 있으면 안돼므로 빈값인지 확인 하여 빈값일시 메세지를
+출력 할수 있게 작업한다.</p>
+
+<pre><code>my $user_name = $c-&gt;req-&gt;param('user_name') || '';
+my $email     = $c-&gt;req-&gt;param('email')     || '';
+my $password  = $c-&gt;req-&gt;param('password')  || '';
+
+my @messages;
+push @messages, 'Input the user name'     unless $user_name;
+push @messages, 'Input the user email'    unless $email;
+push @messages, 'Input the user password' unless $password;
+
+if (@messages) {
+    $c-&gt;flash(
+        messages =&gt; @messages,
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+</code></pre>
+
+<h2>Validation - DB Unique search</h2>
+
+<p>User table에 user_name과 email이 동일한 값이 있는지 확인 하여 동일한
+값이 있을시 error_msg를 출력 할수 있게 한다.</p>
+
+<pre><code>my $cond = {};
+$cond-&gt;{'me.user_name'} = "$user_name";
+my $name_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
+if ($name_search-&gt;count) {
+    $c-&gt;flash(
+        messages =&gt; 'Using ID again input the New ID',
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+
+$cond = {} if $cond;
+$cond-&gt;{'me.email'} = "$email";
+my $email_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
+if ($email_search-&gt;count) {
+    $c-&gt;flash(
+        messages      =&gt; 'Using email again input the New email',
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+</code></pre>
+
+<h2>유저 등록</h2>
+
+<p>Validation이 통과 했다면 테이블에 등록 할수 있게 한다.
+실패시 signup페이지로 다시 이동 하며</p>
+
+<pre><code>my $time    = strftime "%Y-%m-%d %H:%M:%S", localtime;
+my $created = $c-&gt;model('DonDB::User')-&gt;create({
+    user_name  =&gt; $user_name,
+    email      =&gt; $email,
+    password   =&gt; $password,
+    created_on =&gt; "$time",
+    updated_on =&gt; "$time",
+});
+
+$c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri) unless $created;
+</code></pre>
+
+<h2>유저 등록 - 확인</h2>
+
+<p>등록후 이름과 패스워드를 확인하여 다음 페이지 혹은 tdpfjaptpwldhk 냐혀ㅔvpdlwlfmf ghcnfgksek.</p>
+
+<pre><code>if ($c-&gt;authenticate({ user_name =&gt; $user_name, password =&gt; $password } )) {
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for($c-&gt;controller('List')-&gt;action_for('index')));
+} else {
+    $c-&gt;stash(error_msg =&gt; "Bad username or password."); # maybe flash?
+    $c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>Signup View.tt <a href="https://gist.github.com/3090541">signup.tt</a></p>
+
+<pre><code>$ vi root/templates/default/src/login/signup.tt
+# 내용 추가
+</code></pre>
+
+<h2>jquery 미사용</h2>
+
+<p>현재 Validation은 컨트롤 단에서만 검사 한다
+추가가 필요함</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/catalyst-login/">Catalyst-Login</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T20:44:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/catalyst-login/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://metacpan.org/module/Catalyst::Manual::Tutorial::05_Authentication">Catalyst::Manual::Tutorial::05_Authentication</a></p>
+
+<h2>Load plugins</h2>
+
+<p>/lib/MyApp.pm</p>
+
+<pre><code>$ vi ./lib/MyApp/Web/MyApp.pm
+
+# 아래에 다음과 같이 추가
+use Catalyst qw/
+-Debug
+ConfigLoader
+Static::Simple
+Unicode::Encoding
+
+StackTrace
+
+Authentication
+
+Session
+Session::Store::File
+Session::State::Cookie
+/;
+</code></pre>
+
+<p>MakeFile.PL</p>
+
+<pre><code>$ vi Makefile.PL
+
+# 추가
+requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Session';
+requires 'Catalyst::Plugin::Session::Store::File';
+requires 'Catalyst::Plugin::Session::State::Cookie';
+
+$ carton install
+</code></pre>
+
+<p>MyApp.conf</p>
+
+<pre><code>$vi MyApp.conf
+
+# 추가
+&lt;Plugin::Authentication&gt;
+&lt;default&gt;
+    password_type clear
+    user_model    DB::User
+    class         SimpleDB
+&lt;/default&gt;
+&lt;/Plugin::Authentication&gt;
+</code></pre>
+
+<h2>Add Login and Logout Controllers</h2>
+
+<p>Controller 생성</p>
+
+<pre><code>$ script/myapp_create.pl controller Login
+$ script/myapp_create.pl controller Logout
+</code></pre>
+
+<p>Login <a href="https://gist.github.com/3089985">Login.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Login.pm
+</code></pre>
+
+<p>Logout <a href="https://gist.github.com/3090013">Logout.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Logout.pm
+</code></pre>
+
+<h2>Add Valid User Check</h2>
+
+<p>Root <a href="https://gist.github.com/3090343">Root.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Root.pm
+</code></pre>
+
+<h2>추가 해야 할점</h2>
+
+<p>현재는 DB에 유저의 password가 암호화 되지 않음 문서상
+다음 내용에 나오기 때문에 추가가 필요함</p>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/04/catalyst/">Catalyst</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-04T19:02:00+09:00" pubdate data-updated="true">Jul 4<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/04/catalyst/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>DBIx::Class로 스키마 관리하기</h2>
+
+<p><a href="http://advent.perl.kr/2011/2011-12-17.html">jeen</a>님이 발표한 스키마 관리 하기
+입니다.</p>
+
+<p>jeen님의 글을 보게 되면 기존의 스키마를 관리하는 방법은 sql의 잦은 교체시 많은 문제점이
+발생하고 있다고 서술 합니다.</p>
+
+<p>스키마 관리를 좀더 편하게 하기 위하여 마지막에 서술 하는
+<a href="https://metacpan.org/module/dbicdump">dbicdump</a>를 사용하여 간편하게 스키마 관리를 해보도록
+합니다.</p>
+
+<p>dbicdump를 사용하기 위해 필요한 ResultBase.pm과 schema.pl파일을 만들어 보도록 하겠습니다.</p>
+
+<h2>schema/schema.pl</h2>
+
+<p><a href="http://rumidier.github.com/blog/2012/07/02/catalyst/">schema.pl 설명</a></p>
+
+<figure class='code'><figcaption><span>schema.pl </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$DB_NAME</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB</span><span class="p">}</span>           <span class="o">||</span> <span class="s">&#39;DB_NAME&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$DB_USER</span>     <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_USER</span><span class="p">}</span>     <span class="o">||</span> <span class="s">&#39;DB_USER&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$DB_PASSWORD</span> <span class="o">=</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">DB_PASSWORD</span><span class="p">}</span> <span class="o">||</span> <span class="s">&#39;DB_PASSWORD&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">schema_class</span> <span class="o">=&gt;</span> <span class="s">&quot;Silex::Schema&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="n">connect_info</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">dsn</span>               <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:$DB_NAME:127.0.0.1&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">user</span>              <span class="o">=&gt;</span> <span class="nv">$DB_USER</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">pass</span>              <span class="o">=&gt;</span> <span class="nv">$DB_PASSWORD</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">mysql_enable_utf8</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'><span class="n">loader_options</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">dump_directory</span>     <span class="o">=&gt;</span> <span class="s">&#39;lib&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">naming</span>             <span class="o">=&gt;</span> <span class="p">{</span> <span class="n">ALL</span> <span class="o">=&gt;</span> <span class="s">&#39;v8&#39;</span> <span class="p">},</span>
+</span><span class='line'>  <span class="n">skip_load_external</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">relationships</span>      <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">use_moose</span>          <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">only_autoclean</span>     <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">col_collision_map</span>  <span class="o">=&gt;</span> <span class="s">&#39;column_%s&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">result_base_class</span> <span class="o">=&gt;</span> <span class="s">&#39;MyApp::Schema::ResultBase&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">overwrite_modifications</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">datetime_undef_if_invalid</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">custom_column_info</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>  <span class="k">my</span> <span class="p">(</span><span class="nv">$table</span><span class="p">,</span> <span class="nv">$col_name</span><span class="p">,</span> <span class="nv">$col_info</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;password&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span>
+</span><span class='line'>          <span class="n">encode_column</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>          <span class="n">encode_class</span>  <span class="o">=&gt;</span> <span class="s">&#39;Digest&#39;</span><span class="p">,</span>
+</span><span class='line'>          <span class="n">encode_args</span>   <span class="o">=&gt;</span> <span class="p">{</span> <span class="n">algorithm</span> <span class="o">=&gt;</span> <span class="s">&#39;SHA-1&#39;</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=&gt;</span> <span class="s">&#39;hex&#39;</span> <span class="p">},</span>
+</span><span class='line'>          <span class="n">encode_check_method</span> <span class="o">=&gt;</span> <span class="s">&#39;check_password&#39;</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB password 설정</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;created_on&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB created_on 설정</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$col_name</span> <span class="ow">eq</span> <span class="s">&#39;updated_on&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$col_info</span> <span class="p">},</span> <span class="n">set_on_create</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">set_on_update</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflate_datetime</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span> <span class="c1"># DB updated_on 설정</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>lib/MyApp/Schema/ResultBase.pm</h2>
+
+<p>ResultBase 클래스의 제약 문제 때문에 result_base_class 값을 지정해 줌으로써 모든 결과
+ 클래스들은 DBIx::Class::Core가 아닌 MyApp::Schema::ResultBase를 상속받게 합니다.
+MyApp::Schema::ResultBase는 개인이 정의 해주는것 이므로 아래를 참조 합니다.</p>
+
+<p>MD5 체크섬 값 아래에 중복되는 코드를 매번 적어주어야 했습니다.
+이렇게 사용할 컴포넌트들을 결과클래스 별로 지정하는 대신 ResultBase 클래스를 읽어들입니다.
+사실 이처럼 ResultBase를 놓고 여기에 컴포넌트를 일괄해서 읽어들이는 방식은
+Cookbook 문서에서도 스타트업 속도 향상을 위해 권장하고 있습니다. - <a href="http://advent.perl.kr/2011/2011-12-17.html">by Jeen</a> -</p>
+
+<p>그리고 컴포넌트의 사용을 위한 컬럼의 속성은 custom_column_info 속성에 코드를 등록해 지정할 수 있습니다.(schema.pl 하단 참조)
+ 위의 코드처럼 등록하면 created_on 속성에 TimeStamp 컴포넌트를 사용하기 위한 속성 값인 set_on_create 옵션이 모든 결과클래스에 추가됩니다.
+(이거 멋지다..)</p>
+
+<figure class='code'><figcaption><span>ResultBase </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package MyApp::Schema::ResultBase;
+</span><span class='line'>use Moose;
+</span><span class='line'>use MooseX::NonMoose;
+</span><span class='line'>use namespace::autoclean;
+</span><span class='line'>
+</span><span class='line'>extends 'DBIx::Class::Core';
+</span><span class='line'>
+</span><span class='line'>__PACKAGE__->load_components(qw/
+</span><span class='line'>  InflateColumn::DateTime
+</span><span class='line'>  TimeStamp
+</span><span class='line'>/);
+</span><span class='line'>
+</span><span class='line'>__PACKAGE__->meta->make_immutable;
+</span><span class='line'>
+</span><span class='line'>1;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>위의 두가지 코드를 작성 하였다면 준비는 끝났습니다.
+(<strong>dbicdump는 db 정보를 덤프해서 스키마를 작성</strong>하는 것으로 코드 작성및 작성 후에라도
+db가 정의 되어 있어야 합니다.)</p>
+
+<h2>dbicdump 사용하기</h2>
+
+<p>아래를 실행한후 lib/MyApp/Schema/Result에 .pm 파일들이 새로 생성되거나 수정 되었다면 확인을 해보라</p>
+
+<pre><code>$ dbicdump -Ilib schema/schema.pl
+</code></pre>
+
+<h2>MakeFile.pl 모듈 추가</h2>
+
+<p>다른 모듈이 더 추가 될수 있습니다 에러 메세지를 확인 하고 필요한 모듈을 더 설치 하세요.</p>
+
+<pre><code>requires "DBIx::Class::TimeStamp";
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/23/don-release/">Don release</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

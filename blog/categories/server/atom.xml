@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Server | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/server/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-24T14:27:02+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Don release]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/23/don-release/"/>
+    <updated>2012-07-23T18:49:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/23/don-release</id>
+    <content type="html"><![CDATA[<h2>Donnenwa Open</h2>
+
+<ol>
+<li>DNS 요구</li>
+<li>Apache2 설정</li>
+<li>supervisior 설정</li>
+<li>확인</li>
+</ol>
+
+
+<h3>DNS 요구</h3>
+
+<p>도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
+브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨)</p>
+
+<h3>Apache2 설정</h3>
+
+<p><code>
+$ ssh rumidier@bu….접속
+$ cd /etc/apache2/
+$ cd sites-available
+$ vi user.site.kr (작성)
+$ cd ../
+$ cd sites-enable
+$ ln -s 타킷-경로
+$ ~/etc/init.d/apache2 restart
+</code></p>
+
+<h3>supervisior 설정</h3>
+
+<p>슈퍼 바이저는 서버가 죽었다 다시 살아 났을시 수동이 아닌 자동으로 서버를 뛰워주기 위해 필요한 기능이다.</p>
+
+<p>돈내놔는 carton을 사용하고 plackup으로 뛰우며 플라넥스와는 다르게 worker의 갯수가 존재 하지 않는다. 포트 설정은 아파치에서 해준 포트를 명시 해준후 디렉토리와 유저, 환경 등록을 해주면 끝이 난다.
+환경경로는 carton과 plackup 경로도 알아야 하는거 같다(이 부분은 설명이 더 필요)</p>
+
+<p>```
+$ cd /etc
+$ vi supervisord.conf</p>
+
+<p>[program:Donnenwa]
+command=/usr/local/bin/carton exec -Ilib -- /home/USER Donnenwa/local/bin/plackup -Ilib -a /home/USER/Donnenwa
+app.psgi --host 127.0.0.1 --port You_port(ex:3000)<br/>
+directory=/home/User/Donnenwa
+user=USER
+environment=PATH=/usr/local/bin:/usr/bin:/bin,HOME=/home/USER
+stdout_logfile=/home/USER/logs/stdout
+stderr_logfile=/home/USER/logs/stderr</p>
+
+<p>$ sudo supervisorctl
+supervisor> status
+….
+supervisor> update
+supervisor> exit
+$ 서버 실행 확인 끝
+```</p>
+
+<h3>더 물어 봐야 할것</h3>
+
+<ol>
+<li>supervisor의 셋팅을 무엇을 참조 하는가?</li>
+<li>도메인 등록은 어떻게 하는가?</li>
+<li>apach2 설정은 어떻게 하는가?</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

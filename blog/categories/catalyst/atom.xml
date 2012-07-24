@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Catalyst | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/catalyst/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-07-24T14:27:02+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Don-Change-space]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/24/don-change-space/"/>
+    <updated>2012-07-24T14:20:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/24/don-change-space</id>
+    <content type="html"><![CDATA[<h2>Sil::Web::Don 변경</h2>
+
+<p>Sil::Schema는 Sil의 공용 스키마가 아닌데도 불구 하고 그렇게 보일수도 있는
+상태 이다 이를 바꾸기 위해서
+Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
+명시 해주는것과 같다.</p>
+
+<p>변경전
+<code>``
+lib
+</code>-- Sil</p>
+
+<pre><code>|-- Schema
+|   |-- Result
+|   |   |-- Charge.pm
+|   |   `-- User.pm
+|   `-- ResultBase.pm
+|-- Schema.pm
+`-- Web
+    |-- Don
+    |   |-- Controller
+    |   |   |-- Deposit.pm
+    |   |   |-- List.pm
+    |   |   |-- Login.pm
+    |   |   |-- Logout.pm
+    |   |   `-- Root.pm
+    |   |-- Model
+    |   |   `-- DonDB.pm
+    |   `-- View
+    |       |-- Bootstrap.pm
+    |       `-- Download
+    |           `-- CSV.pm
+    `-- Don.pm
+</code></pre>
+
+<p>```</p>
+
+<p> 변경후
+```
+ lib
+└── Sil</p>
+
+<pre><code>└── Don
+    ├── Schema
+    │   ├── Result
+    │   │   ├── Charge.pm
+    │   │   └── User.pm
+    │   └── ResultBase.pm
+    ├── Schema.pm
+    ├── Web
+    │   ├── Controller
+    │   │   ├── Deposit.pm
+    │   │   ├── List.pm
+    │   │   ├── Login.pm
+    │   │   ├── Logout.pm
+    │   │   └── Root.pm
+    │   ├── Model
+    │   │   └── DonDB.pm
+    │   └── View
+    │       ├── Bootstrap.pm
+    │       └── Download
+    │           └── CSV.pm
+    └── Web.pm
+</code></pre>
+
+<p>```</p>
+
+<h2>경로명 변경</h2>
+
+<p>변경전</p>
+
+<p>```
+Sil::Schema::Result::Charge
+Sil::Schema::Result::User
+Sil::Schema::ResultBase
+Sil::Schema</p>
+
+<p>Sil::Web::Don::Controller::Deposit
+Sil::Web::Don::Controller::List
+Sil::Web::Don::Controller::Login
+Sil::Web::Don::Controller::Logout
+Sil::Web::Don::Controller::Root
+Sil::Web::Don::Model::DonDB
+Sil::Web::Don::View::Bootstrap
+Sil::Web::Don::View::Download::CS
+Sil::Web::Don
+```</p>
+
+<p>변경후</p>
+
+<p>```
+Sil::Don::Schema::Result::Charge
+Sil::Don::Schema::Result::User
+Sil::Don::Schema::ResultBase
+Sil::Don::Schema</p>
+
+<p>Sil::Don::Web::Controller::Deposit
+Sil::Don::Web::Controller::List
+Sil::Don::Web::Controller::Login
+Sil::Don::Web::Controller::Logout
+Sil::Don::Web::Controller::Root
+Sil::Don::Web::Model::DonDB
+Sil::Don::Web::View::Bootstrap
+Sil::Don::Web::View::Download::CS
+Sil::Don::Web
+```</p>
+
+<p>p.s 내용을 모두 바꾸어 준후 Sil_web_Don.conf 파일명을 수정 안해주어
+한참 고생 했다.. 경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Side-function]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/12/side-function/"/>
+    <updated>2012-07-12T14:03:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/12/side-function</id>
+    <content type="html"><![CDATA[<h2>Action - approval, refuse</h2>
+
+<p><a href="https://gist.github.com/3096325">approval</a></p>
+
+<p><a href="https://gist.github.com/3096321">refuse</a></p>
+
+<p>Approval은 청구 목록에 대하여 승인 기능을
+refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다.</p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 거부 리스트 상태
+에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<p>거부 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기 리스트 상태, 승인 리스트 상태
+에서 활성화가 되고 action 을 취할수 있게 한다.</p>
+
+<p>/list/view/user_id</p>
+
+<p>아래와 같이 id 값과 함께 전달 할수 있다.</p>
+
+<pre><code>&lt;a href="[% c.uri_for('/list/approval', charge.id) %]" class="btn btn-primary"&gt;승인&lt;/a&gt;
+&lt;a href="[% c.uri_for('/list/refuse', charge.id) %]" class="btn btn-primary"&gt;거부&lt;/a&gt;
+</code></pre>
+
+<p>CaputreArgs(1) 옵션으로 $id 값(들)을 받을수 있게 된다.</p>
+
+<pre><code>sub approval :Local :CaptureArgs(1) {
+    my ( $self, $c, $id ) = @_;
+    my @target_ids = split ',', $id;
+
+sub refuse :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>@target_id의 모든 값(들)을 status값이 2 or 3로 업데이트 한다.
+업데이트는 검색을 한 값들을 대상으로 update를 하게 된다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+
+# 승인
+my $approval = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '2' });
+# 거부
+my $refuse = $c-&gt;model('MyApp_DB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in
+        =&gt; \@target_ids } })-&gt;update_all({ status =&gt; '3' });
+</code></pre>
+
+<p>flash기능으로 messages값을 전달하여 조건에 맞을시 메세지를 출력 시키도록 한다.(/list/index.tt 참고)
+조건은 approval, refuse기능이 정상 작동 되었는지를 검사 하게 된다.</p>
+
+<pre><code>if ($query_status) {
+    $c-&gt;flash-&gt;{messages} = 'Success message.';
+}
+else {
+    $c-&gt;flash-&gt;{messages} = 'No status Item.';
+}
+</code></pre>
+
+<p>템플릿에 쓰일 status값과 함께 전체 목록으로 redirect 시키도록 한다.</p>
+
+<pre><code>$c-&gt;stash-&gt;{status} = '2'; #상태에 맞는 status값
+$c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
+</code></pre>
+
+<h2>Action - delete</h2>
+
+<p><a href="https://gist.github.com/3096329">delete</a></p>
+
+<p>승인 기능은 두가지 상황에서 선택 할수 있게 된다.
+/list/view/user_num과 전체 list상태, 대기, 거부, 수정 상태
+ 에서 활성화가 되고 action을 취할수 있게 한다.</p>
+
+<pre><code>$ vi root/templates/default/src/list
+&lt;a href="[% c.uri_for('/list/delete', charge.id) %]" class="btn btn-primary"&gt;삭제&lt;/a&gt;
+</code></pre>
+
+<p>다른 기능과 같이 CaptureArgs(1)를 받는다.</p>
+
+<pre><code>sub delete :Local :CaptureArgs(1) {
+my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+</code></pre>
+
+<p>다른 기능과 달리 update_all 이 아닌 delete_all를 통하여 내용을 삭제 한다.</p>
+
+<pre><code>my $charge = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({ id =&gt; { -in =&gt; \@target_ids } })-&gt;delete_all;
+</code></pre>
+
+<h2>CPAN</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[list-edit]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/12/list-edit/"/>
+    <updated>2012-07-12T13:56:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/12/list-edit</id>
+    <content type="html"><![CDATA[<h2>청구 내역 수정</h2>
+
+<p><a href="https://gist.github.com/3095912">List-edit-action</a></p>
+
+<p>수정 되어야할 $edit_id를 받을수 있어햐 한다.</p>
+
+<pre><code>sub edit :Local :CaptureArgs(1) {
+my ( $self, $c, $edit_id ) = @_;
+</code></pre>
+
+<p>수정할 폼을 제출 했을때 업데이트 동작 혹은 정보 출력을 하여야 한다.</p>
+
+<pre><code>if ($c-&gt;req-&gt;method eq 'POST') {
+    my @messages;
+
+    push @messages, 'amount is invaild' if ($c-&gt;req-&gt;params-&gt;{amount} !~ /^\d+$/);
+    push @messages, 'title is required' unless ($c-&gt;req-&gt;params-&gt;{title});
+
+    if (@messages) {
+    $c-&gt;flash(
+        messages =&gt; @messages,
+        comment  =&gt; $c-&gt;req-&gt;params-&gt;{comment},
+        title    =&gt; $c-&gt;req-&gt;params-&gt;{title},
+        amount   =&gt; $c-&gt;req-&gt;params-&gt;{amount},
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$c-&gt;req-&gt;params-&gt;{charge_id}"));
+    }
+
+    my $time = strftime "%Y-%m-%d %H:%M:%S", localtime;
+    my %row = (
+    id         =&gt; $c-&gt;req-&gt;params-&gt;{charge_id},
+    amount     =&gt; $c-&gt;req-&gt;params-&gt;{amount},
+    user       =&gt; $c-&gt;req-&gt;params-&gt;{charge_user},
+    title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
+    comment    =&gt; $c-&gt;req-&gt;params-&gt;{comment},
+    updated_on =&gt; "$time",
+    );
+    $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;update_or_create(\%row);
+
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$row{id}"));
+}
+else {
+    my $editer = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;find($edit_id);
+
+    $c-&gt;stash(
+    editer =&gt; $editer,
+    );
+}
+}
+</code></pre>
+
+<p><a href="https://gist.github.com/3095922">List-edit.tt</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[list-write]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/12/list-write/"/>
+    <updated>2012-07-12T13:49:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/12/list-write</id>
+    <content type="html"><![CDATA[<p><a href="https://gist.github.com/3095879">List-write.tt</a>
+<a href="https://gist.github.com/3095901">List-write-action</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[list-view]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/12/list-view/"/>
+    <updated>2012-07-12T13:41:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/12/list-view</id>
+    <content type="html"><![CDATA[<p><a href="https://gist.github.com/3095846">List-view-action</a>
+<a href="https://gist.github.com/3095858">List-view.tt</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>catalyst - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="기본 화면 출력후 무엇을 하지? list.tt 페이지를 만들어 기본 게시판 화면을 꾸민다 root/templates/bootstrap/src/list/index.tt 아래와 같이 기본 .tt를 생성한다. 아직까지는 list명단에
+자료가 없기 때문에 아무것도 보이지 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/06/18/catalyst/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Catalyst</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-18T16:13:00+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>기본 화면 출력후 무엇을 하지?</h2>
+
+<h2>list.tt 페이지를 만들어 기본 게시판 화면을 꾸민다</h2>
+
+<p>root/templates/bootstrap/src/list/index.tt</p>
+
+<p>아래와 같이 기본 .tt를 생성한다. 아직까지는 list명단에
+자료가 없기 때문에 아무것도 보이지 않는다.</p>
+
+<p><a href="https://gist.github.com/2947721">index.tt</a></p>
+
+<h2>DonDB.sql을 만들어 준다.</h2>
+
+<p>INT == int(11), signed는 디폴트로 정의 되어 있다.</p>
+
+<p>DEFAULT값은 절대 NULL이 되게 하여서는 안된다.</p>
+
+<p>timestamp로 잡을시 문제가 될수 있다.</p>
+
+<p>DATETIME는 만든날짜와 수정된 날짜가 있어야 문제를 줄일수 있다.</p>
+
+<pre><code>CREATE TABLE charge (
+id         INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+applicant  VARCHAR(32) NOT NULL DEFAULT '',
+title      VARCHAR(128) NOT NULL DEFAULT '',
+content    TEXT NOT NULL DEFAULT '',
+created_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+updated_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></pre>
+
+<h2>DB 적용</h2>
+
+<pre><code>$ mysql -u ID -p Don_db &lt; DonDB.sql
+</code></pre>
+
+<h2>DB 구성(Model)은 어떻게 할까?</h2>
+
+<pre><code>$ ./script/silex_web_donnenwa_create.pl model DonDB DBIC::Schema \ 
+Silex::Schema create=static dbi:mysql:DonDB_db:localhost ID PASSWORD
+</code></pre>
+
+<p>lib/Silex/Web/Donnenwa/Model/DonDB.pm 생성됨</p>
+
+<h2>DB 구성 하면 늘어나는 모듈이 잇다.</h2>
+
+<p>Makefile.PL 추가</p>
+
+<pre><code>require Catalyst::Model::DBIC::Schema
+require DBD::mysql
+</code></pre>
+
+<p>인스톨</p>
+
+<pre><code>$ carton install
+</code></pre>
+
+<h2>DB 구성을 하면 어떻게 가져오게 될까?</h2>
+
+<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
+
+<pre><code>sub index :Path :Args(0) {
+my ( $self, $c ) = @_;
+
+my $rs = $c-&gt;model('DonDB')-&gt;resultset('List');
+$c-&gt;stash-&gt;{lists} = [ $rs-&gt;all ];
+}
+</code></pre>
+
+<h2>마지막 화면 구성</h2>
+
+<p>root/templates/bootstrap/src/list/index.tt
+index.tt 안에 템플릿 툴킷 집어넣는데라고 표시 된곳에 집어 넣는다</p>
+
+<pre><code>[% FOREACH list IN lists %]
+  &lt;!-- 행 시작 --&gt;
+  &lt;tr&gt;
+&lt;!-- 번호 --&gt;
+&lt;td height=20 bgcolor=white align=center&gt;
+  &lt;p&gt;[% list.id %]&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 번호 끝 --&gt;
+
+&lt;!-- 제목 --&gt;
+&lt;td height=20 bgcolor=white&gt;&amp;nbsp;
+  &lt;p&gt;[% list.title %]&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 제목 끝 --&gt;
+&lt;!-- 이름 --&gt;
+&lt;td align=center height=20 bgcolor=white&gt;
+  &lt;font color=black&gt;
+    &lt;p&gt;[% list.name %]&lt;/p&gt;
+  &lt;/font&gt;
+&lt;/td&gt;
+&lt;!-- 이름 끝 --&gt;
+&lt;!-- 날짜 --&gt;
+&lt;td align=center height=20 bgcolor=white&gt;
+  &lt;p&gt;날짜 다음&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 날짜 끝 --&gt;
+&lt;!-- 조회 수 --&gt;
+&lt;td align=center height=20 bgcolor=white&gt;
+  &lt;p&gt;조회수 나중에 구현&lt;/p&gt;
+&lt;/td&gt;
+&lt;!-- 조회 수 끝 --&gt;
+  &lt;/tr&gt;
+&lt;!-- 행 끝 --&gt;
+[% END %]
+</code></pre>
+
+<p>가져 왔다 근데 한글이 깨진다
+(DB 데이터 집어 넣을때도 utf8적용이 되야 한다.)</p>
+
+<p>lib/Silex/Web/Donnenwa/Model/DonDB.pm</p>
+
+<pre><code>connect_info =&gt; {
+    dsn =&gt; 'dbi:mysql:auth_db:localhost',
+    user =&gt; 'don',
+    password =&gt; 'gksdud09',
+}
+
+추가
+    mysql_enable_utf8 =&gt; 1,
+
+connect_info =&gt; {
+    dsn =&gt; 'dbi:mysql:auth_db:localhost',
+    user =&gt; 'don',
+    password =&gt; 'gksdud09',
+    mysql_enable_utf8 =&gt; 1,
+}
+</code></pre>
+
+<h2>추가사항</h2>
+
+<p>현재 상태는 DB에 등록된 내용이 들어가 있는지 확인과 출력이 되는지 확인을 위해
+만들어 졌다.</p>
+
+<p>sql및 write버튼 미동작등 수행 할것이 많으 므로 기본 와꾸만 잡혀서 정보가 제대로 넘어
+오는지 확인만 하자.</p>
+
+<p>[참고]</p>
+
+<p><a href="http://search.cpan.org/~bricas/Catalyst-Model-DBIC-0.17/lib/Catalyst/Model/DBIC.pm">Catalyst::Model::DBIC</a></p>
+
+<p><a href="http://search.cpan.org/~rkitover/Catalyst-Model-DBIC-Schema-0.60/lib/Catalyst/Model/DBIC/Schema.pm">Catalyst::Model::DBIC::Schema</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-18T16:13:00+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/catalyst/'>catalyst</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/06/18/catalyst/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/06/18/catalyst/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/15/catalyst/" title="Previous Post: Catalyst">&laquo; Catalyst</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/19/catalyst/" title="Next Post: catalyst">catalyst &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/23/don-release/">Don release</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/12/side-function/">Side-function</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/06/18/catalyst/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/06/18/catalyst/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
