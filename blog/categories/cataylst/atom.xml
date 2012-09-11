@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cataylst | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/cataylst/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-09-11T20:43:08+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[export_csv]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/25/export-csv/"/>
+    <updated>2012-07-25T19:01:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/25/export-csv</id>
+    <content type="html"><![CDATA[<p>목차</p>
+
+<ol>
+<li>CSV 출력 준비</li>
+<li>View 생성</li>
+</ol>
+
+
+<h3>CSV 출력 준비</h3>
+
+<p>선택된 내역을 출력 하기 위한 버튼을 추가한다.</p>
+
+<p>root/templates/bootstrap/src/deposit/index.tt</p>
+
+<p>```</p>
+
+<pre><code>  &lt;a class="btn btn-primary" id="do_export"&gt;출력&lt;/a&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>선택된 내역 js처리</p>
+
+<p>root/static/scripts/list.js</p>
+
+<p>```
+  $('#do_export').click(function() {</p>
+
+<pre><code>var selected_charges = [];
+
+$('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+  if($(this).attr('id') !== undefined)
+    selected_charges.push($(this).attr('id'))
+});
+
+location.href = '/deposit/export/' + selected_charges;
+</code></pre>
+
+<p>  });
+```</p>
+
+<p>Sil/Web/Don/Controller/Deposit.pm</p>
+
+<p>선택된 승인 내역을 CSV로 출력하기 위하여
+모듈 - <a href="https://metacpan.org/module/Catalyst::View::Download::CSV">Catalyst::View::Download::CSV</a>을 사용 하였습니다.</p>
+
+<p>```
+sub export :Local CaptureArgs(1) {</p>
+
+<pre><code>my ( $self, $c, $id ) = @_;
+my @target_ids = split ',', $id;
+
+my @charges;
+
+push @charges, ['제목', '청구자', '금액', '영수증날짜'];
+
+foreach my $charge($c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({id =&gt; { -in =&gt; \@target_ids }})-&gt;all) {
+    push @charges, [ $charge-&gt;title, $charge-&gt;user-&gt;user_name, $charge-&gt;amount, $charge-&gt;usage_date];
+}
+
+if (@charges) {
+    $c-&gt;stash-&gt;{'csv'} = { 'data' =&gt; [ @charges ] };
+    $c-&gt;flash-&gt;{messages} = 'Success Exported.';
+
+} else {
+    $c-&gt;flash-&gt;{messages} = 'Export Failed.';
+}
+$c-&gt;forward('Sil::Web::Don::View::Download::CSV');
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>View 생성</h2>
+
+<p>View는 script_web_don_create view로 생성한다.</p>
+
+<p>list/Sil/Web/Don/View/Download/CSV.pm을 생성 완료.</p>
+
+<p>```
+package Sil::Web::Don::View::Download::CSV;
+use Moose;
+use namespace::autoclean;</p>
+
+<p>extends 'Catalyst::View::Download::CSV';</p>
+
+<p>=head1 NAME</p>
+
+<p>Sil::Web::Don::View::Download::CSV - Catalyst View</p>
+
+<p>=head1 DESCRIPTION</p>
+
+<p>Catalyst View.</p>
+
+<p>=head1 AUTHOR</p>
+
+<p>ja3ck</p>
+
+<p>=head1 LICENSE</p>
+
+<p>This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.</p>
+
+<p>=cut</p>
+
+<p><strong>PACKAGE</strong>->meta->make_immutable;</p>
+
+<p>1;
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

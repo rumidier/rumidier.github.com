@@ -9,9 +9,7 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="find find [경로] [옵션들] [판정 조건] [행동] |옵션 |의미 |
-|------------------|-------------------------------------------------------------|
-|-depth |디렉터리 자체를 보기 &hellip;">
+  <meta name="description" content="$PATH에 추가 하기 echo PATH=$PATH:/foo/bar/baz $PATH를 바꾸기 echo PATH=경로.... ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +64,230 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/24/path/">PATH</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-24T23:04:00+09:00" pubdate data-updated="true">Nov 24<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/24/path/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>$PATH에 <em>추가</em> 하기</p>
+
+<pre><code>echo PATH=$PATH:/foo/bar/baz
+</code></pre>
+
+<p>$PATH를 <em>바꾸기</em></p>
+
+<pre><code>echo PATH=경로....
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/24/shell-key/">Shell Key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-24T18:18:00+09:00" pubdate data-updated="true">Nov 24<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/24/shell-key/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ctrl + u</p>
+
+<p>커서 위치 부터 처음 까지 삭제</p>
+
+<pre><code>$ echo rumidier-linux bul-la bul-la.....&lt;--
+$
+
+$ echo rumidier-linux&lt;--- bul-la bul-la.....
+$ bul-la bul-la.....
+</code></pre>
+
+<p>Ctrl + c</p>
+
+<p>명령 실행후 중지</p>
+
+<p>Ctrl + z</p>
+
+<p>명령 일시 정지 (재시작은 fg입력)</p>
+
+<p>Ctrl + s</p>
+
+<p>터미널 출력 멈춤</p>
+
+<p>Ctrl + q</p>
+
+<p>터미널 출력 재시작</p>
+
+<p>이런 키들이 문제가 된다면?</p>
+
+<pre><code>stty function key
+function : 기능
+key      : key 조합 (^컨트롤)
+</code></pre>
+
+<p>현재 터미널의 설정 내용</p>
+
+<pre><code>$ stty -a
+</code></pre>
+
+<p>지금껏 사용 하다 갑자기 이상해졌다면</p>
+
+<pre><code>$ ssty sane
+</code></pre>
+
+<p>Ctrl + c</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/23/grep/">Grep</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-23T12:17:00+09:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/23/grep/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>grep 명령</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>옵션</th>
+<th>의미                                                                   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>-c  </td>
+<td>패턴과 부합한 줄을 출력하는 대신 그런 줄들의 개수를 출력한다.          |</td>
+</tr>
+<tr>
+<td></td>
+<td>-E  </td>
+<td>확장된 정규표현식을 활성화한다.                                        |</td>
+</tr>
+<tr>
+<td></td>
+<td>-h  </td>
+<td>부합한 줄을 출력할 때 파일 이름은 출력하지 않는다.                     |</td>
+</tr>
+<tr>
+<td></td>
+<td>-i  </td>
+<td>대소문자를 구분하지 않는다.                                            |</td>
+</tr>
+<tr>
+<td></td>
+<td>-l  </td>
+<td>부합한 줄을 담은 파일 이름만 출력하고 부합한 줄 자체는 출력하지 않는다.|</td>
+</tr>
+<tr>
+<td></td>
+<td>-v  </td>
+<td>패턴을 뒤집는다. 즉, 주어진 패턴과 부합하지 않은 줄들을 출력한다.      |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>파일에서 in이라는 문자열 찾기</p>
+
+<pre><code>$ grep in words.txt
+</code></pre>
+
+<p>파일들에서 in을 찾고 매치 되는 갯수 출력</p>
+
+<pre><code>$ grep -c in words.txt words2.txt
+</code></pre>
+
+<p>파일들에서 in을 찾고 매치 되지 않는 갯수 출력</p>
+
+<pre><code>$grep -c -v in words.txt words2.txt
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -318,15 +540,15 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/07/24/templet-br/">Templet_br</a>
+        <a href="/blog/2012/09/11/catalyst-test-code/">Catalyst-test-code</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
+        <a href="/blog/2012/07/25/export-csv/">export_csv</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/07/23/don-release/">Don release</a>
+        <a href="/blog/2012/07/25/db-password-hash/">DB_Password_Hash</a>
       </li>
     
   </ul>

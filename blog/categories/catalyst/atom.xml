@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Catalyst | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/catalyst/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-07-24T15:01:14+09:00</updated>
+  <updated>2012-09-11T20:43:08+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -12,6 +12,99 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Catalyst-test-code]]></title>
+    <link href="http://rumidier.github.com/blog/2012/09/11/catalyst-test-code/"/>
+    <updated>2012-09-11T18:46:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/09/11/catalyst-test-code</id>
+    <content type="html"><![CDATA[<h2>Web - Catalyst Test Code 작성</h2>
+
+<p>Catalyst로 웹을 구축 하던중 테스트 코드를 작성을 부여 받았습니다. 테스트 코드를 진행 하기 위한 모듈을 적습니다.</p>
+
+<h2>모듈</h2>
+
+<p><a href="https://metacpan.org/module/Test::More">Test::More</a></p>
+
+<p>기본 적이 펄 테스트 코드 문법을 확인 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/Catalyst::Test#res-request-...-">Catalyst::Test</a></p>
+
+<p>content, response 페이지 정보를 얻어 올수 있습니다.</p>
+
+<p><a href="ihttps://metacpan.org/module/HTTP::Response">HTTP::Response</a></p>
+
+<p>response 정보등을 확인 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/URI">URI</a></p>
+
+<p>response 정보등을 확인 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/HTTP::Request::Common">HTTP::Request::Common</a></p>
+
+<p>Get POST 등을 구현 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/CGI::Simple::Cookie">CGI::Simple::Cookie</a></p>
+
+<p>로그인 인증 관련 세션 처리를 할수 있습니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DB_Password_Hash]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/25/db-password-hash/"/>
+    <updated>2012-07-25T16:41:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/25/db-password-hash</id>
+    <content type="html"><![CDATA[<h2>DB Password HASH</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::EncodedColumn">DBIx::Class::EncodedColumn</a></p>
+
+<p>기본 입력값 입력시 sha('password')사용 하여 암호화 할수 있도록 한다.</p>
+
+<p><code>
+INSERT INTO `user` VALUES (2,'rum_user','rum_user@mail.com',sha('Password'),localtime ,localtime);
+</code></p>
+
+<p>MyWeb::ResultBase.pm에 EncodedColumn 추가하여 준다.</p>
+
+<p>```
+<strong>PACKAGE</strong>->load_components(qw/</p>
+
+<pre><code>EncodedColumn
+InflateColumn::DateTime
+TimeStamp
+</code></pre>
+
+<p>/);
+```</p>
+
+<p><a href="https://metacpan.org/module/Catalyst::Plugin::Authentication">Catalyst::Plugin::Authentication</a></p>
+
+<p>my_web.conf 파일에 플러그인 설정 추가
+pawword_type 설정시 디폴트로 SHA-1이 적용되지만
+명시적으로 password_hash_type을 정의 하여 준다.</p>
+
+<p>```
+&lt;Plugin::Authentication></p>
+
+<pre><code>&lt;default&gt;
+    password_type      hashed
+    password_hash_type SHA-1
+    user_model         DonDB::User
+    class              SimpleDB
+&lt;/default&gt;
+</code></pre>
+
+<p>&lt;/Plugin::Authentication>
+```</p>
+
+<h3>설정 추가 참고 자료</h3>
+
+<p><a href="https://metacpan.org/module/Catalyst::Authentication::Credential::Password">Catalyst::Authentication::Credential::Password</a></p>
+
+<p><a href="https://metacpan.org/module/Digest#new">Digest</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Don-Change-space]]></title>
@@ -294,26 +387,6 @@ else {
 </code></pre>
 
 <p><a href="https://gist.github.com/3095922">List-edit.tt</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[list-write]]></title>
-    <link href="http://rumidier.github.com/blog/2012/07/12/list-write/"/>
-    <updated>2012-07-12T13:49:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/07/12/list-write</id>
-    <content type="html"><![CDATA[<p><a href="https://gist.github.com/3095879">List-write.tt</a>
-<a href="https://gist.github.com/3095901">List-write-action</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[list-view]]></title>
-    <link href="http://rumidier.github.com/blog/2012/07/12/list-view/"/>
-    <updated>2012-07-12T13:41:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/07/12/list-view</id>
-    <content type="html"><![CDATA[<p><a href="https://gist.github.com/3095846">List-view-action</a>
-<a href="https://gist.github.com/3095858">List-view.tt</a></p>
 ]]></content>
   </entry>
   

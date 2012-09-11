@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Password | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/password/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-09-11T20:43:08+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[DB_Password_Hash]]></title>
+    <link href="http://rumidier.github.com/blog/2012/07/25/db-password-hash/"/>
+    <updated>2012-07-25T16:41:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/07/25/db-password-hash</id>
+    <content type="html"><![CDATA[<h2>DB Password HASH</h2>
+
+<p><a href="https://metacpan.org/module/DBIx::Class::EncodedColumn">DBIx::Class::EncodedColumn</a></p>
+
+<p>기본 입력값 입력시 sha('password')사용 하여 암호화 할수 있도록 한다.</p>
+
+<p><code>
+INSERT INTO `user` VALUES (2,'rum_user','rum_user@mail.com',sha('Password'),localtime ,localtime);
+</code></p>
+
+<p>MyWeb::ResultBase.pm에 EncodedColumn 추가하여 준다.</p>
+
+<p>```
+<strong>PACKAGE</strong>->load_components(qw/</p>
+
+<pre><code>EncodedColumn
+InflateColumn::DateTime
+TimeStamp
+</code></pre>
+
+<p>/);
+```</p>
+
+<p><a href="https://metacpan.org/module/Catalyst::Plugin::Authentication">Catalyst::Plugin::Authentication</a></p>
+
+<p>my_web.conf 파일에 플러그인 설정 추가
+pawword_type 설정시 디폴트로 SHA-1이 적용되지만
+명시적으로 password_hash_type을 정의 하여 준다.</p>
+
+<p>```
+&lt;Plugin::Authentication></p>
+
+<pre><code>&lt;default&gt;
+    password_type      hashed
+    password_hash_type SHA-1
+    user_model         DonDB::User
+    class              SimpleDB
+&lt;/default&gt;
+</code></pre>
+
+<p>&lt;/Plugin::Authentication>
+```</p>
+
+<h3>설정 추가 참고 자료</h3>
+
+<p><a href="https://metacpan.org/module/Catalyst::Authentication::Credential::Password">Catalyst::Authentication::Credential::Password</a></p>
+
+<p><a href="https://metacpan.org/module/Digest#new">Digest</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,9 +9,8 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="DOM 조작 메서드 핵심정리(Le-05) DOM을 조작할 수 있도록 jQuery가 제공하는 메서드들은 광범위하기 때문에 어떤 작업을
-처리할 때 어떤 메서드들이 어느 경우에 도움을 줄 수 있는지를 한눈에 보여줄 수 있도록
-관련된 메서드들을 기능별 범주로 나누어 보았다 &hellip;">
+  <meta name="description" content="Source 예제.html 예제 css 예제 js 본문 인라인 CSS 변경 폰트 크기 구하기 $('div.speech').css('fontSize') 반환된 값이 숫자와 단위 문자열이 합쳐져 있으므로 각각 나누기 위해 변수를 따로 저장
+변수 이름에 $는 변수명에 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,711 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/12/learn-jquery-4jang/">Learn jQuery 4장</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-12T16:49:00+09:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/12/learn-jquery-4jang/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Source</h2>
+
+<p><a href="https://gist.github.com/2915965">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2915963">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2915969">예제 js  </a></p>
+
+<h2>본문</h2>
+
+<h2>인라인 CSS 변경</h2>
+
+<p>폰트 크기 구하기</p>
+
+<pre><code>$('div.speech').css('fontSize')
+</code></pre>
+
+<p>반환된 값이 숫자와 단위 문자열이 합쳐져 있으므로 각각 나누기 위해 변수를 따로 저장
+변수 이름에 $는 변수명에 쓰이며 jQuery객체를 저장하고 있다는 의미로 사용된다.</p>
+
+<pre><code>var $speech     = $('div.speech');
+var currentSize = $speech.css('fontSize');
+</code></pre>
+
+<p>문자열에서 숫자까지만 변환하여 추출(10진수 옵션 설정)
+숫자가 아니면 NaN(Not a Number)반환</p>
+
+<pre><code>var num         = parseFloat(currentSize, 10);
+</code></pre>
+
+<p>fontSize의 유닛을 구함(px, em)</p>
+
+<pre><code>var unit        = currentSize.slice(-2);
+</code></pre>
+
+<p>현재 클릭된 버튼의 아이디를 확인하여 숫자연산 후
+css에 fontSize 적용</p>
+
+<pre><code>if (this.id == 'switcher-large') {
+  num *= 1.4;
+} else if (this.id == 'switcher-small') {
+  num /= 1.4;
+}
+$speech.css('fontSize', num + unit);
+</code></pre>
+
+<figure class='code'><figcaption><span>css-part </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('div.button').click(function() {
+</span><span class='line'>  var $speech     = $('div.speech');
+</span><span class='line'>  var currentSize = $speech.css('fontSize');
+</span><span class='line'>  var num         = parseFloat(currentSize, 10);
+</span><span class='line'>  var unit        = currentSize.slice(-2);
+</span><span class='line'>
+</span><span class='line'>  if (this.id == 'switcher-large') {
+</span><span class='line'>    num *= 1.4;
+</span><span class='line'>  } else if (this.id == 'switcher-small') {
+</span><span class='line'>    num /= 1.4;
+</span><span class='line'>  }
+</span><span class='line'>  $speech.css('fontSize', num + unit);
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>hide와 show</h2>
+
+<p>jQuery 효과에 속도를 지정할때는 &#8216;slow&#8217;, &#8216;normal&#8217;, &#8216;fast&#8217;(각각 0.6, 0.4 0.2초)를 지정할수 있으며
+밀리초 단위의 시간을 조정할수 있다(근데 난 차이를 모르겠다..)</p>
+
+<pre><code>$('document).ready(function() {
+  $('div.speech p:eq(1)').hide();
+  $('span.more').click(function() {
+$('div.sppech p:eq(1)').show();
+$(this).hide();
+  });
+});
+</code></pre>
+
+<p>show는 .animate()메서드의 약식 메서드이다.</p>
+
+<pre><code>$(document).ready(function() {
+  $('p:eq(1)').hide();
+  $('span.more').click(function() {
+$('p:eq(1)').animate({height: 'show', width: 'show', opactity: 'show'}, 'slow');
+$(this).hide();
+  });
+});
+</code></pre>
+
+<h2>사용자형 애니메이션 생성하기</h2>
+
+<p>버튼의 높이를 키우면서 이동, 이동이 멈추면 크기 고정</p>
+
+<pre><code>$(document).ready(function() {
+  $('div.label').click(function() {
+$('div.butoon').animate({left: 650, height: 38}, 'slow');
+  });
+});
+</code></pre>
+
+<h2>숫자 이해하기</h2>
+
+<p>height의 38값인 이유는 우리가 버튼을 50으로 만들기 위해서 이다.
+css에 padding은 5px, border는 1px 로 정의 하였으므로 top + bottom값을
+더한후(12) 50 - 12 = 38값이 나오게 되었다.</p>
+
+<h2>CSS로 위치 변경</h2>
+
+<p>.animate()를 사용하여 작업할때 CSS속성이 relative 또는 absolute로 설정 되어있어야 한다
+모든 블록 요소가 가지는 CSS position 속성은 static이다.</p>
+
+<h2>버튼의 너비 계산</h2>
+
+<p>버튼의 넓이와 패딩 보더 넓이를 모두 구하여 더해준후 div.speech p의 넓이에 맞추어서
+값을 구하였다. 그렇게 함으로써 글자 오른쪽 모서리에 맞춤이 이루어 진다.</p>
+
+<pre><code>$(document).ready(function() {
+  $('div.label').click(function() {
+  var paraWidth        = $('div.speech p').width();
+  var $button          = $('div.button');
+  var buttonWidth      = $button.width();
+  var paddingRight     = $button.css('paddingRight');
+  var paddingLeft      = $button.css('paddingLeft');
+  var borderRightWidth = $button.css('borderRightWidth');
+  var borderLeftWidth  = $button.css('borderLeftWidth');
+
+  //총너비 연산
+  var totalButtonWidth =
+  parseInt(buttonWidth, 10) +
+  parseInt(paddingRight, 10) +
+  parseInt(paddingLeft, 10) +
+  parseInt(borderRightWidth, 10) +
+  parseInt(borderLeftWidth, 10);
+  var rightSide = paraWidth - totalButtonWiidth;
+  $button.animate({left: rightSide, height: 38}, 'slow');
+  });
+});
+</code></pre>
+
+<h2>동시효과</h2>
+
+<p>불투명해짐과 배경색이 동시에 변경되며 이동을 한후 불투명도가 들어오고 사라지게 된다</p>
+
+<pre><code>$('div.label').click(function() {
+  $('div.button')
+  .fadeTo('slow', 0.5)
+  .animate({left: 650}, 'slow')
+  .fadeTo('slow', 1.0)
+  .css('backgroundColor', '#f00')
+  .slideUP('slow');
+});
+</code></pre>
+
+<h2>연속효과</h2>
+
+<p>버튼을 클릭 하게 되면 투명해지고 이동한다. 그리고 투명도를 다시 돌리고나서
+배경색을 변경한다. 그리고 사라진다 이게 연속적으로 이루어 지게 되어있다.
+콜백을 이용하여 효과들이 모두 진행된 후에 그 다음 순서로 배경색을 바꾸는
+비효과 메서드를 적용 하였다.</p>
+
+<pre><code>$('div.label').click(function() {
+  $('div.button')
+  .fadeTo('slow', 0.5)
+  .animate({left: 650}, 'slow')
+  .fadeTo('slow', 1.0, function() {
+$(this).css('backgroundColor', '#f00')
+  }).slideUP('slow');
+});
+</code></pre>
+
+<h2>다중 효과</h2>
+
+<pre><code>$('div.speech p:eq(3)').css('backgroundColor', '#fcf').hide();
+$('div.speech p:eq(2)').css('backgroundColor', '#cff').click(function() {
+  var $thisPar = $(this)
+  $(this).next().slideDown('slow', function() {
+$thisPar.slideUp('slow');
+  });
+});
+</code></pre>
+
+<h2>Command action</h2>
+
+<ul>
+<li><p>fadeIn()과 fadeOut(): 불투명도(opacity)</p>
+
+<p><strong>fadeOut(speed, callback)</strong></p>
+
+<p>일치하는 엘리먼트 중 드러난 엘리먼트의 불투명도 0%로 줄여가면서 화면에서 제거한다. 불투명
+도가 변경되는 지속시간은 speed 매개변수에 따라 변한다. 이미 감춰진 엘리먼트는 영향을 받지 않
+는다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>speed</p>
+
+<p>(Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
+
+<p>가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
+
+<p>callback</p>
+
+<p>(Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
+받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p></li>
+<li><p>fadeTo: 불투명도(opacity)</p>
+
+<p><strong>fadeOut(speed, opacity, callback)</strong></p>
+
+<p>확장 엘리먼트의 불투명도를 현재의 러정 값에서 opacity 매개변수 값으로 설정한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>speed</p>
+
+<p>(Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
+
+<p>가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
+
+<p>opacity (Number)</p>
+
+<p>(Number) 0.0에서 1.0 사이의 값으로 엘리먼트에 적용될 불투명도 값</p>
+
+<p>callback</p>
+
+<p>(Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
+받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p></li>
+<li><p>slideDown()과 slideUp(): 높이(height)</p>
+
+<p><strong>slideDown(speed, callback)</strong></p>
+
+<p>감춰진 모든 일치하는 엘리먼트가 높이 값이 증가하면서 나타난다. 드러나 잇는 엘리먼트는
+영향을 받지 않는다</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>speed</p>
+
+<p>(Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
+
+<p>  가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
+
+<p>callback</p>
+
+<p>  (Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
+  받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p>
+
+<p><strong>slideDown(speed, callback)</strong></p>
+
+<p>감춰진 모든 일치하는 엘리먼트가 점차적으로 높이 값이 감소하면서 화면에서 제거된다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>speed</p>
+
+<p>  (Numbe|String)효과의 지속 시간을 1/1000초 단위의 숫자 또는 미리 정의된 문자열 slow, normal, fast</p>
+
+<p>  가운데 하나로 명시한다. 생략되면 기본값인 normal을 이용한다.</p>
+
+<p>callback</p>
+
+<p>  (Function) 선택사항으로 애니메이션이 완료된 뒤 호출되는 함수다. 이 함수는 어떤 매개변수도
+  받지 않는다. 하지만 애니메이션이 수행되는 엘리먼트가 함수 콘텍스트인 this로 설정된다.</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/11/learn-jquery-3jang/">Learn jQuery 3장</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-11T18:17:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/11/learn-jquery-3jang/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Source</h2>
+
+<p><a href="https://gist.github.com/2909211">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2909213">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2909224">예제 js  </a></p>
+
+<h2>본문 - 이벤트 트리거 사용하는 방법</h2>
+
+<h2>button click event</h2>
+
+<p>페이지 시작시 노말페이지로 보이도록 모든 클래스를 해제한다.
+removeClass()는 다른 파악되지 않은 Class까지 해제 하지만 현재 예제
+코드 에서는 생각치 않도록 쓴다.</p>
+
+<pre><code>$('body').removeClass();
+</code></pre>
+
+<p>현재 버튼이 클릭된 id값을 확인하여 일치 하였을경우
+클래스를 추가 하도록 한다.</p>
+
+<pre><code>if (this.id == 'switcher-narrow') {
+  $('body').addClass('narrow');
+}
+else if (this.id == 'switcher-large') {
+  $('body').addClass('large');
+}
+</code></pre>
+
+<p>강조되는 글씨를 표현하기 위해 우선 클래스를 해제하고
+현재 버튼에 클래스를 추가 해준다.</p>
+
+<pre><code>$('#switcher .button').removeClass('selected');
+$(this).addClass('selected');
+</code></pre>
+
+<p>이벤트 객체 사용시 버블링을 중단 하기 위해 다음과 같이 추가해 준다.
+(버블링을 추가안해줄시 노말 버튼 클릭시에도 버튼칸이 사라지게 된다.)</p>
+
+<pre><code>event.stopPropagation();
+</code></pre>
+
+<p>부분 코드</p>
+
+<figure class='code'><figcaption><span>부분코드 - 01 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').click(function(event) {
+</span><span class='line'>  $('body').removeClass();
+</span><span class='line'>
+</span><span class='line'>  if (this.id == 'switcher-narrow') {
+</span><span class='line'>    $('body').addClass('narrow');
+</span><span class='line'>  }
+</span><span class='line'>  else if (this.id == 'switcher-large') {
+</span><span class='line'>    $('body').addClass('large');
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  $('#switcher .button').removeClass('selected');
+</span><span class='line'>  $(this).addClass('selected');
+</span><span class='line'>
+</span><span class='line'>  event.stopPropagation();
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>버튼 강조하기</h2>
+
+<p>버튼에 hover(마우스 가져다 대면) 띠면(체인으로) hover삭제</p>
+
+<p>부분 코드</p>
+
+<figure class='code'><figcaption><span>부분코드 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').hover(function() {
+</span><span class='line'>    $(this).addClass('hover');
+</span><span class='line'>    }, function() {
+</span><span class='line'>      $(this).removeClass('hover');
+</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>이벤트 핸들러</h2>
+
+<p>핸들러를 나중에 다시 사용할 수 있도록 핸들러 함수에 이름을 부여</p>
+
+<pre><code>var toggleStyleSwitcher = function() {
+  $('switcher .button').toggleClass('hidden');
+};
+</code></pre>
+
+<p>핸들러를 활성화 시켜준다.</p>
+
+<pre><code>$('#switcher').click(toggleStyleSwitcher);
+</code></pre>
+
+<p>노말 상태에서만 토글 기능 활성화</p>
+
+<pre><code>$('switcher-normal').click(function() {
+  $('#switcher').click(toggleStyleSwitcher);
+});
+
+$('#switcher-narrow, #switcher-large').click(function() {
+  $('#switcher').unbind('click', toggleStyleSwitcher);
+});
+</code></pre>
+
+<p>시작시 접힘 기능(인자를 지정하지 않는경우 히벤트에 해당하는 행위를 발생시킴)</p>
+
+<pre><code>$('#switcher').click();
+</code></pre>
+
+<h2>Command action</h2>
+
+<p><strong>unbind(event Type, listener)</strong></p>
+
+<p><strong>unbind(event)</strong></p>
+
+<p>확장 집합의 모든 엘리먼트에서 전달된 매개변수에 따라 핸들러를 선택적으로 제거한다.</p>
+
+<p>매개변수를 제공하지 않으면 엘리먼트의 모든 리스터를 제거한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>  <strong>eventType</strong></p>
+
+<pre><code>   (String)매개변수를 제공하면 지정된 이벤트 타입에 할당된 리스너만 제거한다.
+</code></pre>
+
+<p>  <strong>listener</strong></p>
+
+<pre><code>  (Function)매개변수를 제공하면 지정된 리스너와 동일한 것만 제거한다.
+</code></pre>
+
+<p>  <strong>eventType</strong></p>
+
+<pre><code>  (Event) Event 인스턴스의 정보로 알 수 있는 이벤트가 발생했을 대 호출될 리스너를
+  제거한다
+</code></pre>
+
+<p><strong>반환값</strong></p>
+
+<p>확장 집합</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/11/lear-jquery-2jang-02/">Lear jQuery 2장-02</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-11T14:26:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/11/lear-jquery-2jang-02/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Source</h2>
+
+<p><a href="https://gist.github.com/2908591">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2908588">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2908628">예제 js  </a></p>
+
+<h2>본문 - 테이블행에 징검다리 색깔 입히기</h2>
+
+<h2>사용자 정의 선택자</h2>
+
+<p>class명 horizontal를 가진 div 집합의 두번째 항목 선택
+$(&#8216;div.horizontal:eq(1)&#8217;)
+두번째 항목이 1인 이유는 자바스크립트 배열에서 인덱스는
+0에서 부터 시작 하며 jQuery또한 마찬가지이다.
+단, css는 1을 기반으로 한다.</p>
+
+<p>헤더 행 스타일 입히기</p>
+
+<pre><code>$('th').addClass('table-heading');
+//&lt;th class=table-heading'&gt;
+</code></pre>
+
+<p>odd,even 색 입히기</p>
+
+<pre><code>$('tr:not(:has(th)):even').addClass('even');
+$('tr:not(:has(th)):odd').addClass('odd');
+//odd와 even의 색 정의는 css에 정의 되어있다.
+</code></pre>
+
+<p>테이블에서 특정단어 포함 셀만 강조</p>
+
+<pre><code>$('td:contains("Henry")').addClass('highlight');
+//td에 Henry 단어가 포함 된열 강조
+// highlight의 색 정의는 .css에 정의 되어있다.
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아낸후 모든 하위레벨에 클래스 추가</p>
+
+<pre><code>$('td:contains("Henry")').siblings().addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 부모를 찾아 인덱스가 0보다 큰셀들을(0은 최상 부모) 순회하면 클래스추가</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td:gt(0)').addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아 부모를 찾고 그 안의 모든 셀을 찾은후 Henry를 포함한 셀을
+필터링한후 클래스추가(Henry만 적용을 하지 않음)</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td').not(':contains('Henry")')).addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함하고 있는 셀을 찾아낸 후에 그것의 부모를 얻어와서 자식들 중에 두번째 셀을
+찾아서 클래스를 추가하고 가장 최근의 .find()를 취소한 후에 다시 자식들 중에서 세 번째 셀을
+찾아서 클래스를 추가한다.</p>
+
+<pre><code>$('td:contains("Henry")') //Henry셀을 찾고
+.parent()  //부모를 찾아서
+.find('td:eq(1)') //부모의 두번째 셀을 찾아
+.addClass('highlight') //강조 하고(클래스 추가)
+.end() // 다시 부모로 돌아와
+.find('td:eq(2)') // 세번째를 찾아서
+.addClass('highlight'); //강조 한다(클래스 추가)
+</code></pre>
+
+<h2>Command Action</h2>
+
+<p><strong>addClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에 추가한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p>반환값 - 확장집합</p>
+
+<hr />
+
+<p><strong>removeClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에서 삭제한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p>
+
+<hr />
+
+<p><strong>siblings()</strong></p>
+
+<p>확장 엘리먼트의 모든 형제를포함 하는 확장 집합을 반환</p>
+
+<hr />
+
+<p><strong>find(selector)</strong></p>
+
+<p>  원본의 모든 엘리먼트 중 전달된 셀렉터 표현식과 일치하는 엘리먼트로 구성된 새로운 확장 집합
+  을 반환한다. 확장 집합에 포함된 엘리먼트의 자손 엘리먼트도 전달된 표현식과 일치하는지 평가</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>selector (String) 반환될 집합의 일부가 될 엘리먼트가 일치하는 셀렉터</p>
+
+<p><strong>반환값</strong></p>
+
+<p>새로 생성된 확장 집합</p>
+
+<p>변수 wrappedSet에 할당된 확장 집합에서 p문단 인용문(&gt;cite&lt; 엘리먼트)로 구성된 확장 집합은
+두가지로 표현 된다</p>
+
+<pre><code>wrappedSet.find('p cite')
+$('p cite', wrappedSet)
+</code></pre>
+
+<hr />
+
+<p><strong>parent()</strong></p>
+
+<p>  확장 집합 내에 있는 모든 확장 엘리먼트의 바로 위 부모로 구성된 확장 집합을 반환한다.</p>
+
+<p><strong>parents()</strong></p>
+
+<p>  모든 확장 엘리먼트의 조상으로 구성된 확장 집합을 반환한다. 바로 위 부모와
+  상위의 모든 소상이 포함 되지만 문서 루트(document root)는 포함 되지 않는다(?)</p>
+
+<hr />
+
+<p><strong>end()</strong></p>
+
+<p>  jQuery 커맨드 체인에서 사용하며 이전 확장 집합으로 돌아간다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>  없음</p>
+
+<p><strong>반환값</strong></p>
+
+<p>이전 확장 집합</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -581,212 +1285,6 @@ siblings()
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/18/meadow/">Meadow</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-18T19:37:00+09:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/18/meadow/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>[잡담]
-매일 매일 똑같은 모듈만 만지작 거리니까
-진사마가 Furl을 사용해 보라고 권하였다..
-그래도 빨리 하나 써서 주어야 하니까 그건 다음에..
-크리스마스때&#8230;!!?</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/15/php/">PHP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-15T13:02:00+09:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/15/php/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>str_split_unicode(), mb_strlen, mb_substr</h3>
-
-<p>한글 3줄 개행제한 및 10자 자르기 코드</p>
-
-<figure class='code'><figcaption><span>split_word.php </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?</span>
-</span><span class='line'><span class="nv">$Val1</span>     <span class="o">=</span> <span class="s2">&quot;가나다라마바사아아아아아</span><span class="se">\n</span><span class="s2">아자차카야제커거</span><span class="se">\n</span><span class="s2">미나다가라서여&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$word</span>     <span class="o">=</span> <span class="nb">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nv">$Val1</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$arr_cnt</span>  <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$word</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$full_arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$arr_cnt</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$str</span> <span class="o">=</span> <span class="nx">str_split_unicode</span><span class="p">(</span><span class="nv">$word</span><span class="p">[</span><span class="nv">$i</span><span class="p">],</span> <span class="mi">10</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$full_arr</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$full_arr</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">((</span><span class="k">array</span><span class="p">)</span><span class="nv">$full_arr</span><span class="p">,</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span><span class="nv">$str</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$full_arr</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">((</span><span class="k">array</span><span class="p">)</span><span class="nv">$str</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$full_arr</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="s2">&quot;Error&quot;</span><span class="o">.</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">exit</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nv">$full_arr</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span> <span class="nf">str_split_unicode</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$ret</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>  <span class="nv">$len</span> <span class="o">=</span> <span class="nb">mb_strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$len</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">+=</span> <span class="nv">$l</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$ret</span><span class="p">[]</span> <span class="o">=</span> <span class="nb">mb_substr</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$i</span><span class="p">,</span> <span class="nv">$l</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/14/meadow/">Meadow</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-14T15:15:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/14/meadow/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>[잡담]</h2>
-
-<ol>
-<li>카탈 시작 정리(carton install 좀 까먹지마&#8230;)</li>
-<li>MYSQL 유저 추가</li>
-<li>MYSQL Dump 하는법</li>
-</ol>
-
-
-<p>뭔가 블로그질을 하려면 똑바로 하고 싶은데 똑바로 하려면
-엄청나게  시간이 들가고 짧게 짧게 가자..</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -804,15 +1302,15 @@ siblings()
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/07/24/templet-br/">Templet_br</a>
+        <a href="/blog/2012/09/11/catalyst-test-code/">Catalyst-test-code</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a>
+        <a href="/blog/2012/07/25/export-csv/">export_csv</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/07/23/don-release/">Don release</a>
+        <a href="/blog/2012/07/25/db-password-hash/">DB_Password_Hash</a>
       </li>
     
   </ul>

@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>export_csv - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="목차 CSV 출력 준비
+View 생성 CSV 출력 준비 선택된 내역을 출력 하기 위한 버튼을 추가한다. root/templates/bootstrap/src/deposit/index.tt 1 &lt;a class="btn btn-primary" id="do_export &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/07/25/export-csv/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Export_csv</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-25T19:01:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>목차</p>
+
+<ol>
+<li>CSV 출력 준비</li>
+<li>View 생성</li>
+</ol>
+
+
+<h3>CSV 출력 준비</h3>
+
+<p>선택된 내역을 출력 하기 위한 버튼을 추가한다.</p>
+
+<p>root/templates/bootstrap/src/deposit/index.tt</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;a class="btn btn-primary" id="do_export"&gt;출력&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>선택된 내역 js처리</p>
+
+<p>root/static/scripts/list.js</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $('#do_export').click(function() {
+</span><span class='line'>    var selected_charges = [];
+</span><span class='line'>
+</span><span class='line'>    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+</span><span class='line'>      if($(this).attr('id') !== undefined)
+</span><span class='line'>        selected_charges.push($(this).attr('id'))
+</span><span class='line'>    });
+</span><span class='line'>
+</span><span class='line'>    location.href = '/deposit/export/' + selected_charges;
+</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sil/Web/Don/Controller/Deposit.pm</p>
+
+<p>선택된 승인 내역을 CSV로 출력하기 위하여
+모듈 - <a href="https://metacpan.org/module/Catalyst::View::Download::CSV">Catalyst::View::Download::CSV</a>을 사용 하였습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sub export :Local CaptureArgs(1) {
+</span><span class='line'>    my ( $self, $c, $id ) = @_;
+</span><span class='line'>    my @target_ids = split ',', $id;
+</span><span class='line'>    
+</span><span class='line'>    my @charges;
+</span><span class='line'>    
+</span><span class='line'>    push @charges, ['제목', '청구자', '금액', '영수증날짜'];
+</span><span class='line'>    
+</span><span class='line'>    foreach my $charge($c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({id =&gt; { -in =&gt; \@target_ids }})-&gt;all) {
+</span><span class='line'>        push @charges, [ $charge-&gt;title, $charge-&gt;user-&gt;user_name, $charge-&gt;amount, $charge-&gt;usage_date];
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    if (@charges) {
+</span><span class='line'>        $c-&gt;stash-&gt;{'csv'} = { 'data' =&gt; [ @charges ] };
+</span><span class='line'>        $c-&gt;flash-&gt;{messages} = 'Success Exported.';
+</span><span class='line'>
+</span><span class='line'>    } else {
+</span><span class='line'>        $c-&gt;flash-&gt;{messages} = 'Export Failed.';
+</span><span class='line'>    }
+</span><span class='line'>    $c-&gt;forward('Sil::Web::Don::View::Download::CSV');
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>View 생성</h2>
+
+<p>View는 script_web_don_create view로 생성한다.</p>
+
+<p>list/Sil/Web/Don/View/Download/CSV.pm을 생성 완료.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package Sil::Web::Don::View::Download::CSV;
+</span><span class='line'>use Moose;
+</span><span class='line'>use namespace::autoclean;
+</span><span class='line'>
+</span><span class='line'>extends 'Catalyst::View::Download::CSV';
+</span><span class='line'>
+</span><span class='line'>=head1 NAME
+</span><span class='line'>
+</span><span class='line'>Sil::Web::Don::View::Download::CSV - Catalyst View
+</span><span class='line'>
+</span><span class='line'>=head1 DESCRIPTION
+</span><span class='line'>
+</span><span class='line'>Catalyst View.
+</span><span class='line'>
+</span><span class='line'>=head1 AUTHOR
+</span><span class='line'>
+</span><span class='line'>ja3ck
+</span><span class='line'>
+</span><span class='line'>=head1 LICENSE
+</span><span class='line'>
+</span><span class='line'>This library is free software. You can redistribute it and/or modify
+</span><span class='line'>it under the same terms as Perl itself.
+</span><span class='line'>
+</span><span class='line'>=cut
+</span><span class='line'>
+</span><span class='line'>__PACKAGE__-&gt;meta-&gt;make_immutable;
+</span><span class='line'>
+</span><span class='line'>1;</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-25T19:01:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cataylst/'>Cataylst</a>, <a class='category' href='/blog/categories/perl/'>Perl</a>, <a class='category' href='/blog/categories/export-csv/'>export_csv</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/07/25/export-csv/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/07/25/export-csv/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/25/db-password-hash/" title="Previous Post: DB_Password_Hash">&laquo; DB_Password_Hash</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/09/11/catalyst-test-code/" title="Next Post: Catalyst-test-code">Catalyst-test-code &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/11/catalyst-test-code/">Catalyst-test-code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/25/export-csv/">export_csv</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/25/db-password-hash/">DB_Password_Hash</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/07/25/export-csv/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/07/25/export-csv/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
