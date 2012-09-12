@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Catalyst | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/catalyst/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-09-11T20:43:08+09:00</updated>
+  <updated>2012-09-12T13:35:39+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -47,6 +47,21 @@
 <p><a href="https://metacpan.org/module/CGI::Simple::Cookie">CGI::Simple::Cookie</a></p>
 
 <p>로그인 인증 관련 세션 처리를 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/HTTP::Cookies">HTTP::Cookies</a></p>
+
+<p>CGI::Simple::Cookie로 쿠키 관련 재설정이 반복 되며 번거로울때
+파일로 저장하여 사용할수 있다.</p>
+
+<pre><code>## 첫번째 t 파일에서 login 하고 cookie 를 저장해둔다. pull/109설명중.
+my $cookies = HTTP::Cookies-&gt;new(file =&gt; 't/.cookies');
+# res &amp; res
+$cookies-&gt;extract_cookies($res);
+$cookies-&gt;save;
+
+## 다른 t 파일에서는..
+my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_string))[1];
+</code></pre>
 ]]></content>
   </entry>
   
