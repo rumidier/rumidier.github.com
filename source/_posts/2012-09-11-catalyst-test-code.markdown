@@ -35,3 +35,17 @@ Get POST 등을 구현 할수 있습니다.
 [CGI::Simple::Cookie](https://metacpan.org/module/CGI::Simple::Cookie)
 
 로그인 인증 관련 세션 처리를 할수 있습니다.
+
+[HTTP::Cookies](https://metacpan.org/module/HTTP::Cookies)
+
+CGI::Simple::Cookie로 쿠키 관련 재설정이 반복 되며 번거로울때
+파일로 저장하여 사용할수 있다.
+
+    ## 첫번째 t 파일에서 login 하고 cookie 를 저장해둔다. pull/109설명중.
+    my $cookies = HTTP::Cookies->new(file => 't/.cookies');
+    # res & res
+    $cookies->extract_cookies($res);
+    $cookies->save;
+    
+    ## 다른 t 파일에서는..
+    my $cookies = (split(/:/, HTTP::Cookies->new(file => 't/.cookies')->as_string))[1];
