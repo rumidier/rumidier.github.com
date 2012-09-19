@@ -5,12 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>DB_Password_Hash - Meadows of wild horses</title>
+  <title>month-split - Meadows of wild horses</title>
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="DB Password HASH DBIx::Class::EncodedColumn 기본 입력값 입력시 sha(&#8216;password&#8217;)사용 하여 암호화 할수 있도록 한다. 1
-INSERT INTO `user` VALUES (2,'rum_user',' &hellip;">
+  <meta name="description" content="user의 아이디를 가지고 elapsed_at 의 내용을 가져 오게 된다
+이 값은 2012-09-09 21:00:00 형식으로 되어 있으며
+2012 와 09 를 기준으로 값을 따로 가지게 하여년도별 월 횟수를나타나게
+해주었다 하지만 필요 없어 지움&#8230; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@ INSERT INTO `user` VALUES (2,'rum_user',' &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rumidier.github.com/blog/2012/07/25/db-password-hash/">
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/09/18/month-split/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +70,7 @@ INSERT INTO `user` VALUES (2,'rum_user',' &hellip;">
   
   <header>
     
-      <h1 class="entry-title">DB_Password_Hash</h1>
+      <h1 class="entry-title">Month-split</h1>
     
     
       <p class="meta">
@@ -84,7 +86,7 @@ INSERT INTO `user` VALUES (2,'rum_user',' &hellip;">
   
 
 
-<time datetime="2012-07-25T16:41:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
+<time datetime="2012-09-18T15:30:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,59 +95,87 @@ INSERT INTO `user` VALUES (2,'rum_user',' &hellip;">
   </header>
 
 
-<div class="entry-content"><h2>DB Password HASH</h2>
+<div class="entry-content"><p>user의 아이디를 가지고 elapsed_at 의 내용을 가져 오게 된다
+이 값은 2012-09-09 21:00:00 형식으로 되어 있으며
+2012 와 09 를 기준으로 값을 따로 가지게 하여년도별 월 횟수를나타나게
+해주었다 하지만 필요 없어 지움&#8230;</p>
 
-<p><a href="https://metacpan.org/module/DBIx::Class::EncodedColumn">DBIx::Class::EncodedColumn</a></p>
+<p>controll</p>
 
-<p>기본 입력값 입력시 sha(&#8216;password&#8217;)사용 하여 암호화 할수 있도록 한다.</p>
+<pre><code>$cond = {} if %$cond;
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>INSERT INTO `user` VALUES (2,'rum_user','rum_user@mail.com',sha('Password'),localtime ,localtime);</span></code></pre></td></tr></table></div></figure>
+my $user_id;
+if ($id) {
+    $user_id = $user_info-&gt;id;
+}
+else {
+    $user_id = $c-&gt;user-&gt;id;
+}
 
+$cond-&gt;{'me.user_id'} = $user_id;
 
-<p>MyWeb::ResultBase.pm에 EncodedColumn 추가하여 준다.</p>
+my %attr            = ( 'order_by' =&gt; { -desc =&gt; 'me.elapsed_at' } );
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>__PACKAGE__-&gt;load_components(qw/
-</span><span class='line'>    EncodedColumn
-</span><span class='line'>    InflateColumn::DateTime
-</span><span class='line'>    TimeStamp
-</span><span class='line'>/);</span></code></pre></td></tr></table></div></figure>
+my $activity_search = $c-&gt;model('BikeMeDB')-&gt;resultset('Activity')-&gt;search($cond, \%attr);
+my $activities      = [ $activity_search-&gt;all ];
+my $activity_data   = {};
 
+for my $activity (@{ $activities }) {
+    my $year;
+    my $month;
 
-<p><a href="https://metacpan.org/module/Catalyst::Plugin::Authentication">Catalyst::Plugin::Authentication</a></p>
+    my $elapsed = $activity-&gt;elapsed_at;
+    $year       = $activity-&gt;elapsed_at-&gt;year;
+    $month      = $activity-&gt;elapsed_at-&gt;month;
 
-<p>my_web.conf 파일에 플러그인 설정 추가
-pawword_type 설정시 디폴트로 SHA-1이 적용되지만
-명시적으로 password_hash_type을 정의 하여 준다.</p>
+    my @split_elapsed = split('-', $activity-&gt;elapsed_at, 3);
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;Plugin::Authentication&gt;
-</span><span class='line'>    &lt;default&gt;
-</span><span class='line'>        password_type      hashed
-</span><span class='line'>        password_hash_type SHA-1
-</span><span class='line'>        user_model         DonDB::User
-</span><span class='line'>        class              SimpleDB
-</span><span class='line'>    &lt;/default&gt;
-</span><span class='line'>&lt;/Plugin::Authentication&gt;</span></code></pre></td></tr></table></div></figure>
+    $activity_data-&gt;{$split_elapsed[0]}{$split_elapsed[1]}++;
+}
 
+my $year  = $c-&gt;req-&gt;params-&gt;{year};
+my $month = $c-&gt;req-&gt;params-&gt;{month};
 
-<h3>설정 추가 참고 자료</h3>
+my $max_year  = '00000';
+my $max_month = '00';
 
-<p><a href="https://metacpan.org/module/Catalyst::Authentication::Credential::Password">Catalyst::Authentication::Credential::Password</a></p>
+if ($year &amp;&amp; $month) {
+    $max_year  = $year;
+    $max_month = $month;
+}
+else {
+    foreach my $year (keys %$activity_data) {
+        if ($year gt $max_year) {
+            $max_year = $year;
+        }
+        else {
+            $max_month = '00';
+            last;
+        }
 
-<p><a href="https://metacpan.org/module/Digest#new">Digest</a></p>
+        foreach my $month (keys $activity_data-&gt;{$year}) {
+            $max_month = $month if $month gt $max_month;
+        }
+    }
+}
+
+$cond = {} if %$cond;
+$cond-&gt;{'me.user_id'} = $user_id;
+$cond-&gt;{'me.elapsed_at'} = { 'like', "%"."$max_year"."-"."$max_month"."%" };
+
+$activity_search = $c-&gt;model('BikeMeDB')-&gt;resultset('Activity')-&gt;search($cond, \%attr);
+</code></pre>
+
+<p>view - 년-월</p>
+
+<pre><code>[% FOEACH year IN activity_data.keys.reverse %]
+    [% FOREACH month IN activity_data.$year.keys.sort.reverse %]
+  &lt;div class="btn"&gt;
+    &lt;a href="[% c.uri_for('/activities') %]?year=[% year %]&amp;month=[% month %]" class="btn btn-primary"&gt;[% year %]-[% month %] ([% activity_data.$year.$month %])&lt;/a&gt;
+&lt;/div&gt;
+    [% END %]
+[% END %]
+</code></pre>
 </div>
 
 
@@ -168,12 +198,12 @@ pawword_type 설정시 디폴트로 SHA-1이 적용되지만
   
 
 
-<time datetime="2012-07-25T16:41:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
+<time datetime="2012-09-18T15:30:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/catalyst/'>Catalyst</a>, <a class='category' href='/blog/categories/password/'>Password</a>, <a class='category' href='/blog/categories/perl/'>Perl</a>
+    <a class='category' href='/blog/categories/perl/'>Perl</a>, <a class='category' href='/blog/categories/bikeme/'>bikeme</a>, <a class='category' href='/blog/categories/catalyst/'>catalyst</a>
   
 </span>
 
@@ -182,7 +212,7 @@ pawword_type 설정시 디폴트로 SHA-1이 적용되지만
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/07/25/db-password-hash/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/07/25/db-password-hash/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/09/18/month-split/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/09/18/month-split/" >Tweet</a>
   
   
   
@@ -191,10 +221,8 @@ pawword_type 설정시 디폴트로 SHA-1이 적용되지만
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/07/24/templet-br/" title="Previous Post: Templet_br">&laquo; Templet_br</a>
+        <a class="basic-alignment left" href="/blog/2012/09/11/catalyst-test-code/" title="Previous Post: Catalyst-test-code">&laquo; Catalyst-test-code</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/07/25/export-csv/" title="Next Post: export_csv">export_csv &raquo;</a>
       
     </p>
   </footer>
@@ -298,8 +326,8 @@ pawword_type 설정시 디폴트로 SHA-1이 적용되지만
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rumidier.github.com/blog/2012/07/25/db-password-hash/';
-        var disqus_url = 'http://rumidier.github.com/blog/2012/07/25/db-password-hash/';
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/09/18/month-split/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/09/18/month-split/';
         var disqus_script = 'embed.js';
       
     (function () {

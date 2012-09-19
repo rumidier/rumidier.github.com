@@ -4,7 +4,7 @@
   <title><![CDATA[Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-09-12T13:35:39+09:00</updated>
+  <updated>2012-09-18T15:37:45+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -12,6 +12,95 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[month-split]]></title>
+    <link href="http://rumidier.github.com/blog/2012/09/18/month-split/"/>
+    <updated>2012-09-18T15:30:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/09/18/month-split</id>
+    <content type="html"><![CDATA[<p>user의 아이디를 가지고 elapsed_at 의 내용을 가져 오게 된다
+이 값은 2012-09-09 21:00:00 형식으로 되어 있으며
+2012 와 09 를 기준으로 값을 따로 가지게 하여년도별 월 횟수를나타나게
+해주었다 하지만 필요 없어 지움&#8230;</p>
+
+<p>controll</p>
+
+<pre><code>$cond = {} if %$cond;
+
+my $user_id;
+if ($id) {
+    $user_id = $user_info-&gt;id;
+}
+else {
+    $user_id = $c-&gt;user-&gt;id;
+}
+
+$cond-&gt;{'me.user_id'} = $user_id;
+
+my %attr            = ( 'order_by' =&gt; { -desc =&gt; 'me.elapsed_at' } );
+
+my $activity_search = $c-&gt;model('BikeMeDB')-&gt;resultset('Activity')-&gt;search($cond, \%attr);
+my $activities      = [ $activity_search-&gt;all ];
+my $activity_data   = {};
+
+for my $activity (@{ $activities }) {
+    my $year;
+    my $month;
+
+    my $elapsed = $activity-&gt;elapsed_at;
+    $year       = $activity-&gt;elapsed_at-&gt;year;
+    $month      = $activity-&gt;elapsed_at-&gt;month;
+
+    my @split_elapsed = split('-', $activity-&gt;elapsed_at, 3);
+
+    $activity_data-&gt;{$split_elapsed[0]}{$split_elapsed[1]}++;
+}
+
+my $year  = $c-&gt;req-&gt;params-&gt;{year};
+my $month = $c-&gt;req-&gt;params-&gt;{month};
+
+my $max_year  = '00000';
+my $max_month = '00';
+
+if ($year &amp;&amp; $month) {
+    $max_year  = $year;
+    $max_month = $month;
+}
+else {
+    foreach my $year (keys %$activity_data) {
+        if ($year gt $max_year) {
+            $max_year = $year;
+        }
+        else {
+            $max_month = '00';
+            last;
+        }
+
+        foreach my $month (keys $activity_data-&gt;{$year}) {
+            $max_month = $month if $month gt $max_month;
+        }
+    }
+}
+
+$cond = {} if %$cond;
+$cond-&gt;{'me.user_id'} = $user_id;
+$cond-&gt;{'me.elapsed_at'} = { 'like', "%"."$max_year"."-"."$max_month"."%" };
+
+$activity_search = $c-&gt;model('BikeMeDB')-&gt;resultset('Activity')-&gt;search($cond, \%attr);
+</code></pre>
+
+<p>view - 년-월</p>
+
+<pre><code>[% FOEACH year IN activity_data.keys.reverse %]
+    [% FOREACH month IN activity_data.$year.keys.sort.reverse %]
+  &lt;div class="btn"&gt;
+    &lt;a href="[% c.uri_for('/activities') %]?year=[% year %]&amp;month=[% month %]" class="btn btn-primary"&gt;[% year %]-[% month %] ([% activity_data.$year.$month %])&lt;/a&gt;
+&lt;/div&gt;
+    [% END %]
+[% END %]
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Catalyst-test-code]]></title>
@@ -2088,68 +2177,6 @@ carton.lock
 프로젝트마다 손으로 복사합니다.</p>
 
 <p>https://gist.github.com/2761721</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learn jQuery 5장]]></title>
-    <link href="http://rumidier.github.com/blog/2012/06/13/learn-jquery-5jang/"/>
-    <updated>2012-06-13T17:29:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/06/13/learn-jquery-5jang</id>
-    <content type="html"><![CDATA[<h2>Source</h2>
-
-<p><a href="https://gist.github.com/2922803">예제.html</a></p>
-
-<p><a href="https://gist.github.com/2922807">예제 css </a></p>
-
-<p><a href="https://gist.github.com/2922804">예제 js  </a></p>
-
-<h2>본문</h2>
-
-<h2>속성 추가하기</h2>
-
-<p>id속성값을 개별적으로 attr()으로 적용 해주기 위해 each()를 사용하여 적용하여 주고 있다.
-index는 0부터 시작하여 증가한다.</p>
-
-<pre><code>$(document).ready(function() {
-  $('div.chapter a[href*=wikipedia]').each(function(index) {
-var $thisLink = $(this);
-$(this).attr({
-  'rel': 'external',
-  'id': 'wikilink-' + index,
-  'title': $thisLink.text() + '에 대한 자세한 정보는 위키 피디아에 있습니다.'
-});
-  });
-});
-</code></pre>
-
-<h2>앵커 삽입</h2>
-
-<p>앵커 위치를 정하기 위해 body에 prependTo()로 삽입한다.
-앵커 버튼이 굳이 다 있을 필요는 없고 화면 밖에 존재 부터 하기 위해
-p:gt(4) 5번째(0부터 시작) 문단 부터 적용 시킨다</p>
-
-<pre><code>$('&lt;a href="#top"&gt;맨 앞으로 돌아가기&lt;/a&gt;').insertAfter('div.chapter p:gt(4)');
-$('&lt;a id="top" name="top"&gt;&lt;/a&gt;').prependTo('body');
-</code></pre>
-
-<h2>주석 표시, 숫자 부여, 컨텍스트 연결</h2>
-
-<p>챕터가 끝난지점 후에 리스트 목록인 &gt;ol&lt;만들어준다.
-클래스가 footnote</p>
-
-<pre><code>$('&lt;ol id="notes"&gt;&lt;/ol&gt;').insertAfter('div.chapter');
-$('span.footnote').each(function(index) {
-  $(this).before('&lt;a href="#foot-note-' + (index+1) +
-'" id="context-' + (index+1) + '" class="context"&gt;&lt;sup&gt;'
-+ (index+1) + '&lt;/sup&gt;&lt;/a&gt;')
-  .appendTo('#notes')
-  .append( '&amp;nbsp;(&lt;a href="#context-' + (index+1) + '"&gt;context &lt;/a&gt;)' )
-  .wrap('&lt;li id="foot-note-' + (index+1) + '"&gt;&lt;/li&gt;');
-});
-</code></pre>
-
-<h2>Command Action</h2>
 ]]></content>
   </entry>
   
