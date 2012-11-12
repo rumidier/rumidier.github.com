@@ -9,11 +9,10 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="정규 표현식 특수 문자 |문자|의미 |
-|----|---------------------------------------------------|
-|^ |한 줄의 시작을 뜻하는 앵커(anchor) |
-|$ |한 줄의 끝을 뜻하는 앵커 |
-|. |임의의 문자 하나 &hellip;">
+  <meta name="description" content="출력 재지정 $ cjpeg image.gif &gt; image.jpg 실습 #!/bin/sh
+for image in * .gif
+do cjpeg $image &gt; ${image%%gif}jpg
+done ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,178 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/25/cjpeg/">Cjpeg</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-25T18:05:00+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/25/cjpeg/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>출력 재지정</p>
+
+<pre><code>$ cjpeg image.gif &gt; image.jpg
+</code></pre>
+
+<p>실습</p>
+
+<pre><code>#!/bin/sh
+for image in * .gif
+do
+  cjpeg $image &gt; ${image%%gif}jpg
+done
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/25/param/">Param</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-25T17:43:00+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/25/param/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>매개변수 치환 구문</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>매개변수 치환 구문</th>
+<th>결과                                                                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>${param:-default} </td>
+<td>param이 널이면 default의 값                                         |</td>
+</tr>
+<tr>
+<td></td>
+<td>${#param}         </td>
+<td>param의 길이                                                        |</td>
+</tr>
+<tr>
+<td></td>
+<td>${param%word}     </td>
+<td>param의 끝에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분  |</td>
+</tr>
+<tr>
+<td></td>
+<td>${param%%word}    </td>
+<td>param의 끝에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분    |</td>
+</tr>
+<tr>
+<td></td>
+<td>${param#word}     </td>
+<td>param의 시작에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분|</td>
+</tr>
+<tr>
+<td></td>
+<td>${param##word}    </td>
+<td>param의 시작에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분  |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>실습-매개변수 처리</p>
+
+<figure class='code'><figcaption><span>shell</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</span><span class='line'>
+</span><span class='line'>unset foo
+</span><span class='line'>echo ${foo:-bar}
+</span><span class='line'>
+</span><span class='line'>foo=fud
+</span><span class='line'>
+</span><span class='line'>echo ${foo:-bar}
+</span><span class='line'>foo=/usr/bin/X11/startx
+</span><span class='line'>echo ${foo#*/}
+</span><span class='line'>echo ${foo##*/}
+</span><span class='line'>
+</span><span class='line'>bar=/usr/local/etc/local/networks
+</span><span class='line'>echo ${bar%local*}
+</span><span class='line'>echo ${bar%%%local*}
+</span><span class='line'>
+</span><span class='line'>exit 0</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -740,15 +911,15 @@ key      : key 조합 (^컨트롤)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/24/net-twitter/">Net::Twitter</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/09/18/month-split/">month-split</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/11/catalyst-test-code/">Catalyst-test-code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/25/export-csv/">export_csv</a>
       </li>
     
   </ul>
