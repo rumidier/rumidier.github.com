@@ -9,9 +9,9 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="메서드 childeren() 확장 엘리먼트의 고유한 자식으로 구성된 확장 집합을 반환한다.
-contents() 확장 집합에서 엘리먼트의 콘텐츠로 구성된 확장 집합을 반환한다. 여기에는
-텍스트 노드도 포함되며 주로 &amp;lt;iframe&amp;gt;엘리먼트의 &hellip;">
+  <meta name="description" content="3장 요약 .bind()나 .click()를 사용하여 사용자의 클릭을 반응하는 코드로 페이지 스타일 변경 가능
+클릭되는 요소가 무엇이냐에 따라서 서로다른 동작들을 수행하기 위한 이벤트 컨텍스트
+를 사용함. 거기에다 하나의 핸들러가 여러 요소에 연결되는 경우도 알아봄 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,56 @@ contents() 확장 집합에서 엘리먼트의 콘텐츠로 구성된 확장 집
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/24/learn-jquery/">Learn jQuery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-24T12:49:00+09:00" pubdate data-updated="true">May 24<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/24/learn-jquery/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>3장 요약</h2>
+
+<ul>
+<li>.bind()나 .click()를 사용하여 사용자의 클릭을 반응하는 코드로 페이지 스타일 변경 가능</li>
+<li>클릭되는 요소가 무엇이냐에 따라서 서로다른 동작들을 수행하기 위한 이벤트 컨텍스트
+를 사용함. 거기에다 하나의 핸들러가 여러 요소에 연결되는 경우도 알아봄</li>
+<li>.toggle()를 사용하여 페이지의 요소를 펼치거나 접을 수 있음</li>
+<li>.hover()를 사용하여 마우스 커서 위치에 있는 요소를 강조</li>
+<li>.stopPropagation(), preventDefault()를 이용하여 이벤트에 응답해야 하는 요소를 선별</li>
+<li>이벤트 핸들러를 제거하기 위해 .unbind()를 호출</li>
+<li>.trigger()를 사용하여 실행하고 싶은 이벤트 핸들러와 연결</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -749,54 +799,6 @@ a-z, A-Z를 사용가능 하며 소문자는 한개만 대문자는 기존에 �
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/29/vim-r/">Vim: :r</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T22:21:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/12/29/vim-r/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>다른 파일 포함하기 :r</h3>
-
-<p>:r foo.txt</p>
-
-<pre><code>현재 파일 위치밑에 foo.txt의 내용을 복사한다
-</code></pre>
-
-<p>:r!ls -F</p>
-
-<pre><code>ls의 표준 출력이 복사 되어진다.
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -814,15 +816,15 @@ a-z, A-Z를 사용가능 하며 소문자는 한개만 대문자는 기존에 �
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/14/less-start/">Less-Start</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/09/24/net-twitter/">Net::Twitter</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/18/month-split/">month-split</a>
       </li>
     
   </ul>

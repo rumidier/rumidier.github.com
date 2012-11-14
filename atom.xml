@@ -4,7 +4,7 @@
   <title><![CDATA[Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-12T12:24:18+09:00</updated>
+  <updated>2012-11-14T17:47:41+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Less-Start]]></title>
+    <link href="http://rumidier.github.com/blog/2012/11/14/less-start/"/>
+    <updated>2012-11-14T17:37:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/11/14/less-start</id>
+    <content type="html"><![CDATA[<h2>LESS - The Dynamic Stylesheet language</h2>
+
+<h2>사용 환경</h2>
+
+<hr />
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:   MacBookPro8,1</li>
+<li>프로세서 이름:   Intel Core i5</li>
+<li>프로세서 속도:  2.3 GHz</li>
+<li>메모리:           4 GB</li>
+<li>기타: homebrew, iTerm</li>
+</ul>
+
+
+<h2>Less 설치</h2>
+
+<hr />
+
+<h3>Less 공식 사이트</h3>
+
+<p><a href="http://lesscss.org/#usage">Less - Site</a></p>
+
+<h3>npm - Less 설치를 위한 package manager</h3>
+
+<p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
+
+<h3>설치</h3>
+
+<pre><code>$ npm install -g less
+</code></pre>
+
+<h2>Less 사용방법</h2>
+
+<hr />
+
+<ol>
+<li><p>Less-Start</p>
+
+<pre><code>$ mkdir Less-Start
+$ cd Less-Start
+$ touch style.less
+</code></pre></li>
+<li><p>style.less 작성</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span>style.less  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'>  <span class="k">@color</span><span class="o">:</span> <span class="nf">#4D926F</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nf">#header</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="o">@</span><span class="k">color</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nt">h2</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="o">@</span><span class="k">color</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>.less -> .css 미리보기</p>
+
+<pre><code>$ lessc styles.less
+
+#header {
+  color: #6cc4be;
+}
+</code></pre></li>
+<li><p>.less -> .css 변환하기</p>
+
+<pre><code>$ lessc styles.less -&gt; styles.css
+$ ls
+
+styles.less styles css
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sublime text2 vim mode]]></title>
@@ -1801,98 +1895,6 @@ say POSIX::strftime('%Y-%m-%d %H:%M:%S', localtime);
 
 say "DateTime";
 say DateTime-&gt;now( time_zone =&gt; 'local' )-&gt;strftime('%Y-%m-%d %H:%M:%S');
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[catalyst]]></title>
-    <link href="http://rumidier.github.com/blog/2012/06/19/catalyst/"/>
-    <updated>2012-06-19T17:31:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/06/19/catalyst</id>
-    <content type="html"><![CDATA[<h2>/list/write.tt 페이지</h2>
-
-<p><a href="https://gist.github.com/2953030">write.tt</a></p>
-
-<h2>form action</h2>
-
-<pre><code>&lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt;
-</code></pre>
-
-<h2>direction setting</h2>
-
-<pre><code>&lt;td colspan=10 align=center&gt;
-  &lt;input type=submit class="btn btn-primary" value="글 저장하기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;input type=reset class="btn btn-primary" value="다시 쓰기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-&lt;/td&gt;
-</code></pre>
-
-<h2>list -> write</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub write :Local :Args(0) {
-my ( $self, $c ) = @_;
-
-if ($c-&gt;req-&gt;method eq 'POST') {
-    my %row = (
-    name    =&gt; $c-&gt;req-&gt;params-&gt;{name},
-    title   =&gt; $c-&gt;req-&gt;params-&gt;{title},
-    content =&gt; $c-&gt;req-&gt;params-&gt;{content},
-    );
-    $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;update_or_create(\%row);
-    $c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
-}
-}
-</code></pre>
-
-<h2>/list/view.tt 페이지</h2>
-
-<p><a href="https://gist.github.com/2953088">view.tt</a></p>
-
-<h2>인자 출력</h2>
-
-<pre><code>// 제목
-&lt;tr&gt;
-  &lt;td height=20 colspan=4 align=center bgcolor=#999999&gt;
-&lt;font color=white&gt;&lt;b&gt;[% users.title %]&lt;/b&gt;&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-
-// 이름
-&lt;tr&gt;
-  &lt;td width=50 height=20 align=center bgcolor=#EEEEEE&gt;글쓴이&lt;/td&gt;
-  &lt;td width=240 bgcolor=white&gt;[% users.name %]&lt;/td&gt;
-&lt;/tr&gt;
-
-// 내용
-&lt;tr&gt;
-  &lt;td bgcolor=white colspan=4 style="table-layout:fixed;"&gt;
-&lt;font color=black&gt;
-  [% users.content %]
-&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
-
-<h2>list page redirect</h2>
-
-<pre><code>&lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-</code></pre>
-
-<h2>list -> view</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub view :Local :CaptureArgs(1) {
-my ( $self, $c, $user_id) = @_;
-
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;find($user_id);
-$c-&gt;stash-&gt;{users} = $rs;
-}
 </code></pre>
 ]]></content>
   </entry>

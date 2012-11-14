@@ -9,10 +9,7 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="출력 재지정 $ cjpeg image.gif &gt; image.jpg 실습 #!/bin/sh
-for image in * .gif
-do cjpeg $image &gt; ${image%%gif}jpg
-done ">
+  <meta name="description" content="다른 파일 포함하기 :r :r foo.txt 현재 파일 위치밑에 foo.txt의 내용을 복사한다 :r!ls -F ls의 표준 출력이 복사 되어진다. ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +64,54 @@ done ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/29/vim-r/">Vim: :r</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-29T22:21:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/12/29/vim-r/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>다른 파일 포함하기 :r</h3>
+
+<p>:r foo.txt</p>
+
+<pre><code>현재 파일 위치밑에 foo.txt의 내용을 복사한다
+</code></pre>
+
+<p>:r!ls -F</p>
+
+<pre><code>ls의 표준 출력이 복사 되어진다.
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -911,15 +956,15 @@ key      : key 조합 (^컨트롤)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/14/less-start/">Less-Start</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/09/24/net-twitter/">Net::Twitter</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/18/month-split/">month-split</a>
       </li>
     
   </ul>

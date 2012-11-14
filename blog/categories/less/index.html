@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Catalyst-test-code - Meadows of wild horses</title>
+  <title>Category: Less - Meadows of wild horses</title>
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Web - Catalyst Test Code 작성 Catalyst로 웹을 구축 하던중 테스트 코드를 작성을 부여 받았습니다. 테스트 코드를 진행 하기 위한 모듈을 적습니다. 모듈 Test::More 기본 적이 펄 테스트 코드 문법을 확인 할수 있습니다. &hellip;">
+  <meta name="description" content="Category: Less">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rumidier.github.com/blog/2012/09/11/catalyst-test-code/">
+  <link rel="canonical" href="http://rumidier.github.comblog/categories/less/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,138 +63,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Catalyst-test-code</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-11T18:46:00+09:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Less</h1>
     
   </header>
-
-
-<div class="entry-content"><h2>Web - Catalyst Test Code 작성</h2>
-
-<p>Catalyst로 웹을 구축 하던중 테스트 코드를 작성을 부여 받았습니다. 테스트 코드를 진행 하기 위한 모듈을 적습니다.</p>
-
-<h2>모듈</h2>
-
-<p><a href="https://metacpan.org/module/Test::More">Test::More</a></p>
-
-<p>기본 적이 펄 테스트 코드 문법을 확인 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/Catalyst::Test#res-request-...-">Catalyst::Test</a></p>
-
-<p>content, response 페이지 정보를 얻어 올수 있습니다.</p>
-
-<p><a href="ihttps://metacpan.org/module/HTTP::Response">HTTP::Response</a></p>
-
-<p>response 정보등을 확인 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/URI">URI</a></p>
-
-<p>response 정보등을 확인 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/HTTP::Request::Common">HTTP::Request::Common</a></p>
-
-<p>Get POST 등을 구현 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/CGI::Simple::Cookie">CGI::Simple::Cookie</a></p>
-
-<p>로그인 인증 관련 세션 처리를 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/HTTP::Cookies">HTTP::Cookies</a></p>
-
-<p>CGI::Simple::Cookie로 쿠키 관련 재설정이 반복 되며 번거로울때
-파일로 저장하여 사용할수 있다.</p>
-
-<pre><code>## 첫번째 t 파일에서 login 하고 cookie 를 저장해둔다. pull/109설명중.
-my $cookies = HTTP::Cookies-&gt;new(file =&gt; 't/.cookies');
-# res &amp; res
-$cookies-&gt;extract_cookies($res);
-$cookies-&gt;save;
-
-## 다른 t 파일에서는..
-my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_string))[1];
-</code></pre>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2012</h2>
+
+<article>
+  
+<h1><a href="/blog/2012/11/14/less-start/">Less-Start</a></h1>
+<time datetime="2012-11-14T17:37:00+09:00" pubdate><span class='month'>Nov</span> <span class='day'>14</span> <span class='year'>2012</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/less/'>Less</a></span>
+</footer>
 
 
-<time datetime="2012-09-11T18:46:00+09:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/catalyst/'>Catalyst</a>, <a class='category' href='/blog/categories/perl/'>Perl</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/09/11/catalyst-test-code/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/09/11/catalyst-test-code/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/07/25/export-csv/" title="Previous Post: export_csv">&laquo; export_csv</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/09/18/month-split/" title="Next Post: month-split">month-split &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -287,10 +185,7 @@ my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_
       var disqus_shortname = 'rumidier';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://rumidier.github.com/blog/2012/09/11/catalyst-test-code/';
-        var disqus_url = 'http://rumidier.github.com/blog/2012/09/11/catalyst-test-code/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
