@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Less | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/less/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-14T17:47:41+09:00</updated>
+  <updated>2012-11-14T17:52:06+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -22,8 +22,6 @@
 
 <h2>사용 환경</h2>
 
-<hr />
-
 <ul>
 <li>모델명    :     MacBook Pro</li>
 <li>모델 식별자:   MacBookPro8,1</li>
@@ -35,8 +33,6 @@
 
 
 <h2>Less 설치</h2>
-
-<hr />
 
 <h3>Less 공식 사이트</h3>
 
@@ -53,17 +49,15 @@
 
 <h2>Less 사용방법</h2>
 
-<hr />
-
-<ol>
+<ul>
 <li><p>Less-Start</p>
 
-<pre><code>$ mkdir Less-Start
-$ cd Less-Start
-$ touch style.less
+<pre><code> $ mkdir Less-Start
+ $ cd Less-Start
+ $ touch style.less
 </code></pre></li>
 <li><p>style.less 작성</p></li>
-</ol>
+</ul>
 
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>style.less  </span></figcaption>
@@ -97,23 +91,23 @@ $ touch style.less
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<ol>
+<ul>
 <li><p>.less -> .css 미리보기</p>
 
-<pre><code>$ lessc styles.less
+<pre><code> $ lessc styles.less
 
-#header {
-  color: #6cc4be;
-}
+ #header {
+   color: #6cc4be;
+ }
 </code></pre></li>
 <li><p>.less -> .css 변환하기</p>
 
-<pre><code>$ lessc styles.less -&gt; styles.css
-$ ls
+<pre><code> $ lessc styles.less &gt; styles.css
+ $ ls
 
-styles.less styles css
+ styles.less styles css
 </code></pre></li>
-</ol>
+</ul>
 
 ]]></content>
   </entry>
