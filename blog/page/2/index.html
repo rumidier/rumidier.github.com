@@ -9,9 +9,13 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Action - approval, refuse approval refuse Approval은 청구 목록에 대하여 승인 기능을
-refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다. 승인 기능은 두가지 상황에서 선택 할수 있게 된다.
-/list/view/ &hellip;">
+  <meta name="description" content="Donnenwa Open DNS 요구
+Apache2 설정
+supervisior 설정
+확인 DNS 요구 도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
+브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨) Apache2 설정 1
+2
+3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +70,133 @@ refuse는 청구 목렉에 대하여 거부 기능을 가지게 된다. 승인 �
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/23/don-release/">Don Release</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-23T18:49:00+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/23/don-release/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Donnenwa Open</h2>
+
+<ol>
+<li>DNS 요구</li>
+<li>Apache2 설정</li>
+<li>supervisior 설정</li>
+<li>확인</li>
+</ol>
+
+
+<h3>DNS 요구</h3>
+
+<p>도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
+브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨)</p>
+
+<h3>Apache2 설정</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh rumidier@bu….접속
+</span><span class='line'>$ cd /etc/apache2/
+</span><span class='line'>$ cd sites-available
+</span><span class='line'>$ vi user.site.kr (작성)
+</span><span class='line'>$ cd ../
+</span><span class='line'>$ cd sites-enable
+</span><span class='line'>$ ln -s 타킷-경로
+</span><span class='line'>$ ~/etc/init.d/apache2 restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>supervisior 설정</h3>
+
+<p>슈퍼 바이저는 서버가 죽었다 다시 살아 났을시 수동이 아닌 자동으로 서버를 뛰워주기 위해 필요한 기능이다.</p>
+
+<p>돈내놔는 carton을 사용하고 plackup으로 뛰우며 플라넥스와는 다르게 worker의 갯수가 존재 하지 않는다. 포트 설정은 아파치에서 해준 포트를 명시 해준후 디렉토리와 유저, 환경 등록을 해주면 끝이 난다.
+환경경로는 carton과 plackup 경로도 알아야 하는거 같다(이 부분은 설명이 더 필요)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /etc
+</span><span class='line'>$ vi supervisord.conf
+</span><span class='line'>
+</span><span class='line'>[program:Donnenwa] 
+</span><span class='line'>command=/usr/local/bin/carton exec -Ilib -- /home/USER Donnenwa/local/bin/plackup -Ilib -a /home/USER/Donnenwa
+</span><span class='line'>app.psgi --host 127.0.0.1 --port You_port(ex:3000)  
+</span><span class='line'>directory=/home/User/Donnenwa 
+</span><span class='line'>user=USER 
+</span><span class='line'>environment=PATH=/usr/local/bin:/usr/bin:/bin,HOME=/home/USER
+</span><span class='line'>stdout_logfile=/home/USER/logs/stdout 
+</span><span class='line'>stderr_logfile=/home/USER/logs/stderr 
+</span><span class='line'>
+</span><span class='line'>$ sudo supervisorctl
+</span><span class='line'>supervisor&gt; status
+</span><span class='line'>….
+</span><span class='line'>supervisor&gt; update
+</span><span class='line'>supervisor&gt; exit
+</span><span class='line'>$ 서버 실행 확인 끝</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>더 물어 봐야 할것</h3>
+
+<ol>
+<li>supervisor의 셋팅을 무엇을 참조 하는가?</li>
+<li>도메인 등록은 어떻게 하는가?</li>
+<li>apach2 설정은 어떻게 하는가?</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1344,124 +1475,6 @@ mysql_enable_utf8  =&gt; 1,
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/25/catalyst/">Catalyst</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-25T19:11:00+09:00" pubdate data-updated="true">Jun 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/25/catalyst/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Error message</h2>
-
-<p>기존에 사용되던 myweb.conf 파일의
-ERROR 500.tt 메세지로 인해 에러 메세지가 제대로 보이지 않아
-삭제 했습니다.</p>
-
-<pre><code>$ vi myweb.conf
-ERROR 500.tt 삭제
-</code></pre>
-
-<h2>Makefile.PL 모듈 추가</h2>
-
-<pre><code>$ vi Makefile.PL
-require DateTime::Format::MYSQL
-</code></pre>
-
-<h2>DB 날짜 입력</h2>
-
-<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
-
-<p>등록시 날짜 생성을 위해 POSIX모듈을 사용합니다. 현재시간에</p>
-
-<p>형식을 DB와 같이  &#8220;%Y-%m-%d% %H:%M:%S&#8221; 만들어 입력합니다.</p>
-
-<pre><code>sub write :Local :Args(0) {
-...
-use POSIX qw(strftime);
-
-my $time = strftime "%Y-%m-%d% %H:%M:%S", localtime;
-my %row = (
-applicant  =&gt; $c-&gt;req-&gt;params-&gt;{applicant},
-title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
-content    =&gt; $c-&gt;req-&gt;params-&gt;{content},
-created_on =&gt; "$time",
-updated_on =&gt; "$time",
-);
-...
-</code></pre>
-
-<h2>list 페이지 쿼리문 수정</h2>
-
-<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
-
-<p>생성될 날짜순으로 출력하기 위한 쿼리문 작성
-search의 첫번째 인자는 where문으로써 무시 하기 위해서는 빈 해쉬레퍼를 줍니다.</p>
-
-<pre><code>sub index :Path :Args(0) {
-...
-my $opt  = { 'order_by' =&gt; { -desc =&gt; 'me.created_on' } };
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({}, $opt);
-...
-</code></pre>
-
-<h2>list.tt, list/view.tt 페이지 수정</h2>
-
-<p>root/templates/bootstrap/src/list/index.tt
-root/templates/bootstrap/src/list/view.tt</p>
-
-<p>날짜 0000-00-00 형식으로 출력 지정</p>
-
-<pre><code>&lt;td align=center height=20 bgcolor=white&gt;[% list.created_on.ymd %]
-</code></pre>
-
-<h2>기타</h2>
-
-<p>날짜 관련 예제</p>
-
-<pre><code>#!/usr/bin/env perl 
-
-use 5.010;
-use strict;
-use warnings;
-use POSIX qw(strftime);
-use DateTime;
-
-say "POSOX";
-say POSIX::strftime('%Y-%m-%d %H:%M:%S', localtime);
-
-say "DateTime";
-say DateTime-&gt;now( time_zone =&gt; 'local' )-&gt;strftime('%Y-%m-%d %H:%M:%S');
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1479,15 +1492,15 @@ say DateTime-&gt;now( time_zone =&gt; 'local' )-&gt;strftime('%Y-%m-%d %H:%M:%S'
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/15/sass-start/">Sass-Start</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/14/less-start/">Less-Start</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/24/net-twitter/">Net::Twitter</a>
       </li>
     
   </ul>

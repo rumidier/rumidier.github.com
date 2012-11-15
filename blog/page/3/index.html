@@ -9,7 +9,10 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="/list/write.tt 페이지 write.tt form action &lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt; direction setting &lt;td colspan=10 align= &hellip;">
+  <meta name="description" content="Error message 기존에 사용되던 myweb.conf 파일의
+ERROR 500.tt 메세지로 인해 에러 메세지가 제대로 보이지 않아
+삭제 했습니다. $ vi myweb.conf
+ERROR 500.tt 삭제 Makefile.PL 모듈 추가 $ vi &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +67,124 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/25/catalyst/">Catalyst</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-25T19:11:00+09:00" pubdate data-updated="true">Jun 25<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/25/catalyst/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Error message</h2>
+
+<p>기존에 사용되던 myweb.conf 파일의
+ERROR 500.tt 메세지로 인해 에러 메세지가 제대로 보이지 않아
+삭제 했습니다.</p>
+
+<pre><code>$ vi myweb.conf
+ERROR 500.tt 삭제
+</code></pre>
+
+<h2>Makefile.PL 모듈 추가</h2>
+
+<pre><code>$ vi Makefile.PL
+require DateTime::Format::MYSQL
+</code></pre>
+
+<h2>DB 날짜 입력</h2>
+
+<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
+
+<p>등록시 날짜 생성을 위해 POSIX모듈을 사용합니다. 현재시간에</p>
+
+<p>형식을 DB와 같이  &#8220;%Y-%m-%d% %H:%M:%S&#8221; 만들어 입력합니다.</p>
+
+<pre><code>sub write :Local :Args(0) {
+...
+use POSIX qw(strftime);
+
+my $time = strftime "%Y-%m-%d% %H:%M:%S", localtime;
+my %row = (
+applicant  =&gt; $c-&gt;req-&gt;params-&gt;{applicant},
+title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
+content    =&gt; $c-&gt;req-&gt;params-&gt;{content},
+created_on =&gt; "$time",
+updated_on =&gt; "$time",
+);
+...
+</code></pre>
+
+<h2>list 페이지 쿼리문 수정</h2>
+
+<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
+
+<p>생성될 날짜순으로 출력하기 위한 쿼리문 작성
+search의 첫번째 인자는 where문으로써 무시 하기 위해서는 빈 해쉬레퍼를 줍니다.</p>
+
+<pre><code>sub index :Path :Args(0) {
+...
+my $opt  = { 'order_by' =&gt; { -desc =&gt; 'me.created_on' } };
+my $rs = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({}, $opt);
+...
+</code></pre>
+
+<h2>list.tt, list/view.tt 페이지 수정</h2>
+
+<p>root/templates/bootstrap/src/list/index.tt
+root/templates/bootstrap/src/list/view.tt</p>
+
+<p>날짜 0000-00-00 형식으로 출력 지정</p>
+
+<pre><code>&lt;td align=center height=20 bgcolor=white&gt;[% list.created_on.ymd %]
+</code></pre>
+
+<h2>기타</h2>
+
+<p>날짜 관련 예제</p>
+
+<pre><code>#!/usr/bin/env perl 
+
+use 5.010;
+use strict;
+use warnings;
+use POSIX qw(strftime);
+use DateTime;
+
+say "POSOX";
+say POSIX::strftime('%Y-%m-%d %H:%M:%S', localtime);
+
+say "DateTime";
+say DateTime-&gt;now( time_zone =&gt; 'local' )-&gt;strftime('%Y-%m-%d %H:%M:%S');
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1504,122 +1625,6 @@ $('p cite', wrappedSet)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/25/perl/">Perl</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-25T17:28:00+09:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/25/perl/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>목록으로 부터 중복된 값 제거</h3>
-
-<h3>해결 방안</h3>
-
-<p>hash를 이용하여 목록에 존재하는 각 값을 한번만 저장하고, keys 함수를
-이용하여 이를 활용하면 된다. 이때, 프로그래머는 코드를 보다 짧고 빠르게
-해주는 펄의 다양한 아이디어를 적용할 수 있다.</p>
-
-<h2>일반적인 방법</h2>
-
-<p>해쉬값을 체크하고 값이 존재 하지 않는다면 배열을 생성한다.</p>
-
-<figure class='code'><figcaption><span>uniq값 구하기 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>my %seen = ();
-</span><span class='line'>my @uniq = ();
-</span><span class='line'>foreach my $item (@list) {
-</span><span class='line'>    unless ($seen{$item}) {
-</span><span class='line'>        # 한번도 나타 나지 않은 값에 대해서만 처리
-</span><span class='line'>  $seen{$item} = 1;
-</span><span class='line'>  push(@uniq, $item);
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>좀더 빠른 처리 방법 - 01</h2>
-
-<p>이전에 나타내는 값이 없는 값을 처리할 경우 이를 해쉬에 저장 하게 된다 (++연산자는 카운팅 기능)</p>
-
-<figure class='code'><figcaption><span>uniq값 구하기 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>my %seen = ();
-</span><span class='line'>my @uniq = ();
-</span><span class='line'>foreach my $item (@list) {
-</span><span class='line'>    push @uniq, $item unless $seen{$item}++;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>좀더 빠른 처리 방법 - 02</h2>
-
-<p>해쉬에 저장 하고 그 키값 만은 추출 한다. (순서가 뒤죽박죽이다)</p>
-
-<figure class='code'><figcaption><span>uniq값 구하기 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>my %seen = ();
-</span><span class='line'>foreach my $item (@list) {
-</span><span class='line'>    $seen{$item}++;
-</span><span class='line'>}
-</span><span class='line'>my @uniq = keys %seen;</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>좀더 빠른 처리 방법 - 03</h2>
-
-<figure class='code'><figcaption><span>uniq값 구하기 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>my %seen = ();
-</span><span class='line'>my @uniq = grep { ! $seen{$_}++ } @list;</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>exam-code</h2>
-
-<p>https://gist.github.com/2786790</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1637,15 +1642,15 @@ $('p cite', wrappedSet)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/15/sass-start/">Sass-Start</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/14/less-start/">Less-Start</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/24/net-twitter/">Net::Twitter</a>
       </li>
     
   </ul>

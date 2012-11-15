@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>catalyst - Meadows of wild horses</title>
+  <title>Meadows of wild horses</title>
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="/list/write.tt 페이지 write.tt form action &lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt; direction setting &lt;td colspan=10 align= &hellip;">
+  <meta name="description" content="Hi!! rumidier
+blog
+Hi! HaHaHa ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rumidier.github.com/blog/2012/06/19/catalyst/">
+  <link rel="canonical" href="http://rumidier.github.com/blog/page/6/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,12 +64,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Catalyst</h1>
+      <h1 class="entry-title"><a href="/blog/2011/11/14/new-blog/">New Blog</a></h1>
     
     
       <p class="meta">
@@ -83,161 +88,38 @@
   
 
 
-<time datetime="2012-06-19T17:31:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2011-11-14T18:59:00+09:00" pubdate data-updated="true">Nov 14<span>th</span>, 2011</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/blog/2011/11/14/new-blog/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>/list/write.tt 페이지</h2>
+  <div class="entry-content"><h1>Hi!!</h1>
 
-<p><a href="https://gist.github.com/2953030">write.tt</a></p>
+<ul>
+<li>rumidier</li>
+<li>blog</li>
+<li>Hi! HaHaHa</li>
+</ul>
 
-<h2>form action</h2>
-
-<pre><code>&lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt;
-</code></pre>
-
-<h2>direction setting</h2>
-
-<pre><code>&lt;td colspan=10 align=center&gt;
-  &lt;input type=submit class="btn btn-primary" value="글 저장하기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;input type=reset class="btn btn-primary" value="다시 쓰기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-&lt;/td&gt;
-</code></pre>
-
-<h2>list -> write</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub write :Local :Args(0) {
-my ( $self, $c ) = @_;
-
-if ($c-&gt;req-&gt;method eq 'POST') {
-    my %row = (
-    name    =&gt; $c-&gt;req-&gt;params-&gt;{name},
-    title   =&gt; $c-&gt;req-&gt;params-&gt;{title},
-    content =&gt; $c-&gt;req-&gt;params-&gt;{content},
-    );
-    $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;update_or_create(\%row);
-    $c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
-}
-}
-</code></pre>
-
-<h2>/list/view.tt 페이지</h2>
-
-<p><a href="https://gist.github.com/2953088">view.tt</a></p>
-
-<h2>인자 출력</h2>
-
-<pre><code>// 제목
-&lt;tr&gt;
-  &lt;td height=20 colspan=4 align=center bgcolor=#999999&gt;
-&lt;font color=white&gt;&lt;b&gt;[% users.title %]&lt;/b&gt;&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-
-// 이름
-&lt;tr&gt;
-  &lt;td width=50 height=20 align=center bgcolor=#EEEEEE&gt;글쓴이&lt;/td&gt;
-  &lt;td width=240 bgcolor=white&gt;[% users.name %]&lt;/td&gt;
-&lt;/tr&gt;
-
-// 내용
-&lt;tr&gt;
-  &lt;td bgcolor=white colspan=4 style="table-layout:fixed;"&gt;
-&lt;font color=black&gt;
-  [% users.content %]
-&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
-
-<h2>list page redirect</h2>
-
-<pre><code>&lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-</code></pre>
-
-<h2>list -> view</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub view :Local :CaptureArgs(1) {
-my ( $self, $c, $user_id) = @_;
-
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;find($user_id);
-$c-&gt;stash-&gt;{users} = $rs;
-}
-</code></pre>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2012-06-19T17:31:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/catalyst/'>catalyst</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/06/19/catalyst/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/06/19/catalyst/" >Tweet</a>
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/06/18/catalyst/" title="Previous Post: catalyst">&laquo; catalyst</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/06/25/catalyst/" title="Next Post: catalyst">catalyst &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/blog/page/5/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -262,7 +144,7 @@ $c-&gt;stash-&gt;{users} = $rs;
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/rumidier">@rumidier</a> on GitHub
@@ -292,7 +174,7 @@ $c-&gt;stash-&gt;{users} = $rs;
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -312,7 +194,6 @@ $c-&gt;stash-&gt;{users} = $rs;
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -327,10 +208,7 @@ $c-&gt;stash-&gt;{users} = $rs;
       var disqus_shortname = 'rumidier';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://rumidier.github.com/blog/2012/06/19/catalyst/';
-        var disqus_url = 'http://rumidier.github.com/blog/2012/06/19/catalyst/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

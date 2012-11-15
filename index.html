@@ -9,12 +9,12 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="LESS - The Dynamic Stylesheet language 사용 환경 모델명 : MacBook Pro
+  <meta name="description" content="ass - Syntactically Awesome Stylesheets 사용 환경 모델명 : MacBook Pro
 모델 식별자: MacBookPro8,1
 프로세서 이름: Intel Core i5
 프로세서 속도: 2.3 GHz
 메모리: 4 GB
-기타: homebrew, &hellip;">
+기타: homebrew &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,143 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/11/15/sass-start/">Sass-Start</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-15T16:40:00+09:00" pubdate data-updated="true">Nov 15<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/15/sass-start/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ass - Syntactically Awesome Stylesheets</p>
+
+<h2>사용 환경</h2>
+
+<hr />
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:   MacBookPro8,1</li>
+<li>프로세서 이름:   Intel Core i5</li>
+<li>프로세서 속도:  2.3 GHz</li>
+<li>메모리:           4 GB</li>
+<li>기타: homebrew, iTerm</li>
+</ul>
+
+
+<h2>Sass 설치</h2>
+
+<hr />
+
+<h3>Sass 공식 사이트</h3>
+
+<p><a href="http://sass-lang.com/docs.html">Sass 사이트</a></p>
+
+<h3>gem - Sass 설치를 위한 패키지 매니저</h3>
+
+<p>gem을 사용하기 위해서는 Ruby가 설치되어 있어야 합니다.
+<a href="http://octopress.org/docs/setup/rvm/">gem 설치가이드</a></p>
+
+<h3>gem - RVM 설치</h3>
+
+<pre><code>$ curl -L https://get.rvm.io | bash -s stable --ruby
+</code></pre>
+
+<h3>gem - Ruby 설치</h3>
+
+<pre><code>$ rvm install 1.9.3
+$ rvm use 1.9.3
+$ rvm rubygems latest
+</code></pre>
+
+<h3>Sass 설치</h3>
+
+<p>RVM과 Ruby가 잘 설치 되었다면 이상없이 sass가 설치 될것입니다.</p>
+
+<pre><code>$ gem install sass
+</code></pre>
+
+<h2>Sass 사용방법</h2>
+
+<ul>
+<li><p>Sass 따라 해보기</p>
+
+<p>  폴더를 생성하여 style.scss 파일을 생성하여 본다.</p>
+
+<pre><code> $ mkdir Sass-Start
+ $ cd Sass-Start
+ $ touch style.scss
+</code></pre></li>
+<li><p>style.scss 파일 작성</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>style.scss  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.fakeshadow</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="n">style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">left</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>      <span class="k">width</span><span class="o">:</span> <span class="m">4px</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">color</span><span class="o">:</span> <span class="m">#888</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nt">right</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">color</span><span class="o">:</span> <span class="m">#ccc</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>.scss -> .css 변환하기</li>
+</ul>
+
+
+<p>작성된 .scss 파일을 .css 파일로 변환하여야 합니다.</p>
+
+<pre><code>$ sass --watch style.scss:style.css
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/11/14/less-start/">Less-Start</a></h1>
     
     
@@ -114,25 +251,29 @@
 </ul>
 
 
-<h2>Less 설치</h2>
+<h2>LESS 설치</h2>
 
-<h3>Less 공식 사이트</h3>
+<h3>LESS 공식 사이트</h3>
 
 <p><a href="http://lesscss.org/#usage">Less - Site</a></p>
 
-<h3>npm - Less 설치를 위한 package manager</h3>
+<h3>npm - LESS 설치를 위한 패키지 매니저</h3>
+
+<p>LESS를 다운 받기 위해서는 npm 이 필요하다.</p>
 
 <p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
 
-<h3>설치</h3>
+<h3>LESS 설치</h3>
 
 <pre><code>$ npm install -g less
 </code></pre>
 
-<h2>Less 사용방법</h2>
+<h2>LESS 사용방법</h2>
 
 <ul>
-<li><p>Less-Start</p>
+<li><p>Less 시작하기</p>
+
+<p>  폴더를 생성하고 style.less 파일을 만들어 본다.</p>
 
 <pre><code> $ mkdir Less-Start
  $ cd Less-Start
@@ -165,6 +306,8 @@
 <ul>
 <li><p>.less -> .css 미리보기</p>
 
+<p>  .less 작성후 변환하기전 올바르게 나오는지 미리 보기를 할수 있다.</p>
+
 <pre><code> $ lessc styles.less
 
  #header {
@@ -172,6 +315,8 @@
  }
 </code></pre></li>
 <li><p>.less -> .css 변환하기</p>
+
+<p>  올바르게 작성 되었다면 .less 파일을 .css 파일로 변환한다.</p>
 
 <pre><code> $ lessc styles.less &gt; styles.css
  $ ls
@@ -1008,133 +1153,6 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/23/don-release/">Don Release</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-23T18:49:00+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/23/don-release/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Donnenwa Open</h2>
-
-<ol>
-<li>DNS 요구</li>
-<li>Apache2 설정</li>
-<li>supervisior 설정</li>
-<li>확인</li>
-</ol>
-
-
-<h3>DNS 요구</h3>
-
-<p>도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
-브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨)</p>
-
-<h3>Apache2 설정</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh rumidier@bu….접속
-</span><span class='line'>$ cd /etc/apache2/
-</span><span class='line'>$ cd sites-available
-</span><span class='line'>$ vi user.site.kr (작성)
-</span><span class='line'>$ cd ../
-</span><span class='line'>$ cd sites-enable
-</span><span class='line'>$ ln -s 타킷-경로
-</span><span class='line'>$ ~/etc/init.d/apache2 restart</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>supervisior 설정</h3>
-
-<p>슈퍼 바이저는 서버가 죽었다 다시 살아 났을시 수동이 아닌 자동으로 서버를 뛰워주기 위해 필요한 기능이다.</p>
-
-<p>돈내놔는 carton을 사용하고 plackup으로 뛰우며 플라넥스와는 다르게 worker의 갯수가 존재 하지 않는다. 포트 설정은 아파치에서 해준 포트를 명시 해준후 디렉토리와 유저, 환경 등록을 해주면 끝이 난다.
-환경경로는 carton과 plackup 경로도 알아야 하는거 같다(이 부분은 설명이 더 필요)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /etc
-</span><span class='line'>$ vi supervisord.conf
-</span><span class='line'>
-</span><span class='line'>[program:Donnenwa] 
-</span><span class='line'>command=/usr/local/bin/carton exec -Ilib -- /home/USER Donnenwa/local/bin/plackup -Ilib -a /home/USER/Donnenwa
-</span><span class='line'>app.psgi --host 127.0.0.1 --port You_port(ex:3000)  
-</span><span class='line'>directory=/home/User/Donnenwa 
-</span><span class='line'>user=USER 
-</span><span class='line'>environment=PATH=/usr/local/bin:/usr/bin:/bin,HOME=/home/USER
-</span><span class='line'>stdout_logfile=/home/USER/logs/stdout 
-</span><span class='line'>stderr_logfile=/home/USER/logs/stderr 
-</span><span class='line'>
-</span><span class='line'>$ sudo supervisorctl
-</span><span class='line'>supervisor&gt; status
-</span><span class='line'>….
-</span><span class='line'>supervisor&gt; update
-</span><span class='line'>supervisor&gt; exit
-</span><span class='line'>$ 서버 실행 확인 끝</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>더 물어 봐야 할것</h3>
-
-<ol>
-<li>supervisor의 셋팅을 무엇을 참조 하는가?</li>
-<li>도메인 등록은 어떻게 하는가?</li>
-<li>apach2 설정은 어떻게 하는가?</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1150,15 +1168,15 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/15/sass-start/">Sass-Start</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/14/less-start/">Less-Start</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/24/net-twitter/">Net::Twitter</a>
       </li>
     
   </ul>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: CSS | Meadows of wild horses]]></title>
-  <link href="http://rumidier.github.com/blog/categories/css/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Sass | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/sass/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
   <updated>2012-11-15T16:42:55+09:00</updated>
   <id>http://rumidier.github.com/</id>
@@ -123,113 +123,6 @@ $ rvm rubygems latest
 
 <pre><code>$ sass --watch style.scss:style.css
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Less-Start]]></title>
-    <link href="http://rumidier.github.com/blog/2012/11/14/less-start/"/>
-    <updated>2012-11-14T17:37:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/11/14/less-start</id>
-    <content type="html"><![CDATA[<h2>LESS - The Dynamic Stylesheet language</h2>
-
-<h2>사용 환경</h2>
-
-<ul>
-<li>모델명    :     MacBook Pro</li>
-<li>모델 식별자:   MacBookPro8,1</li>
-<li>프로세서 이름:   Intel Core i5</li>
-<li>프로세서 속도:  2.3 GHz</li>
-<li>메모리:           4 GB</li>
-<li>기타: homebrew, iTerm</li>
-</ul>
-
-
-<h2>LESS 설치</h2>
-
-<h3>LESS 공식 사이트</h3>
-
-<p><a href="http://lesscss.org/#usage">Less - Site</a></p>
-
-<h3>npm - LESS 설치를 위한 패키지 매니저</h3>
-
-<p>LESS를 다운 받기 위해서는 npm 이 필요하다.</p>
-
-<p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
-
-<h3>LESS 설치</h3>
-
-<pre><code>$ npm install -g less
-</code></pre>
-
-<h2>LESS 사용방법</h2>
-
-<ul>
-<li><p>Less 시작하기</p>
-
-<p>  폴더를 생성하고 style.less 파일을 만들어 본다.</p>
-
-<pre><code> $ mkdir Less-Start
- $ cd Less-Start
- $ touch style.less
-</code></pre></li>
-<li><p>style.less 작성</p></li>
-</ul>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>style.less  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'>  <span class="k">@color</span><span class="o">:</span> <span class="nf">#4D926F</span><span class="p">;</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>  <span class="nf">#header</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">color</span><span class="o">:</span> <span class="o">@</span><span class="k">color</span><span class="p">;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
-</span><span class='line'>  <span class="nt">h2</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">color</span><span class="o">:</span> <span class="o">@</span><span class="k">color</span><span class="p">;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<ul>
-<li><p>.less -> .css 미리보기</p>
-
-<p>  .less 작성후 변환하기전 올바르게 나오는지 미리 보기를 할수 있다.</p>
-
-<pre><code> $ lessc styles.less
-
- #header {
-   color: #6cc4be;
- }
-</code></pre></li>
-<li><p>.less -> .css 변환하기</p>
-
-<p>  올바르게 작성 되었다면 .less 파일을 .css 파일로 변환한다.</p>
-
-<pre><code> $ lessc styles.less &gt; styles.css
- $ ls
-
- styles.less styles css
-</code></pre></li>
-</ul>
-
 ]]></content>
   </entry>
   

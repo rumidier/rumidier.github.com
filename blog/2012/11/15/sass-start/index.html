@@ -5,11 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>catalyst - Meadows of wild horses</title>
+  <title>Sass-Start - Meadows of wild horses</title>
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="/list/write.tt 페이지 write.tt form action &lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt; direction setting &lt;td colspan=10 align= &hellip;">
+  <meta name="description" content="ass - Syntactically Awesome Stylesheets 사용 환경 모델명 : MacBook Pro
+모델 식별자: MacBookPro8,1
+프로세서 이름: Intel Core i5
+프로세서 속도: 2.3 GHz
+메모리: 4 GB
+기타: homebrew &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rumidier.github.com/blog/2012/06/19/catalyst/">
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/11/15/sass-start/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +72,7 @@
   
   <header>
     
-      <h1 class="entry-title">Catalyst</h1>
+      <h1 class="entry-title">Sass-Start</h1>
     
     
       <p class="meta">
@@ -83,7 +88,7 @@
   
 
 
-<time datetime="2012-06-19T17:31:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-11-15T16:40:00+09:00" pubdate data-updated="true">Nov 15<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -92,89 +97,105 @@
   </header>
 
 
-<div class="entry-content"><h2>/list/write.tt 페이지</h2>
+<div class="entry-content"><p>ass - Syntactically Awesome Stylesheets</p>
 
-<p><a href="https://gist.github.com/2953030">write.tt</a></p>
+<h2>사용 환경</h2>
 
-<h2>form action</h2>
+<hr />
 
-<pre><code>&lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt;
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:   MacBookPro8,1</li>
+<li>프로세서 이름:   Intel Core i5</li>
+<li>프로세서 속도:  2.3 GHz</li>
+<li>메모리:           4 GB</li>
+<li>기타: homebrew, iTerm</li>
+</ul>
+
+
+<h2>Sass 설치</h2>
+
+<hr />
+
+<h3>Sass 공식 사이트</h3>
+
+<p><a href="http://sass-lang.com/docs.html">Sass 사이트</a></p>
+
+<h3>gem - Sass 설치를 위한 패키지 매니저</h3>
+
+<p>gem을 사용하기 위해서는 Ruby가 설치되어 있어야 합니다.
+<a href="http://octopress.org/docs/setup/rvm/">gem 설치가이드</a></p>
+
+<h3>gem - RVM 설치</h3>
+
+<pre><code>$ curl -L https://get.rvm.io | bash -s stable --ruby
 </code></pre>
 
-<h2>direction setting</h2>
+<h3>gem - Ruby 설치</h3>
 
-<pre><code>&lt;td colspan=10 align=center&gt;
-  &lt;input type=submit class="btn btn-primary" value="글 저장하기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;input type=reset class="btn btn-primary" value="다시 쓰기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-&lt;/td&gt;
+<pre><code>$ rvm install 1.9.3
+$ rvm use 1.9.3
+$ rvm rubygems latest
 </code></pre>
 
-<h2>list -> write</h2>
+<h3>Sass 설치</h3>
 
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
+<p>RVM과 Ruby가 잘 설치 되었다면 이상없이 sass가 설치 될것입니다.</p>
 
-sub write :Local :Args(0) {
-my ( $self, $c ) = @_;
-
-if ($c-&gt;req-&gt;method eq 'POST') {
-    my %row = (
-    name    =&gt; $c-&gt;req-&gt;params-&gt;{name},
-    title   =&gt; $c-&gt;req-&gt;params-&gt;{title},
-    content =&gt; $c-&gt;req-&gt;params-&gt;{content},
-    );
-    $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;update_or_create(\%row);
-    $c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
-}
-}
+<pre><code>$ gem install sass
 </code></pre>
 
-<h2>/list/view.tt 페이지</h2>
+<h2>Sass 사용방법</h2>
 
-<p><a href="https://gist.github.com/2953088">view.tt</a></p>
+<ul>
+<li><p>Sass 따라 해보기</p>
 
-<h2>인자 출력</h2>
+<p>  폴더를 생성하여 style.scss 파일을 생성하여 본다.</p>
 
-<pre><code>// 제목
-&lt;tr&gt;
-  &lt;td height=20 colspan=4 align=center bgcolor=#999999&gt;
-&lt;font color=white&gt;&lt;b&gt;[% users.title %]&lt;/b&gt;&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
+<pre><code> $ mkdir Sass-Start
+ $ cd Sass-Start
+ $ touch style.scss
+</code></pre></li>
+<li><p>style.scss 파일 작성</p></li>
+</ul>
 
-// 이름
-&lt;tr&gt;
-  &lt;td width=50 height=20 align=center bgcolor=#EEEEEE&gt;글쓴이&lt;/td&gt;
-  &lt;td width=240 bgcolor=white&gt;[% users.name %]&lt;/td&gt;
-&lt;/tr&gt;
 
-// 내용
-&lt;tr&gt;
-  &lt;td bgcolor=white colspan=4 style="table-layout:fixed;"&gt;
-&lt;font color=black&gt;
-  [% users.content %]
-&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
+<figure class='code'><figcaption><span>style.scss  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.fakeshadow</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="n">style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">left</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>      <span class="k">width</span><span class="o">:</span> <span class="m">4px</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">color</span><span class="o">:</span> <span class="m">#888</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nt">right</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">color</span><span class="o">:</span> <span class="m">#ccc</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2>list page redirect</h2>
 
-<pre><code>&lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-</code></pre>
+<ul>
+<li>.scss -> .css 변환하기</li>
+</ul>
 
-<h2>list -> view</h2>
 
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
+<p>작성된 .scss 파일을 .css 파일로 변환하여야 합니다.</p>
 
-sub view :Local :CaptureArgs(1) {
-my ( $self, $c, $user_id) = @_;
-
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;find($user_id);
-$c-&gt;stash-&gt;{users} = $rs;
-}
+<pre><code>$ sass --watch style.scss:style.css
 </code></pre>
 </div>
 
@@ -198,12 +219,12 @@ $c-&gt;stash-&gt;{users} = $rs;
   
 
 
-<time datetime="2012-06-19T17:31:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-11-15T16:40:00+09:00" pubdate data-updated="true">Nov 15<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/catalyst/'>catalyst</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/sass/'>Sass</a>
   
 </span>
 
@@ -212,7 +233,7 @@ $c-&gt;stash-&gt;{users} = $rs;
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/06/19/catalyst/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/06/19/catalyst/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/11/15/sass-start/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/11/15/sass-start/" >Tweet</a>
   
   
   
@@ -221,10 +242,8 @@ $c-&gt;stash-&gt;{users} = $rs;
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/18/catalyst/" title="Previous Post: catalyst">&laquo; catalyst</a>
+        <a class="basic-alignment left" href="/blog/2012/11/14/less-start/" title="Previous Post: Less-Start">&laquo; Less-Start</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/25/catalyst/" title="Next Post: catalyst">catalyst &raquo;</a>
       
     </p>
   </footer>
@@ -328,8 +347,8 @@ $c-&gt;stash-&gt;{users} = $rs;
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rumidier.github.com/blog/2012/06/19/catalyst/';
-        var disqus_url = 'http://rumidier.github.com/blog/2012/06/19/catalyst/';
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/11/15/sass-start/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/11/15/sass-start/';
         var disqus_script = 'embed.js';
       
     (function () {

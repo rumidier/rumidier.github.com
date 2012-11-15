@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Less | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/less/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-14T17:52:06+09:00</updated>
+  <updated>2012-11-15T16:42:55+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -32,25 +32,29 @@
 </ul>
 
 
-<h2>Less 설치</h2>
+<h2>LESS 설치</h2>
 
-<h3>Less 공식 사이트</h3>
+<h3>LESS 공식 사이트</h3>
 
 <p><a href="http://lesscss.org/#usage">Less - Site</a></p>
 
-<h3>npm - Less 설치를 위한 package manager</h3>
+<h3>npm - LESS 설치를 위한 패키지 매니저</h3>
+
+<p>LESS를 다운 받기 위해서는 npm 이 필요하다.</p>
 
 <p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
 
-<h3>설치</h3>
+<h3>LESS 설치</h3>
 
 <pre><code>$ npm install -g less
 </code></pre>
 
-<h2>Less 사용방법</h2>
+<h2>LESS 사용방법</h2>
 
 <ul>
-<li><p>Less-Start</p>
+<li><p>Less 시작하기</p>
+
+<p>  폴더를 생성하고 style.less 파일을 만들어 본다.</p>
 
 <pre><code> $ mkdir Less-Start
  $ cd Less-Start
@@ -94,6 +98,8 @@
 <ul>
 <li><p>.less -> .css 미리보기</p>
 
+<p>  .less 작성후 변환하기전 올바르게 나오는지 미리 보기를 할수 있다.</p>
+
 <pre><code> $ lessc styles.less
 
  #header {
@@ -101,6 +107,8 @@
  }
 </code></pre></li>
 <li><p>.less -> .css 변환하기</p>
+
+<p>  올바르게 작성 되었다면 .less 파일을 .css 파일로 변환한다.</p>
 
 <pre><code> $ lessc styles.less &gt; styles.css
  $ ls

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>catalyst - Meadows of wild horses</title>
+  <title>Category: Sass - Meadows of wild horses</title>
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="/list/write.tt 페이지 write.tt form action &lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt; direction setting &lt;td colspan=10 align= &hellip;">
+  <meta name="description" content="Category: Sass">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rumidier.github.com/blog/2012/06/19/catalyst/">
+  <link rel="canonical" href="http://rumidier.github.comblog/categories/sass/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,178 +63,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Catalyst</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-19T17:31:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Sass</h1>
     
   </header>
-
-
-<div class="entry-content"><h2>/list/write.tt 페이지</h2>
-
-<p><a href="https://gist.github.com/2953030">write.tt</a></p>
-
-<h2>form action</h2>
-
-<pre><code>&lt;form action="[% c.uri_for('/list/write') %]" method="POST"&gt;
-</code></pre>
-
-<h2>direction setting</h2>
-
-<pre><code>&lt;td colspan=10 align=center&gt;
-  &lt;input type=submit class="btn btn-primary" value="글 저장하기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;input type=reset class="btn btn-primary" value="다시 쓰기"&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-&lt;/td&gt;
-</code></pre>
-
-<h2>list -> write</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub write :Local :Args(0) {
-my ( $self, $c ) = @_;
-
-if ($c-&gt;req-&gt;method eq 'POST') {
-    my %row = (
-    name    =&gt; $c-&gt;req-&gt;params-&gt;{name},
-    title   =&gt; $c-&gt;req-&gt;params-&gt;{title},
-    content =&gt; $c-&gt;req-&gt;params-&gt;{content},
-    );
-    $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;update_or_create(\%row);
-    $c-&gt;res-&gt;redirect($c-&gt;uri_for('/list'));
-}
-}
-</code></pre>
-
-<h2>/list/view.tt 페이지</h2>
-
-<p><a href="https://gist.github.com/2953088">view.tt</a></p>
-
-<h2>인자 출력</h2>
-
-<pre><code>// 제목
-&lt;tr&gt;
-  &lt;td height=20 colspan=4 align=center bgcolor=#999999&gt;
-&lt;font color=white&gt;&lt;b&gt;[% users.title %]&lt;/b&gt;&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-
-// 이름
-&lt;tr&gt;
-  &lt;td width=50 height=20 align=center bgcolor=#EEEEEE&gt;글쓴이&lt;/td&gt;
-  &lt;td width=240 bgcolor=white&gt;[% users.name %]&lt;/td&gt;
-&lt;/tr&gt;
-
-// 내용
-&lt;tr&gt;
-  &lt;td bgcolor=white colspan=4 style="table-layout:fixed;"&gt;
-&lt;font color=black&gt;
-  [% users.content %]
-&lt;/font&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
-
-<h2>list page redirect</h2>
-
-<pre><code>&lt;a href="[% c.uri_for('/list') %]" class="btn btn-primary"&gt;되돌아가기&lt;/a&gt;
-</code></pre>
-
-<h2>list -> view</h2>
-
-<pre><code>$ lib/Silex/Web/Donnenwa/Controller/List.pm
-
-sub view :Local :CaptureArgs(1) {
-my ( $self, $c, $user_id) = @_;
-
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('List')-&gt;find($user_id);
-$c-&gt;stash-&gt;{users} = $rs;
-}
-</code></pre>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2012</h2>
+
+<article>
+  
+<h1><a href="/blog/2012/11/15/sass-start/">Sass-Start</a></h1>
+<time datetime="2012-11-15T16:40:00+09:00" pubdate><span class='month'>Nov</span> <span class='day'>15</span> <span class='year'>2012</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/sass/'>Sass</a></span>
+</footer>
 
 
-<time datetime="2012-06-19T17:31:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/catalyst/'>catalyst</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/06/19/catalyst/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/06/19/catalyst/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/06/18/catalyst/" title="Previous Post: catalyst">&laquo; catalyst</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/06/25/catalyst/" title="Next Post: catalyst">catalyst &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -327,10 +185,7 @@ $c-&gt;stash-&gt;{users} = $rs;
       var disqus_shortname = 'rumidier';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://rumidier.github.com/blog/2012/06/19/catalyst/';
-        var disqus_url = 'http://rumidier.github.com/blog/2012/06/19/catalyst/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

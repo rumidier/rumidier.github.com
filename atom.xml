@@ -4,7 +4,7 @@
   <title><![CDATA[Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-14T17:52:06+09:00</updated>
+  <updated>2012-11-15T16:42:55+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sass-Start]]></title>
+    <link href="http://rumidier.github.com/blog/2012/11/15/sass-start/"/>
+    <updated>2012-11-15T16:40:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/11/15/sass-start</id>
+    <content type="html"><![CDATA[<p>ass - Syntactically Awesome Stylesheets</p>
+
+<h2>사용 환경</h2>
+
+<hr />
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:   MacBookPro8,1</li>
+<li>프로세서 이름:   Intel Core i5</li>
+<li>프로세서 속도:  2.3 GHz</li>
+<li>메모리:           4 GB</li>
+<li>기타: homebrew, iTerm</li>
+</ul>
+
+
+<h2>Sass 설치</h2>
+
+<hr />
+
+<h3>Sass 공식 사이트</h3>
+
+<p><a href="http://sass-lang.com/docs.html">Sass 사이트</a></p>
+
+<h3>gem - Sass 설치를 위한 패키지 매니저</h3>
+
+<p>gem을 사용하기 위해서는 Ruby가 설치되어 있어야 합니다.
+<a href="http://octopress.org/docs/setup/rvm/">gem 설치가이드</a></p>
+
+<h3>gem - RVM 설치</h3>
+
+<pre><code>$ curl -L https://get.rvm.io | bash -s stable --ruby
+</code></pre>
+
+<h3>gem - Ruby 설치</h3>
+
+<pre><code>$ rvm install 1.9.3
+$ rvm use 1.9.3
+$ rvm rubygems latest
+</code></pre>
+
+<h3>Sass 설치</h3>
+
+<p>RVM과 Ruby가 잘 설치 되었다면 이상없이 sass가 설치 될것입니다.</p>
+
+<pre><code>$ gem install sass
+</code></pre>
+
+<h2>Sass 사용방법</h2>
+
+<ul>
+<li><p>Sass 따라 해보기</p>
+
+<p>  폴더를 생성하여 style.scss 파일을 생성하여 본다.</p>
+
+<pre><code> $ mkdir Sass-Start
+ $ cd Sass-Start
+ $ touch style.scss
+</code></pre></li>
+<li><p>style.scss 파일 작성</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>style.scss  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.fakeshadow</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="n">style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">left</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>      <span class="k">width</span><span class="o">:</span> <span class="m">4px</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">color</span><span class="o">:</span> <span class="m">#888</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nt">right</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">color</span><span class="o">:</span> <span class="m">#ccc</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>.scss -> .css 변환하기</li>
+</ul>
+
+
+<p>작성된 .scss 파일을 .css 파일로 변환하여야 합니다.</p>
+
+<pre><code>$ sass --watch style.scss:style.css
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Less-Start]]></title>
@@ -32,25 +140,29 @@
 </ul>
 
 
-<h2>Less 설치</h2>
+<h2>LESS 설치</h2>
 
-<h3>Less 공식 사이트</h3>
+<h3>LESS 공식 사이트</h3>
 
 <p><a href="http://lesscss.org/#usage">Less - Site</a></p>
 
-<h3>npm - Less 설치를 위한 package manager</h3>
+<h3>npm - LESS 설치를 위한 패키지 매니저</h3>
+
+<p>LESS를 다운 받기 위해서는 npm 이 필요하다.</p>
 
 <p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
 
-<h3>설치</h3>
+<h3>LESS 설치</h3>
 
 <pre><code>$ npm install -g less
 </code></pre>
 
-<h2>Less 사용방법</h2>
+<h2>LESS 사용방법</h2>
 
 <ul>
-<li><p>Less-Start</p>
+<li><p>Less 시작하기</p>
+
+<p>  폴더를 생성하고 style.less 파일을 만들어 본다.</p>
 
 <pre><code> $ mkdir Less-Start
  $ cd Less-Start
@@ -83,6 +195,8 @@
 <ul>
 <li><p>.less -> .css 미리보기</p>
 
+<p>  .less 작성후 변환하기전 올바르게 나오는지 미리 보기를 할수 있다.</p>
+
 <pre><code> $ lessc styles.less
 
  #header {
@@ -90,6 +204,8 @@
  }
 </code></pre></li>
 <li><p>.less -> .css 변환하기</p>
+
+<p>  올바르게 작성 되었다면 .less 파일을 .css 파일로 변환한다.</p>
 
 <pre><code> $ lessc styles.less &gt; styles.css
  $ ls
@@ -1800,95 +1916,6 @@ user              =&gt; $DB_USER,
 pass              =&gt; $DB_PASSWORD,
 mysql_enable_utf8  =&gt; 1,
 },
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[catalyst]]></title>
-    <link href="http://rumidier.github.com/blog/2012/06/25/catalyst/"/>
-    <updated>2012-06-25T19:11:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/06/25/catalyst</id>
-    <content type="html"><![CDATA[<h2>Error message</h2>
-
-<p>기존에 사용되던 myweb.conf 파일의
-ERROR 500.tt 메세지로 인해 에러 메세지가 제대로 보이지 않아
-삭제 했습니다.</p>
-
-<pre><code>$ vi myweb.conf
-ERROR 500.tt 삭제
-</code></pre>
-
-<h2>Makefile.PL 모듈 추가</h2>
-
-<pre><code>$ vi Makefile.PL
-require DateTime::Format::MYSQL
-</code></pre>
-
-<h2>DB 날짜 입력</h2>
-
-<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
-
-<p>등록시 날짜 생성을 위해 POSIX모듈을 사용합니다. 현재시간에</p>
-
-<p>형식을 DB와 같이  &#8220;%Y-%m-%d% %H:%M:%S&#8221; 만들어 입력합니다.</p>
-
-<pre><code>sub write :Local :Args(0) {
-...
-use POSIX qw(strftime);
-
-my $time = strftime "%Y-%m-%d% %H:%M:%S", localtime;
-my %row = (
-applicant  =&gt; $c-&gt;req-&gt;params-&gt;{applicant},
-title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
-content    =&gt; $c-&gt;req-&gt;params-&gt;{content},
-created_on =&gt; "$time",
-updated_on =&gt; "$time",
-);
-...
-</code></pre>
-
-<h2>list 페이지 쿼리문 수정</h2>
-
-<p>lib/Silex/Web/Donnenwa/Controller/List.pm</p>
-
-<p>생성될 날짜순으로 출력하기 위한 쿼리문 작성
-search의 첫번째 인자는 where문으로써 무시 하기 위해서는 빈 해쉬레퍼를 줍니다.</p>
-
-<pre><code>sub index :Path :Args(0) {
-...
-my $opt  = { 'order_by' =&gt; { -desc =&gt; 'me.created_on' } };
-my $rs = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({}, $opt);
-...
-</code></pre>
-
-<h2>list.tt, list/view.tt 페이지 수정</h2>
-
-<p>root/templates/bootstrap/src/list/index.tt
-root/templates/bootstrap/src/list/view.tt</p>
-
-<p>날짜 0000-00-00 형식으로 출력 지정</p>
-
-<pre><code>&lt;td align=center height=20 bgcolor=white&gt;[% list.created_on.ymd %]
-</code></pre>
-
-<h2>기타</h2>
-
-<p>날짜 관련 예제</p>
-
-<pre><code>#!/usr/bin/env perl 
-
-use 5.010;
-use strict;
-use warnings;
-use POSIX qw(strftime);
-use DateTime;
-
-say "POSOX";
-say POSIX::strftime('%Y-%m-%d %H:%M:%S', localtime);
-
-say "DateTime";
-say DateTime-&gt;now( time_zone =&gt; 'local' )-&gt;strftime('%Y-%m-%d %H:%M:%S');
 </code></pre>
 ]]></content>
   </entry>
