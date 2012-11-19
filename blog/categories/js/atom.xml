@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JS | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/js/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-11-19T12:36:33+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Coffee Script 시작하기]]></title>
+    <link href="http://rumidier.github.com/blog/2012/11/19/coffee-script/"/>
+    <updated>2012-11-19T12:23:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/11/19/coffee-script</id>
+    <content type="html"><![CDATA[<h3>사용 환경</h3>
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:     MacBookPro8,1</li>
+<li>프로세서 이름:   Intel Core i5</li>
+<li>프로세서 속도:    2.3 GHz</li>
+<li>메모리:         4 GB</li>
+<li>기타: homebrew, iTerm</li>
+</ul>
+
+
+<h2>CoffeeScript 설치</h2>
+
+<p>CoffeeScript - CoffeeScript is a little language that compiles into JavaScript</p>
+
+<h3>CoffeeScript 공식 사이트</h3>
+
+<p>CoffeeScript 공식 사이트 주소는 <a href="http://coffeescript.org/">CoffeeScript 사이트</a>
+입니다.</p>
+
+<h3>npm - coffee-script 설치를 위한 패키지 매니저</h3>
+
+<p>coffee-script를 다운 받기 위해서는 npm이 필요 하고 별로도 설치를 해주어야 합니다.
+npm 설치를 위해 필요한 파일은 아래의 링크에서 다운로드 받을수 있습니다.</p>
+
+<p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
+
+<h3>node-v.8.x.x.pkg 설치</h3>
+
+<p>개인의 OS에 맞는 파일을 선택하여 다운 받았다면 이를 설치 하여 줍니다. 다음은 Mac 에서의
+.패키지 실행시 첫화면과 마지막 화면 입니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-eUicOa-fhtQ/UKXCFOGz27I/AAAAAAAAACE/9LBj6Kzdn-8/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-01.jpg" width="500" height="500" title="&#34;node.pkg 설치 시작&#34;" alt="&#34;node.pkg 설치 시작&#34;">
+<img src="https://lh5.googleusercontent.com/-Smr4TJfxMgI/UKXEkWDOYWI/AAAAAAAAACM/soEN5qpthGg/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-02.jpg" width="500" height="500" title="&#34;node.pkg 설치 끝&#34;" alt="&#34;node.pkg 설치 끝&#34;"></p>
+
+<h3>coffee-script 설치</h3>
+
+<pre><code>hancho@hanjoui-MacBook-Pro:~$ sudo npm install -g coffee-script
+Password:
+npm http GET https://registry.npmjs.org/coffee-script
+npm http 304 https://registry.npmjs.org/coffee-script
+/usr/local/bin/coffee -&gt; /usr/local/lib/node_modules/coffee-script/bin/ coffee
+/usr/local/bin/cake -&gt; /usr/local/lib/node_modules/coffee-script/bin/cake
+coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
+</code></pre>
+
+<h3>CoffeeScript 사용방법</h3>
+
+<ul>
+<li><p>CoffeeScript 시작하기</p>
+
+<p>  폴더를 생성하고 style.less 파일을 만들어 봅니다.</p>
+
+<pre><code> $ mkdir Coffee-Start
+ $ cd Coffee-Start
+ $ touch style.coffee
+</code></pre></li>
+<li><p>style.coffee 작성</p></li>
+</ul>
+
+
+<p>coffee가 제대로 동작하는지 확인 하기 위하여 테스트 데이터를 작성 합니다.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>style.coffee  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ul>
+<li><p>.coffee -> .js 변환하기</p>
+
+<p>.coffee 파일을 작성하고 .js 파일로 변환 할수 있습니다. 파일명은 style.coffee의 style.js로 변환 되어 집니다.</p>
+
+<p>  $ coffee --compile style.coffee
+  $ ls</p>
+
+<p>  style.coffee style.js</p></li>
+<li><p>.coffee -> .js 지켜보기</p>
+
+<p>.coffee -> .js 파일로 변화 하며 --watch 옵션으로 지속 적으로 style.coffee 파일 내용이 갱신(저장) 될때마다 .js 파일로 변환 시켜 주게 됩니다. 종료는 Ctrl + c 키로 할수 있습니다.</p>
+
+<p>  $ coffee --watch --compile style.coffee
+  11:55:26 - compiled style.coffee</p></li>
+<li><p>coffeescript - .coffee 확인 하기</p></li>
+</ul>
+
+
+<p>.html 파일 내에서 .js로 변환 없이 .coffee 를 검사 할수 있습니다.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>coffee.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/coffeescript&quot;</span><span class="nt">&gt;</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>  <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ul>
+<li>coffeescript - .js 확인하기</li>
+</ul>
+
+
+<p>.html 파일 내에서 변환된 .js 내용을 검사 할수 있습니다.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>coffee.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script&gt;</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">fill</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">fill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">liquid</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="s2">&quot;Filling the &quot;</span> <span class="o">+</span> <span class="nx">container</span> <span class="o">+</span> <span class="s2">&quot; with &quot;</span> <span class="o">+</span> <span class="nx">liquid</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">));</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

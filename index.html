@@ -9,12 +9,12 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Sass - Syntactically Awesome Stylesheets 사용 환경 모델명 : MacBook Pro
+  <meta name="description" content="사용 환경 모델명 : MacBook Pro
 모델 식별자: MacBookPro8,1
 프로세서 이름: Intel Core i5
 프로세서 속도: 2.3 GHz
 메모리: 4 GB
-기타: homebrew &hellip;">
+기타: homebrew, iTerm CoffeeScript 설치 CoffeeScript - &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,226 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-19T12:23:00+09:00" pubdate data-updated="true">Nov 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/19/coffee-script/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>사용 환경</h3>
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:     MacBookPro8,1</li>
+<li>프로세서 이름:   Intel Core i5</li>
+<li>프로세서 속도:    2.3 GHz</li>
+<li>메모리:         4 GB</li>
+<li>기타: homebrew, iTerm</li>
+</ul>
+
+
+<h2>CoffeeScript 설치</h2>
+
+<p>CoffeeScript - CoffeeScript is a little language that compiles into JavaScript</p>
+
+<h3>CoffeeScript 공식 사이트</h3>
+
+<p>CoffeeScript 공식 사이트 주소는 <a href="http://coffeescript.org/">CoffeeScript 사이트</a>
+입니다.</p>
+
+<h3>npm - coffee-script 설치를 위한 패키지 매니저</h3>
+
+<p>coffee-script를 다운 받기 위해서는 npm이 필요 하고 별로도 설치를 해주어야 합니다.
+npm 설치를 위해 필요한 파일은 아래의 링크에서 다운로드 받을수 있습니다.</p>
+
+<p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
+
+<h3>node-v.8.x.x.pkg 설치</h3>
+
+<p>개인의 OS에 맞는 파일을 선택하여 다운 받았다면 이를 설치 하여 줍니다. 다음은 Mac 에서의
+.패키지 실행시 첫화면과 마지막 화면 입니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-eUicOa-fhtQ/UKXCFOGz27I/AAAAAAAAACE/9LBj6Kzdn-8/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-01.jpg" width="500" height="500" title="&#34;node.pkg 설치 시작&#34;" alt="&#34;node.pkg 설치 시작&#34;">
+<img src="https://lh5.googleusercontent.com/-Smr4TJfxMgI/UKXEkWDOYWI/AAAAAAAAACM/soEN5qpthGg/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-02.jpg" width="500" height="500" title="&#34;node.pkg 설치 끝&#34;" alt="&#34;node.pkg 설치 끝&#34;"></p>
+
+<h3>coffee-script 설치</h3>
+
+<pre><code>hancho@hanjoui-MacBook-Pro:~$ sudo npm install -g coffee-script
+Password:
+npm http GET https://registry.npmjs.org/coffee-script
+npm http 304 https://registry.npmjs.org/coffee-script
+/usr/local/bin/coffee -&gt; /usr/local/lib/node_modules/coffee-script/bin/ coffee
+/usr/local/bin/cake -&gt; /usr/local/lib/node_modules/coffee-script/bin/cake
+coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
+</code></pre>
+
+<h3>CoffeeScript 사용방법</h3>
+
+<ul>
+<li><p>CoffeeScript 시작하기</p>
+
+<p>  폴더를 생성하고 style.less 파일을 만들어 봅니다.</p>
+
+<pre><code> $ mkdir Coffee-Start
+ $ cd Coffee-Start
+ $ touch style.coffee
+</code></pre></li>
+<li><p>style.coffee 작성</p></li>
+</ul>
+
+
+<p>coffee가 제대로 동작하는지 확인 하기 위하여 테스트 데이터를 작성 합니다.</p>
+
+<figure class='code'><figcaption><span>style.coffee  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>.coffee -> .js 변환하기</p>
+
+<p>.coffee 파일을 작성하고 .js 파일로 변환 할수 있습니다. 파일명은 style.coffee의 style.js로 변환 되어 집니다.</p>
+
+<p>  $ coffee &#8211;compile style.coffee
+  $ ls</p>
+
+<p>  style.coffee style.js</p></li>
+<li><p>.coffee -> .js 지켜보기</p>
+
+<p>.coffee -> .js 파일로 변화 하며 &#8211;watch 옵션으로 지속 적으로 style.coffee 파일 내용이 갱신(저장) 될때마다 .js 파일로 변환 시켜 주게 됩니다. 종료는 Ctrl + c 키로 할수 있습니다.</p>
+
+<p>  $ coffee &#8211;watch &#8211;compile style.coffee
+  11:55:26 - compiled style.coffee</p></li>
+<li><p>coffeescript - .coffee 확인 하기</p></li>
+</ul>
+
+
+<p>.html 파일 내에서 .js로 변환 없이 .coffee 를 검사 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>coffee.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/coffeescript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>      <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>coffeescript - .js 확인하기</li>
+</ul>
+
+
+<p>.html 파일 내에서 변환된 .js 내용을 검사 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>coffee.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">fill</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">fill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">liquid</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="s2">&quot;Filling the &quot;</span> <span class="o">+</span> <span class="nx">container</span> <span class="o">+</span> <span class="s2">&quot; with &quot;</span> <span class="o">+</span> <span class="nx">liquid</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">));</span>
+</span><span class='line'>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1004,223 +1224,6 @@ pawword_type 설정시 디폴트로 SHA-1이 적용되지만
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-24T14:20:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/24/don-change-space/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Sil::Web::Don 변경</h2>
-
-<p>Sil::Schema는 Sil의 공용 스키마가 아닌데도 불구 하고 그렇게 보일수도 있는
-상태 이다 이를 바꾸기 위해서
-Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
-명시 해주는것과 같다.</p>
-
-<p>변경전</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>lib
-</span><span class='line'>`-- Sil
-</span><span class='line'>    |-- Schema
-</span><span class='line'>    |   |-- Result
-</span><span class='line'>    |   |   |-- Charge.pm
-</span><span class='line'>    |   |   `-- User.pm
-</span><span class='line'>    |   `-- ResultBase.pm
-</span><span class='line'>    |-- Schema.pm
-</span><span class='line'>    `-- Web
-</span><span class='line'>        |-- Don
-</span><span class='line'>        |   |-- Controller
-</span><span class='line'>        |   |   |-- Deposit.pm
-</span><span class='line'>        |   |   |-- List.pm
-</span><span class='line'>        |   |   |-- Login.pm
-</span><span class='line'>        |   |   |-- Logout.pm
-</span><span class='line'>        |   |   `-- Root.pm
-</span><span class='line'>        |   |-- Model
-</span><span class='line'>        |   |   `-- DonDB.pm
-</span><span class='line'>        |   `-- View
-</span><span class='line'>        |       |-- Bootstrap.pm
-</span><span class='line'>        |       `-- Download
-</span><span class='line'>        |           `-- CSV.pm
-</span><span class='line'>        `-- Don.pm</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 변경후</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> lib
-</span><span class='line'>└── Sil
-</span><span class='line'>    └── Don
-</span><span class='line'>        ├── Schema
-</span><span class='line'>        │   ├── Result
-</span><span class='line'>        │   │   ├── Charge.pm
-</span><span class='line'>        │   │   └── User.pm
-</span><span class='line'>        │   └── ResultBase.pm
-</span><span class='line'>        ├── Schema.pm
-</span><span class='line'>        ├── Web
-</span><span class='line'>        │   ├── Controller
-</span><span class='line'>        │   │   ├── Deposit.pm
-</span><span class='line'>        │   │   ├── List.pm
-</span><span class='line'>        │   │   ├── Login.pm
-</span><span class='line'>        │   │   ├── Logout.pm
-</span><span class='line'>        │   │   └── Root.pm
-</span><span class='line'>        │   ├── Model
-</span><span class='line'>        │   │   └── DonDB.pm
-</span><span class='line'>        │   └── View
-</span><span class='line'>        │       ├── Bootstrap.pm
-</span><span class='line'>        │       └── Download
-</span><span class='line'>        │           └── CSV.pm
-</span><span class='line'>        └── Web.pm</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>경로명 변경</h2>
-
-<p>의존성이 걸려있는 모든 내역들을 grep 명령어로 찾아 아래와 같이 수정해 주었다.</p>
-
-<p>변경전</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Sil::Schema::Result::Charge
-</span><span class='line'>Sil::Schema::Result::User
-</span><span class='line'>Sil::Schema::ResultBase
-</span><span class='line'>Sil::Schema
-</span><span class='line'>
-</span><span class='line'>Sil::Web::Don::Controller::Deposit
-</span><span class='line'>Sil::Web::Don::Controller::List
-</span><span class='line'>Sil::Web::Don::Controller::Login
-</span><span class='line'>Sil::Web::Don::Controller::Logout
-</span><span class='line'>Sil::Web::Don::Controller::Root
-</span><span class='line'>Sil::Web::Don::Model::DonDB
-</span><span class='line'>Sil::Web::Don::View::Bootstrap
-</span><span class='line'>Sil::Web::Don::View::Download::CS
-</span><span class='line'>Sil::Web::Don</span></code></pre></td></tr></table></div></figure>
-
-
-<p>변경후</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Sil::Don::Schema::Result::Charge
-</span><span class='line'>Sil::Don::Schema::Result::User
-</span><span class='line'>Sil::Don::Schema::ResultBase
-</span><span class='line'>Sil::Don::Schema
-</span><span class='line'>
-</span><span class='line'>Sil::Don::Web::Controller::Deposit
-</span><span class='line'>Sil::Don::Web::Controller::List
-</span><span class='line'>Sil::Don::Web::Controller::Login
-</span><span class='line'>Sil::Don::Web::Controller::Logout
-</span><span class='line'>Sil::Don::Web::Controller::Root
-</span><span class='line'>Sil::Don::Web::Model::DonDB
-</span><span class='line'>Sil::Don::Web::View::Bootstrap
-</span><span class='line'>Sil::Don::Web::View::Download::CS
-</span><span class='line'>Sil::Don::Web</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>변경후 문제점</h2>
-
-<p>내용 수정후 서버 실행이 app.psgi에서 모듈을 찾지 못한다고 하였다.
-이유는 Sil_web_Don.conf 파일명을 수정 해주지 않았기에 발생한 문제였다.
-경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1236,15 +1239,15 @@ Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/15/sass-start/">Sass 시작하기</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/14/less-start/">LESS 시작하기</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
       </li>
     
   </ul>

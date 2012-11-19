@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Coffee Script 시작하기 - Meadows of wild horses</title>
+  <meta name="author" content="rumidier">
+
+  
+  <meta name="description" content="사용 환경 모델명 : MacBook Pro
+모델 식별자: MacBookPro8,1
+프로세서 이름: Intel Core i5
+프로세서 속도: 2.3 GHz
+메모리: 4 GB
+기타: homebrew, iTerm CoffeeScript 설치 CoffeeScript - &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/11/19/coffee-script/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Meadows of wild horses" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Meadows of wild horses</a></h1>
+  
+    <h2>Blog...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rumidier.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Coffee Script 시작하기</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-19T12:23:00+09:00" pubdate data-updated="true">Nov 19<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>사용 환경</h3>
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:     MacBookPro8,1</li>
+<li>프로세서 이름:   Intel Core i5</li>
+<li>프로세서 속도:    2.3 GHz</li>
+<li>메모리:         4 GB</li>
+<li>기타: homebrew, iTerm</li>
+</ul>
+
+
+<h2>CoffeeScript 설치</h2>
+
+<p>CoffeeScript - CoffeeScript is a little language that compiles into JavaScript</p>
+
+<h3>CoffeeScript 공식 사이트</h3>
+
+<p>CoffeeScript 공식 사이트 주소는 <a href="http://coffeescript.org/">CoffeeScript 사이트</a>
+입니다.</p>
+
+<h3>npm - coffee-script 설치를 위한 패키지 매니저</h3>
+
+<p>coffee-script를 다운 받기 위해서는 npm이 필요 하고 별로도 설치를 해주어야 합니다.
+npm 설치를 위해 필요한 파일은 아래의 링크에서 다운로드 받을수 있습니다.</p>
+
+<p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
+
+<h3>node-v.8.x.x.pkg 설치</h3>
+
+<p>개인의 OS에 맞는 파일을 선택하여 다운 받았다면 이를 설치 하여 줍니다. 다음은 Mac 에서의
+.패키지 실행시 첫화면과 마지막 화면 입니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-eUicOa-fhtQ/UKXCFOGz27I/AAAAAAAAACE/9LBj6Kzdn-8/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-01.jpg" width="500" height="500" title="&#34;node.pkg 설치 시작&#34;" alt="&#34;node.pkg 설치 시작&#34;">
+<img src="https://lh5.googleusercontent.com/-Smr4TJfxMgI/UKXEkWDOYWI/AAAAAAAAACM/soEN5qpthGg/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-02.jpg" width="500" height="500" title="&#34;node.pkg 설치 끝&#34;" alt="&#34;node.pkg 설치 끝&#34;"></p>
+
+<h3>coffee-script 설치</h3>
+
+<pre><code>hancho@hanjoui-MacBook-Pro:~$ sudo npm install -g coffee-script
+Password:
+npm http GET https://registry.npmjs.org/coffee-script
+npm http 304 https://registry.npmjs.org/coffee-script
+/usr/local/bin/coffee -&gt; /usr/local/lib/node_modules/coffee-script/bin/ coffee
+/usr/local/bin/cake -&gt; /usr/local/lib/node_modules/coffee-script/bin/cake
+coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
+</code></pre>
+
+<h3>CoffeeScript 사용방법</h3>
+
+<ul>
+<li><p>CoffeeScript 시작하기</p>
+
+<p>  폴더를 생성하고 style.less 파일을 만들어 봅니다.</p>
+
+<pre><code> $ mkdir Coffee-Start
+ $ cd Coffee-Start
+ $ touch style.coffee
+</code></pre></li>
+<li><p>style.coffee 작성</p></li>
+</ul>
+
+
+<p>coffee가 제대로 동작하는지 확인 하기 위하여 테스트 데이터를 작성 합니다.</p>
+
+<figure class='code'><figcaption><span>style.coffee  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>.coffee -> .js 변환하기</p>
+
+<p>.coffee 파일을 작성하고 .js 파일로 변환 할수 있습니다. 파일명은 style.coffee의 style.js로 변환 되어 집니다.</p>
+
+<p>  $ coffee &#8211;compile style.coffee
+  $ ls</p>
+
+<p>  style.coffee style.js</p></li>
+<li><p>.coffee -> .js 지켜보기</p>
+
+<p>.coffee -> .js 파일로 변화 하며 &#8211;watch 옵션으로 지속 적으로 style.coffee 파일 내용이 갱신(저장) 될때마다 .js 파일로 변환 시켜 주게 됩니다. 종료는 Ctrl + c 키로 할수 있습니다.</p>
+
+<p>  $ coffee &#8211;watch &#8211;compile style.coffee
+  11:55:26 - compiled style.coffee</p></li>
+<li><p>coffeescript - .coffee 확인 하기</p></li>
+</ul>
+
+
+<p>.html 파일 내에서 .js로 변환 없이 .coffee 를 검사 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>coffee.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/coffeescript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>      <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>coffeescript - .js 확인하기</li>
+</ul>
+
+
+<p>.html 파일 내에서 변환된 .js 내용을 검사 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>coffee.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">fill</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">fill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">liquid</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="s2">&quot;Filling the &quot;</span> <span class="o">+</span> <span class="nx">container</span> <span class="o">+</span> <span class="s2">&quot; with &quot;</span> <span class="o">+</span> <span class="nx">liquid</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">));</span>
+</span><span class='line'>  <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rumidier</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-19T12:23:00+09:00" pubdate data-updated="true">Nov 19<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/coffeescript/'>CoffeeScript</a>, <a class='category' href='/blog/categories/js/'>JS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/11/19/coffee-script/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/11/19/coffee-script/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/15/sass-start/" title="Previous Post: Sass 시작하기">&laquo; Sass 시작하기</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/15/sass-start/">Sass 시작하기</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/14/less-start/">LESS 시작하기</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/rumidier">@rumidier</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'rumidier',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rumidier", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rumidier" class="twitter-follow-button" data-show-count="false">Follow @rumidier</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - rumidier -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rumidier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/11/19/coffee-script/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/11/19/coffee-script/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

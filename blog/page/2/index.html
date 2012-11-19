@@ -9,11 +9,10 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Donnenwa Open DNS 요구
-Apache2 설정
-supervisior 설정
-확인 DNS 요구 도메인 네임을 받아 현진이(서버)에 연결해 주어야 하지만
-브롬튼에 도메인이 정의가 되있기 때문에 SE님에게 요구하면 된다.(나만되는겨) Apache2 설정 1
+  <meta name="description" content="Sil::Web::Don 변경 Sil::Schema는 Sil의 공용 스키마가 아닌데도 불구 하고 그렇게 보일수도 있는
+상태 이다 이를 바꾸기 위해서
+Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
+명시 해주는것과 같다. 변경전 1
 2
 3 &hellip;">
   
@@ -70,6 +69,223 @@ supervisior 설정
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/24/don-change-space/">Don-Change-space</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-24T14:20:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/24/don-change-space/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Sil::Web::Don 변경</h2>
+
+<p>Sil::Schema는 Sil의 공용 스키마가 아닌데도 불구 하고 그렇게 보일수도 있는
+상태 이다 이를 바꾸기 위해서
+Sil::Don::Schema로 바꾼다. 이는 Sil의 Don만의 스키마라고
+명시 해주는것과 같다.</p>
+
+<p>변경전</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lib
+</span><span class='line'>`-- Sil
+</span><span class='line'>    |-- Schema
+</span><span class='line'>    |   |-- Result
+</span><span class='line'>    |   |   |-- Charge.pm
+</span><span class='line'>    |   |   `-- User.pm
+</span><span class='line'>    |   `-- ResultBase.pm
+</span><span class='line'>    |-- Schema.pm
+</span><span class='line'>    `-- Web
+</span><span class='line'>        |-- Don
+</span><span class='line'>        |   |-- Controller
+</span><span class='line'>        |   |   |-- Deposit.pm
+</span><span class='line'>        |   |   |-- List.pm
+</span><span class='line'>        |   |   |-- Login.pm
+</span><span class='line'>        |   |   |-- Logout.pm
+</span><span class='line'>        |   |   `-- Root.pm
+</span><span class='line'>        |   |-- Model
+</span><span class='line'>        |   |   `-- DonDB.pm
+</span><span class='line'>        |   `-- View
+</span><span class='line'>        |       |-- Bootstrap.pm
+</span><span class='line'>        |       `-- Download
+</span><span class='line'>        |           `-- CSV.pm
+</span><span class='line'>        `-- Don.pm</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 변경후</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> lib
+</span><span class='line'>└── Sil
+</span><span class='line'>    └── Don
+</span><span class='line'>        ├── Schema
+</span><span class='line'>        │   ├── Result
+</span><span class='line'>        │   │   ├── Charge.pm
+</span><span class='line'>        │   │   └── User.pm
+</span><span class='line'>        │   └── ResultBase.pm
+</span><span class='line'>        ├── Schema.pm
+</span><span class='line'>        ├── Web
+</span><span class='line'>        │   ├── Controller
+</span><span class='line'>        │   │   ├── Deposit.pm
+</span><span class='line'>        │   │   ├── List.pm
+</span><span class='line'>        │   │   ├── Login.pm
+</span><span class='line'>        │   │   ├── Logout.pm
+</span><span class='line'>        │   │   └── Root.pm
+</span><span class='line'>        │   ├── Model
+</span><span class='line'>        │   │   └── DonDB.pm
+</span><span class='line'>        │   └── View
+</span><span class='line'>        │       ├── Bootstrap.pm
+</span><span class='line'>        │       └── Download
+</span><span class='line'>        │           └── CSV.pm
+</span><span class='line'>        └── Web.pm</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>경로명 변경</h2>
+
+<p>의존성이 걸려있는 모든 내역들을 grep 명령어로 찾아 아래와 같이 수정해 주었다.</p>
+
+<p>변경전</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sil::Schema::Result::Charge
+</span><span class='line'>Sil::Schema::Result::User
+</span><span class='line'>Sil::Schema::ResultBase
+</span><span class='line'>Sil::Schema
+</span><span class='line'>
+</span><span class='line'>Sil::Web::Don::Controller::Deposit
+</span><span class='line'>Sil::Web::Don::Controller::List
+</span><span class='line'>Sil::Web::Don::Controller::Login
+</span><span class='line'>Sil::Web::Don::Controller::Logout
+</span><span class='line'>Sil::Web::Don::Controller::Root
+</span><span class='line'>Sil::Web::Don::Model::DonDB
+</span><span class='line'>Sil::Web::Don::View::Bootstrap
+</span><span class='line'>Sil::Web::Don::View::Download::CS
+</span><span class='line'>Sil::Web::Don</span></code></pre></td></tr></table></div></figure>
+
+
+<p>변경후</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sil::Don::Schema::Result::Charge
+</span><span class='line'>Sil::Don::Schema::Result::User
+</span><span class='line'>Sil::Don::Schema::ResultBase
+</span><span class='line'>Sil::Don::Schema
+</span><span class='line'>
+</span><span class='line'>Sil::Don::Web::Controller::Deposit
+</span><span class='line'>Sil::Don::Web::Controller::List
+</span><span class='line'>Sil::Don::Web::Controller::Login
+</span><span class='line'>Sil::Don::Web::Controller::Logout
+</span><span class='line'>Sil::Don::Web::Controller::Root
+</span><span class='line'>Sil::Don::Web::Model::DonDB
+</span><span class='line'>Sil::Don::Web::View::Bootstrap
+</span><span class='line'>Sil::Don::Web::View::Download::CS
+</span><span class='line'>Sil::Don::Web</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>변경후 문제점</h2>
+
+<p>내용 수정후 서버 실행이 app.psgi에서 모듈을 찾지 못한다고 하였다.
+이유는 Sil_web_Don.conf 파일명을 수정 해주지 않았기에 발생한 문제였다.
+경로명이 바뀌엇듯이 파일명도 교체 해주어야 한다.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1118,363 +1334,6 @@ db가 정의 되어 있어야 합니다.)</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/02/catalyst/">Catalyst</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-02T18:13:00+09:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/02/catalyst/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>DB confing 셋팅 정보</h1>
-
-<pre><code>my $DB_NAME     = $ENV{DB_NAME}     || 'NAME';
-my $DB_USER     = $ENV{DB_USER}     || 'USER';
-my $DB_PASSWORD = $ENV{DB_PASSWORD} || 'PASSWORD';
-</code></pre>
-
-<h1>옵션 내용</h1>
-
-<h2>DBIx::Class::Schema::Loader::Base</h2>
-
-<pre><code>schema_class =&gt; name of the schema class we are building,
-</code></pre>
-
-<p>적용</p>
-
-<pre><code>schema_class =&gt; "Project::Schema",
-</code></pre>
-
-<hr />
-
-<ul>
-<li>dump_directory</li>
-</ul>
-
-
-<p>The value of this option is a perl libdir pathname. Within that directory this module will create a baseline manual DBIx::Class::Schema module set, based on what it creates at runtime.</p>
-
-<p>The created schema class will have the same classname as the one on which you are setting this option (and the ResultSource classes will be based on this name as well).</p>
-
-<p>Normally you wouldn&#8217;t hard-code this setting in your schema class, as it is meant for one-time manual usage.</p>
-
-<p>See &#8220;dump_to_dir&#8221; in DBIx::Class::Schema::Loader for examples of the recommended way to access this functionality.</p>
-
-<p>적용</p>
-
-<pre><code>dump_directory =&gt; 'lib',
-</code></pre>
-
-<hr />
-
-<p>naming</p>
-
-<p>Static schemas (ones dumped to disk) will, by default, use the new-style relationship names</p>
-
-<p>and singularized Results, unless you&#8217;re overwriting an existing dump made by an older version</p>
-
-<p>of DBIx::Class::Schema::Loader, in which case the backward compatible RelBuilder will be activated,</p>
-
-<p>and the appropriate monikerization used.</p>
-
-<p>Specifying</p>
-
-<pre><code>naming =&gt; 'current'
-</code></pre>
-
-<p>will disable the backward-compatible RelBuilder and use the new-style relationship names along with singularized Results, even when overwriting a dump made with an earlier version.</p>
-
-<p>The option also takes a hashref:</p>
-
-<pre><code>naming =&gt; {
-    relationships    =&gt; 'v8',
-    monikers         =&gt; 'v8',
-    column_accessors =&gt; 'v8',
-    force_ascii      =&gt; 1,
-}
-</code></pre>
-
-<p>or</p>
-
-<pre><code>naming =&gt; { ALL =&gt; 'v8', force_ascii =&gt; 1 }
-</code></pre>
-
-<p>The keys are:</p>
-
-<p>ALL</p>
-
-<p>Set &#8220;relationships&#8221;, &#8220;monikers&#8221; and &#8220;column_accessors&#8221; to the specified value.</p>
-
-<p>relationships</p>
-
-<p>How to name relationship accessors.</p>
-
-<p>monikers</p>
-
-<p>How to name Result classes.</p>
-
-<p>column_accessors</p>
-
-<p>How to name column accessors in Result classes.</p>
-
-<p>force_ascii</p>
-
-<p>For &#8220;v8&#8221; mode and later, uses String::ToIdentifier::EN instead of String::ToIdentifier::EM::Unicode to force monikers and other identifiers to ASCII.</p>
-
-<p>The values can be:</p>
-
-<p>current</p>
-
-<p>Latest style, whatever that happens to be.</p>
-
-<p>v4</p>
-
-<p>Unsingularlized monikers, has_many only relationships with no _id stripping.</p>
-
-<p>v5</p>
-
-<p>Monikers singularized as whole words, might_have relationships for FKs on UNIQUE constraints, _id stripping for belongs_to relationships.</p>
-
-<p>Some of the _id stripping edge cases in 0.05003 have been reverted for the v5 RelBuilder.</p>
-
-<p>v6</p>
-
-<p>All monikers and relationships are inflected using Lingua::EN::Inflect::Phrase, and there is more aggressive _id stripping from relationship names.</p>
-
-<p>In general, there is very little difference between v5 and v6 schemas.</p>
-
-<p>v7</p>
-
-<p>This mode is identical to v6 mode, except that monikerization of CamelCase table names is also done better (but best in v8.)</p>
-
-<p>CamelCase column names in case-preserving mode will also be handled better for relationship name inflection (but best in v8.) See &#8220;preserve_case&#8221;.</p>
-
-<p>In this mode, CamelCase &#8220;column_accessors&#8221; are normalized based on case transition instead of just being lowercased, so FooId becomes foo_id.</p>
-
-<p>v8</p>
-
-<p>(EXPERIMENTAL)</p>
-
-<p>The default mode is &#8220;v7&#8221;, to get &#8220;v8&#8221; mode, you have to specify it in &#8220;naming&#8221; explicitly until 0.08 comes out.</p>
-
-<p>&#8220;monikers&#8221; and &#8220;column_accessors&#8221; are created using String::ToIdentifier::EN::Unicode or String::ToIdentifier::EN if &#8220;force_ascii&#8221; is set; this is only significant for names with non-\w characters such as ..</p>
-
-<p>CamelCase identifiers with words in all caps, e.g. VLANValidID are supported correctly in this mode.</p>
-
-<p>For relationships, belongs_to accessors are made from column names by stripping postfixes other than _id as well, for example just Id, _?ref, _?cd, _?code and _?num, case insensitively.</p>
-
-<p>적용</p>
-
-<pre><code>naming =&gt; { ALL =&gt; 'v8' },
-</code></pre>
-
-<hr />
-
-<p>relationships</p>
-
-<p>How to name relationship accessors.</p>
-
-<p>적용</p>
-
-<pre><code>relationships =&gt; 1,
-
-# 왜 여기만 1이지? ALL =&gt; v8이었는데?
-</code></pre>
-
-<hr />
-
-<p>skip_load_external</p>
-
-<p>Skip loading of other classes in @INC. The default is to merge all other classes with the same name found in @INC into the schema file we are creating.</p>
-
-<p>적용</p>
-
-<pre><code>skip\_load_external =&gt; 1,
-</code></pre>
-
-<hr />
-
-<p>use_moose</p>
-
-<p>Creates Schema and Result classes that use Moose, MooseX::NonMoose and MooseX::MarkAsMethods (or namespace::autoclean, see below). The default content after the md5 sum also makes the classes immutable.</p>
-
-<p>It is safe to upgrade your existing Schema to this option.</p>
-
-<p>적용</p>
-
-<pre><code>use_moose          =&gt; 1,
-</code></pre>
-
-<hr />
-
-<p>only_autoclean</p>
-
-<p>By default, we use MooseX::MarkAsMethods to remove imported functions from your generated classes. It uses namespace::autoclean to do this, after telling your object&#8217;s metaclass that any operator overloads in your class are methods, which will cause namespace::autoclean to spare them from removal.</p>
-
-<p>This prevents the &#8220;Hey, where&#8217;d my overloads go?!&#8221; effect.</p>
-
-<p>If you don&#8217;t care about operator overloads, enabling this option falls back to just using namespace::autoclean itself.</p>
-
-<p>If none of the above made any sense, or you don&#8217;t have some pressing need to only use namespace::autoclean, leaving this set to the default is recommended.</p>
-
-<p>적용</p>
-
-<pre><code>only_autoclean     =&gt; 1,
-</code></pre>
-
-<hr />
-
-<p>col_collision_map</p>
-
-<p>This option controls how accessors for column names which collide with perl methods are named. See &#8220;COLUMN ACCESSOR COLLISIONS&#8221; for more information.</p>
-
-<p>This option takes either a single sprintf format or a hashref of strings which are compiled to regular expressions that map to sprintf formats.</p>
-
-<p>Examples:</p>
-
-<pre><code>col_collision_map =&gt; 'column_%s'
-
-col_collision_map =&gt; { '(.*)' =&gt; 'column_%s' }
-
-col_collision_map =&gt; { '(foo).*(bar)' =&gt; 'column_%s_%s' }
-</code></pre>
-
-<p>적용</p>
-
-<pre><code>col_collision_map  =&gt; 'column_%s',
-</code></pre>
-
-<hr />
-
-<p>result_base_class</p>
-
-<p>Base class for your table classes (aka result classes). Defaults to &#8216;DBIx::Class::Core&#8217;.</p>
-
-<p>적용</p>
-
-<pre><code>result_base_class =&gt; 'Evid::Schema::ResultBase',
-</code></pre>
-
-<hr />
-
-<p>overwrite_modifications</p>
-
-<p>Default false. If false, when updating existing files, Loader will refuse to modify any Loader-generated code that has been modified since its last run (as determined by the checksum Loader put in its comment lines).</p>
-
-<p>If true, Loader will discard any manual modifications that have been made to Loader-generated code.</p>
-
-<p>Again, you should be using version control on your schema classes. Be careful with this option.</p>
-
-<p>적용</p>
-
-<pre><code>overwrite_modifications =&gt; 1,
-</code></pre>
-
-<hr />
-
-<p>datetime_undef_if_invalid</p>
-
-<p>Pass a 0 for this option when using MySQL if you DON&#8217;T want datetime_undef_if_invalid => 1 in your column info for DATE, DATETIME and TIMESTAMP columns.</p>
-
-<p>The default is recommended to deal with data such as 00/00/00 which sometimes ends up in such columns in MySQL.</p>
-
-<p>적용</p>
-
-<pre><code>datetime_undef_if_invalid =&gt; 1,
-</code></pre>
-
-<hr />
-
-<p>custom_column_info</p>
-
-<p>Hook for adding extra attributes to the column_info for a column.</p>
-
-<p>Must be a coderef that returns a hashref with the extra attributes.</p>
-
-<p>Receives the table object (which stringifies to the unqualified table name), column name and column_info.</p>
-
-<p>For example:</p>
-
-<pre><code>custom_column_info =&gt; sub {
-my ($table, $column_name, $column_info) = @_;
-
-if ($column_name eq 'dog' &amp;&amp; $column_info-&gt;{default_value} eq 'snoopy') {
-    return { is_snoopy =&gt; 1 };
-}
-},
-</code></pre>
-
-<p>적용</p>
-
-<pre><code>{
-loader_options =&gt; {
-    custom_column_info =&gt; sub {
-    my ($table, $col_name, $col_info) = @_;
-
-    if ($col_name eq 'password') {
-        return { %{ $col_info },
-            encode_column =&gt; 1,
-            encode_class  =&gt; 'Digest',
-            encode_args   =&gt; { algorithm =&gt; 'SHA-1', format =&gt; 'hex' },
-            encode_check_method =&gt; 'check_password' };
-    }
-
-    if ($col_name eq 'created_at') {
-        return { %{ $col_info }, set_on_create =&gt; 1, inflate_datetime =&gt; 1 };
-    }
-
-    if ($col_name eq 'update_at') {
-        return { %{ $col_info }, set_on_create =&gt; 1, set_on_update =&gt; 1, inflate_datetime =&gt; 1 };
-    }
-
-    if ($col_name eq 'data') {
-        return { %{ $col_info }, serializer_class =&gt; 'JSON' };
-    }
-    },
-},
-}
-</code></pre>
-
-<hr />
-
-<h2>cpan dbicdump</h2>
-
-<pre><code>connect_info =&gt; {
-dsn               =&gt; "dbi:mysql:$DB_NAME:127.0.0.1",
-user              =&gt; $DB_USER,
-pass              =&gt; $DB_PASSWORD,
-mysql_enable_utf8  =&gt; 1,
-},
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1492,15 +1351,15 @@ mysql_enable_utf8  =&gt; 1,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/15/sass-start/">Sass 시작하기</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/14/less-start/">LESS 시작하기</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime text2 vim mode</a>
       </li>
     
   </ul>
