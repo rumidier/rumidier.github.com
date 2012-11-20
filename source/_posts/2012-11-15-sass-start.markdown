@@ -25,18 +25,19 @@ Sass - Syntactically Awesome Stylesheets
 
 ### Sass 공식 사이트
 
-Sass의 공식 사이트 주소는 [Sass 사이트](http://sass-lang.com/docs.html) 입니다.
+Sass의 공식 사이트 주소는 [Sass 사이트](http://sass-lang.com/docs.html)입니다.
 
 ### gem - Sass 설치를 위한 패키지 매니저
 
-gem을 사용하기 위해서는 Ruby가 설치되어 있어야 합니다.
+gem을 사용하려면 Ruby가 설치되어 있어야 합니다.
 [gem 설치가이드](http://octopress.org/docs/setup/rvm/)
 
 ### RVM 패키지 설치
 
 ruby를 설치 하기전 ruby를 관리해주는 RVM 을 설치 합니다.
-처음 실행 시키면 'q'를 누르라고 나옵니다. 'q' 입력후 설치 시간이 좀 걸리게 됩니다. 
-
+처음 실행 시키면 'q'를 누르라고 나옵니다.
+'q' 입력후 설치 시간이 좀 걸리게 되며 아래와 같은 내용이
+나올때까지 기다려야 합니다.
 
     $ curl -L https://get.rvm.io | bash -s stable --ruby
 
@@ -62,7 +63,7 @@ ruby를 설치 하기전 ruby를 관리해주는 RVM 을 설치 합니다.
     
 ### Ruby 설치
 
-RVM을 정상적으로 설치가 되면 rvm 을 사용하여 루비 를 설치하여 줍니다.
+RVM이 설치가 정상적으로 완료되면 rvm 을 사용해 루비를 설치해 줍니다.
 
     $ rvm install 1.9.3
 
@@ -73,20 +74,20 @@ RVM을 정상적으로 설치가 되면 rvm 을 사용하여 루비 를 설치�
     * 'echo rvm_auto_reload_flag=1 >> ~/.rvmrc' # for auto reload with msg.
     * 'echo rvm_auto_reload_flag=2 >> ~/.rvmrc' # for silent auto reload.
 
-ruby 버전별 사용
+#### ruby 버전별 사용
 
-ruby 버전을 최신으로 설정하여 줄수 있습니다.
+ruby 버전을 최신으로 설정해 줍니다.
 
     $ rvm use 1.9.3
 
     Using /Users/hancho/.rvm/gems/ruby-1.9.3-p327
 
 
-ruby 최신 버전 적용
+#### ruby 최신 버전 적용
 
-현재 보다 최신 버전이 있으면 최신 버전으로 적용 시켜 주게 됩니다. 일회성
-현재 사용하고 있는 버전이 최신이 아니었다면 위의 $ rvm use 1.x.x 사용하여
-주는게 좋습니다.
+현재 보다 최신 버전이 있으면 최신 버전으로 적용 시켜 주게 됩니다.
+현재 사용하고 있는 버전이 최신이 아니었다면 위의 $ rvm use 1.x.x 사용
+하는게 좋습니다.
 
     $ rvm rubygems latest
 
@@ -104,7 +105,7 @@ RVM과 Ruby가 정상적으로 설치되면 sass를 설치 할수 있습니다.
 
 - Sass 따라 해보기
 
-    폴더를 생성하여 style.scss 파일을 만들어 봅니다.
+    테스트 폴더를 생성후 style.scss 파일을 만듭니다.
 
        $ mkdir Sass-Start
        $ cd Sass-Start
@@ -112,7 +113,7 @@ RVM과 Ruby가 정상적으로 설치되면 sass를 설치 할수 있습니다.
 
 - style.scss 파일 작성
 
-sass가 동작 하는지 확인 하기 위하여 테스트 데이터를 작성 합니다.
+sass가 동작 하는지 확인 하기 위해 테스트 파일를 작성합니다.
 
 {% codeblock style.scss lang:css %}
 .fakeshadow {
@@ -131,7 +132,9 @@ sass가 동작 하는지 확인 하기 위하여 테스트 데이터를 작성 �
 
 - .scss -> .css 변환하기
 
-작성된 .scss 파일을 .css 파일로 변환하여야 합니다. 다음은 .scss 파일이 변경
-되었을시 재입력 없이 변경 되는 명령어 입니다.
+작성된 .scss 파일을 .css 파일로 변환합니다. 다음은 .scss 파일이 변경
+되었을시 재입력 없이 변경 되는 명령어 입니다.  .scss 파일이 변경되는
+시점에(저장시) .css 변환을 자동으로 해주므로 수정 사항이 많을시 사용해
+주면 좋습니다.
 
     $ sass --watch style.scss:style.css
