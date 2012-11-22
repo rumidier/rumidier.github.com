@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Phonegap | Meadows of wild horses]]></title>
+  <link href="http://rumidier.github.com/blog/categories/phonegap/atom.xml" rel="self"/>
+  <link href="http://rumidier.github.com/"/>
+  <updated>2012-11-22T19:19:08+09:00</updated>
+  <id>http://rumidier.github.com/</id>
+  <author>
+    <name><![CDATA[rumidier]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Phonegap]]></title>
+    <link href="http://rumidier.github.com/blog/2012/11/22/phonegap/"/>
+    <updated>2012-11-22T19:06:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/11/22/phonegap</id>
+    <content type="html"><![CDATA[<h1>Phonegap - iOS</h1>
+
+<h2>사용 환경</h2>
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:   MacBookPro8,1</li>
+<li>메모리:           4 GB</li>
+<li>Xcode: v4.5.2</li>
+<li>기타:
+
+<ul>
+<li>homebrew</li>
+<li>iTerm</li>
+<li>Xcode Command Line Tools</li>
+<li>OS X Mountain Lion</li>
+<li>iPhone</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>요구 환경</h2>
+
+<ul>
+<li>Xcode 4.5+</li>
+<li>Xcode Command Line Tools</li>
+<li>Intel-based computer with Mac OS X Lion or greater (10.7+)</li>
+<li>Necessary for installing on device:
+
+<ul>
+<li>Apple iOS device (iPhone, iPad, iPod Touch) iOS developer certificate</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Xcode 설치</h3>
+
+<p>Xcode는 <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Mac App Store</a>에서 다운 받아 설치 할수 있습니다.</p>
+
+<h3>Xcode Command Line Tools 설치</h3>
+
+<h4>Xcode 실행후 > Xcode Preferences 선택 합니다.</h4>
+
+<p><img src="https://lh6.googleusercontent.com/-9lGHtlIr6t0/UK3bfp3Kn9I/AAAAAAAAACc/7g0GBCw6L24/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-01.jpg" width="500" height="500" title="&#34;Xcode preferences 변경&#34;" alt="&#34;Xcode preferences 변경&#34;"></p>
+
+<h4>Downloads->Components-> Command LIne Tools -> Install 클릭으로 설치 합니다.</h4>
+
+<p><img src="https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg" width="500" height="500" title="&#34;Command Line Tools 설치&#34;" alt="&#34;Command Line Tools 설치&#34;"></p>
+
+<p>설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은
+<a href="http://docs.phonegap.com/en/2.2.0/guide_command-line_index.md.html#Command-Line%20Usage">Command-Line</a>에서 iOS 부분을 참고 하시면 됩니다.</p>
+
+<h3>Apache Cordova 다운로드</h3>
+
+<p>다운로드된 파일은 .zip 파일이므로 압축을 풀어서 사용하시면 됩니다.</p>
+
+<ul>
+<li>Cordova는 <a href="http://phonegap.com/download">Cordova-Down</a>에서 다운 받을수 있습니다.</li>
+<li>다운 받은 폴더를 ~/CordovaLib-2.x.x 쓰기 편한 위치로 이동 시킵니다.</li>
+</ul>
+
+
+<h3>새로운 프로젝트 시작하기</h3>
+
+<h4>bin 폴더 열기</h4>
+
+<p>새로운 프로젝트를 생성하기 위해서는 ./create 파일을 실행 해야 합니다. create 파일은
+lib/iOS/bin 폴더에 존재 합니다.</p>
+
+<ul>
+<li>lib/ios/bin 폴더로 직접 이동 해서 사용할수 있습니다.</li>
+<li>~/CordovalLib-2.2/lib/ios/bin 폴더를 Terminal.app에 드래그 하면 bin 폴더로 바로 이동 할수 있습니다.</li>
+</ul>
+
+
+<h4>create 실행하기</h4>
+
+<pre><code>$ ./create &lt;project_folder_path&gt; &lt;package_name&gt; &lt;project_name&gt;
+
+$ mkdir project_folder_path/new_folder_name
+$ ./create &lt;project_folder_path&gt; pheonegap.start start
+$ cd ~/project_folder_path
+$ ls
+
+CordovaLib  cordova     start       start.xcodepro www
+</code></pre>
+
+<h3>Simulator 실행하기</h3>
+
+<h4>project_name.xcodeproj 실행</h4>
+
+<p>project_name.xcodeproj 파일을 클릭 하면 Xcode가 실행 됩니다. 실행후 컴파일 시간을 거친후 아래와 같이 <project_name> iPhone v.xx Simulator 선택 한후 Run(단축키 Command + R)을 실행 시켜 줍니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-4i-P73CwMQ8/UK3xPWma-gI/AAAAAAAAAC0/nmMVo0_Hlkk/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-01.jpg" width="500" height="500" title="&#34;Simulrator 실행&#34;" alt="&#34;Simulrator 실행&#34;"></p>
+
+<p>Run이 옳바르게 진행 되면 아래와 같은 iOS Simulator가 뜨게 됩니다.</p>
+
+<p><img src="https://lh4.googleusercontent.com/-6MXX5k5upE0/UK3xWeU51mI/AAAAAAAAAC8/zSRgxkGKQoc/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-02.jpg" width="500" height="500" title="&#34;Simulrator 실행 화면&#34;" alt="&#34;Simulrator 실행 화면&#34;"></p>
+]]></content>
+  </entry>
+  
+</feed>

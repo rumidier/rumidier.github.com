@@ -9,12 +9,14 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="사용 환경 모델명 : MacBook Pro
+  <meta name="description" content="Phonegap - iOS 사용 환경 모델명 : MacBook Pro
 모델 식별자: MacBookPro8,1
-프로세서 이름: Intel Core i5
-프로세서 속도: 2.3 GHz
 메모리: 4 GB
-기타: homebrew, iTerm CoffeeScript 설치 CoffeeScript - &hellip;">
+Xcode: v4.5.2
+기타: homebrew
+iTerm
+Xcode Command Line Tools
+OS X Mountain Lion &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +71,602 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/22/phonegap/">Phonegap</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-22T19:06:00+09:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/22/phonegap/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Phonegap - iOS</h1>
+
+<h2>사용 환경</h2>
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:   MacBookPro8,1</li>
+<li>메모리:           4 GB</li>
+<li>Xcode: v4.5.2</li>
+<li>기타:
+
+<ul>
+<li>homebrew</li>
+<li>iTerm</li>
+<li>Xcode Command Line Tools</li>
+<li>OS X Mountain Lion</li>
+<li>iPhone</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>요구 환경</h2>
+
+<ul>
+<li>Xcode 4.5+</li>
+<li>Xcode Command Line Tools</li>
+<li>Intel-based computer with Mac OS X Lion or greater (10.7+)</li>
+<li>Necessary for installing on device:
+
+<ul>
+<li>Apple iOS device (iPhone, iPad, iPod Touch) iOS developer certificate</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Xcode 설치</h3>
+
+<p>Xcode는 <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Mac App Store</a>에서 다운 받아 설치 할수 있습니다.</p>
+
+<h3>Xcode Command Line Tools 설치</h3>
+
+<h4>Xcode 실행후 > Xcode Preferences 선택 합니다.</h4>
+
+<p><img src="https://lh6.googleusercontent.com/-9lGHtlIr6t0/UK3bfp3Kn9I/AAAAAAAAACc/7g0GBCw6L24/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-01.jpg" width="500" height="500" title="&#34;Xcode preferences 변경&#34;" alt="&#34;Xcode preferences 변경&#34;"></p>
+
+<h4>Downloads->Components-> Command LIne Tools -> Install 클릭으로 설치 합니다.</h4>
+
+<p><img src="https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg" width="500" height="500" title="&#34;Command Line Tools 설치&#34;" alt="&#34;Command Line Tools 설치&#34;"></p>
+
+<p>설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은
+<a href="http://docs.phonegap.com/en/2.2.0/guide_command-line_index.md.html#Command-Line%20Usage">Command-Line</a>에서 iOS 부분을 참고 하시면 됩니다.</p>
+
+<h3>Apache Cordova 다운로드</h3>
+
+<p>다운로드된 파일은 .zip 파일이므로 압축을 풀어서 사용하시면 됩니다.</p>
+
+<ul>
+<li>Cordova는 <a href="http://phonegap.com/download">Cordova-Down</a>에서 다운 받을수 있습니다.</li>
+<li>다운 받은 폴더를 ~/CordovaLib-2.x.x 쓰기 편한 위치로 이동 시킵니다.</li>
+</ul>
+
+
+<h3>새로운 프로젝트 시작하기</h3>
+
+<h4>bin 폴더 열기</h4>
+
+<p>새로운 프로젝트를 생성하기 위해서는 ./create 파일을 실행 해야 합니다. create 파일은
+lib/iOS/bin 폴더에 존재 합니다.</p>
+
+<ul>
+<li>lib/ios/bin 폴더로 직접 이동 해서 사용할수 있습니다.</li>
+<li>~/CordovalLib-2.2/lib/ios/bin 폴더를 Terminal.app에 드래그 하면 bin 폴더로 바로 이동 할수 있습니다.</li>
+</ul>
+
+
+<h4>create 실행하기</h4>
+
+<pre><code>$ ./create &lt;project_folder_path&gt; &lt;package_name&gt; &lt;project_name&gt;
+
+$ mkdir project_folder_path/new_folder_name
+$ ./create &lt;project_folder_path&gt; pheonegap.start start
+$ cd ~/project_folder_path
+$ ls
+
+CordovaLib  cordova     start       start.xcodepro www
+</code></pre>
+
+<h3>Simulator 실행하기</h3>
+
+<h4>project_name.xcodeproj 실행</h4>
+
+<p>project_name.xcodeproj 파일을 클릭 하면 Xcode가 실행 됩니다. 실행후 컴파일 시간을 거친후 아래와 같이 <project_name> iPhone v.xx Simulator 선택 한후 Run(단축키 Command + R)을 실행 시켜 줍니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-4i-P73CwMQ8/UK3xPWma-gI/AAAAAAAAAC0/nmMVo0_Hlkk/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-01.jpg" width="500" height="500" title="&#34;Simulrator 실행&#34;" alt="&#34;Simulrator 실행&#34;"></p>
+
+<p>Run이 옳바르게 진행 되면 아래와 같은 iOS Simulator가 뜨게 됩니다.</p>
+
+<p><img src="https://lh4.googleusercontent.com/-6MXX5k5upE0/UK3xWeU51mI/AAAAAAAAAC8/zSRgxkGKQoc/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-02.jpg" width="500" height="500" title="&#34;Simulrator 실행 화면&#34;" alt="&#34;Simulrator 실행 화면&#34;"></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/21/less-tutorial/">Less Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-21T12:44:00+09:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/21/less-tutorial/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Variables(변수)</h3>
+
+<p>변수는 광범위 하게 사용 하는 값을 한곳에 정의 할수 있으며 그 값을 스타일 시트에 적용 할수 있습니다.
+이는 전체 변경을 한줄의 코드로 변경 할수 있습니다.</p>
+
+<pre><code>@color: #4D926F
+
+#header {
+  color: @color;
+}
+h2 {
+  color: @color;
+}
+</code></pre>
+
+<h3>Mixins(믹스 인)</h3>
+
+<p>믹스 인 클래스 이름을 속성의 일부 처럼 묘사함으로써  그 클래스에서 설정한 모든 속성을  다른 클래스에
+포함 할수 있습니다.
+또한 믹스 인은 함수와 같이 인수를 설정할 수 있습니다.</p>
+
+<pre><code>.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+#header {
+  .rounded-corners;
+}
+#footer {
+  .rounded-corners(10px);
+}
+</code></pre>
+
+<h3>Nested Rules(중첩 규칙)</h3>
+
+<p>LESS에서는 선택기를 다른 선택기에 중첩하여 상속을 지정하기 위해 긴 선택기를 선택 하지 않아도 됩니다.
+이렇게 하여 스타일 상속을 명확하게 하고, 스타일 시트를 짧게 설명 할 수 있습니다.</p>
+
+<pre><code>#header {
+  h1{
+    font-size: 26px;
+    font-weight: bold;
+  }
+  p {
+    font-size: 12px;
+    a {
+      text-decoration: none;
+      &amp;:hover { border-width: 1px }
+    }
+  }
+}
+</code></pre>
+
+<h3>Functions &amp; Operations(함수와 연산)</h3>
+
+<p>연산은 색이나 숫자에 대해 덧셈, 뺄셈, 나눗셈, 곱셈을 할수 있습니다. 연산은 CSS화의 호환성을 위해
+괄호 내에서만 실행 됩니다.</p>
+
+<pre><code>@the-border: 1px;
+@base-color: #111;
+@red: #842210;
+
+#header {
+  color: @base-color * 3;
+  border-left: @the-border;
+  border-right: @the-border * 2;
+}
+#footer {
+  color: @base-color + #003300;
+  border-color: desaturate( @red, 10%);
+}
+</code></pre>
+
+<h2>The Language</h2>
+
+<h3>Variables(변수)</h3>
+
+<p>LESS에서 변수는 실제로 상수로 기억되며 변수는 오직 한번만 정의 됩니다.</p>
+
+<p>example-01.less</p>
+
+<pre><code>@nice-blue: #5B83AD;
+@light-blue: (@nice-blue + #111);
+
+#header { color: @light-blue; }
+</code></pre>
+
+<p>example-01.css</p>
+
+<pre><code>#header { color: #6c94be; }
+</code></pre>
+
+<p>example-02.less - 변수 이름에 변수가 정의 가능합니다.</p>
+
+<pre><code>@fnord: "I am fnord";
+@var: 'fnord';
+content: @@var;
+</code></pre>
+
+<p>example-02.css</p>
+
+<pre><code>content: "I am fnord"
+</code></pre>
+
+<h3>Mixins</h3>
+
+<p>LESS에서는 하나의 ruleset을 다른 ruleset안에 묶음으로 포함할수 있습니다.</p>
+
+<p>example-03.less</p>
+
+<pre><code>.bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+</code></pre>
+
+<p>그리고 이러한 속성들을 다른 ruleset에서 사용하고자 할경우 클래스 이름을 사용해 속성을 포함 시킬수있습니다.</p>
+
+<p>example-03.less</p>
+
+<pre><code>.bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+
+#menu a {
+  color: #111;
+  .bordered;
+}
+.post a {
+  color: red;
+  .bordered;
+}
+</code></pre>
+
+<p>example-03.css</p>
+
+<pre><code>#menu a {
+  color: #111;
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+.post a {
+  color: red;
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+</code></pre>
+
+<h3>Parametric Mixins</h3>
+
+<p>example-04.less</p>
+
+<pre><code>.border-radius (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+#header {
+  .border-radius(4px);
+}
+.button {
+  .border-radius(6px);
+}
+</code></pre>
+
+<p>example-04.css</p>
+
+<pre><code>#header {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+.button {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+</code></pre>
+
+<p>example-05.less</p>
+
+<p>기본값을 가질수도 있습니다</p>
+
+<pre><code>.border-radius (@radius: 5px) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+#header {
+  .border-radius;
+}
+</code></pre>
+
+<p>example-05.css</p>
+
+<pre><code>#header {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+</code></pre>
+
+<p>매개 변수가 유효한 mixins은 파라미터를 전달 하지 않아도 되고 CSS에 표시 되지 않게 사용할수 있습니다.</p>
+
+<p>example-06.less</p>
+
+<pre><code>.wrap () {
+    text-wrap: wrap;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    word-wrap: break-word;
+}
+</code></pre>
+
+<p>example-06.css</p>
+
+<pre><code>pre {
+  text-wrap: wrap;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  word-wrap: break-word;
+}
+</code></pre>
+
+<h4>The @arguments varialbe</h4>
+
+<p>@arguments를 사용해서 개별적으로 파라미터를 사용 하지 않아도 됩니다.</p>
+
+<p>example-07.less</p>
+
+<pre><code>.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+}
+
+.box-shadow(2px, 5px);
+</code></pre>
+
+<p>example-07.css</p>
+
+<pre><code>.box-shadow: 2px 5px 1px #000;
+-moz-box-shadow: 2px 5px 1px #000;
+-webkit-box-shadow: 2px 5px 1px #000;
+</code></pre>
+
+<h2>Pattern-matching and Guard expressions</h2>
+
+<p>mixin에 기본값을 변경 할수있습니다. mixin을 선언 하고 호출시 참인 값을 선택해 변환합니다.</p>
+
+<p>변경 기본 문법</p>
+
+<p>basic-01.less</p>
+
+<pre><code>.mixin (@s, @color) {
+    ….
+}
+.class {
+  .mixin(@switch, #888);
+}
+</code></pre>
+
+<p>basic-02.less</p>
+
+<pre><code>.mixin (dark, @color) {
+  color: darken(@color, 10%);
+}
+.mixin (light, @color) {
+  color: lighten(@color, 10%);
+}
+.mixin (@), @color) {
+  display: block;
+}
+</code></pre>
+
+<p>example-08.less</p>
+
+<pre><code>.mixin (dark, @color) {
+  color: darken(@color, 10%);
+}
+.mixin (light, @color) {
+  color: lighten(@color, 10%);
+}
+.mixin (@_, @color) {
+  display: block;
+}
+
+@switch: light;
+.class {
+  .mixin(@switch, #888);
+}
+</code></pre>
+
+<p>example-08.css</p>
+
+<pre><code>.class {
+  color: #a2a2a2;
+  display: black;
+}
+</code></pre>
+
+<p>인수의 개수에 따라서 선택 할수도 있습니다.</p>
+
+<pre><code>.mixin (@a) {
+  color: @a;
+}
+.mixin (@a, @b) {
+  color: fade(@a, @b);
+}
+</code></pre>
+
+<h2>Guards</h2>
+
+<p>가드는 값이나 변수의 개수가 아니라 식에 일치 시킵니다.</p>
+
+<p>example-09.less</p>
+
+<pre><code>.mixin (@a) when (lightness(@a) &gt;= 50%) {
+  background-color: black;
+}
+.mixin (@a) when (lightness(@a) &lt; 50%) {
+  background-color: white;
+}
+.mixn (@a) {
+  color: @a;
+}
+.class1 { .mixin(#ddd) }
+.class2 { .mixin(#555) }
+</code></pre>
+
+<p>example-09.css</p>
+
+<pre><code>.class1 {
+  color: #ddd;
+  background-color: black;
+}
+.class2 {
+  color: #555;
+  background-color: white;            
+}
+</code></pre>
+
+<p>가드 안에서 비교식(>, >=, =, =&lt;, &lt;)을 사용 할수있습니다.</p>
+
+<p>basic.less</p>
+
+<pre><code>.truth (@a) when (@a) { … }
+.truth (@a) when (@a = true) { … }
+</code></pre>
+
+<p>example-10.less</p>
+
+<p>아래의 식은 위에  basic.less값에 매치 되지 않습니다. 값이 &#8216;true&#8217;만 매치 됩니다.</p>
+
+<pre><code>.class {
+  .truth(40);
+}
+</code></pre>
+
+<p>or 이중 조건은 &#8216;,&#8217;로 분류 됩니다.</p>
+
+<p>example-11.less</p>
+
+<pre><code>.mixin (@a) when (@a &gt; 10), (@a &lt; -10) { … }
+</code></pre>
+
+<p>인자를 비교 하거나 인자가 아닌값을 비교 할수 있습니다.</p>
+
+<p>example-12.less</p>
+
+<pre><code>@media: mobile;
+
+.mixin (@a) when (@media = mobile) { … }
+.mixin (@a) when (@media = desktop) { … }
+
+.max (@a, @b) when (@a &gt; @b) { width: @a }
+.max (@a, @b) when (@a &lt; @b) { width: @b }
+</code></pre>
+
+<p>값의 형을 is*를 사용해서 비교 할수 있습니다.</p>
+
+<pre><code>.mixin (@a, @b: 0) when (isnumber(@b)) { … }
+.mixin (@a, @b: black) when (iscolor(@b)) { … }
+</code></pre>
+
+<p>확인 가능한 is*형</p>
+
+<ul>
+<li>iscolor</li>
+<li>isnumber</li>
+<li>isstring</li>
+<li>iskeyword</li>
+<li>isurl</li>
+</ul>
+
+
+<p>숫자가 아닌 다른 is*형</p>
+
+<ul>
+<li>ispixel</li>
+<li>ispercentage</li>
+<li>isem</li>
+</ul>
+
+
+<p>추가 조건문 and</p>
+
+<pre><code>.mixin (@a) when (isnumber(@a)) and (@a &gt; 0) { … }
+</code></pre>
+
+<p>부정 조건문 not</p>
+
+<pre><code>.mixin (@b) when not (@b &gt; 0) { … }
+</code></pre>
+
+<h3>Nested rules</h3>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1105,134 +1703,6 @@ my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/25/db-password-hash/">DB_Password_Hash</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-25T16:41:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/25/db-password-hash/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>DB Password HASH</h2>
-
-<p><a href="https://metacpan.org/module/DBIx::Class::EncodedColumn">DBIx::Class::EncodedColumn</a></p>
-
-<p>기본 입력값 입력시 sha(&#8216;password&#8217;)사용 하여 암호화 할수 있도록 한다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>INSERT INTO `user` VALUES (2,'rum_user','rum_user@mail.com',sha('Password'),localtime ,localtime);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>MyWeb::ResultBase.pm에 EncodedColumn 추가하여 준다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>__PACKAGE__-&gt;load_components(qw/
-</span><span class='line'>    EncodedColumn
-</span><span class='line'>    InflateColumn::DateTime
-</span><span class='line'>    TimeStamp
-</span><span class='line'>/);</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://metacpan.org/module/Catalyst::Plugin::Authentication">Catalyst::Plugin::Authentication</a></p>
-
-<p>my_web.conf 파일에 플러그인 설정 추가
-pawword_type 설정시 디폴트로 SHA-1이 적용되지만
-명시적으로 password_hash_type을 정의 하여 준다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;Plugin::Authentication&gt;
-</span><span class='line'>    &lt;default&gt;
-</span><span class='line'>        password_type      hashed
-</span><span class='line'>        password_hash_type SHA-1
-</span><span class='line'>        user_model         DonDB::User
-</span><span class='line'>        class              SimpleDB
-</span><span class='line'>    &lt;/default&gt;
-</span><span class='line'>&lt;/Plugin::Authentication&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>설정 추가 참고 자료</h3>
-
-<p><a href="https://metacpan.org/module/Catalyst::Authentication::Credential::Password">Catalyst::Authentication::Credential::Password</a></p>
-
-<p><a href="https://metacpan.org/module/Digest#new">Digest</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/24/templet-br/">Templet_br</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-24T14:28:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/24/templet-br/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1248,15 +1718,15 @@ pawword_type 설정시 디폴트로 SHA-1이 적용되지만
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/15/sass-start/">Sass 시작하기</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/14/less-start/">LESS 시작하기</a>
       </li>
     
   </ul>

@@ -9,9 +9,9 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="핵심정리(Le-04) 변화를 주기 위해서 여러 효과들을 적용하다 보면, 이 효과들이 한 번에 동작하는지 또는 순서
-대로 동작하는지를 기억하기가 쉽지 않을 수 있다. 도움을 주기 위해 간단히 몇 가지 요점을
-정리해 보았다. 요소들의 단일 집합에서 효과들은 하나의 . &hellip;">
+  <meta name="description" content="Source 예제.html 예제 css 예제 js 본문 - 테이블행에 징검다리 색깔 입히기 사용자 정의 선택자 class명 horizontal를 가진 div 집합의 두번째 항목 선택
+$(&#8216;div.horizontal:eq(1)&#8217;)
+두번째 항목이 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,277 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/11/lear-jquery-2jang-02/">Lear jQuery 2장-02</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-11T14:26:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/11/lear-jquery-2jang-02/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Source</h2>
+
+<p><a href="https://gist.github.com/2908591">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2908588">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2908628">예제 js  </a></p>
+
+<h2>본문 - 테이블행에 징검다리 색깔 입히기</h2>
+
+<h2>사용자 정의 선택자</h2>
+
+<p>class명 horizontal를 가진 div 집합의 두번째 항목 선택
+$(&#8216;div.horizontal:eq(1)&#8217;)
+두번째 항목이 1인 이유는 자바스크립트 배열에서 인덱스는
+0에서 부터 시작 하며 jQuery또한 마찬가지이다.
+단, css는 1을 기반으로 한다.</p>
+
+<p>헤더 행 스타일 입히기</p>
+
+<pre><code>$('th').addClass('table-heading');
+//&lt;th class=table-heading'&gt;
+</code></pre>
+
+<p>odd,even 색 입히기</p>
+
+<pre><code>$('tr:not(:has(th)):even').addClass('even');
+$('tr:not(:has(th)):odd').addClass('odd');
+//odd와 even의 색 정의는 css에 정의 되어있다.
+</code></pre>
+
+<p>테이블에서 특정단어 포함 셀만 강조</p>
+
+<pre><code>$('td:contains("Henry")').addClass('highlight');
+//td에 Henry 단어가 포함 된열 강조
+// highlight의 색 정의는 .css에 정의 되어있다.
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아낸후 모든 하위레벨에 클래스 추가</p>
+
+<pre><code>$('td:contains("Henry")').siblings().addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 부모를 찾아 인덱스가 0보다 큰셀들을(0은 최상 부모) 순회하면 클래스추가</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td:gt(0)').addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함한 셀을 찾아 부모를 찾고 그 안의 모든 셀을 찾은후 Henry를 포함한 셀을
+필터링한후 클래스추가(Henry만 적용을 하지 않음)</p>
+
+<pre><code>$('td:contains("Henry")').parent().find('td').not(':contains('Henry")')).addClass('highlight');
+</code></pre>
+
+<p>Henry를 포함하고 있는 셀을 찾아낸 후에 그것의 부모를 얻어와서 자식들 중에 두번째 셀을
+찾아서 클래스를 추가하고 가장 최근의 .find()를 취소한 후에 다시 자식들 중에서 세 번째 셀을
+찾아서 클래스를 추가한다.</p>
+
+<pre><code>$('td:contains("Henry")') //Henry셀을 찾고
+.parent()  //부모를 찾아서
+.find('td:eq(1)') //부모의 두번째 셀을 찾아
+.addClass('highlight') //강조 하고(클래스 추가)
+.end() // 다시 부모로 돌아와
+.find('td:eq(2)') // 세번째를 찾아서
+.addClass('highlight'); //강조 한다(클래스 추가)
+</code></pre>
+
+<h2>Command Action</h2>
+
+<p><strong>addClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에 추가한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p>반환값 - 확장집합</p>
+
+<hr />
+
+<p><strong>removeClass(names)</strong></p>
+
+<p>매개변수로 전달된 하나 이상되는 클래스명을 확장 집합의 모든 엘리먼트에서 삭제한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>names (String)클래스명을 포함 하는 문자열, 여러 클래스명을 추가할 때는 공백으로 구분</p>
+
+<p><strong>반환값</strong></p>
+
+<p>확장집합</p>
+
+<hr />
+
+<p><strong>siblings()</strong></p>
+
+<p>확장 엘리먼트의 모든 형제를포함 하는 확장 집합을 반환</p>
+
+<hr />
+
+<p><strong>find(selector)</strong></p>
+
+<p>  원본의 모든 엘리먼트 중 전달된 셀렉터 표현식과 일치하는 엘리먼트로 구성된 새로운 확장 집합
+  을 반환한다. 확장 집합에 포함된 엘리먼트의 자손 엘리먼트도 전달된 표현식과 일치하는지 평가</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>selector (String) 반환될 집합의 일부가 될 엘리먼트가 일치하는 셀렉터</p>
+
+<p><strong>반환값</strong></p>
+
+<p>새로 생성된 확장 집합</p>
+
+<p>변수 wrappedSet에 할당된 확장 집합에서 p문단 인용문(&gt;cite&lt; 엘리먼트)로 구성된 확장 집합은
+두가지로 표현 된다</p>
+
+<pre><code>wrappedSet.find('p cite')
+$('p cite', wrappedSet)
+</code></pre>
+
+<hr />
+
+<p><strong>parent()</strong></p>
+
+<p>  확장 집합 내에 있는 모든 확장 엘리먼트의 바로 위 부모로 구성된 확장 집합을 반환한다.</p>
+
+<p><strong>parents()</strong></p>
+
+<p>  모든 확장 엘리먼트의 조상으로 구성된 확장 집합을 반환한다. 바로 위 부모와
+  상위의 모든 소상이 포함 되지만 문서 루트(document root)는 포함 되지 않는다(?)</p>
+
+<hr />
+
+<p><strong>end()</strong></p>
+
+<p>  jQuery 커맨드 체인에서 사용하며 이전 확장 집합으로 돌아간다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>  없음</p>
+
+<p><strong>반환값</strong></p>
+
+<p>이전 확장 집합</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/30/jquery-01/">jQuery-01</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-30T17:45:00+09:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/30/jquery-01/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>DOM 조작 메서드 핵심정리(Le-05)</h3>
+
+<p>DOM을 조작할 수 있도록 jQuery가 제공하는 메서드들은 광범위하기 때문에 어떤 작업을
+처리할 때 어떤 메서드들이 어느 경우에 도움을 줄 수 있는지를 한눈에 보여줄 수 있도록
+관련된 메서드들을 기능별 범주로 나누어 보았다.</p>
+
+<ol>
+<li><p>새로운 요소를 검색된 요소 <strong>안에</strong> 삽입하기 위한 메서드</p>
+
+<ul>
+<li>.append()</li>
+<li>.appendTo()</li>
+<li>.prepend()</li>
+<li>.prependTo()</li>
+</ul>
+</li>
+<li><p>새로운 요소를 검색된 요소 <strong>전/후에</strong> 삽입하기 위한 메서드</p>
+
+<ul>
+<li>.after()</li>
+<li>.insertAfter()</li>
+<li>.before()</li>
+<li>.insertBefore()</li>
+</ul>
+</li>
+<li><p>새로운 요소로 검색된 요소를 <strong>감싸면서</strong> 삽입하기 위한 메서드</p>
+
+<ul>
+<li>.wrap()</li>
+</ul>
+</li>
+<li><p>검색된 요소를 새로운 요소 또는 텍스트로 대치하기 위한 메서드</p>
+
+<ul>
+<li>.html()</li>
+<li>.text()</li>
+</ul>
+</li>
+<li><p>실제 삭제 하지 않고 도큐먼트에서 검색된 요소와 자식들을 <strong>제거하기</strong> 위한 메서드</p>
+
+<ul>
+<li>.remove()</li>
+</ul>
+</li>
+</ol>
+
+
+<h3>요약</h3>
+
+<p>DOM과 관련된 jQuery 메서드를 사용하여 콘텐츠를 생성해보거나 복사하는 데 사용하기도 하고 조립하거나
+장식하는 데에도 사용하였다. 그리고 웹 페이지상의 문장을 주석으로 변경해 보거나 인용표시나 링크로
+또는 스타일이 적용된 인용 문구로 변경해 볼 때에도 jQuery 메서드들을 사용해 보았다</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -650,102 +921,6 @@ siblings()
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/14/meadow/">Meadow</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-14T15:15:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/14/meadow/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>[잡담]</h2>
-
-<ol>
-<li>카탈 시작 정리(carton install 좀 까먹지마&#8230;)</li>
-<li>MYSQL 유저 추가</li>
-<li>MYSQL Dump 하는법</li>
-</ol>
-
-
-<p>뭔가 블로그질을 하려면 똑바로 하고 싶은데 똑바로 하려면
-엄청나게  시간이 들가고 짧게 짧게 가자..</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/14/ubuntu-scp/">Ubuntu SCP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-14T15:08:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/14/ubuntu-scp/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>서버파일 전송</p>
-
-<pre><code>$ scp [option] [파일] [위치]
-&lt;option&gt;
--r : 지정한 디렉토리 하위 디렉토리 및 파일까지 복사
-</code></pre>
-
-<p>예제</p>
-
-<pre><code>$ scp rumi@rumidier.github.com:/home/meadow/workspace/filename.c .
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -763,15 +938,15 @@ siblings()
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/15/sass-start/">Sass 시작하기</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/14/less-start/">LESS 시작하기</a>
       </li>
     
   </ul>
