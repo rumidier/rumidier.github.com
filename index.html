@@ -239,10 +239,13 @@ CordovaLib  cordova     start       start.xcodepro www
   </header>
 
 
-  <div class="entry-content"><h3>Variables(변수)</h3>
+  <div class="entry-content"><h2>Tutorial</h2>
 
-<p>변수는 광범위 하게 사용 하는 값을 한곳에 정의 할수 있으며 그 값을 스타일 시트에 적용 할수 있습니다.
-이는 전체 변경을 한줄의 코드로 변경 할수 있습니다.</p>
+<h3>Variables(변수)</h3>
+
+<p>변수 선언은 &#8216;@&#8217; 연산자를 사용 합니다. 변수에 값을 정의 함으로써 광범위 하게 사용 할수 있습니다.</p>
+
+<p>example.less</p>
 
 <pre><code>@color: #4D926F
 
@@ -254,11 +257,23 @@ h2 {
 }
 </code></pre>
 
+<p>compile.css</p>
+
+<p>.css로 변환 하면 @color의 값으로 치환됩니다.</p>
+
+<pre><code> #header {
+   color: #4D926F;
+ }
+ h2 {
+   color: #4D926F;
+ }
+</code></pre>
+
 <h3>Mixins(믹스 인)</h3>
 
-<p>믹스 인 클래스 이름을 속성의 일부 처럼 묘사함으로써  그 클래스에서 설정한 모든 속성을  다른 클래스에
-포함 할수 있습니다.
-또한 믹스 인은 함수와 같이 인수를 설정할 수 있습니다.</p>
+<p>믹스인은 클래스 처럼 사용 가능 하며 클래스에서 설정한 모든 속성을 포함시킬수 있습니다. 또한, 함수와 같이 인수를 설정 할수도 있습니다.</p>
+
+<p>example.less</p>
 
 <pre><code>.rounded-corners (@radius: 5px) {
   -webkit-border-radius: @radius;
@@ -276,10 +291,39 @@ h2 {
 }
 </code></pre>
 
+<p>compile.css</p>
+
+<p>.rounded-coners를 선언 하였고 기본 인수는 @radius 5px입니다. #header는 기본 인수를 사용 하였고 #footer는 사용자 인수를 사용 하여서 10px이 되었습니다.</p>
+
+<pre><code>.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+#header {
+  -webkt-boder-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+#footer {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+</code></pre>
+
 <h3>Nested Rules(중첩 규칙)</h3>
 
-<p>LESS에서는 선택기를 다른 선택기에 중첩하여 상속을 지정하기 위해 긴 선택기를 선택 하지 않아도 됩니다.
-이렇게 하여 스타일 상속을 명확하게 하고, 스타일 시트를 짧게 설명 할 수 있습니다.</p>
+<p>선택기를 중첩하여 상속 할수 있으므로 긴 이름의 선택기를 중복으로 사용하지 않고도 명확하고 짧게 사용할수 있습니다.</p>
+
+<p>example.less</p>
 
 <pre><code>#header {
   h1{
@@ -296,10 +340,29 @@ h2 {
 }
 </code></pre>
 
+<p>compile.css</p>
+
+<p>.less 에서 쓰인 한번 쓰인 #heder 선택기가 중복으로 적용됩니다.</p>
+
+<pre><code>#header h1 {
+  font-size: 26px;
+  font-weight: bold;
+}    
+#header p {
+  font-size: 12px;
+}
+#header p a {
+  text-decoration: none;
+}
+#header p a:hover { border-width: 1px }
+</code></pre>
+
 <h3>Functions &amp; Operations(함수와 연산)</h3>
 
-<p>연산은 색이나 숫자에 대해 덧셈, 뺄셈, 나눗셈, 곱셈을 할수 있습니다. 연산은 CSS화의 호환성을 위해
+<p>연산은 색이나 숫자에 대해 덧셈, 뺄셈, 나눗셈, 곱셈을 할수 있습니다. 속성 사이에 복잡한 연산은 CSS의 호환성을 위해
 괄호 내에서만 실행 됩니다.</p>
+
+<p>example.less</p>
 
 <pre><code>@the-border: 1px;
 @base-color: #111;
@@ -316,6 +379,19 @@ h2 {
 }
 </code></pre>
 
+<p>compile.css</p>
+
+<pre><code>#header {
+  color: #333;
+  border-left: 1px;
+  border-right: 2px;
+}    
+#footer {
+  color: #114411;
+  border-color: #7d2717
+}
+</code></pre>
+
 <h2>The Language</h2>
 
 <h3>Variables(변수)</h3>
@@ -323,6 +399,8 @@ h2 {
 <p>LESS에서 변수는 실제로 상수로 기억되며 변수는 오직 한번만 정의 됩니다.</p>
 
 <p>example-01.less</p>
+
+<p>@nice-blue 변수를 선언하고 + 연산을 합니다.</p>
 
 <pre><code>@nice-blue: #5B83AD;
 @light-blue: (@nice-blue + #111);
@@ -335,7 +413,9 @@ h2 {
 <pre><code>#header { color: #6c94be; }
 </code></pre>
 
-<p>example-02.less - 변수 이름에 변수가 정의 가능합니다.</p>
+<p>example-02.less - 변수에 다른 변수가 정의 가능합니다.</p>
+
+<p>@var에 문자열 &#8216;fnord&#8217;는 @fnord로 치환 됩니다.</p>
 
 <pre><code>@fnord: "I am fnord";
 @var: 'fnord';
@@ -349,7 +429,7 @@ content: @@var;
 
 <h3>Mixins</h3>
 
-<p>LESS에서는 하나의 ruleset을 다른 ruleset안에 묶음으로 포함할수 있습니다.</p>
+<p>Mixin은 이름을 사용해 선언 할수 있고 클래스 처럼 동작 합니다.</p>
 
 <p>example-03.less</p>
 
@@ -359,9 +439,9 @@ content: @@var;
 }
 </code></pre>
 
-<p>그리고 이러한 속성들을 다른 ruleset에서 사용하고자 할경우 클래스 이름을 사용해 속성을 포함 시킬수있습니다.</p>
-
 <p>example-03.less</p>
+
+<p>클래스 이름을 사용해 속성을 포함 시킬수있습니다.</p>
 
 <pre><code>.bordered {
   border-top: dotted 1px black;
@@ -380,6 +460,8 @@ content: @@var;
 
 <p>example-03.css</p>
 
+<p>선언된 .bordered는 .css에서 보이지 않으며 치환 된채로 컴파일 됩니다.</p>
+
 <pre><code>#menu a {
   color: #111;
   border-top: dotted 1px black;
@@ -395,6 +477,8 @@ content: @@var;
 <h3>Parametric Mixins</h3>
 
 <p>example-04.less</p>
+
+<p>클래스 처럼 믹스인 할수 있으며, 매개변수를 전달할수 있습니다.</p>
 
 <pre><code>.border-radius (@radius) {
   border-radius: @radius;
@@ -412,6 +496,8 @@ content: @@var;
 
 <p>example-04.css</p>
 
+<p>.button의 6px, #header에 4px 값을 전달 받아 선언합니다.</p>
+
 <pre><code>#header {
   border-radius: 4px;
   -moz-border-radius: 4px;
@@ -426,7 +512,7 @@ content: @@var;
 
 <p>example-05.less</p>
 
-<p>기본값을 가질수도 있습니다</p>
+<p>매개 변수가 유효한 mixin은 기본값을 가질수 있습니다</p>
 
 <pre><code>.border-radius (@radius: 5px) {
   border-radius: @radius;
@@ -440,14 +526,14 @@ content: @@var;
 
 <p>example-05.css</p>
 
+<p>매개 변수 전달 없이 기본값을 사용 합니다.</p>
+
 <pre><code>#header {
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 </code></pre>
-
-<p>매개 변수가 유효한 mixins은 파라미터를 전달 하지 않아도 되고 CSS에 표시 되지 않게 사용할수 있습니다.</p>
 
 <p>example-06.less</p>
 
@@ -457,6 +543,7 @@ content: @@var;
     white-space: -moz-pre-wrap;
     word-wrap: break-word;
 }
+pre { .wrap }
 </code></pre>
 
 <p>example-06.css</p>
@@ -475,6 +562,8 @@ content: @@var;
 
 <p>example-07.less</p>
 
+<p>2px, 5px 두개의 인수를 전달 하면 순서대로 @x, @y에 적용 됩니다.</p>
+
 <pre><code>.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
   box-shadow: @arguments;
   -moz-box-shadow: @arguments;
@@ -486,6 +575,8 @@ content: @@var;
 
 <p>example-07.css</p>
 
+<p>0, 0값에서 전달된 2px, 5px값으로 치환 되었습니다.</p>
+
 <pre><code>.box-shadow: 2px 5px 1px #000;
 -moz-box-shadow: 2px 5px 1px #000;
 -webkit-box-shadow: 2px 5px 1px #000;
@@ -493,7 +584,7 @@ content: @@var;
 
 <h2>Pattern-matching and Guard expressions</h2>
 
-<p>mixin에 기본값을 변경 할수있습니다. mixin을 선언 하고 호출시 참인 값을 선택해 변환합니다.</p>
+<p>mixin을 선언하고 조건문으로 인자를 비교해 같은 이름의 .mixin중에 참인 .mixin을 적용 합니다.</p>
 
 <p>변경 기본 문법</p>
 
@@ -522,6 +613,8 @@ content: @@var;
 
 <p>example-08.less</p>
 
+<p>.mixin이 3개가 선언 되었고 각 다른 조건문을 가지고 있습니다.</p>
+
 <pre><code>.mixin (dark, @color) {
   color: darken(@color, 10%);
 }
@@ -540,13 +633,15 @@ content: @@var;
 
 <p>example-08.css</p>
 
+<p>호출시 조건문 light값을 충족하며 모든 값을 의미 하는 &#8216;@_&#8217;포함 하여 적용 됩니다.</p>
+
 <pre><code>.class {
   color: #a2a2a2;
   display: black;
 }
 </code></pre>
 
-<p>인수의 개수에 따라서 선택 할수도 있습니다.</p>
+<p>조건문으로 인수의 개수에 따라서 선택 할수도 있습니다.</p>
 
 <pre><code>.mixin (@a) {
   color: @a;
@@ -562,13 +657,15 @@ content: @@var;
 
 <p>example-09.less</p>
 
+<p>if/else 대신 when을 사용 합니다. @a값을 비교하여 적용 하며 인자가 하나이므로 color는 전체에 적용 됩니다.</p>
+
 <pre><code>.mixin (@a) when (lightness(@a) &gt;= 50%) {
   background-color: black;
 }
 .mixin (@a) when (lightness(@a) &lt; 50%) {
   background-color: white;
 }
-.mixn (@a) {
+.mixin (@a) {
   color: @a;
 }
 .class1 { .mixin(#ddd) }
@@ -576,6 +673,8 @@ content: @@var;
 </code></pre>
 
 <p>example-09.css</p>
+
+<p>값에 비교에 따른 적용과 전체 적용된 color 입니다.</p>
 
 <pre><code>.class1 {
   color: #ddd;
@@ -587,9 +686,11 @@ content: @@var;
 }
 </code></pre>
 
-<p>가드 안에서 비교식(>, >=, =, =&lt;, &lt;)을 사용 할수있습니다.</p>
+<p>가드 안에서는 비교식(>, >=, =, =&lt;, &lt;)을 사용 할수있습니다.</p>
 
 <p>basic.less</p>
+
+<p>두개의 식은 같은 표현 입니다.</p>
 
 <pre><code>.truth (@a) when (@a) { … }
 .truth (@a) when (@a = true) { … }
@@ -597,23 +698,23 @@ content: @@var;
 
 <p>example-10.less</p>
 
-<p>아래의 식은 위에  basic.less값에 매치 되지 않습니다. 값이 &#8216;true&#8217;만 매치 됩니다.</p>
+<p>아래의 식은 위에 basic.less값에 매치 되지 않습니다. 값이 &#8216;true&#8217;만 매치 됩니다.</p>
 
 <pre><code>.class {
   .truth(40);
 }
 </code></pre>
 
-<p>or 이중 조건은 &#8216;,&#8217;로 분류 됩니다.</p>
-
 <p>example-11.less</p>
+
+<p>&#8216;or&#8217; 이중 조건은 &#8216;,&#8217;로 분류 됩니다. 작성된 조건의 범위를 벗어난 값을 호출시 컴파일 자체가 되지 않습니다.</p>
 
 <pre><code>.mixin (@a) when (@a &gt; 10), (@a &lt; -10) { … }
 </code></pre>
 
-<p>인자를 비교 하거나 인자가 아닌값을 비교 할수 있습니다.</p>
-
 <p>example-12.less</p>
+
+<p>인자의 값이 동등 한지 비교 가능 하며 대,소 또한 가능 합니다.</p>
 
 <pre><code>@media: mobile;
 
@@ -624,7 +725,7 @@ content: @@var;
 .max (@a, @b) when (@a &lt; @b) { width: @b }
 </code></pre>
 
-<p>값의 형을 is*를 사용해서 비교 할수 있습니다.</p>
+<p>매개변수가 number 인지 color인지 비교 할수 있습니다.</p>
 
 <pre><code>.mixin (@a, @b: 0) when (isnumber(@b)) { … }
 .mixin (@a, @b: black) when (iscolor(@b)) { … }
@@ -638,29 +739,400 @@ content: @@var;
 <li>isstring</li>
 <li>iskeyword</li>
 <li>isurl</li>
-</ul>
-
-
-<p>숫자가 아닌 다른 is*형</p>
-
-<ul>
 <li>ispixel</li>
 <li>ispercentage</li>
 <li>isem</li>
 </ul>
 
 
-<p>추가 조건문 and</p>
+<p>추가 조건문 and는 숫자인지 비교하고 0보다 높은 값이어야 합니다.</p>
 
 <pre><code>.mixin (@a) when (isnumber(@a)) and (@a &gt; 0) { … }
 </code></pre>
 
-<p>부정 조건문 not</p>
+<p>부정 조건문 not 조건이 0보다 크지 않을때 동작 합니다.</p>
 
 <pre><code>.mixin (@b) when not (@b &gt; 0) { … }
 </code></pre>
 
+<h3>조건문</h3>
+
+<p>Less</p>
+
+<ul>
+<li>= : 두 값이 같으면 참입니다.</li>
+<li>not : 두 값이 같지 않으면 참입니다.</li>
+<li>and : 모든 조건이 참이어야 합니다.</li>
+<li>,   : 모든 조건 값중에 하나만 참이면 참입니다.</li>
+</ul>
+
+
 <h3>Nested rules</h3>
+
+<p>example-13.css</p>
+
+<p>&amp; 콤비네이터를 사용한 상속을 통해서 간결하게 만들수 있습니다. 아래는 .css파일 입니다. 이를 .less로 바꾸어 보겠습니다.</p>
+
+<pre><code>#header { color: black; }
+#header .navigation {
+  font-size: 12px;
+}
+#header .logo {
+  width: 300px;
+}
+#header .logo:hover {
+  text-decoration: none;
+}
+</code></pre>
+
+<p>example-13-01.less</p>
+
+<p>.css에서 반복 되던 #header를 한번만 선언 할수 있습니다.</p>
+
+<pre><code>#header {
+  color: black;
+
+  .navigation {
+    font-size: 12px;
+  }
+  .logo {
+    width: 300px;
+    &amp;:hover { text-decoration: none; }
+  }
+}
+</code></pre>
+
+<p>example-13-02.less</p>
+
+<p>위와 결과는 같지만 더 간결한 문법을 보입니다.</p>
+
+<pre><code>#header { color: black;
+  .navigation { font-size: 12px }
+  .logo       { width: 300px;
+    &amp;:hover   { text-decoration: none }
+  }  
+}
+</code></pre>
+
+<p>example-14.less</p>
+
+<p>&amp; 콤비네이터를 사용한 또다른 형태 입니다.</p>
+
+<pre><code>.bordered {
+  &amp;.float { flat: left; }
+  .top {
+    margin: 5px;
+  }
+}
+</code></pre>
+
+<p>example-14.css</p>
+
+<pre><code>.bordered.float {
+  flat: left;
+}
+.bordered.top {
+  margin: 5px;
+}
+</code></pre>
+
+<h3>Advanced Usage of &amp;</h3>
+
+<p>example-15.less</p>
+
+<p>&amp; 또다른 사용 법입니다. 모든 셀렉터의 조합을 만들어 줄수 있습니다.</p>
+
+<pre><code>.child, .sibling {
+  .parent &amp; {
+    color: black;
+  }
+  &amp; + &amp; {
+    color: red;
+  }
+}
+</code></pre>
+
+<p>example-15.css</p>
+
+<pre><code>.parent.child, .parent.sibling {
+  color: black;
+}
+
+.child + .child,
+.child + .sibling,
+.sibling + .child,
+.sibling + .sibling {
+  color: red;
+}
+</code></pre>
+
+<h3>Operations</h3>
+
+<p>example-16.less</p>
+
+<p>숫자, 색, 변수 또한 연산을 할수 있습니다.</p>
+
+<pre><code>@base: 5%;
+@filler: (@base * 2);
+@other: (@bae + @filler);
+
+color: (#888 / 4);
+background-color: (@base-color + #111);
+height: (100% / 2 + @filler);
+</code></pre>
+
+<p>example-16-01.less</p>
+
+<pre><code>@var: (1px + 5); // @var: 6px
+</code></pre>
+
+<p>example-16-02.less</p>
+
+<pre><code>width: ((@var + 5) * 2);
+</code></pre>
+
+<h3>Color functions</h3>
+
+<ul>
+<li><p>밝기 조절</p>
+
+<p>  lighten(@color, 10%);
+  darken(@color, 10%);</p></li>
+<li><p>채도 조절</p>
+
+<p>  saturate(@color, 10%);
+  desaturate(@color, 10%);</p></li>
+<li><p>투명도</p>
+
+<p>  fadein(@color, 10%);
+  fadeout(@color, 10%);
+  fade(@color, 50%);</p></li>
+<li><p>색장 조절</p>
+
+<p>  spin(@color, 10);
+  spin(@color, -10);</p>
+
+<h1></h1></li>
+<li><p>@color1, 과 @color2 혼합된 값을 반환 합니다. @weight는 기본값을 의미 합니다.</p>
+
+<p>  mix(@color1, @color2, @weight);</p></li>
+<li><p>@color1 > 50% luma 일경우 @darkcolor 를 아니면 @lightcolor를 반환 합니다.
+  contrast(@color1, @darkcolor, @lightcolor;);</p></li>
+</ul>
+
+
+<p>exampl1-17.less</p>
+
+<pre><code>@base: #f04615;
+
+.class {
+  color: saturate(@base, 5%);
+  background-color: spin(lighten(@base, 25%), 8);
+}
+</code></pre>
+
+<p>색정보 알아내기</p>
+
+<pre><code>hue(@color);
+saturation(@color);
+lightness(@color);
+red(@color);
+green(@color);
+blue(@color);
+alpha(@color);
+luma(@color);
+</code></pre>
+
+<p>새로운 색 구하기</p>
+
+<p>@new는 @old의 색을 유지하면서 자신의 채도 및 밝기를 정의</p>
+
+<pre><code>@new: hsl(hue(@old), 45%, 90%);
+</code></pre>
+
+<h3>Math functions</h3>
+
+<p>&#8216;2&#8217;를 반환 합니다</p>
+
+<pre><code>round(1.67);
+</code></pre>
+
+<p>&#8216;3&#8217;을 반환 합니다.</p>
+
+<pre><code>ceil(2.4);
+</code></pre>
+
+<p>&#8216;2&#8217;를 반환 합니다.</p>
+
+<pre><code>floor(2.6);
+</code></pre>
+
+<p>퍼센티지 구하기</p>
+
+<p>0.5는 50%를 반환 합니다.</p>
+
+<pre><code>percentage(0.5)
+</code></pre>
+
+<h3>Namespaces</h3>
+
+<p>example-18.less</p>
+
+<p>Namespace를 가지고 Mixin 에서 선택 할수 있습니다. 다음은 #bundle 에서 .button을 Mixin 하는 방법 입니다.</p>
+
+<pre><code>#bundle {
+  .button () {
+    display: block;
+    border: 1px solid black;
+    background-color: grey;
+    &amp;:hover { background-color: white }
+  }
+  .tab { … }
+  .citaion { … }
+}
+
+#header a {
+  color: orange;
+  #bundle &gt; .button;
+}
+</code></pre>
+
+<p>compile.css</p>
+
+<p>.tab, .citaion은 적용 되지 않습니다.</p>
+
+<pre><code>#header a {
+  color: orange;
+  display: black;
+  border: 1px solid black;
+  background-color: grey;
+}
+#header a:hover {
+  background-color: #ffffff;
+}
+</code></pre>
+
+<h3>Scope</h3>
+
+<p>example-19.less</p>
+
+<p>{ }안에서 변수 재선언시 지역적으로 사용 됩니다.</p>
+
+<pre><code>@var: red;
+
+#page {
+  @var: white;
+  #header {
+    color: @var;
+  }
+}
+#footer {
+  color: @var;
+}
+</code></pre>
+
+<h3>Comments</h3>
+
+<p>example-20.less</p>
+
+<p>여러줄 주석 입니다. .css 변환시 에도 남아 있게 됩니다.</p>
+
+<pre><code>/* Hello, I'm a CSS-style comment */
+.class { color: black }
+</code></pre>
+
+<p>example-21.less</p>
+
+<p>한줄 주석입니다 .css변환시 보이지 않습니다.</p>
+
+<pre><code>// Hi, I'm a silent comment, I won't show up in your CSS
+.class { color: white }
+</code></pre>
+
+<h3>Importing</h3>
+
+<p>example-22.less</p>
+
+<p>기존에 만들어진 .less 파일과 .css 파일을 불러서 사용 할수 있습니다.</p>
+
+<pre><code>@import "lib.less";
+@import "lib";
+
+@import "lib.css";
+</code></pre>
+
+<h3>String interpolation</h3>
+
+<p>example-23.less</p>
+
+<p>문자열을 &#8220;&#8221; 안에 불러 올수 있습니다.</p>
+
+<pre><code>@base-url: "http://assets.fnord.com";
+background-image: url("@{base-url}/images/bg.png");
+</code></pre>
+
+<h3>Selector Interpolation</h3>
+
+<p>example-25.less</p>
+
+<p>셀렉터 이름도 불러 올수 있습니다.</p>
+
+<pre><code>@name: blocked;
+.@{name} {
+  color: black;
+}
+</code></pre>
+
+<p>example-25.css</p>
+
+<pre><code>.blocked {
+  color: black;
+}
+</code></pre>
+
+<h3>Escaping</h3>
+
+<p>example-24.less</p>
+
+<pre><code>.class {
+  filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
+}
+</code></pre>
+
+<p>example-24.css</p>
+
+<pre><code>.class {
+  filter: ms:alwaysHasItsOwnSyntax.For.Stuff();
+}
+</code></pre>
+
+<h3>JavaScript evaluation</h3>
+
+<p>example-26.less</p>
+
+<pre><code>@var: `"hello".toUpperCase() + '!'`;
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>@var: "HELLO!";
+</code></pre>
+
+<p>example-27.less</p>
+
+<pre><code>@str: "hello";
+@var: ~`"@{str}".toUpperCase() + '!'`;
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>@var: HELLO!;
+</code></pre>
+
+<p>JavaScript환경에 액세스 할수 있습니다.</p>
+
+<pre><code>@height:`document.body.clientHeight`;
+</code></pre>
 </div>
   
   
