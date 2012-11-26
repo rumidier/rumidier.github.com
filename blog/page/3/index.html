@@ -9,9 +9,8 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Catalyst::Manual::Tutorial::05_Authentication Load plugins /lib/MyApp.pm $ vi ./lib/MyApp/Web/MyApp.pm # 아래에 다음과 같이 추가
-use Catalyst qw/
--Debug &hellip;">
+  <meta name="description" content="Signup Controller Login.pm $ vi lib/MyApp/Controller/Login.pm
+# 내용 추가 :Private forword 혹은 detach로만 접근이 가능 하며, URL로 부터 바로 접근이 불가능 합니다. sub signup : &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,155 @@ use Catalyst qw/
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/catalyst-signup/">Catalyst-signup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T22:55:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/catalyst-signup/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Signup Controller <a href="https://gist.github.com/3090526">Login.pm</a></p>
+
+<pre><code>$ vi lib/MyApp/Controller/Login.pm
+# 내용 추가
+</code></pre>
+
+<h2>:Private</h2>
+
+<p>forword 혹은 detach로만 접근이 가능 하며, URL로 부터 바로 접근이 불가능 합니다.</p>
+
+<pre><code>sub signup :Path('/signup') :Args(0) {
+my ( $self, $c ) = @_;
+
+$c-&gt;detach('signup_POST') if $c-&gt;req-&gt;method eq 'POST';
+}
+
+sub signup_POST :Private {
+my ( $self, $c ) = @_;
+</code></pre>
+
+<h2>Validation - Empty Value</h2>
+
+<p>입력값중에 빈값이 있으면 안돼므로 빈값인지 확인 하여 빈값일시 메세지를
+출력 할수 있게 작업한다.</p>
+
+<pre><code>my $user_name = $c-&gt;req-&gt;param('user_name') || '';
+my $email     = $c-&gt;req-&gt;param('email')     || '';
+my $password  = $c-&gt;req-&gt;param('password')  || '';
+
+my @messages;
+push @messages, 'Input the user name'     unless $user_name;
+push @messages, 'Input the user email'    unless $email;
+push @messages, 'Input the user password' unless $password;
+
+if (@messages) {
+    $c-&gt;flash(
+        messages =&gt; @messages,
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+</code></pre>
+
+<h2>Validation - DB Unique search</h2>
+
+<p>User table에 user_name과 email이 동일한 값이 있는지 확인 하여 동일한
+값이 있을시 error_msg를 출력 할수 있게 한다.</p>
+
+<pre><code>my $cond = {};
+$cond-&gt;{'me.user_name'} = "$user_name";
+my $name_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
+if ($name_search-&gt;count) {
+    $c-&gt;flash(
+        messages =&gt; 'Using ID again input the New ID',
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+
+$cond = {} if $cond;
+$cond-&gt;{'me.email'} = "$email";
+my $email_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
+if ($email_search-&gt;count) {
+    $c-&gt;flash(
+        messages      =&gt; 'Using email again input the New email',
+    );
+
+    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
+}
+</code></pre>
+
+<h2>유저 등록</h2>
+
+<p>Validation이 통과 했다면 테이블에 등록 할수 있게 한다.
+실패시 signup페이지로 다시 이동 하며</p>
+
+<pre><code>my $time    = strftime "%Y-%m-%d %H:%M:%S", localtime;
+my $created = $c-&gt;model('DonDB::User')-&gt;create({
+    user_name  =&gt; $user_name,
+    email      =&gt; $email,
+    password   =&gt; $password,
+    created_on =&gt; "$time",
+    updated_on =&gt; "$time",
+});
+
+$c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri) unless $created;
+</code></pre>
+
+<h2>유저 등록 - 확인</h2>
+
+<p>등록후 이름과 패스워드를 확인하여 다음 페이지 혹은 tdpfjaptpwldhk 냐혀ㅔvpdlwlfmf ghcnfgksek.</p>
+
+<pre><code>if ($c-&gt;authenticate({ user_name =&gt; $user_name, password =&gt; $password } )) {
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for($c-&gt;controller('List')-&gt;action_for('index')));
+} else {
+    $c-&gt;stash(error_msg =&gt; "Bad username or password."); # maybe flash?
+    $c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>Signup View.tt <a href="https://gist.github.com/3090541">signup.tt</a></p>
+
+<pre><code>$ vi root/templates/default/src/login/signup.tt
+# 내용 추가
+</code></pre>
+
+<h2>jquery 미사용</h2>
+
+<p>현재 Validation은 컨트롤 단에서만 검사 한다
+추가가 필요함</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1781,201 +1929,6 @@ $thisPar.slideUp('slow');
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/11/learn-jquery-3jang/">Learn jQuery 3장</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-11T18:17:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/11/learn-jquery-3jang/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Source</h2>
-
-<p><a href="https://gist.github.com/2909211">예제.html</a></p>
-
-<p><a href="https://gist.github.com/2909213">예제 css </a></p>
-
-<p><a href="https://gist.github.com/2909224">예제 js  </a></p>
-
-<h2>본문 - 이벤트 트리거 사용하는 방법</h2>
-
-<h2>button click event</h2>
-
-<p>페이지 시작시 노말페이지로 보이도록 모든 클래스를 해제한다.
-removeClass()는 다른 파악되지 않은 Class까지 해제 하지만 현재 예제
-코드 에서는 생각치 않도록 쓴다.</p>
-
-<pre><code>$('body').removeClass();
-</code></pre>
-
-<p>현재 버튼이 클릭된 id값을 확인하여 일치 하였을경우
-클래스를 추가 하도록 한다.</p>
-
-<pre><code>if (this.id == 'switcher-narrow') {
-  $('body').addClass('narrow');
-}
-else if (this.id == 'switcher-large') {
-  $('body').addClass('large');
-}
-</code></pre>
-
-<p>강조되는 글씨를 표현하기 위해 우선 클래스를 해제하고
-현재 버튼에 클래스를 추가 해준다.</p>
-
-<pre><code>$('#switcher .button').removeClass('selected');
-$(this).addClass('selected');
-</code></pre>
-
-<p>이벤트 객체 사용시 버블링을 중단 하기 위해 다음과 같이 추가해 준다.
-(버블링을 추가안해줄시 노말 버튼 클릭시에도 버튼칸이 사라지게 된다.)</p>
-
-<pre><code>event.stopPropagation();
-</code></pre>
-
-<p>부분 코드</p>
-
-<figure class='code'><figcaption><span>부분코드 - 01 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').click(function(event) {
-</span><span class='line'>  $('body').removeClass();
-</span><span class='line'>
-</span><span class='line'>  if (this.id == 'switcher-narrow') {
-</span><span class='line'>    $('body').addClass('narrow');
-</span><span class='line'>  }
-</span><span class='line'>  else if (this.id == 'switcher-large') {
-</span><span class='line'>    $('body').addClass('large');
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  $('#switcher .button').removeClass('selected');
-</span><span class='line'>  $(this).addClass('selected');
-</span><span class='line'>
-</span><span class='line'>  event.stopPropagation();
-</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>버튼 강조하기</h2>
-
-<p>버튼에 hover(마우스 가져다 대면) 띠면(체인으로) hover삭제</p>
-
-<p>부분 코드</p>
-
-<figure class='code'><figcaption><span>부분코드 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').hover(function() {
-</span><span class='line'>    $(this).addClass('hover');
-</span><span class='line'>    }, function() {
-</span><span class='line'>      $(this).removeClass('hover');
-</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>이벤트 핸들러</h2>
-
-<p>핸들러를 나중에 다시 사용할 수 있도록 핸들러 함수에 이름을 부여</p>
-
-<pre><code>var toggleStyleSwitcher = function() {
-  $('switcher .button').toggleClass('hidden');
-};
-</code></pre>
-
-<p>핸들러를 활성화 시켜준다.</p>
-
-<pre><code>$('#switcher').click(toggleStyleSwitcher);
-</code></pre>
-
-<p>노말 상태에서만 토글 기능 활성화</p>
-
-<pre><code>$('switcher-normal').click(function() {
-  $('#switcher').click(toggleStyleSwitcher);
-});
-
-$('#switcher-narrow, #switcher-large').click(function() {
-  $('#switcher').unbind('click', toggleStyleSwitcher);
-});
-</code></pre>
-
-<p>시작시 접힘 기능(인자를 지정하지 않는경우 히벤트에 해당하는 행위를 발생시킴)</p>
-
-<pre><code>$('#switcher').click();
-</code></pre>
-
-<h2>Command action</h2>
-
-<p><strong>unbind(event Type, listener)</strong></p>
-
-<p><strong>unbind(event)</strong></p>
-
-<p>확장 집합의 모든 엘리먼트에서 전달된 매개변수에 따라 핸들러를 선택적으로 제거한다.</p>
-
-<p>매개변수를 제공하지 않으면 엘리먼트의 모든 리스터를 제거한다.</p>
-
-<p><strong>매개변수</strong></p>
-
-<p>  <strong>eventType</strong></p>
-
-<pre><code>   (String)매개변수를 제공하면 지정된 이벤트 타입에 할당된 리스너만 제거한다.
-</code></pre>
-
-<p>  <strong>listener</strong></p>
-
-<pre><code>  (Function)매개변수를 제공하면 지정된 리스너와 동일한 것만 제거한다.
-</code></pre>
-
-<p>  <strong>eventType</strong></p>
-
-<pre><code>  (Event) Event 인스턴스의 정보로 알 수 있는 이벤트가 발생했을 대 호출될 리스너를
-  제거한다
-</code></pre>
-
-<p><strong>반환값</strong></p>
-
-<p>확장 집합</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1993,15 +1946,15 @@ $('#switcher-narrow, #switcher-large').click(function() {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
       </li>
     
   </ul>

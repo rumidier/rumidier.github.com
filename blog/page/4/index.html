@@ -9,9 +9,8 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Source 예제.html 예제 css 예제 js 본문 - 테이블행에 징검다리 색깔 입히기 사용자 정의 선택자 class명 horizontal를 가진 div 집합의 두번째 항목 선택
-$(&#8216;div.horizontal:eq(1)&#8217;)
-두번째 항목이 &hellip;">
+  <meta name="description" content="Source 예제.html 예제 css 예제 js 본문 - 이벤트 트리거 사용하는 방법 button click event 페이지 시작시 노말페이지로 보이도록 모든 클래스를 해제한다.
+removeClass()는 다른 파악되지 않은 Class까지 해제 하지만 현재 예제 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,201 @@ $(&#8216;div.horizontal:eq(1)&#8217;)
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/11/learn-jquery-3jang/">Learn jQuery 3장</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-11T18:17:00+09:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/11/learn-jquery-3jang/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Source</h2>
+
+<p><a href="https://gist.github.com/2909211">예제.html</a></p>
+
+<p><a href="https://gist.github.com/2909213">예제 css </a></p>
+
+<p><a href="https://gist.github.com/2909224">예제 js  </a></p>
+
+<h2>본문 - 이벤트 트리거 사용하는 방법</h2>
+
+<h2>button click event</h2>
+
+<p>페이지 시작시 노말페이지로 보이도록 모든 클래스를 해제한다.
+removeClass()는 다른 파악되지 않은 Class까지 해제 하지만 현재 예제
+코드 에서는 생각치 않도록 쓴다.</p>
+
+<pre><code>$('body').removeClass();
+</code></pre>
+
+<p>현재 버튼이 클릭된 id값을 확인하여 일치 하였을경우
+클래스를 추가 하도록 한다.</p>
+
+<pre><code>if (this.id == 'switcher-narrow') {
+  $('body').addClass('narrow');
+}
+else if (this.id == 'switcher-large') {
+  $('body').addClass('large');
+}
+</code></pre>
+
+<p>강조되는 글씨를 표현하기 위해 우선 클래스를 해제하고
+현재 버튼에 클래스를 추가 해준다.</p>
+
+<pre><code>$('#switcher .button').removeClass('selected');
+$(this).addClass('selected');
+</code></pre>
+
+<p>이벤트 객체 사용시 버블링을 중단 하기 위해 다음과 같이 추가해 준다.
+(버블링을 추가안해줄시 노말 버튼 클릭시에도 버튼칸이 사라지게 된다.)</p>
+
+<pre><code>event.stopPropagation();
+</code></pre>
+
+<p>부분 코드</p>
+
+<figure class='code'><figcaption><span>부분코드 - 01 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').click(function(event) {
+</span><span class='line'>  $('body').removeClass();
+</span><span class='line'>
+</span><span class='line'>  if (this.id == 'switcher-narrow') {
+</span><span class='line'>    $('body').addClass('narrow');
+</span><span class='line'>  }
+</span><span class='line'>  else if (this.id == 'switcher-large') {
+</span><span class='line'>    $('body').addClass('large');
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  $('#switcher .button').removeClass('selected');
+</span><span class='line'>  $(this).addClass('selected');
+</span><span class='line'>
+</span><span class='line'>  event.stopPropagation();
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>버튼 강조하기</h2>
+
+<p>버튼에 hover(마우스 가져다 대면) 띠면(체인으로) hover삭제</p>
+
+<p>부분 코드</p>
+
+<figure class='code'><figcaption><span>부분코드 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').hover(function() {
+</span><span class='line'>    $(this).addClass('hover');
+</span><span class='line'>    }, function() {
+</span><span class='line'>      $(this).removeClass('hover');
+</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>이벤트 핸들러</h2>
+
+<p>핸들러를 나중에 다시 사용할 수 있도록 핸들러 함수에 이름을 부여</p>
+
+<pre><code>var toggleStyleSwitcher = function() {
+  $('switcher .button').toggleClass('hidden');
+};
+</code></pre>
+
+<p>핸들러를 활성화 시켜준다.</p>
+
+<pre><code>$('#switcher').click(toggleStyleSwitcher);
+</code></pre>
+
+<p>노말 상태에서만 토글 기능 활성화</p>
+
+<pre><code>$('switcher-normal').click(function() {
+  $('#switcher').click(toggleStyleSwitcher);
+});
+
+$('#switcher-narrow, #switcher-large').click(function() {
+  $('#switcher').unbind('click', toggleStyleSwitcher);
+});
+</code></pre>
+
+<p>시작시 접힘 기능(인자를 지정하지 않는경우 히벤트에 해당하는 행위를 발생시킴)</p>
+
+<pre><code>$('#switcher').click();
+</code></pre>
+
+<h2>Command action</h2>
+
+<p><strong>unbind(event Type, listener)</strong></p>
+
+<p><strong>unbind(event)</strong></p>
+
+<p>확장 집합의 모든 엘리먼트에서 전달된 매개변수에 따라 핸들러를 선택적으로 제거한다.</p>
+
+<p>매개변수를 제공하지 않으면 엘리먼트의 모든 리스터를 제거한다.</p>
+
+<p><strong>매개변수</strong></p>
+
+<p>  <strong>eventType</strong></p>
+
+<pre><code>   (String)매개변수를 제공하면 지정된 이벤트 타입에 할당된 리스너만 제거한다.
+</code></pre>
+
+<p>  <strong>listener</strong></p>
+
+<pre><code>  (Function)매개변수를 제공하면 지정된 리스너와 동일한 것만 제거한다.
+</code></pre>
+
+<p>  <strong>eventType</strong></p>
+
+<pre><code>  (Event) Event 인스턴스의 정보로 알 수 있는 이벤트가 발생했을 대 호출될 리스너를
+  제거한다
+</code></pre>
+
+<p><strong>반환값</strong></p>
+
+<p>확장 집합</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -805,122 +999,6 @@ siblings()
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/15/php/">PHP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-15T13:02:00+09:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/15/php/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>str_split_unicode(), mb_strlen, mb_substr</h3>
-
-<p>한글 3줄 개행제한 및 10자 자르기 코드</p>
-
-<figure class='code'><figcaption><span>split_word.php </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?</span>
-</span><span class='line'><span class="nv">$Val1</span>     <span class="o">=</span> <span class="s2">&quot;가나다라마바사아아아아아</span><span class="se">\n</span><span class="s2">아자차카야제커거</span><span class="se">\n</span><span class="s2">미나다가라서여&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$word</span>     <span class="o">=</span> <span class="nb">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nv">$Val1</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$arr_cnt</span>  <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$word</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$full_arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$arr_cnt</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$str</span> <span class="o">=</span> <span class="nx">str_split_unicode</span><span class="p">(</span><span class="nv">$word</span><span class="p">[</span><span class="nv">$i</span><span class="p">],</span> <span class="mi">10</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$full_arr</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$full_arr</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">((</span><span class="k">array</span><span class="p">)</span><span class="nv">$full_arr</span><span class="p">,</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span><span class="nv">$str</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$full_arr</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">((</span><span class="k">array</span><span class="p">)</span><span class="nv">$str</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$full_arr</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="s2">&quot;Error&quot;</span><span class="o">.</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">exit</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nv">$full_arr</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span> <span class="nf">str_split_unicode</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$ret</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>  <span class="nv">$len</span> <span class="o">=</span> <span class="nb">mb_strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$len</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">+=</span> <span class="nv">$l</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$ret</span><span class="p">[]</span> <span class="o">=</span> <span class="nb">mb_substr</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$i</span><span class="p">,</span> <span class="nv">$l</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -938,15 +1016,15 @@ siblings()
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
       </li>
     
   </ul>

@@ -9,14 +9,10 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Phonegap - iOS 사용 환경 모델명 : MacBook Pro
+  <meta name="description" content="사용 환경 모델명 : MacBook Pro
 모델 식별자: MacBookPro8,1
 메모리: 4 GB
-Xcode: v4.5.2
-기타: homebrew
-iTerm
-Xcode Command Line Tools
-OS X Mountain Lion &hellip;">
+Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse Classic를 다운 받습니다. 다운 받은 파일은 . &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +67,285 @@ OS X Mountain Lion &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-26T13:22:00+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/26/phonegap-android/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>사용 환경</h2>
+
+<hr />
+
+<ul>
+<li>모델명    :     MacBook Pro</li>
+<li>모델 식별자:   MacBookPro8,1</li>
+<li>메모리:           4 GB</li>
+<li>Eclipse: v4.2.1</li>
+</ul>
+
+
+<h2>요구 환경</h2>
+
+<hr />
+
+<ul>
+<li>Eclipse 3.4+</li>
+</ul>
+
+
+<h3>Eclipse Classic 설치</h3>
+
+<ul>
+<li><a href="http://www.eclipse.org/downloads/">Eclipse Classic</a>를 다운 받습니다.</li>
+</ul>
+
+
+<p><img src="https://lh4.googleusercontent.com/-eEEddA1zCKw/UK9H_HFMlMI/AAAAAAAAADM/apX-8h1nAGE/%25252FUsers%25252Fhancho%25252FPictures%25252Feeclipse-down-classic.jpg" width="500" height="500" title="&#34;Eclipse down&#34;" alt="&#34;Eclipse down&#34;"></p>
+
+<ul>
+<li><p>다운 받은 파일은 .tar.gz 압축 파일 이므로 압축 해제후 Eclipse 아이콘을 클릭 합니다.</p></li>
+<li><p>실행을 이어 나가면 다음과 같은 페이지가 나오며 &#8216;ok&#8217;를 클릭 합니다.</p></li>
+</ul>
+
+
+<p><img src="https://lh4.googleusercontent.com/-GlTWPfVPvs0/UK9I7Ea48yI/AAAAAAAAADU/Isd5LGHAKGo/%25252FUsers%25252Fhancho%25252FPictures%25252Feclipse-install-01.jpg" width="500" height="500" title="&#34;Eclipse 설치&#34;" alt="&#34;Eclipse 설치&#34;"></p>
+
+<ul>
+<li>설치 완료</li>
+</ul>
+
+
+<h3>Android SDK 설치</h3>
+
+<ul>
+<li><a href="http://developer.android.com/sdk/index.html">SDK</a>에서 다운로드 가능 합니다.</li>
+</ul>
+
+
+<p><img src="https://lh5.googleusercontent.com/-4Kryzuug_wA/UK9KTEltWAI/AAAAAAAAADc/Ci-vVNhUJC0/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphone-android-01.jpg" width="500" height="500" title="&#34;SDK Down&#34;" alt="&#34;SDK Down&#34;"></p>
+
+<h3>Android SDK 환경 설정</h3>
+
+<p>파일 열기</p>
+
+<pre><code>$ vi ~/.bash_profile
+</code></pre>
+
+<p>.bash_profile 자신이 다운 받은 SDK파일의 경로를 추가해 줍니다.</p>
+
+<figure class='code'><figcaption><span>bash_profile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=${PATH}:/Development/android-sdk-macosx/platform-tools:/Development/android-sdk-macosx/tools</span></code></pre></td></tr></table></div></figure>
+
+
+<p>설정 확인</p>
+
+<pre><code>$ source ~/.bash_profile
+$ echo $PATH
+…./Users/han/Development/android-sdk-macosx/sdk/platform-tools:/Users/han/Development/android-sdk-macosx/tools….
+</code></pre>
+
+<h3>Xcode Command Line Tools 설치</h3>
+
+<h5>Xcode 실행후 > Xcode Preferences 선택 합니다.</h5>
+
+<p><img src="https://lh6.googleusercontent.com/-9lGHtlIr6t0/UK3bfp3Kn9I/AAAAAAAAACc/7g0GBCw6L24/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-01.jpg" width="500" height="500" title="&#34;Command line 설치&#34;" alt="&#34;Command line 설치&#34;"></p>
+
+<h5>Downloads->Components-> Command Line Tools -> Install 클릭으로 설치 합니다.</h5>
+
+<p><img src="https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg" width="500" height="500" title="&#34;Command Line Tolls 설치&#34;" alt="&#34;Command Line Tolls 설치&#34;"></p>
+
+<p>설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은
+<a href="http://docs.phonegap.com/en/2.2.0/guide_command-line_index.md.html#Command-Line%20Usage">Command-Line</a>에서 iOS 부분을 참고 하시면 됩니다.</p>
+
+<h3>Apache Cordova 다운로드</h3>
+
+<p>다운로드된 파일은 .zip 파일이므로 압축을 풀어서 사용하시면 됩니다.</p>
+
+<ul>
+<li>Cordova는 <a href="http://phonegap.com/download">Cordova-Down</a>에서 다운 받을수 있습니다.</li>
+<li>다운 받은 폴더를 ~/CordovaLib-2.x.x 쓰기 편한 위치로 이동 시킵니다.</li>
+</ul>
+
+
+<h3>새로운 프로젝트 시작하기</h3>
+
+<h5>bin 폴더 열기</h5>
+
+<p>새로운 프로젝트를 생성하기 위해서는 ./create 파일을 실행 해야 합니다. create 파일은
+lib/android/bin 폴더에 존재 합니다.</p>
+
+<ul>
+<li>lib/ios/bin 폴더로 직접 이동 해서 사용할수 있습니다.</li>
+<li>~/CordovalLib-2.2/lib/android/bin 폴더를 Terminal.app에 드래그 하면 bin 폴더로 바로 이동 할수 있습니다.</li>
+</ul>
+
+
+<h5>create 실행하기</h5>
+
+<pre><code>$ ./create &lt;project_folder_path&gt; &lt;package_name&gt; &lt;project_name&gt;
+
+$ ./create &lt;project_folder_path&gt; pheonegap.start start
+$ cd ~/project_folder_path
+$ ls
+
+AndroidManifest.xml cordova   project.properties
+ant.properties                gen           res
+assets                        libs          src
+bin                           local.properties
+build.xml                     proguard-project.txt
+</code></pre>
+
+<h3>Simulator 실행하기</h3>
+
+<h4>SDK 지정 하기</h4>
+
+<p>eclipse를 처음 실행 하게 되면 다음과 같이 SDK 폴더를 지정합니다.</p>
+
+<p><img src="https://lh4.googleusercontent.com/-ot4Vk-4u5_Y/ULLcJlNDr9I/AAAAAAAAADs/5Vx_AyDGqRo/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-file-mv.jpg" width="500" height="500" title="&#34;SDK 지정&#34;" alt="&#34;SDK 지정&#34;"></p>
+
+<p>SDK 경로 수정은 &#8216;Command + ,&#8217; 사용해서 열수 있습니다.</p>
+
+<h4>Android SDK 매니저 설치</h4>
+
+<p>Android SDK 매니저 버튼을 클릭하거나 &#8216;Window -> Android SDK Mannager&#8217;를 클릭 합니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-faBm7F2Gk0U/ULLhaJEOVKI/AAAAAAAAAD8/ei5iS_wI_C8/%25252FUsers%25252Fhancho%25252FPictures%25252FAndroid-sdk-man-01.jpg" width="100" height="100" title="&#34;Android SDK Mannager&#34;" alt="&#34;Android SDK Mannager&#34;"></p>
+
+<h4>SDK 패키지 선택</h4>
+
+<p>버전에 맞는 API 선택하고 install package 버튼을 클릭 합니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-BpJep0rpajw/ULLidv8yTeI/AAAAAAAAAEE/fP0unxE902w/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-select.jpg" width="500" height="500" title="&#34;패키지 선택&#34;" alt="&#34;패키지 선택&#34;"></p>
+
+<h4>SDK 패키지 설치</h4>
+
+<p>체크된 패키지를 설치 합니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-Lpn5YCOcQyM/ULLjgqCa5WI/AAAAAAAAAEM/PmE7fb1xD2E/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-install.jpg" width="500" height="500" title="&#34;패키지 설치&#34;" alt="&#34;패키지 설치&#34;"></p>
+
+<h4>Android ADK Plugin 설치</h4>
+
+<p><a href="http://developer.android.com/sdk/installing/installing-adt.html">ADK Plugin</a>에서 다운 받고 설치 가이드를 확인 할수 있습니다.</p>
+
+<h4>ADK 설치</h4>
+
+<h5>Help -> insall new software를 클릭 합니다.</h5>
+
+<p><img src="https://lh4.googleusercontent.com/-QR5gGvGIngA/ULLoh0ZOI4I/AAAAAAAAAEc/tL9uY_4jPxE/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-01.png" width="500" height="500" title="&#34;install ADK&#34;" alt="&#34;install ADK&#34;"></p>
+
+<h5>화면 오른쪽 위에 &#8216;add&#8217; 클릭</h5>
+
+<p><img src="https://lh6.googleusercontent.com/-0NJRgGDaZJM/ULLo4vEJUzI/AAAAAAAAAEk/824uJ-URvMo/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-02.png" width="500" height="500" title="&#34;클릭 Add&#34;" alt="&#34;클릭 Add&#34;"></p>
+
+<h5>Add Repository 설정</h5>
+
+<p>Location에서 문제가 발생하면 &#8216;https&#8217; &#8216;http&#8217;를 사용하도록 합니다.</p>
+
+<pre><code>Name: ADT Plugin
+Location: https://dl-ssl.google.com/android/eclipse/
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-756En0wgbWg/ULLpdkrdeyI/AAAAAAAAAEs/tvSMuwiWP2o/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-03.png" width="500" height="500" title="&#34;Add Repository 설정&#34;" alt="&#34;Add Repository 설정&#34;"></p>
+
+<h5>Available Software</h5>
+
+<p>Developer Tools과 필요한 프로그램을 클릭 한뒤 Next를 클릭합니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-gregw6cQ3dg/ULLqQ4ptnsI/AAAAAAAAAE0/5Z_M_28kDto/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-04.png" width="500" height="500" title="&#34;Software 선택&#34;" alt="&#34;Software 선택&#34;"></p>
+
+<h5>Install Details</h5>
+
+<p>인스톨 되는 정보를 확인후 &#8216;Next&#8217;를 클릭 합니다.</p>
+
+<p><img src="https://lh4.googleusercontent.com/-52_7il-K0S8/ULLrXNkRVLI/AAAAAAAAAE8/qN-lTWrhHhM/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-05.png" width="500" height="500" title="&#34;Show Details&#34;" alt="&#34;Show Details&#34;"></p>
+
+<h5>Review Lienses</h5>
+
+<p>라이센스 확인후 &#8216;Finish&#8217;를 클릭 합니다.</p>
+
+<p><img src="https://lh6.googleusercontent.com/-Yv_t0AQWpA0/ULLsKWQ2S-I/AAAAAAAAAFE/HwgarHXkDh0/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-06.png" width="500" height="500" title="&#34;Finish click&#34;" alt="&#34;Finish click&#34;"></p>
+
+<h5>Security Warning</h5>
+
+<p>경고 화면이 나오게 되면 &#8216;Ok&#8217;를 클릭 하도록 합니다.</p>
+
+<p><img src="https://lh6.googleusercontent.com/-6yjCMs_WoVE/ULLsmN2bdCI/AAAAAAAAAFM/X7PlH385Prw/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-07.png" width="500" height="500" title="&#34;Security Warning&#34;" alt="&#34;Security Warning&#34;"></p>
+
+<h5>Software Update</h5>
+
+<p>설치가 끝나면 &#8216;Yes&#8217;를 클릭하여 새로 eclipse를 시작 하도록 합니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-HzGam6KOJLE/ULLtUTbrgDI/AAAAAAAAAFU/bk2nSeaO2ns/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-08.png" width="500" height="500" title="&#34;Software Update&#34;" alt="&#34;Software Update&#34;"></p>
+
+<h3>ADV(Android Virtual Device Manager)</h3>
+
+<p> ADV 버튼을 클릭하거나 &#8216;Window -> Anroid Virtual Devie Manger&#8217;를 클릭 합니다.</p>
+
+<p> <img src="https://lh6.googleusercontent.com/-nObeGIzAtuc/ULLw2ta5CII/AAAAAAAAAFk/SO4WnHg0130/%25252FUsers%25252Fhancho%25252FPictures%25252FADV.jpg" width="80" height="80" title="&#34;ADV&#34;" alt="&#34;ADV&#34;"></p>
+
+<h5>ADV New</h5>
+
+<p>오른쪽 상단에 &#8216;New&#8217; 버튼을 클릭 합니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-WgSKxxkSptI/ULLzFef9chI/AAAAAAAAAFs/YTf6Lq27rzA/%25252FUsers%25252Fhancho%25252FPictures%25252FADV-New.jpg" width="300" height="300" title="&#34;ADV New&#34;" alt="&#34;ADV New&#34;"></p>
+
+<h5>ADV Create</h5>
+
+<p>ADV 이름과 Device를 선택후 &#8216;ok&#8217;를 누릅니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-aY9paQ9DKgY/ULLzyLaMHyI/AAAAAAAAAF0/Fc5g96lajm4/%25252FUsers%25252Fhancho%25252FPictures%25252FADV-name.jpg" width="300" height="300" title="&#34;ADV Create&#34;" alt="&#34;ADV Create&#34;"></p>
+
+<h3>Eclipse 실행</h3>
+
+<ul>
+<li>Command line tools를 사용 하여 새로운 프로젝트를 만듭니다.</li>
+<li>다운 받은 eclipse폴더에서 eclipse를 실행 합니다.</li>
+<li>eclipse에서 &#8216;File->New->Project&#8217;를 클릭 합니다.</li>
+<li>New Project 창에서 &#8216;Android Project from Existing Code&#8217;선택후 &#8216;Next&#8217;를 클릭 합니다.</li>
+<li>우측 상단의 &#8216;Browse..&#8217; 클릭후 생성된 Cordova 프로젝트폴더를 엽니다.</li>
+<li>Root Directory 정의후 &#8216;Run&#8217;실행 후 ADV를 선택 해주면 Android화면이생성</li>
+<li>Phonegap Android는 컴파일 시간이 오래 걸리므로 기다려 주어야 합니다.</li>
+</ul>
+
+
+<h5>Android Cordova 화면</h5>
+
+<p>완료된 Android 화면</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ESLlihvURZM/ULL2fVXdK9I/AAAAAAAAAGE/x_qo6Fslssw/%25252FUsers%25252Fhancho%25252FPictures%25252Fphone-Android.jpg" width="300" height="300" title="&#34;안드로이드 Cordova&#34;" alt="&#34;안드로이드 Cordova&#34;"></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1982,199 +2257,6 @@ my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/25/export-csv/">Export_csv</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-25T19:01:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/25/export-csv/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>목차</p>
-
-<ol>
-<li>CSV 출력 준비</li>
-<li>View 생성</li>
-</ol>
-
-
-<h3>CSV 출력 준비</h3>
-
-<p>선택된 내역을 출력 하기 위한 버튼을 추가한다.</p>
-
-<p>root/templates/bootstrap/src/deposit/index.tt</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;a class="btn btn-primary" id="do_export"&gt;출력&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>선택된 내역 js처리</p>
-
-<p>root/static/scripts/list.js</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  $('#do_export').click(function() {
-</span><span class='line'>    var selected_charges = [];
-</span><span class='line'>
-</span><span class='line'>    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
-</span><span class='line'>      if($(this).attr('id') !== undefined)
-</span><span class='line'>        selected_charges.push($(this).attr('id'))
-</span><span class='line'>    });
-</span><span class='line'>
-</span><span class='line'>    location.href = '/deposit/export/' + selected_charges;
-</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Sil/Web/Don/Controller/Deposit.pm</p>
-
-<p>선택된 승인 내역을 CSV로 출력하기 위하여
-모듈 - <a href="https://metacpan.org/module/Catalyst::View::Download::CSV">Catalyst::View::Download::CSV</a>을 사용 하였습니다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sub export :Local CaptureArgs(1) {
-</span><span class='line'>    my ( $self, $c, $id ) = @_;
-</span><span class='line'>    my @target_ids = split ',', $id;
-</span><span class='line'>    
-</span><span class='line'>    my @charges;
-</span><span class='line'>    
-</span><span class='line'>    push @charges, ['제목', '청구자', '금액', '영수증날짜'];
-</span><span class='line'>    
-</span><span class='line'>    foreach my $charge($c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({id =&gt; { -in =&gt; \@target_ids }})-&gt;all) {
-</span><span class='line'>        push @charges, [ $charge-&gt;title, $charge-&gt;user-&gt;user_name, $charge-&gt;amount, $charge-&gt;usage_date];
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    if (@charges) {
-</span><span class='line'>        $c-&gt;stash-&gt;{'csv'} = { 'data' =&gt; [ @charges ] };
-</span><span class='line'>        $c-&gt;flash-&gt;{messages} = 'Success Exported.';
-</span><span class='line'>
-</span><span class='line'>    } else {
-</span><span class='line'>        $c-&gt;flash-&gt;{messages} = 'Export Failed.';
-</span><span class='line'>    }
-</span><span class='line'>    $c-&gt;forward('Sil::Web::Don::View::Download::CSV');
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>View 생성</h2>
-
-<p>View는 script_web_don_create view로 생성한다.</p>
-
-<p>list/Sil/Web/Don/View/Download/CSV.pm을 생성 완료.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>package Sil::Web::Don::View::Download::CSV;
-</span><span class='line'>use Moose;
-</span><span class='line'>use namespace::autoclean;
-</span><span class='line'>
-</span><span class='line'>extends 'Catalyst::View::Download::CSV';
-</span><span class='line'>
-</span><span class='line'>=head1 NAME
-</span><span class='line'>
-</span><span class='line'>Sil::Web::Don::View::Download::CSV - Catalyst View
-</span><span class='line'>
-</span><span class='line'>=head1 DESCRIPTION
-</span><span class='line'>
-</span><span class='line'>Catalyst View.
-</span><span class='line'>
-</span><span class='line'>=head1 AUTHOR
-</span><span class='line'>
-</span><span class='line'>ja3ck
-</span><span class='line'>
-</span><span class='line'>=head1 LICENSE
-</span><span class='line'>
-</span><span class='line'>This library is free software. You can redistribute it and/or modify
-</span><span class='line'>it under the same terms as Perl itself.
-</span><span class='line'>
-</span><span class='line'>=cut
-</span><span class='line'>
-</span><span class='line'>__PACKAGE__-&gt;meta-&gt;make_immutable;
-</span><span class='line'>
-</span><span class='line'>1;</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2190,15 +2272,15 @@ my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
       </li>
     
   </ul>

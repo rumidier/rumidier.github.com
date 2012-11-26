@@ -9,8 +9,8 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="DB Password HASH DBIx::Class::EncodedColumn 기본 입력값 입력시 sha(&#8216;password&#8217;)사용 하여 암호화 할수 있도록 한다. 1
-INSERT INTO `user` VALUES (2,'rum_user',' &hellip;">
+  <meta name="description" content="목차 CSV 출력 준비
+View 생성 CSV 출력 준비 선택된 내역을 출력 하기 위한 버튼을 추가한다. root/templates/bootstrap/src/deposit/index.tt 1 &lt;a class="btn btn-primary" id="do_export &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,199 @@ INSERT INTO `user` VALUES (2,'rum_user',' &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/25/export-csv/">Export_csv</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-25T19:01:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/25/export-csv/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>목차</p>
+
+<ol>
+<li>CSV 출력 준비</li>
+<li>View 생성</li>
+</ol>
+
+
+<h3>CSV 출력 준비</h3>
+
+<p>선택된 내역을 출력 하기 위한 버튼을 추가한다.</p>
+
+<p>root/templates/bootstrap/src/deposit/index.tt</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;a class="btn btn-primary" id="do_export"&gt;출력&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>선택된 내역 js처리</p>
+
+<p>root/static/scripts/list.js</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $('#do_export').click(function() {
+</span><span class='line'>    var selected_charges = [];
+</span><span class='line'>
+</span><span class='line'>    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+</span><span class='line'>      if($(this).attr('id') !== undefined)
+</span><span class='line'>        selected_charges.push($(this).attr('id'))
+</span><span class='line'>    });
+</span><span class='line'>
+</span><span class='line'>    location.href = '/deposit/export/' + selected_charges;
+</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sil/Web/Don/Controller/Deposit.pm</p>
+
+<p>선택된 승인 내역을 CSV로 출력하기 위하여
+모듈 - <a href="https://metacpan.org/module/Catalyst::View::Download::CSV">Catalyst::View::Download::CSV</a>을 사용 하였습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sub export :Local CaptureArgs(1) {
+</span><span class='line'>    my ( $self, $c, $id ) = @_;
+</span><span class='line'>    my @target_ids = split ',', $id;
+</span><span class='line'>    
+</span><span class='line'>    my @charges;
+</span><span class='line'>    
+</span><span class='line'>    push @charges, ['제목', '청구자', '금액', '영수증날짜'];
+</span><span class='line'>    
+</span><span class='line'>    foreach my $charge($c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search({id =&gt; { -in =&gt; \@target_ids }})-&gt;all) {
+</span><span class='line'>        push @charges, [ $charge-&gt;title, $charge-&gt;user-&gt;user_name, $charge-&gt;amount, $charge-&gt;usage_date];
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    if (@charges) {
+</span><span class='line'>        $c-&gt;stash-&gt;{'csv'} = { 'data' =&gt; [ @charges ] };
+</span><span class='line'>        $c-&gt;flash-&gt;{messages} = 'Success Exported.';
+</span><span class='line'>
+</span><span class='line'>    } else {
+</span><span class='line'>        $c-&gt;flash-&gt;{messages} = 'Export Failed.';
+</span><span class='line'>    }
+</span><span class='line'>    $c-&gt;forward('Sil::Web::Don::View::Download::CSV');
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>View 생성</h2>
+
+<p>View는 script_web_don_create view로 생성한다.</p>
+
+<p>list/Sil/Web/Don/View/Download/CSV.pm을 생성 완료.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package Sil::Web::Don::View::Download::CSV;
+</span><span class='line'>use Moose;
+</span><span class='line'>use namespace::autoclean;
+</span><span class='line'>
+</span><span class='line'>extends 'Catalyst::View::Download::CSV';
+</span><span class='line'>
+</span><span class='line'>=head1 NAME
+</span><span class='line'>
+</span><span class='line'>Sil::Web::Don::View::Download::CSV - Catalyst View
+</span><span class='line'>
+</span><span class='line'>=head1 DESCRIPTION
+</span><span class='line'>
+</span><span class='line'>Catalyst View.
+</span><span class='line'>
+</span><span class='line'>=head1 AUTHOR
+</span><span class='line'>
+</span><span class='line'>ja3ck
+</span><span class='line'>
+</span><span class='line'>=head1 LICENSE
+</span><span class='line'>
+</span><span class='line'>This library is free software. You can redistribute it and/or modify
+</span><span class='line'>it under the same terms as Perl itself.
+</span><span class='line'>
+</span><span class='line'>=cut
+</span><span class='line'>
+</span><span class='line'>__PACKAGE__-&gt;meta-&gt;make_immutable;
+</span><span class='line'>
+</span><span class='line'>1;</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -977,155 +1170,6 @@ $c-&gt;stash(
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/11/catalyst-signup/">Catalyst-signup</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-11T22:55:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/11/catalyst-signup/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Signup Controller <a href="https://gist.github.com/3090526">Login.pm</a></p>
-
-<pre><code>$ vi lib/MyApp/Controller/Login.pm
-# 내용 추가
-</code></pre>
-
-<h2>:Private</h2>
-
-<p>forword 혹은 detach로만 접근이 가능 하며, URL로 부터 바로 접근이 불가능 합니다.</p>
-
-<pre><code>sub signup :Path('/signup') :Args(0) {
-my ( $self, $c ) = @_;
-
-$c-&gt;detach('signup_POST') if $c-&gt;req-&gt;method eq 'POST';
-}
-
-sub signup_POST :Private {
-my ( $self, $c ) = @_;
-</code></pre>
-
-<h2>Validation - Empty Value</h2>
-
-<p>입력값중에 빈값이 있으면 안돼므로 빈값인지 확인 하여 빈값일시 메세지를
-출력 할수 있게 작업한다.</p>
-
-<pre><code>my $user_name = $c-&gt;req-&gt;param('user_name') || '';
-my $email     = $c-&gt;req-&gt;param('email')     || '';
-my $password  = $c-&gt;req-&gt;param('password')  || '';
-
-my @messages;
-push @messages, 'Input the user name'     unless $user_name;
-push @messages, 'Input the user email'    unless $email;
-push @messages, 'Input the user password' unless $password;
-
-if (@messages) {
-    $c-&gt;flash(
-        messages =&gt; @messages,
-    );
-
-    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
-}
-</code></pre>
-
-<h2>Validation - DB Unique search</h2>
-
-<p>User table에 user_name과 email이 동일한 값이 있는지 확인 하여 동일한
-값이 있을시 error_msg를 출력 할수 있게 한다.</p>
-
-<pre><code>my $cond = {};
-$cond-&gt;{'me.user_name'} = "$user_name";
-my $name_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
-if ($name_search-&gt;count) {
-    $c-&gt;flash(
-        messages =&gt; 'Using ID again input the New ID',
-    );
-
-    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
-}
-
-$cond = {} if $cond;
-$cond-&gt;{'me.email'} = "$email";
-my $email_search = $c-&gt;model('DonDB')-&gt;resultset('User')-&gt;search($cond);
-if ($email_search-&gt;count) {
-    $c-&gt;flash(
-        messages      =&gt; 'Using email again input the New email',
-    );
-
-    return $c-&gt;res-&gt;redirect($c-&gt;uri_for('/signup'));
-}
-</code></pre>
-
-<h2>유저 등록</h2>
-
-<p>Validation이 통과 했다면 테이블에 등록 할수 있게 한다.
-실패시 signup페이지로 다시 이동 하며</p>
-
-<pre><code>my $time    = strftime "%Y-%m-%d %H:%M:%S", localtime;
-my $created = $c-&gt;model('DonDB::User')-&gt;create({
-    user_name  =&gt; $user_name,
-    email      =&gt; $email,
-    password   =&gt; $password,
-    created_on =&gt; "$time",
-    updated_on =&gt; "$time",
-});
-
-$c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri) unless $created;
-</code></pre>
-
-<h2>유저 등록 - 확인</h2>
-
-<p>등록후 이름과 패스워드를 확인하여 다음 페이지 혹은 tdpfjaptpwldhk 냐혀ㅔvpdlwlfmf ghcnfgksek.</p>
-
-<pre><code>if ($c-&gt;authenticate({ user_name =&gt; $user_name, password =&gt; $password } )) {
-    $c-&gt;res-&gt;redirect($c-&gt;uri_for($c-&gt;controller('List')-&gt;action_for('index')));
-} else {
-    $c-&gt;stash(error_msg =&gt; "Bad username or password."); # maybe flash?
-    $c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri);
-}
-</code></pre>
-
-<p>}</p>
-
-<p>Signup View.tt <a href="https://gist.github.com/3090541">signup.tt</a></p>
-
-<pre><code>$ vi root/templates/default/src/login/signup.tt
-# 내용 추가
-</code></pre>
-
-<h2>jquery 미사용</h2>
-
-<p>현재 Validation은 컨트롤 단에서만 검사 한다
-추가가 필요함</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1143,15 +1187,15 @@ $c-&gt;res-&gt;redirect($c-&gt;req-&gt;uri) unless $created;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/19/coffee-script/">Coffee Script 시작하기</a>
       </li>
     
   </ul>
