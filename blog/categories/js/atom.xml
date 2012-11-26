@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JS | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/js/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-26T18:13:55+09:00</updated>
+  <updated>2012-11-26T18:23:16+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -51,8 +51,8 @@ npm 설치를 위한 파일은 아래의 링크에서 다운로드 받습니다.
 <p>개인 OS에 맞는 파일을 선택해 다운 받고 설치 합니다. 다음은 Mac 에서의
 .pkg 실행시 첫화면과 마지막 화면 입니다.</p>
 
-<p><img src="https://lh5.googleusercontent.com/-eUicOa-fhtQ/UKXCFOGz27I/AAAAAAAAACE/9LBj6Kzdn-8/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-01.jpg" width="500" height="500" title="&#34;node.pkg 설치 시작&#34;" alt="&#34;node.pkg 설치 시작&#34;">
-<img src="https://lh5.googleusercontent.com/-Smr4TJfxMgI/UKXEkWDOYWI/AAAAAAAAACM/soEN5qpthGg/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-02.jpg" width="500" height="500" title="&#34;node.pkg 설치 끝&#34;" alt="&#34;node.pkg 설치 끝&#34;"></p>
+<p>{% img https://lh5.googleusercontent.com/-eUicOa-fhtQ/UKXCFOGz27I/AAAAAAAAACE/9LBj6Kzdn-8/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-01.jpg 500 500 "node.pkg 설치 시작" %}
+{% img https://lh5.googleusercontent.com/-Smr4TJfxMgI/UKXEkWDOYWI/AAAAAAAAACM/soEN5qpthGg/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-02.jpg 500 500 "node.pkg 설치 끝" %}</p>
 
 <h3>coffee-script 설치</h3>
 
@@ -84,16 +84,12 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 
 <p>coffee가 동작하는지 확인 하기 위해 테스트 파일를 작성합니다.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>style.coffee  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
-</span><span class='line'>  <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock style.coffee lang:js %}
+fill = (container, liquid = "coffee") ->
+  "Filling the #{container} with #{liquid}..."</p>
+
+<p>alert fill("cup")
+{% endcodeblock %}</p>
 
 <ul>
 <li><p>.coffee -> .js 변환하기</p>
@@ -119,42 +115,25 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 
 <p>.html 파일 내에서 .js 파일로 변환 없이 .coffee를 검사 할수있습니다.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>coffee.html </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/coffeescript&quot;</span><span class="nt">&gt;</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">fill</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">)</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span>
-</span><span class='line'>  <span class="s2">&quot;Filling the #{container} with #{liquid}...&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock coffee.html %}
+<html>
+  <head>
+  <script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/coffeescript"></p>
+
+<pre><code>fill = (container, liquid = "coffee") -&gt;
+  "Filling the #{container} with #{liquid}..."
+
+alert fill("cup")
+</code></pre>
+
+<p>  </script>
+  </head></p>
+
+<p>  <body>
+  </body>
+</html>
+{% endcodeblock %}</p>
 
 <ul>
 <li>coffeescript - .js 확인하기</li>
@@ -163,56 +142,32 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 
 <p>.html 파일 내에서 변환된 .js 내용을 검사 할수있습니다.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>coffee.html </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;script&gt;</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">fill</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">fill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">liquid</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="s2">&quot;Filling the &quot;</span> <span class="o">+</span> <span class="nx">container</span> <span class="o">+</span> <span class="s2">&quot; with &quot;</span> <span class="o">+</span> <span class="nx">liquid</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">));</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock coffee.html %}
+<html>
+  <head>
+  <script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js" type="text/javascript" charset="utf-8"></script>
+  <script></p>
+
+<pre><code>var fill;
+
+fill = function(container, liquid) {
+  if (liquid == null) {
+    liquid = "coffee";
+  }
+
+  return "Filling the " + container + " with " + liquid + "...";
+};
+
+alert(fill("cup"));
+</code></pre>
+
+<p>  </script>
+  </head></p>
+
+<p>  <body>
+  </body>
+</html>
+{% endcodeblock %}</p>
 ]]></content>
   </entry>
   
