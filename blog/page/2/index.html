@@ -9,8 +9,7 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="목차 CSV 출력 준비
-View 생성 CSV 출력 준비 선택된 내역을 출력 하기 위한 버튼을 추가한다. root/templates/bootstrap/src/deposit/index.tt 1 &lt;a class="btn btn-primary" id="do_export &hellip;">
+  <meta name="description" content="Web - Catalyst Test Code 작성 Catalyst로 웹을 구축 하던중 테스트 코드를 작성을 부여 받았습니다. 테스트 코드를 진행 하기 위한 모듈을 적습니다. 모듈 Test::More 기본 적이 펄 테스트 코드 문법을 확인 할수 있습니다. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +64,87 @@ View 생성 CSV 출력 준비 선택된 내역을 출력 하기 위한 버튼을
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/11/catalyst-test-code/">Catalyst-test-code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-11T18:46:00+09:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/11/catalyst-test-code/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Web - Catalyst Test Code 작성</h2>
+
+<p>Catalyst로 웹을 구축 하던중 테스트 코드를 작성을 부여 받았습니다. 테스트 코드를 진행 하기 위한 모듈을 적습니다.</p>
+
+<h2>모듈</h2>
+
+<p><a href="https://metacpan.org/module/Test::More">Test::More</a></p>
+
+<p>기본 적이 펄 테스트 코드 문법을 확인 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/Catalyst::Test#res-request-...-">Catalyst::Test</a></p>
+
+<p>content, response 페이지 정보를 얻어 올수 있습니다.</p>
+
+<p><a href="ihttps://metacpan.org/module/HTTP::Response">HTTP::Response</a></p>
+
+<p>response 정보등을 확인 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/URI">URI</a></p>
+
+<p>response 정보등을 확인 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/HTTP::Request::Common">HTTP::Request::Common</a></p>
+
+<p>Get POST 등을 구현 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/CGI::Simple::Cookie">CGI::Simple::Cookie</a></p>
+
+<p>로그인 인증 관련 세션 처리를 할수 있습니다.</p>
+
+<p><a href="https://metacpan.org/module/HTTP::Cookies">HTTP::Cookies</a></p>
+
+<p>CGI::Simple::Cookie로 쿠키 관련 재설정이 반복 되며 번거로울때
+파일로 저장하여 사용할수 있다.</p>
+
+<pre><code>## 첫번째 t 파일에서 login 하고 cookie 를 저장해둔다. pull/109설명중.
+my $cookies = HTTP::Cookies-&gt;new(file =&gt; 't/.cookies');
+# res &amp; res
+$cookies-&gt;extract_cookies($res);
+$cookies-&gt;save;
+
+## 다른 t 파일에서는..
+my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_string))[1];
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1029,147 +1109,6 @@ else {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/11/list/">List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-11T23:06:00+09:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/11/list/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>청구 목록 페이지</h2>
-
-<p><a href="https://gist.github.com/3095682">List.pm - index</a></p>
-
-<p><a href="https://gist.github.com/3095679">/list/index.tt</a></p>
-
-<h2>List Controller - Query option</h2>
-
-<p>등록 날짜 역순 출력을 위한 내림 차수 옵션을 준다.</p>
-
-<pre><code>my %attr  = ( 'order_by' =&gt; { -desc =&gt; 'me.id' } );
-
-my $total_charge;
-my %cond    = ();
-</code></pre>
-
-<p>현재 가르켜야 할 페이지 정보가 없다면 1페이지로 하게 한다.</p>
-
-<pre><code>my $page    = $c-&gt;req-&gt;params-&gt;{page};
-$attr{page} = $page || 1;
-</code></pre>
-
-<p>status 옵션이 정의 되지 않았다면 전체(대기/승인/거부) 검색을 할수 있게 한다.</p>
-
-<pre><code>my $status  = $c-&gt;req-&gt;param("status") || $c-&gt;stash-&gt;{"status"} || '0'; #수정 필요
-</code></pre>
-
-<p>status 옵션 없으면 전체 있으면 상태 검색 할수 있게 한다.</p>
-
-<pre><code>%cond         = ( status =&gt; $status ) if $status;
-$total_charge = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;search(\%cond, \%attr);
-</code></pre>
-
-<p>Data::Pageset활용 하여 페이징 할수 있다.</p>
-
-<pre><code>my $page_info =
-Data::Pageset-&gt;new(
-    {
-    ( map { $_ =&gt; $total_charge-&gt;pager-&gt;$_ } qw/entries_per_page total_entries current_page/ ),
-    mode =&gt; "slide",
-    pages_per_set =&gt; 10,
-    }
-);
-
-$c-&gt;stash(
-    lists   =&gt; [ $total_charge-&gt;all ],
-    status  =&gt; $status,
-    pageset =&gt; $page_info,
-);
-}
-</code></pre>
-
-<h2>List - View</h2>
-
-<p>성공 혹은 실패 메세지 출력을 할수 있게 한다.</p>
-
-<pre><code>[% IF messages %]
-&lt;div class="alert fade in"&gt;
-&lt;button class="close" data-dismiss="alert"&gt;&amp;times;&lt;/button&gt;
-[% messages %]
-&lt;/div&gt;
-[% END %]
-</code></pre>
-
-<p>탭 등록으로 원하는 상태의 값들만 보여 줄수 있게 한다.</p>
-
-<pre><code>&lt;div class="container-fluid"&gt;
-  &lt;div class="row-fluid"&gt;
-&lt;div class="span2"&gt;
-  &lt;ul class="nav nav-tabs nav-stacked"&gt;
-    &lt;li class="active"&gt;&lt;a href="/list"&gt;전체&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/list?status=1"&gt;대기&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/list?status=2"&gt;승인&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/list?status=3"&gt;거부&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>현재 경로가 어떻게 되는지 확인 할수 있도록 한다.</p>
-
-<pre><code>&lt;div class="span10"&gt;
-  &lt;ul class="breadcrumb"&gt;
-    &lt;li&gt;목록
-        &lt;span class="divider"&gt;/&lt;/span&gt;
-    &lt;/li&gt;      
-    &lt;li class="active"&gt;
-    [% IF status == "1" %]
-        &lt;b&gt; 대기 &lt;/b&gt;
-    [% ELSIF status == "2" %]
-        &lt;b&gt; 승인 &lt;/b&gt;
-    [% ELSIF status == "3" %]
-        &lt;b&gt; 거부 &lt;/b&gt;
-    [% ELSE %]
-        &lt;b&gt; 전체 &lt;/b&gt;
-    [% END %]     
-    &lt;/li&gt;
-  &lt;/ul&gt;
-</code></pre>
-
-<h2>CPAN</h2>
-
-<p><a href="https://metacpan.org/module/Data::Pageset">Data::Pageset</a></p>
-
-<p><a href="https://metacpan.org/module/DBIx::Class::Manual::DocMap">DBIx::Class::Manual::DocMap</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1187,15 +1126,15 @@ $c-&gt;stash(
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/26/sass/">Sass</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
       </li>
     
   </ul>

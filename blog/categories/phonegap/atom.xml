@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Phonegap | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/phonegap/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-26T13:58:53+09:00</updated>
+  <updated>2012-11-26T18:13:55+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -20,8 +20,6 @@
     <id>http://rumidier.github.com/blog/2012/11/26/phonegap-android</id>
     <content type="html"><![CDATA[<h2>사용 환경</h2>
 
-<hr />
-
 <ul>
 <li>모델명    :     MacBook Pro</li>
 <li>모델 식별자:   MacBookPro8,1</li>
@@ -31,8 +29,6 @@
 
 
 <h2>요구 환경</h2>
-
-<hr />
 
 <ul>
 <li>Eclipse 3.4+</li>
@@ -185,7 +181,7 @@ build.xml                     proguard-project.txt
 
 <h5>Add Repository 설정</h5>
 
-<p>Location에서 문제가 발생하면 'https' 'http'를 사용하도록 합니다.</p>
+<p>Location에서 문제가 발생하면 'https'를 'http'로 사용하도록 합니다.</p>
 
 <pre><code>Name: ADT Plugin
 Location: https://dl-ssl.google.com/android/eclipse/

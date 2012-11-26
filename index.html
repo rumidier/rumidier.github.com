@@ -9,10 +9,7 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="사용 환경 모델명 : MacBook Pro
-모델 식별자: MacBookPro8,1
-메모리: 4 GB
-Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse Classic를 다운 받습니다. 다운 받은 파일은 . &hellip;">
+  <meta name="description" content="CSS Extensions Nested Rules .scss 중첩 규칙의 일반적인 사용법 example-01.scss #main p { color: #00ff00; width: 97%; .redbox { boackground-color: #ff0000; color &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +70,1401 @@ Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse Classi
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/11/26/sass/">Sass</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-26T18:08:00+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/26/sass/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>CSS Extensions</h3>
+
+<h4>Nested Rules</h4>
+
+<p>.scss 중첩 규칙의 일반적인 사용법</p>
+
+<p>example-01.scss</p>
+
+<pre><code>#main p {
+  color: #00ff00;
+  width: 97%;
+
+  .redbox {
+    boackground-color: #ff0000;
+    color: #0000;
+  }
+}
+</code></pre>
+
+<p>example-01.css</p>
+
+<pre><code>#main p {
+  color: #00ff00;
+  wdth: 97%; }
+  #main p .redbox {
+    background-color: #ff0000;
+    color: #000000; }
+</code></pre>
+
+<p>example-02.scss</p>
+
+<pre><code>#main {
+  width: 97%;
+
+  p, div {
+    font-size: 2em;
+    a { font-weight: bold; }
+  }
+  pre { font-size: 3em; }
+}
+</code></pre>
+
+<p>example-02.css</p>
+
+<pre><code>#mian {
+  width: 97%; }
+  #mian p, #main div {
+    font-size: 2em; }
+    #mian p a, #main div a {
+      font-weight: bold; }
+  #main pre {
+    font-size: 3em; }
+</code></pre>
+
+<h4>Referencing Parent Selectors: &amp;</h4>
+
+<p>&#8216;&amp;&#8217;를 사용함으로서 부모 셀렉터를 상속 받을수 있습니다.</p>
+
+<p>example-03.scss</p>
+
+<pre><code>a {
+  font-weight: bold;
+  text-decoration: none;
+  &amp;:hover { text-decoration: underline; }
+  body.firefox &amp; { font-weight: normal; }
+}
+</code></pre>
+
+<p>example-03.css</p>
+
+<pre><code>a {
+  font-weight: bold;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+  body.firefox a {
+    font-weight: normal; }
+</code></pre>
+
+<p>example-04.scss</p>
+
+<pre><code>#main {
+  color: black;
+  a {
+    font-weight: bold;
+    &amp;:hover { color: red; }
+  }
+}
+</code></pre>
+
+<p>example-04.css</p>
+
+<pre><code>#main {
+  color: black; }
+  #main a {
+    font-weight: bold; }
+      #main a:hover {
+        color: red; }
+</code></pre>
+
+<h4>Nested Properties</h4>
+
+<p>Nested의 또 다른 기능으로 특성들을 상속 합니다.</p>
+
+<p>example-05.scss</p>
+
+<pre><code>.funky {
+  font: {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}
+</code></pre>
+
+<p>example-05.css</p>
+
+<pre><code>.funky {
+  font-family: fantasy;
+  font-szie: 30em;
+  font-weight: bold; }
+</code></pre>
+
+<p>example-06.scss</p>
+
+<pre><code>.funky {
+  font: 2px/3px {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}
+</code></pre>
+
+<p>example-06.css</p>
+
+<pre><code>.funky {
+  font: 2px/3px;
+    font-family: fantasy;
+    font-size: 30em;
+    font-weight: bold; }
+</code></pre>
+
+<h4>Comments: /* */ and //</h4>
+
+<p>example-07.scss</p>
+
+<p>//한줄 주석으로 변환시 .css에 없고 /* */ 다중 주석 문으로 .css변환시에도 남아 있습니다.</p>
+
+<pre><code>/* multiple line
+   is not delete in css */
+body { color: black; }   
+// one line is delete in css
+a { color: green; }
+</code></pre>
+
+<p>example-07.css</p>
+
+<pre><code>/* multiple line
+   is not delete in css */
+body { color: black; }
+a { color: green; }
+</code></pre>
+
+<h4>Variables: $</h4>
+
+<p>.scss의 변수는 $에 선언 합니다.</p>
+
+<p>example-08.scss</p>
+
+<pre><code>$width: 5em;
+#main {
+  width: $width;
+}
+</code></pre>
+
+<p>example-08.css</p>
+
+<pre><code>#main {
+  width: 5em;
+}
+</code></pre>
+
+<h4>Strings</h4>
+
+<p>문자열은 #{$string}를 통해서 사용 할수 있습니다.</p>
+
+<p>example-09.scss</p>
+
+<pre><code>@mixin firefox-message($selector) {
+  body.firefox #{$selector}:before {
+    content: "Hi, Firefox users!";
+  }
+}
+@include firefox-message(".header");
+</code></pre>
+
+<p>example-09.css</p>
+
+<pre><code>body.firefox .header:before {
+  content: "Hi, Firefox users!"; }
+</code></pre>
+
+<h4>Number Operations</h4>
+
+<p>in와 pt를 같이 사용하면 in로 변환되어 계산 됩니다.</p>
+
+<p>example-10.scss</p>
+
+<pre><code>p {
+  width: 1in + 8pt;
+}
+</code></pre>
+
+<p>example-10.css</p>
+
+<pre><code>p {
+  width: 1.111in }
+</code></pre>
+
+<h4>Division and /</h4>
+
+<p>example-11.scss</p>
+
+<p>margin-left 처럼 다른 인자와 연산을 하지 않으면 .css변환시 표기대로 변환 됩니다.</p>
+
+<pre><code>p {
+  font: 10px/8px;
+  $width: 1000px;
+  width: $width/2;
+  height: (500px/2);
+  margin-left: 5px + 8px/2px;
+}
+</code></pre>
+
+<p>example-11.css</p>
+
+<pre><code>p {
+  font: 10px/8px;
+  width: 500px;
+  height: 250px;
+  margin-left: 9px;
+}
+</code></pre>
+
+<p>example-12.scss</p>
+
+<p>변수에 할당하여 연산할수도 있습니다.</p>
+
+<pre><code>p {
+  $font-size: 12px;
+  $line-height: 30px;
+  font: #{$font-size}/#{$line-height};
+}
+</code></pre>
+
+<p>example-12.css</p>
+
+<pre><code>p {
+  font: 12px/30px; }
+</code></pre>
+
+<h4>Color Operations</h4>
+
+<p>example-13.scss</p>
+
+<p>Color의 덧셈 입니다.</p>
+
+<pre><code>p {
+  color: #010203 + #040506;
+}
+</code></pre>
+
+<p>example-13.css</p>
+
+<pre><code>p {
+  color: #050709; }
+</code></pre>
+
+<p>example-14.scss</p>
+
+<p>Color의 곱셈 입니다.</p>
+
+<pre><code>p {
+  color: #010203 * 2;
+}
+</code></pre>
+
+<p>example-14.css</p>
+
+<pre><code>p {
+  color: #020406; }
+</code></pre>
+
+<p>example-15.scss</p>
+
+<p>rgba의 값들간에만 더하기를 합니다. 최소 값은 0이며 양측 덧셈 최대값은 255 입니다. 투명도가 동일 값이어야만 계산이 됩니다.</p>
+
+<pre><code>p {
+  color: rgba(255, 0, 0, 0.75) + rgba(0, 255, 0, 0.75);
+}
+</code></pre>
+
+<p>example-15.css</p>
+
+<pre><code>p {
+  color: rgba(255, 255, 0, 0.75); }
+</code></pre>
+
+<p>example-16.scss</p>
+
+<p>opacify는 투명도값을 덧셈하고 transparentize는 0.5의 값을 0.25로 변경합니다.</p>
+
+<pre><code>$translucent-red: rgba(255, 0, 0, 0.5);
+p {
+  color: opacify($translucent-red, 0.3);
+  background-color: transparentize($translucent-red, 0.25);
+}
+</code></pre>
+
+<p>example-16.css</p>
+
+<pre><code>p {
+  color: rgba(255, 0, 0, 0.8);
+  background-color: rgba(255, 0, 0, 0.25); }
+</code></pre>
+
+<h4>String Operations</h4>
+
+<p>example-17.scss</p>
+
+<p>문자열의 덧셈을 보여 주고 있습니다.</p>
+
+<pre><code>p {
+  cursor: e + -resize;
+}
+</code></pre>
+
+<p>example-17.css</p>
+
+<pre><code>p {
+  cursor: e-resize; }
+</code></pre>
+
+<p>example-18.scss</p>
+
+<p>공백을 포함한 문자열의 덧셈을 보여 줍니다.</p>
+
+<pre><code>p:before {
+  content: "Foo " + Bar;
+  font-family: sans- + "serif";
+}
+</code></pre>
+
+<p>example-18.css</p>
+
+<pre><code>p:before {
+  content: "Foo Bar";
+  font-family: sans-serif; }
+</code></pre>
+
+<p>example-19.scss</p>
+
+<p>px값과 auto 인자가 있을시 ( ) 없이도 px값 만 계산 합니다.</p>
+
+<pre><code>p {
+  margin: 3px + 4px auto;
+}
+</code></pre>
+
+<p>example-19.css</p>
+
+<pre><code>p {
+  margin: 7px auto; }
+</code></pre>
+
+<p>example-20.scss</p>
+
+<p>문자열 치환도 가능 합니다.</p>
+
+<pre><code>p:before {
+  content: "I ate #{5 + 10} pies!";
+}
+</code></pre>
+
+<p>example-20.css</p>
+
+<pre><code>p:before {
+  content: "I ate 15 pies!"; }
+</code></pre>
+
+<p>example-21.scss</p>
+
+<p>변수 값이 null일시 무시 합니다.</p>
+
+<pre><code>$value: null;
+  p:before {
+  content: "I ate #{$value} pies!";
+}
+</code></pre>
+
+<p>example-21.css</p>
+
+<pre><code>p:before {
+  content: "I ate pies!"; }
+</code></pre>
+
+<h4>Parentheses</h4>
+
+<p>example-22.scss</p>
+
+<p>( )우선 순위로 계산 합니다.</p>
+
+<pre><code>p {
+  width: 1em + (2em * 3);
+}
+</code></pre>
+
+<p>example-22.css</p>
+
+<pre><code>p {
+  width: 7em;
+}
+</code></pre>
+
+<h4>Functions</h4>
+
+<p>HSL ($hue, $saturation, $lightness), (색깔, 채도, 밝기)
+example-23.scss</p>
+
+<pre><code>p {
+  color: hsl(0, 100%, 50%);
+}
+
+example-23.css
+
+p {
+  color: red; }
+</code></pre>
+
+<h4>Interpolation: #{}</h4>
+
+<p>example-24.scss</p>
+
+<p>문자 보간 하는 방법 입니다. foo와 border를 치환 합니다.</p>
+
+<pre><code>$name: foo;
+$attr: border;
+p.#{$name} {
+  #{$attr}-color: blue;
+}
+</code></pre>
+
+<p>example-24.css</p>
+
+<pre><code>p.foo {
+  border-color: blue;
+}
+</code></pre>
+
+<p>example-25.scss</p>
+
+<p>px 값들 또한 보간할수 있습니다.</p>
+
+<pre><code>p {
+  $font-size: 12px;
+  $line-height: 30px;
+  font: #{$font-size} / #{$line-height};
+}
+</code></pre>
+
+<p>example-25.css</p>
+
+<pre><code>p { font: 12px / 30px; }
+</code></pre>
+
+<h4>Variable Defaults: !default</h4>
+
+<p>example-26.scss</p>
+
+<p>$content값이 참인지 분별하여 참이 아니면 &#8220;Second content?&#8221;값을 부여 합니다. 참이므로 $content는 &#8220;First..&#8221;가 됩니다.
+$new_content는 참이 아니므로 &#8220;First time…&#8221;을 출력 합니다.</p>
+
+<pre><code>$content: "First content";
+$content: "Second content?" !default;
+$new_content: "First time reference" !default;
+
+#main {
+  ccontent: $content;
+  new-content: $new_content;
+}
+</code></pre>
+
+<p>example-26.css</p>
+
+<pre><code>#main {
+  content: "First content";
+  new-content: "First time reference";
+}
+</code></pre>
+
+<p>example-27.scss</p>
+
+<p>$content의 값이 null이므로 !default가 동작 합니다.</p>
+
+<pre><code>$content: null;
+$content: "Non-null content" !default;
+
+#main {
+  content: $content;
+}
+</code></pre>
+
+<p>example-27.css</p>
+
+<pre><code>#main {
+  content: "Non-null content";
+}
+</code></pre>
+
+<h2>@-Rules and Directives</h2>
+
+<h4>import</h4>
+
+<p>example-28.scss example</p>
+
+<pre><code>@import "foo.scss";
+or
+@import "foo";
+</code></pre>
+
+<p>example-28-01.scss example</p>
+
+<pre><code>@import "foo.css";
+@import "foo" screen;
+@import "http://foo.com/bar";
+@import url(foo);
+</code></pre>
+
+<p>example-28-01.css</p>
+
+<pre><code>@import "foo.css";
+@import "foo" screen;
+@import "http://foo.com/bar";
+@import url(foo);
+</code></pre>
+
+<h4>multiple import</h4>
+
+<p>여러개의 파일을 import할수 있습니다.</p>
+
+<pre><code>@import "rounded-corners", "text-shadow";
+</code></pre>
+
+<h4>interpolation #{}</h4>
+
+<p>unqoute를 사용함으로써 변환시 문자열에 &#8220;&#8221; 제거 할수 있습니다.</p>
+
+<pre><code>$family: unquote("Droid-Sans");
+@import url("http://fonts.googleapis.com/css?family=\#{$family}");
+</code></pre>
+
+<h4>Partials</h4>
+
+<p>colors로 import를 하게 되면 기본적으로 .css 파일이 없는 상태에서 _color.scss파일을 import하게 되고 이도 없으면 비슷한 color.scss파일을 import합니다.</p>
+
+<pre><code>@import "colors";
+</code></pre>
+
+<h4>Nested @import</h4>
+
+<p>{ }에서 import를 하게 되면 selector 네임이 중첩 됩니다.</p>
+
+<p>example-29.scss</p>
+
+<pre><code>.example {
+  color: red;
+}
+</code></pre>
+
+<p>example-29-01.scss</p>
+
+<pre><code>#main {
+  @import: "example";
+}
+</code></pre>
+
+<p>example-29-01.css</p>
+
+<pre><code>#main .example {
+  color: red;
+}
+</code></pre>
+
+<h4>@media</h4>
+
+<pre><code>.sidebar {
+  width: 300px;
+  @media screen and (orientation: landscape) {
+    width: 500px;
+  }
+}
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>.sidebar {
+  width: 300px; }
+  @media screen and (orientation: landscape) {
+    .sidebar {
+    width: 500px; } }
+</code></pre>
+
+<p>@media .scss</p>
+
+<pre><code>@media screen {
+  .sidebar {
+    @media (orientation: landscape) {
+      width: 500px;
+    }
+  }
+}
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>@media screen and (orientation: landscape) {
+  .sidebar {
+    width: 500px; } }
+}
+</code></pre>
+
+<p>@media .scss</p>
+
+<pre><code>$media: screen;
+$feature: -webkit-min-device-pixel-ratio;
+$value: 1.5;
+
+@media #{$media} and ($feature: $value) {
+  .sidebar {
+    width: 500px; } }
+}
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  .sidebar {
+    width: 500px; } }
+}
+</code></pre>
+
+<h4>@extend</h4>
+
+<p>markup</p>
+
+<pre><code>&lt;div class="error seriousError"&gt;
+  Oh no! You've been hacked!
+&lt;/div&gt;
+</code></pre>
+
+<p>styles -> 뭔가 문제가 있다는데?</p>
+
+<pre><code>.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  border-width: 3px;
+}
+</code></pre>
+
+<p>다른 styles</p>
+
+<pre><code>.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+</code></pre>
+
+<p>markup</p>
+
+<pre><code>&lt;div class="error seriousError"&gt;
+  Oh no! You've been hacked!
+&lt;/div&gt;
+&lt;div class="seriousError intrusion"&gt;&lt;/div&gt;
+</code></pre>
+
+<p>다른 스타일 추가</p>
+
+<pre><code>.error.intrusion {
+  background-image: url("/image/hacked.png");
+}
+</code></pre>
+
+<p>How i Workd</p>
+
+<p>example</p>
+
+<pre><code>.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.error.intrusion {
+  background-image: url("/image/hacked.png");
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>.error, .seriousError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.error.intrusion, .seriousError.intrusion {
+  background-image: url("/image/hacked.png");
+}
+.seriousError {
+  border-width: 3px;
+}
+</code></pre>
+
+<h4>Extending Complex Selectors</h4>
+
+<p>.scss example</p>
+
+<pre><code>.hoverlink {
+  @extend a:hover;
+}
+a:hover {
+  text-decoration: underline;
+}
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>a:hover, .hoverlink {
+  text-decoration: underline;
+}
+</code></pre>
+
+<p>.scss example</p>
+
+<pre><code>.hoverlink {
+  @extend a:hover;
+}
+.comment a.user:hover {
+  font-weight: bold;
+}
+</code></pre>
+
+<p>compile</p>
+
+<pre><code>.comment a.user:hover, .comment .user.hoverlink {
+  font-weight: bold;
+}
+</code></pre>
+
+<h4>Multiple Extends</h4>
+
+<p>.scss</p>
+
+<pre><code>.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.attention {
+  font-size: 3em;
+  background-color: #ff0;
+}
+.seriousError {
+  @extend .error;
+  @extend .attention;
+  border-width: 3px;
+}
+</code></pre>
+
+<p>.compile</p>
+
+<pre><code>.error, .seriousError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.attention, .seriousError {
+  font-size: 3em;
+  background-color: #ff0;
+}
+.seriousError {
+  border-width: 3px;
+}
+</code></pre>
+
+<h4>Chanining Extends</h4>
+
+<p>example.scss</p>
+
+<pre><code>.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+.criticalError {
+  @extend .seriousError;
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.error, .seriousError, .criticalEroor {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+.criticalError {
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+}
+</code></pre>
+
+<h4>Selector Sequences</h4>
+
+<p>example.scss</p>
+
+<pre><code>#fake-links .link {
+  @extend a;
+}
+
+a {
+  color: blue;
+  &amp;:hover {
+    text-decoration: underline;
+  }
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>a, #fake-links .link {
+  color: blue;
+}
+  a:hover, #fakelinks .link:hover {
+    text-decoration: underline;
+  }
+</code></pre>
+
+<h4>Merging Selector Sequences</h4>
+
+<p>두개의 다른 시퀀스를 @extend 할때는 첫번재 시퀀스, 첫번재 + 두번째 시퀀스, 두번째 시퀀스 + 첫번째 시퀀스를 한다. 마지막 셀렉터 .fakelink는 두번재 + 첫번재 시퀀스 뒤에 오게 됩니다.(왜?)</p>
+
+<p>example.scss</p>
+
+<pre><code>#admin .tabbar a {
+  font-weight: bold;
+}
+#demo .overview .fakelink {
+  @extend a;
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>#admin .tabbar a,
+#admin .tabbar #demo .overview .fakelink,
+#demo .overview #admin .tabbar .fakelink {
+  font-weight: bold;
+}
+</code></pre>
+
+<p>두개의 시퀀스에 같은 셀렉터가 있을때.</p>
+
+<p>example.scss</p>
+
+<pre><code>#admin .tabbar a {
+  font-weight: bold;
+}
+#admin .overview .fakelink {
+  @extend a;
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>#admin tabbar a,
+#admin .tabbar .overview fakelink,
+#admin .overview .tabbar .fakelink {
+  font-weight: bold;
+}
+</code></pre>
+
+<h4>@extend-Only Selectors</h4>
+
+<p>(잘 모르겠음))
+example.scss</p>
+
+<pre><code>#context a%extreme {
+  color: blue;
+  font-weight: bold;
+  font-size: 2em;
+}
+.notice {
+  @extend %extreme;
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>#context a.notice {
+  color: blue;
+  font-weight: bold;
+  font-size: 2ex;
+}
+</code></pre>
+
+<h4>The !optional Flag</h4>
+
+<p>(잘 모르겠음)</p>
+
+<h4>@extend in Directives</h4>
+
+<h4>@debug</h4>
+
+<h4>@warn</h4>
+
+<h2>Control Directives</h2>
+
+<h4>@if</h4>
+
+<p>example.scss</p>
+
+<pre><code>p {
+  @if 1 + 1 == 2 { border: 1px solid; }
+  @if 5 &lt; 3      { border: 2px dotted; }
+  @if nul        { border: 3px double; }
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>p {
+  border: 1px solid;
+  border: 3px double;
+}
+</code></pre>
+
+<h4>@if @else</h4>
+
+<p>example.scss</p>
+
+<pre><code>$type: monster;
+p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == matador {
+    color: red;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>p {
+  color: green;
+}
+</code></pre>
+
+<h4>@for</h4>
+
+<p>example.scss</p>
+
+<pre><code>@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.item-1 {
+  width: 2em;
+}
+.item-2 {
+  width: 4em;
+}
+.item-3 {
+  width: 6em;
+}
+</code></pre>
+
+<h4>@each</h4>
+
+<p>example.scss</p>
+
+<pre><code>@each $animal in puma, sea-slug, egret, salamander {
+  .#{$animal}-icon {
+    background-image: url('/images/#{animal}.png');
+  }
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.puma-icon {
+  background-image: url('/images/puma.png');
+}
+.sea-slug {
+  background-image: url('/images/sea-slug.png');
+}
+.egret {
+  background-image: url('/images/egret.png');
+}
+.salamander {
+  background-image: url('/images/salamander.png');
+}
+</code></pre>
+
+<h4>@while</h4>
+
+<p>example.scss</p>
+
+<pre><code>$i: 6;
+@while $i &gt; 0 { 
+  .item-#{$i} { width: 2em * $i; }
+  $i: $i - 2;
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.item-6 {
+  width: 12em;
+}
+.item-4 {
+  width: 8em;
+}
+.item-2 {
+  width: 4em;
+}
+</code></pre>
+
+<h3>Mixin Directives</h3>
+
+<h4>Defining a Mixin: @mixin</h4>
+
+<p>example.scss</p>
+
+<pre><code>@mixin large-text {
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
+}
+</code></pre>
+
+<h5>Mixins contain parent reference</h5>
+
+<p>example.scss</p>
+
+<pre><code>@mixin clearfix {
+  display: inline-block;
+  &amp;:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  * html &amp; { height: 1px }
+}
+</code></pre>
+
+<h4>Including a Mixin: @include</h4>
+
+<p>example.scss</p>
+
+<pre><code>@mixin large-text {
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
+}
+
+.page-title {
+  @include large-text;
+  padding: 4px;
+  margin-top: 10px;
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.page-title {
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff0000;
+  padding: 4px;
+  margin-top: 10px;
+}
+</code></pre>
+
+<p>example.scss</p>
+
+<pre><code>@mixin silly-links {
+  a {
+    color: blue;
+    background-color: red;
+  }
+}
+
+@include silly-links;
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>a {
+  color: blue;
+  background-color: red;
+}
+</code></pre>
+
+<h5>Mixin 안에 Mixin @include</h5>
+
+<p>example.scss</p>
+
+<pre><code>@mixin compound {
+  @include highlighted-background;
+  @include header-text;
+}
+
+@mixin highlighted-background { background-color: #fc0; }
+@mixin header-text { font-size: 20px; }
+</code></pre>
+
+<h4>Arguments</h4>
+
+<p>example.scss</p>
+
+<pre><code>@mixin sexy-border($color, $witdh) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
+}
+
+p { @include secy-border(blue, 1in); }
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>p {
+  border-color: blue;
+  border-width: 1in;
+  border-style: dashed;
+}
+</code></pre>
+
+<h5>Mixin default value</h5>
+
+<p>example.scss</p>
+
+<pre><code>@mixin sexy-border($color, $width: 1in) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
+}
+p { @include sexy-border(blue); }
+h1 { @include sexy-border(blue, 2in); }
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>p {
+  border-color: blue;
+  border-width: 1in;
+  border-style: dashed;
+}
+h1 {
+  border-color: blue;
+  border-width: 2in;
+  border-style: dashed;
+}
+</code></pre>
+
+<h4>Keyword Arguments</h4>
+
+<p>example.scss</p>
+
+<pre><code>p { @include sexy-border($color: blue); }
+h1 { @include sexy-border($color: blue, $width: 2in); }
+</code></pre>
+
+<h4>Varialbe Arguments</h4>
+
+<p>example.scss</p>
+
+<pre><code>@mixin box-shadow($shadows…) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+.shadows {
+  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.shadowed {
+  -moz-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+  -webkit-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+  box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+}
+</code></pre>
+
+<h5>Variable arguments calling a mixin</h5>
+
+<p>example.scss</p>
+
+<pre><code>@mixin colors($text, $background, $border) {
+  color: $text;
+  background-color: $background;
+  border-color: $border;
+}
+
+$values: #ff0000, #00ff00, #0000ff;
+.primary {
+  @include colors($values…);
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.primary {
+  color: #ff0000;
+  background-color: #00ff00;
+  border-color: #0000ff;
+}
+</code></pre>
+
+<h5>wrap mixin and add styles change argument</h5>
+
+<pre><code>@mixin wrapped-stylish-mixin($args…) {
+   font-weight: bold;
+   @include stylish-mixin($args…);
+}
+.stylish {
+  @include wrapped-stylish-mixin(#00ff00, $width: 100px);
+}
+</code></pre>
+
+<h4>Passing Content Blocks to a Mixin</h4>
+
+<p>example.scss</p>
+
+<pre><code>@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>* html #logo {
+  background-image: url(/logo.gif);
+}
+</code></pre>
+
+<h4>Variable Scope and Content Blocks</h4>
+
+<p>example.scss</p>
+
+<pre><code>$color: white;
+  @mixin colors($color: blue) {
+  background-color: $color;
+  @content;
+  border-color: $color;
+}
+.colors {
+  @include colors { color: $color; }
+}
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>.colors {
+  background-color: blue;
+  color: white;
+  border-color: blue;
+}
+</code></pre>
+
+<p>example-02.scss</p>
+
+<pre><code>#sidebar {
+  $sidebar-width: 300px;
+  width: $sidebar-width;
+  @include smartphone {
+    width: $sidebar-width / 3;
+  }
+}
+</code></pre>
+
+<h4>Function Directives</h4>
+
+<p>example.scss</p>
+
+<pre><code>$grid-width: 40px;
+$gutter-width: 10px;
+
+@function grid-width($n) {
+  @return $n * $grid-width + ($n - 1) * $gutter-width;
+}
+
+#sidebar { width: grid-width(5); }
+</code></pre>
+
+<p>example.css</p>
+
+<pre><code>#sidebar {
+  width: 240px; }
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a></h1>
     
     
@@ -100,8 +1492,6 @@ Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse Classi
 
   <div class="entry-content"><h2>사용 환경</h2>
 
-<hr />
-
 <ul>
 <li>모델명    :     MacBook Pro</li>
 <li>모델 식별자:   MacBookPro8,1</li>
@@ -111,8 +1501,6 @@ Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse Classi
 
 
 <h2>요구 환경</h2>
-
-<hr />
 
 <ul>
 <li>Eclipse 3.4+</li>
@@ -266,7 +1654,7 @@ build.xml                     proguard-project.txt
 
 <h5>Add Repository 설정</h5>
 
-<p>Location에서 문제가 발생하면 &#8216;https&#8217; &#8216;http&#8217;를 사용하도록 합니다.</p>
+<p>Location에서 문제가 발생하면 &#8216;https&#8217;를 &#8216;http&#8217;로 사용하도록 합니다.</p>
 
 <pre><code>Name: ADT Plugin
 Location: https://dl-ssl.google.com/android/eclipse/
@@ -2176,87 +3564,6 @@ $activity_search = $c-&gt;model('BikeMeDB')-&gt;resultset('Activity')-&gt;search
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/09/11/catalyst-test-code/">Catalyst-test-code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-11T18:46:00+09:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/09/11/catalyst-test-code/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Web - Catalyst Test Code 작성</h2>
-
-<p>Catalyst로 웹을 구축 하던중 테스트 코드를 작성을 부여 받았습니다. 테스트 코드를 진행 하기 위한 모듈을 적습니다.</p>
-
-<h2>모듈</h2>
-
-<p><a href="https://metacpan.org/module/Test::More">Test::More</a></p>
-
-<p>기본 적이 펄 테스트 코드 문법을 확인 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/Catalyst::Test#res-request-...-">Catalyst::Test</a></p>
-
-<p>content, response 페이지 정보를 얻어 올수 있습니다.</p>
-
-<p><a href="ihttps://metacpan.org/module/HTTP::Response">HTTP::Response</a></p>
-
-<p>response 정보등을 확인 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/URI">URI</a></p>
-
-<p>response 정보등을 확인 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/HTTP::Request::Common">HTTP::Request::Common</a></p>
-
-<p>Get POST 등을 구현 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/CGI::Simple::Cookie">CGI::Simple::Cookie</a></p>
-
-<p>로그인 인증 관련 세션 처리를 할수 있습니다.</p>
-
-<p><a href="https://metacpan.org/module/HTTP::Cookies">HTTP::Cookies</a></p>
-
-<p>CGI::Simple::Cookie로 쿠키 관련 재설정이 반복 되며 번거로울때
-파일로 저장하여 사용할수 있다.</p>
-
-<pre><code>## 첫번째 t 파일에서 login 하고 cookie 를 저장해둔다. pull/109설명중.
-my $cookies = HTTP::Cookies-&gt;new(file =&gt; 't/.cookies');
-# res &amp; res
-$cookies-&gt;extract_cookies($res);
-$cookies-&gt;save;
-
-## 다른 t 파일에서는..
-my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_string))[1];
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2272,15 +3579,15 @@ my $cookies = (split(/:/, HTTP::Cookies-&gt;new(file =&gt; 't/.cookies')-&gt;as_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/26/sass/">Sass</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/21/less-tutorial/">Less tutorial</a>
       </li>
     
   </ul>
