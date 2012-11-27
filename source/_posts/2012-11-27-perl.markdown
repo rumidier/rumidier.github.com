@@ -1,0 +1,13 @@
+---
+layout: post
+title: "Perl"
+date: 2012-11-27 15:29
+comments: true
+categories:  perl
+---
+
+해당 되는 파일의 이름을 찾아 그 안에서 정규 표현식에 해당 되는 문자열을 치환 해주는 기능
+
+{% codeblock lang:bash %}
+$ perl -pi -e 's/scripts/scripts\.coffee/g' `find . -name '*.tt'`
+{% endcodeblock %}

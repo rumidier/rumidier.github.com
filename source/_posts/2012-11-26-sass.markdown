@@ -1,0 +1,1234 @@
+---
+layout: post
+title: "Sass"
+date: 2012-11-26 18:08
+comments: true
+categories:  Sass Scss CSS
+---
+
+### CSS Extensions
+
+#### Nested Rules
+
+.scss 중첩 규칙의 일반적인 사용법
+
+example-01.scss
+
+    #main p {
+      color: #00ff00;
+      width: 97%;
+      
+      .redbox {
+        boackground-color: #ff0000;
+        color: #0000;
+      }
+    }
+    
+example-01.css
+
+    #main p {
+      color: #00ff00;
+      wdth: 97%; }
+      #main p .redbox {
+        background-color: #ff0000;
+        color: #000000; }
+        
+example-02.scss
+
+    #main {
+      width: 97%;
+      
+      p, div {
+        font-size: 2em;
+        a { font-weight: bold; }
+      }
+      pre { font-size: 3em; }
+    }
+    
+example-02.css
+
+    #mian {
+      width: 97%; }
+      #mian p, #main div {
+        font-size: 2em; }
+        #mian p a, #main div a {
+          font-weight: bold; }
+      #main pre {
+        font-size: 3em; }
+        
+#### Referencing Parent Selectors: &
+
+'&'를 사용함으로서 부모 셀렉터를 상속 받을수 있습니다.
+
+example-03.scss
+
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      &:hover { text-decoration: underline; }
+      body.firefox & { font-weight: normal; }
+    }
+    
+example-03.css
+
+    a {
+      font-weight: bold;
+      text-decoration: none; }
+      a:hover {
+        text-decoration: underline; }
+      body.firefox a {
+        font-weight: normal; }
+        
+example-04.scss
+
+    #main {
+      color: black;
+      a {
+        font-weight: bold;
+        &:hover { color: red; }
+      }
+    }
+    
+example-04.css
+
+    #main {
+      color: black; }
+      #main a {
+        font-weight: bold; }
+          #main a:hover {
+            color: red; }
+            
+#### Nested Properties
+
+Nested의 또 다른 기능으로 특성들을 상속 합니다.
+
+example-05.scss
+
+    .funky {
+      font: {
+        family: fantasy;
+        size: 30em;
+        weight: bold;
+      }
+    }
+
+example-05.css
+
+    .funky {
+      font-family: fantasy;
+      font-szie: 30em;
+      font-weight: bold; }
+      
+example-06.scss
+
+    .funky {
+      font: 2px/3px {
+        family: fantasy;
+        size: 30em;
+        weight: bold;
+      }
+    }
+    
+example-06.css
+
+    .funky {
+      font: 2px/3px;
+        font-family: fantasy;
+        font-size: 30em;
+        font-weight: bold; }
+        
+#### Comments: /\* */ and //
+
+example-07.scss
+
+//한줄 주석으로 변환시 .css에 없고 /\* */ 다중 주석 문으로 .css변환시에도 남아 있습니다.
+
+    /* multiple line
+       is not delete in css */
+    body { color: black; }   
+    // one line is delete in css
+    a { color: green; }
+    
+example-07.css
+
+    /* multiple line
+       is not delete in css */
+    body { color: black; }
+    a { color: green; }
+    
+#### Variables: $
+
+.scss의 변수는 $에 선언 합니다.
+
+example-08.scss
+
+    $width: 5em;
+    #main {
+      width: $width;
+    }
+    
+example-08.css
+
+    #main {
+      width: 5em;
+    }
+    
+#### Strings
+
+문자열은 #{$string}를 통해서 사용 할수 있습니다.
+
+example-09.scss
+
+    @mixin firefox-message($selector) {
+      body.firefox #{$selector}:before {
+        content: "Hi, Firefox users!";
+      }
+    }
+    @include firefox-message(".header");
+    
+example-09.css
+
+    body.firefox .header:before {
+      content: "Hi, Firefox users!"; }
+      
+#### Number Operations
+
+in와 pt를 같이 사용하면 in로 변환되어 계산 됩니다.
+
+example-10.scss
+
+    p {
+      width: 1in + 8pt;
+    }
+    
+example-10.css
+
+    p {
+      width: 1.111in }
+      
+#### Division and /
+
+example-11.scss
+
+margin-left 처럼 다른 인자와 연산을 하지 않으면 .css변환시 표기대로 변환 됩니다.
+
+    p {
+      font: 10px/8px;
+      $width: 1000px;
+      width: $width/2;
+      height: (500px/2);
+      margin-left: 5px + 8px/2px;
+    }
+    
+example-11.css
+
+    p {
+      font: 10px/8px;
+      width: 500px;
+      height: 250px;
+      margin-left: 9px;
+    }
+    
+example-12.scss
+
+변수에 할당하여 연산할수도 있습니다.
+
+    p {
+      $font-size: 12px;
+      $line-height: 30px;
+      font: #{$font-size}/#{$line-height};
+    }
+    
+example-12.css
+
+    p {
+      font: 12px/30px; }
+      
+#### Color Operations
+
+example-13.scss
+
+Color의 덧셈 입니다.
+
+    p {
+      color: #010203 + #040506;
+    }
+    
+example-13.css
+
+    p {
+      color: #050709; }
+      
+example-14.scss
+
+Color의 곱셈 입니다.
+
+    p {
+      color: #010203 * 2;
+    }
+    
+example-14.css
+
+    p {
+      color: #020406; }
+      
+example-15.scss
+
+rgba의 값들간에만 더하기를 합니다. 최소 값은 0이며 양측 덧셈 최대값은 255 입니다. 투명도가 동일 값이어야만 계산이 됩니다.
+
+    p {
+      color: rgba(255, 0, 0, 0.75) + rgba(0, 255, 0, 0.75);
+    }
+      
+example-15.css
+
+    p {
+      color: rgba(255, 255, 0, 0.75); }
+      
+example-16.scss
+
+opacify는 투명도값을 덧셈하고 transparentize는 0.5의 값을 0.25로 변경합니다.
+
+    $translucent-red: rgba(255, 0, 0, 0.5);
+    p {
+      color: opacify($translucent-red, 0.3);
+      background-color: transparentize($translucent-red, 0.25);
+    }
+    
+example-16.css
+
+    p {
+      color: rgba(255, 0, 0, 0.8);
+      background-color: rgba(255, 0, 0, 0.25); }
+      
+#### String Operations
+
+example-17.scss
+
+문자열의 덧셈을 보여 주고 있습니다.
+
+    p {
+      cursor: e + -resize;
+    }
+    
+example-17.css
+
+    p {
+      cursor: e-resize; }
+      
+example-18.scss
+
+공백을 포함한 문자열의 덧셈을 보여 줍니다.
+
+    p:before {
+      content: "Foo " + Bar;
+      font-family: sans- + "serif";
+    }
+    
+example-18.css
+
+    p:before {
+      content: "Foo Bar";
+      font-family: sans-serif; }
+
+example-19.scss
+
+px값과 auto 인자가 있을시 ( ) 없이도 px값 만 계산 합니다.
+
+    p {
+      margin: 3px + 4px auto;
+    }
+    
+example-19.css
+
+    p {
+      margin: 7px auto; }
+      
+example-20.scss
+
+문자열 치환도 가능 합니다.
+
+    p:before {
+      content: "I ate #{5 + 10} pies!";
+    }
+    
+example-20.css
+
+    p:before {
+      content: "I ate 15 pies!"; }
+
+example-21.scss
+      
+변수 값이 null일시 무시 합니다.
+
+    $value: null;
+      p:before {
+      content: "I ate #{$value} pies!";
+    }
+    
+example-21.css
+
+    p:before {
+      content: "I ate pies!"; }
+      
+#### Parentheses
+
+example-22.scss
+
+( )우선 순위로 계산 합니다.
+
+    p {
+      width: 1em + (2em * 3);
+    }
+    
+example-22.css
+
+    p {
+      width: 7em;
+    }
+ 
+#### Functions
+
+HSL ($hue, $saturation, $lightness), (색깔, 채도, 밝기)
+example-23.scss
+
+    p {
+      color: hsl(0, 100%, 50%);
+    }
+    
+    example-23.css
+
+    p {
+      color: red; }
+             
+#### Interpolation: #{}
+
+example-24.scss
+
+문자 보간 하는 방법 입니다. foo와 border를 치환 합니다.
+
+    $name: foo;
+    $attr: border;
+    p.#{$name} {
+      #{$attr}-color: blue;
+    }
+    
+example-24.css
+
+    p.foo {
+      border-color: blue;
+    }
+
+example-25.scss
+
+px 값들 또한 보간할수 있습니다.
+  
+    p {
+      $font-size: 12px;
+      $line-height: 30px;
+      font: #{$font-size} / #{$line-height};
+    }
+    
+example-25.css
+
+    p { font: 12px / 30px; }
+
+#### Variable Defaults: !default
+
+example-26.scss
+
+$content값이 참인지 분별하여 참이 아니면 "Second content?"값을 부여 합니다. 참이므로 $content는 "First.."가 됩니다.
+$new_content는 참이 아니므로 "First time…"을 출력 합니다.
+
+    $content: "First content";
+    $content: "Second content?" !default;
+    $new_content: "First time reference" !default;
+    
+    #main {
+      ccontent: $content;
+      new-content: $new_content;
+    }
+    
+example-26.css
+
+    #main {
+      content: "First content";
+      new-content: "First time reference";
+    }
+    
+example-27.scss
+
+$content의 값이 null이므로 !default가 동작 합니다.
+
+    $content: null;
+    $content: "Non-null content" !default;
+    
+    #main {
+      content: $content;
+    }
+    
+example-27.css
+
+    #main {
+      content: "Non-null content";
+    }
+    
+## @-Rules and Directives
+
+#### import
+
+example-28.scss example
+
+    @import "foo.scss";
+    or
+    @import "foo";
+    
+example-28-01.scss example
+
+    @import "foo.css";
+    @import "foo" screen;
+    @import "http://foo.com/bar";
+    @import url(foo);
+    
+example-28-01.css
+
+    @import "foo.css";
+    @import "foo" screen;
+    @import "http://foo.com/bar";
+    @import url(foo);
+    
+#### multiple import
+
+여러개의 파일을 import할수 있습니다.
+
+    @import "rounded-corners", "text-shadow";
+    
+#### interpolation #{}
+
+unqoute를 사용함으로써 변환시 문자열에 "" 제거 할수 있습니다.
+
+    $family: unquote("Droid-Sans");
+    @import url("http://fonts.googleapis.com/css?family=\#{$family}");
+    
+#### Partials
+
+colors로 import를 하게 되면 기본적으로 .css 파일이 없는 상태에서 _color.scss파일을 import하게 되고 이도 없으면 비슷한 color.scss파일을 import합니다.
+ 
+    @import "colors";
+
+#### Nested @import
+
+{ }에서 import를 하게 되면 selector 네임이 중첩 됩니다.
+
+example-29.scss
+
+    .example {
+      color: red;
+    }
+    
+example-29-01.scss
+
+    #main {
+      @import: "example";
+    }
+    
+example-29-01.css
+
+    #main .example {
+      color: red;
+    }
+    
+#### @media
+
+    .sidebar {
+      width: 300px;
+      @media screen and (orientation: landscape) {
+        width: 500px;
+      }
+    }
+    
+compile
+
+    .sidebar {
+      width: 300px; }
+      @media screen and (orientation: landscape) {
+        .sidebar {
+        width: 500px; } }
+        
+@media .scss
+
+    @media screen {
+      .sidebar {
+        @media (orientation: landscape) {
+          width: 500px;
+        }
+      }
+    }
+    
+compile
+
+    @media screen and (orientation: landscape) {
+      .sidebar {
+        width: 500px; } }
+    }
+    
+@media .scss
+
+    $media: screen;
+    $feature: -webkit-min-device-pixel-ratio;
+    $value: 1.5;
+    
+    @media #{$media} and ($feature: $value) {
+      .sidebar {
+        width: 500px; } }
+    }
+    
+compile
+
+    @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+      .sidebar {
+        width: 500px; } }
+    }
+    
+#### @extend
+
+markup
+
+    <div class="error seriousError">
+      Oh no! You've been hacked!
+    </div>
+    
+styles -> 뭔가 문제가 있다는데?
+
+    .error {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .seriousError {
+      border-width: 3px;
+    }
+
+다른 styles
+
+    .error {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .seriousError {
+      @extend .error;
+      border-width: 3px;
+    }
+
+markup
+
+    <div class="error seriousError">
+      Oh no! You've been hacked!
+    </div>
+    <div class="seriousError intrusion"></div>
+        
+다른 스타일 추가
+
+    .error.intrusion {
+      background-image: url("/image/hacked.png");
+    }
+    
+How i Workd
+
+example
+
+    .error {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .error.intrusion {
+      background-image: url("/image/hacked.png");
+    }
+    .seriousError {
+      @extend .error;
+      border-width: 3px;
+    }
+    
+compile
+
+    .error, .seriousError {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .error.intrusion, .seriousError.intrusion {
+      background-image: url("/image/hacked.png");
+    }
+    .seriousError {
+      border-width: 3px;
+    }
+    
+#### Extending Complex Selectors
+
+.scss example
+
+    .hoverlink {
+      @extend a:hover;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    
+compile
+
+    a:hover, .hoverlink {
+      text-decoration: underline;
+    }
+    
+.scss example
+
+    .hoverlink {
+      @extend a:hover;
+    }
+    .comment a.user:hover {
+      font-weight: bold;
+    }
+    
+compile
+
+    .comment a.user:hover, .comment .user.hoverlink {
+      font-weight: bold;
+    }
+    
+#### Multiple Extends
+
+.scss
+
+    .error {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .attention {
+      font-size: 3em;
+      background-color: #ff0;
+    }
+    .seriousError {
+      @extend .error;
+      @extend .attention;
+      border-width: 3px;
+    }
+    
+.compile
+
+    .error, .seriousError {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .attention, .seriousError {
+      font-size: 3em;
+      background-color: #ff0;
+    }
+    .seriousError {
+      border-width: 3px;
+    }
+    
+#### Chanining Extends
+
+example.scss
+
+    .error {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .seriousError {
+      @extend .error;
+      border-width: 3px;
+    }
+    .criticalError {
+      @extend .seriousError;
+      position: fixed;
+      top: 10%;
+      bottom: 10%;
+      left: 10%;
+      right: 10%;
+    }
+    
+example.css
+
+    .error, .seriousError, .criticalEroor {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .seriousError, .criticalError {
+      border-width: 3px;
+    }
+    .criticalError {
+      position: fixed;
+      top: 10%;
+      bottom: 10%;
+      left: 10%;
+      right: 10%;
+    }
+    
+#### Selector Sequences
+
+example.scss
+
+    #fake-links .link {
+      @extend a;
+    }
+    
+    a {
+      color: blue;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+example.css
+
+    a, #fake-links .link {
+      color: blue;
+    }
+      a:hover, #fakelinks .link:hover {
+        text-decoration: underline;
+      }
+      
+#### Merging Selector Sequences
+
+두개의 다른 시퀀스를 @extend 할때는 첫번재 시퀀스, 첫번재 + 두번째 시퀀스, 두번째 시퀀스 + 첫번째 시퀀스를 한다. 마지막 셀렉터 .fakelink는 두번재 + 첫번재 시퀀스 뒤에 오게 됩니다.(왜?)
+
+example.scss
+
+    #admin .tabbar a {
+      font-weight: bold;
+    }
+    #demo .overview .fakelink {
+      @extend a;
+    }
+    
+example.css
+
+    #admin .tabbar a,
+    #admin .tabbar #demo .overview .fakelink,
+    #demo .overview #admin .tabbar .fakelink {
+      font-weight: bold;
+    }
+    
+두개의 시퀀스에 같은 셀렉터가 있을때.
+
+example.scss
+
+    #admin .tabbar a {
+      font-weight: bold;
+    }
+    #admin .overview .fakelink {
+      @extend a;
+    }
+    
+example.css
+
+    #admin tabbar a,
+    #admin .tabbar .overview fakelink,
+    #admin .overview .tabbar .fakelink {
+      font-weight: bold;
+    }
+    
+#### @extend-Only Selectors
+(잘 모르겠음))
+example.scss
+
+    #context a%extreme {
+      color: blue;
+      font-weight: bold;
+      font-size: 2em;
+    }
+    .notice {
+      @extend %extreme;
+    }
+    
+example.css
+
+    #context a.notice {
+      color: blue;
+      font-weight: bold;
+      font-size: 2ex;
+    }
+    
+#### The !optional Flag
+(잘 모르겠음)
+#### @extend in Directives
+#### @debug
+#### @warn
+
+## Control Directives
+
+#### @if
+
+example.scss
+
+    p {
+      @if 1 + 1 == 2 { border: 1px solid; }
+      @if 5 < 3      { border: 2px dotted; }
+      @if nul        { border: 3px double; }
+    }
+    
+example.css
+
+    p {
+      border: 1px solid;
+      border: 3px double;
+    }
+    
+#### @if @else
+
+example.scss
+
+    $type: monster;
+    p {
+      @if $type == ocean {
+        color: blue;
+      } @else if $type == matador {
+        color: red;
+      } @else if $type == monster {
+        color: green;
+      } @else {
+        color: black;
+      }
+    }
+example.css
+
+    p {
+      color: green;
+    }
+    
+#### @for
+
+example.scss
+
+    @for $i from 1 through 3 {
+      .item-#{$i} { width: 2em * $i; }
+    }
+    
+example.css
+
+    .item-1 {
+      width: 2em;
+    }
+    .item-2 {
+      width: 4em;
+    }
+    .item-3 {
+      width: 6em;
+    }
+    
+#### @each
+
+example.scss
+
+    @each $animal in puma, sea-slug, egret, salamander {
+      .#{$animal}-icon {
+        background-image: url('/images/#{animal}.png');
+      }
+    }
+example.css
+
+    .puma-icon {
+      background-image: url('/images/puma.png');
+    }
+    .sea-slug {
+      background-image: url('/images/sea-slug.png');
+    }
+    .egret {
+      background-image: url('/images/egret.png');
+    }
+    .salamander {
+      background-image: url('/images/salamander.png');
+    }
+    
+#### @while
+
+example.scss
+
+    $i: 6;
+    @while $i > 0 { 
+      .item-#{$i} { width: 2em * $i; }
+      $i: $i - 2;
+    }
+    
+example.css
+
+    .item-6 {
+      width: 12em;
+    }
+    .item-4 {
+      width: 8em;
+    }
+    .item-2 {
+      width: 4em;
+    }
+    
+### Mixin Directives
+
+#### Defining a Mixin: @mixin
+
+example.scss
+
+    @mixin large-text {
+      font: {
+        family: Arial;
+        size: 20px;
+        weight: bold;
+      }
+      color: #ff0000;
+    }
+    
+##### Mixins contain parent reference
+
+example.scss
+
+    @mixin clearfix {
+      display: inline-block;
+      &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+      }
+      * html & { height: 1px }
+    }
+    
+#### Including a Mixin: @include
+
+example.scss
+
+    @mixin large-text {
+      font: {
+        family: Arial;
+        size: 20px;
+        weight: bold;
+      }
+      color: #ff0000;
+    }
+    
+    .page-title {
+      @include large-text;
+      padding: 4px;
+      margin-top: 10px;
+    }
+    
+example.css
+
+    .page-title {
+      font-family: Arial;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff0000;
+      padding: 4px;
+      margin-top: 10px;
+    }
+    
+example.scss
+
+    @mixin silly-links {
+      a {
+        color: blue;
+        background-color: red;
+      }
+    }
+    
+    @include silly-links;
+    
+example.css
+
+    a {
+      color: blue;
+      background-color: red;
+    }
+    
+##### Mixin 안에 Mixin @include
+
+example.scss
+
+    @mixin compound {
+      @include highlighted-background;
+      @include header-text;
+    }
+    
+    @mixin highlighted-background { background-color: #fc0; }
+    @mixin header-text { font-size: 20px; }
+
+#### Arguments
+
+example.scss
+
+    @mixin sexy-border($color, $witdh) {
+      border: {
+        color: $color;
+        width: $width;
+        style: dashed;
+      }
+    }
+    
+    p { @include secy-border(blue, 1in); }
+    
+example.css
+
+    p {
+      border-color: blue;
+      border-width: 1in;
+      border-style: dashed;
+    }
+    
+##### Mixin default value
+
+example.scss
+
+    @mixin sexy-border($color, $width: 1in) {
+      border: {
+        color: $color;
+        width: $width;
+        style: dashed;
+      }
+    }
+    p { @include sexy-border(blue); }
+    h1 { @include sexy-border(blue, 2in); }
+    
+example.css
+
+    p {
+      border-color: blue;
+      border-width: 1in;
+      border-style: dashed;
+    }
+    h1 {
+      border-color: blue;
+      border-width: 2in;
+      border-style: dashed;
+    }
+    
+#### Keyword Arguments
+
+example.scss
+
+    p { @include sexy-border($color: blue); }
+    h1 { @include sexy-border($color: blue, $width: 2in); }
+    
+#### Varialbe Arguments
+
+example.scss
+
+    @mixin box-shadow($shadows…) {
+      -moz-box-shadow: $shadows;
+      -webkit-box-shadow: $shadows;
+      box-shadow: $shadows;
+    }
+    .shadows {
+      @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+    }
+    
+example.css
+
+    .shadowed {
+      -moz-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+      -webkit-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+      box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+    }
+    
+##### Variable arguments calling a mixin
+
+example.scss
+
+    @mixin colors($text, $background, $border) {
+      color: $text;
+      background-color: $background;
+      border-color: $border;
+    }
+    
+    $values: #ff0000, #00ff00, #0000ff;
+    .primary {
+      @include colors($values…);
+    }
+    
+example.css
+
+    .primary {
+      color: #ff0000;
+      background-color: #00ff00;
+      border-color: #0000ff;
+    }
+    
+##### wrap mixin and add styles change argument
+
+    @mixin wrapped-stylish-mixin($args…) {
+       font-weight: bold;
+       @include stylish-mixin($args…);
+    }
+    .stylish {
+      @include wrapped-stylish-mixin(#00ff00, $width: 100px);
+    }
+    
+#### Passing Content Blocks to a Mixin
+
+example.scss
+
+    @mixin apply-to-ie6-only {
+      * html {
+        @content;
+      }
+    }
+    @include apply-to-ie6-only {
+      #logo {
+        background-image: url(/logo.gif);
+      }
+    }
+    
+example.css
+
+    * html #logo {
+      background-image: url(/logo.gif);
+    }
+    
+#### Variable Scope and Content Blocks
+
+example.scss
+
+    $color: white;
+      @mixin colors($color: blue) {
+      background-color: $color;
+      @content;
+      border-color: $color;
+    }
+    .colors {
+      @include colors { color: $color; }
+    }
+    
+example.css
+
+    .colors {
+      background-color: blue;
+      color: white;
+      border-color: blue;
+    }
+    
+example-02.scss
+
+    #sidebar {
+      $sidebar-width: 300px;
+      width: $sidebar-width;
+      @include smartphone {
+        width: $sidebar-width / 3;
+      }
+    }
+    
+#### Function Directives
+
+example.scss
+
+    $grid-width: 40px;
+    $gutter-width: 10px;
+    
+    @function grid-width($n) {
+      @return $n * $grid-width + ($n - 1) * $gutter-width;
+    }
+    
+    #sidebar { width: grid-width(5); }
+    
+example.css
+
+    #sidebar {
+      width: 240px; }

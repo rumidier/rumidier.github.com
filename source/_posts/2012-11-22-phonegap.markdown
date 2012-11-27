@@ -1,0 +1,89 @@
+---
+layout: post
+title: "Phonegap"
+date: 2012-11-22 19:06
+comments: true
+categories:  Phonegap JavaScript iOS
+---
+
+# Phonegap - iOS
+
+## 사용 환경
+
+- 모델명    :     MacBook Pro
+- 모델 식별자:	  MacBookPro8,1
+- 메모리:	       4 GB
+- Xcode: v4.5.2
+- 기타:
+  - homebrew
+  - iTerm
+  - Xcode Command Line Tools
+  - OS X Mountain Lion
+  - iPhone
+
+## 요구 환경
+
+- Xcode 4.5+
+- Xcode Command Line Tools
+- Intel-based computer with Mac OS X Lion or greater (10.7+)
+- Necessary for installing on device:
+  - Apple iOS device (iPhone, iPad, iPod Touch) iOS developer certificate
+
+
+### Xcode 설치
+
+Xcode는 [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)에서 다운 받아 설치 할수 있습니다.
+
+### Xcode Command Line Tools 설치
+
+#### Xcode 실행후 > Xcode Preferences 선택 합니다.
+
+{% img https://lh6.googleusercontent.com/-9lGHtlIr6t0/UK3bfp3Kn9I/AAAAAAAAACc/7g0GBCw6L24/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-01.jpg 500 500 "Xcode preferences 변경" %}
+
+#### Downloads->Components-> Command LIne Tools -> Install 클릭으로 설치 합니다.
+
+{% img https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg 500 500 "Command Line Tools 설치" %}
+
+설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은
+[Command-Line](http://docs.phonegap.com/en/2.2.0/guide_command-line_index.md.html#Command-Line%20Usage)에서 iOS 부분을 참고 하시면 됩니다.
+
+### Apache Cordova 다운로드
+
+다운로드된 파일은 .zip 파일이므로 압축을 풀어서 사용하시면 됩니다.
+
+- Cordova는 [Cordova-Down](http://phonegap.com/download)에서 다운 받을수 있습니다.
+- 다운 받은 폴더를 ~/CordovaLib-2.x.x 쓰기 편한 위치로 이동 시킵니다.
+
+### 새로운 프로젝트 시작하기
+
+#### bin 폴더 열기
+
+새로운 프로젝트를 생성하기 위해서는 ./create 파일을 실행 해야 합니다. create 파일은
+lib/iOS/bin 폴더에 존재 합니다.
+
+- lib/ios/bin 폴더로 직접 이동 해서 사용할수 있습니다.
+- ~/CordovalLib-2.2/lib/ios/bin 폴더를 Terminal.app에 드래그 하면 bin 폴더로 바로 이동 할수 있습니다.
+
+#### create 실행하기
+
+
+    $ ./create <project_folder_path> <package_name> <project_name>
+    
+    $ mkdir project_folder_path/new_folder_name
+    $ ./create <project_folder_path> pheonegap.start start
+    $ cd ~/project_folder_path
+    $ ls
+    
+    CordovaLib	cordova		start		start.xcodepro www
+
+### Simulator 실행하기
+
+#### project_name.xcodeproj 실행
+
+project_name.xcodeproj 파일을 클릭 하면 Xcode가 실행 됩니다. 실행후 컴파일 시간을 거친후 아래와 같이 <project_name> iPhone v.xx Simulator 선택 한후 Run(단축키 Command + R)을 실행 시켜 줍니다. 
+
+{% img https://lh5.googleusercontent.com/-4i-P73CwMQ8/UK3xPWma-gI/AAAAAAAAAC0/nmMVo0_Hlkk/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-01.jpg 500 500 "Simulrator 실행" %}
+    
+Run이 옳바르게 진행 되면 아래와 같은 iOS Simulator가 뜨게 됩니다. 
+
+{% img https://lh4.googleusercontent.com/-6MXX5k5upE0/UK3xWeU51mI/AAAAAAAAAC8/zSRgxkGKQoc/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-02.jpg 500 500 "Simulrator 실행 화면" %}
