@@ -10,8 +10,6 @@ Sass - Syntactically Awesome Stylesheets
 
 ## 사용 환경
 
----------------
-
 - 모델명    :     MacBook Pro
 - 모델 식별자:	  MacBookPro8,1
 - 프로세서 이름:   Intel Core i5
@@ -20,8 +18,6 @@ Sass - Syntactically Awesome Stylesheets
 - 기타: homebrew, iTerm
 
 ## Sass 설치
-
-------------------
 
 ### Sass 공식 사이트
 
@@ -35,8 +31,8 @@ Sass의 공식 사이트 주소는 [Sass 사이트](http://sass-lang.com/docs.ht
 ### RVM 패키지 설치
 
 ruby를 설치 하기전 ruby를 관리해주는 RVM 을 설치 합니다.
-처음 실행 시키면 'q'를 누르라고 나옵니다.
-'q' 입력후 설치 시간이 좀 걸리게 되며 아래와 같은 내용이
+처음 실행 시키면 `q`를 누르라고 나옵니다.
+`q` 입력후 설치 시간이 좀 걸리게 되며 아래와 같은 내용이
 나올때까지 기다려야 합니다.
 
     $ curl -L https://get.rvm.io | bash -s stable --ruby
@@ -101,19 +97,19 @@ RVM과 Ruby가 정상적으로 설치되면 `sass`를 설치 할수 있습니다
 
     $ gem install sass
     
-## Sass 사용방법
+### Sass 사용방법
 
-- Sass 따라 해보기
+#### Sass 따라 해보기
 
-    테스트 폴더를 생성후 style.scss 파일을 만듭니다.
+    테스트 폴더를 생성후 `style.scss` 파일을 만듭니다.
 
        $ mkdir Sass-Start
        $ cd Sass-Start
        $ touch style.scss
 
-- style.scss 파일 작성
+#### style.scss 파일 작성
 
-sass가 동작 하는지 확인 하기 위해 테스트 파일를 작성합니다.
+sass 동작 확인을 위해 테스트 파일를 작성합니다.
 
 {% codeblock style.scss lang:css %}
 .fakeshadow {
@@ -130,7 +126,7 @@ sass가 동작 하는지 확인 하기 위해 테스트 파일를 작성합니�
   }
 {% endcodeblock %}
 
-- `.scss` -> `.css` 변환하기
+#### .scss -> .css 변환하기
 
 작성된 `.scss` 파일을 `.css` 파일로 변환합니다. 다음은 `.scss` 파일이 변경
 되었을시 재입력 없이 변경 되는 명령어 입니다. `.scss` 파일이 변경되는
