@@ -4,7 +4,7 @@
   <title><![CDATA[Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-26T18:22:55+09:00</updated>
+  <updated>2012-11-28T20:14:15+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Perl]]></title>
+    <link href="http://rumidier.github.com/blog/2012/11/27/perl/"/>
+    <updated>2012-11-27T15:29:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/11/27/perl</id>
+    <content type="html"><![CDATA[<p>해당 되는 파일의 이름을 찾아 그 안에서 정규 표현식에 해당 되는 문자열을 치환 해주는 기능</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>perl -pi -e <span class="s1">&#39;s/scripts/scripts\.coffee/g&#39;</span> <span class="sb">`</span>find . -name <span class="s1">&#39;*.tt&#39;</span><span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sass]]></title>
@@ -1742,154 +1758,277 @@ CordovaLib  cordova     start       start.xcodepro www
 
 <h3>Variables(변수)</h3>
 
-<p>변수 선언은 &#8216;@&#8217; 연산자를 사용 합니다. 변수에 값을 정의 함으로써 광범위 하게 사용 할수 있습니다.</p>
+<p>변수 선언은 <code>@</code> 연산자를 사용 합니다. 변수에 값을 정의 함으로써 광범위 하게 사용 할수 있습니다.</p>
 
-<p>example.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@color</span><span class="nd">:</span> <span class="nn">#4D926F</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="no">color</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nt">h2</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="no">color</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@color: #4D926F
 
-#header {
-  color: @color;
-}
-h2 {
-  color: @color;
-}
-</code></pre>
+<p><code>.css</code>로 변환 하면 <code>@color</code>의 값으로 치환됩니다.</p>
 
-<p>compile.css</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">compile</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#header</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#4D926F</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">h2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#4D926F</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>.css로 변환 하면 @color의 값으로 치환됩니다.</p>
-
-<pre><code> #header {
-   color: #4D926F;
- }
- h2 {
-   color: #4D926F;
- }
-</code></pre>
 
 <h3>Mixins(믹스 인)</h3>
 
-<p>믹스인은 클래스 처럼 사용 가능 하며 클래스에서 설정한 모든 속성을 포함시킬수 있습니다. 또한, 함수와 같이 인수를 설정 할수도 있습니다.</p>
+<p>믹스인은 클래스 처럼 사용 가능 하며 클래스에서 설정한 모든 속성을 포함 시킵니다. 또한, 함수와 같이 인수를 설정 할수 있습니다.</p>
 
-<p>example.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">.rounded-corners</span><span class="err"> </span><span class="na">(@radius</span><span class="o">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">-webkit-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-moz-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-ms-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-o-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.rounded-corners</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nn">#footer</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.rounded-corners</span><span class="o">(</span><span class="nt">10px</span><span class="o">);</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.rounded-corners (@radius: 5px) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  -ms-border-radius: @radius;
-  -o-border-radius: @radius;
-  border-radius: @radius;
-}
 
-#header {
-  .rounded-corners;
-}
-#footer {
-  .rounded-corners(10px);
-}
-</code></pre>
+<p><code>.rounded-coners</code>를 선언 하였고 기본 인수는 <code>@radius</code>는 <code>5px</code>입니다.
+<code>#header</code>는 기본 인수를 사용 하였고 <code>#footer</code>는 사용자 인수를 사용해 <code>10px</code>이 되었습니다.</p>
 
-<p>compile.css</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">compile</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.rounded-corners</span> <span class="o">(</span><span class="k">@radius</span><span class="o">:</span> <span class="nt">5px</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">-webkit-border-radius</span><span class="o">:</span> <span class="k">@radius</span><span class="p">;</span>
+</span><span class='line'>  <span class="nt">-moz-border-radius</span><span class="o">:</span> <span class="k">@radius</span><span class="p">;</span>
+</span><span class='line'>  <span class="nt">-ms-border-radius</span><span class="o">:</span> <span class="k">@radius</span><span class="p">;</span>
+</span><span class='line'>  <span class="nt">-o-border-radius</span><span class="o">:</span> <span class="k">@radius</span><span class="p">;</span>
+</span><span class='line'>  <span class="nt">border-radius</span><span class="o">:</span> <span class="k">@radius</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#header</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkt</span><span class="o">-</span><span class="n">boder</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#footer</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>.rounded-coners를 선언 하였고 기본 인수는 @radius 5px입니다. #header는 기본 인수를 사용 하였고 #footer는 사용자 인수를 사용 하여서 10px이 되었습니다.</p>
-
-<pre><code>.rounded-corners (@radius: 5px) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  -ms-border-radius: @radius;
-  -o-border-radius: @radius;
-  border-radius: @radius;
-}
-
-#header {
-  -webkt-boder-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-}
-#footer {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-}
-</code></pre>
 
 <h3>Nested Rules(중첩 규칙)</h3>
 
-<p>선택기를 중첩하여 상속 할수 있으므로 긴 이름의 선택기를 중복으로 사용하지 않고도 명확하고 짧게 사용할수 있습니다.</p>
+<p>선택기를 중첩하여 상속 가능하므로 긴 이름의 선택기를 중복으로 사용하지 않고도 명확하고 짧게 사용할수 있습니다.</p>
 
-<p>example.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nt">h1</span><span class="err">{</span>
+</span><span class='line'>    <span class="na">font-size</span><span class="o">:</span> <span class="mi">26</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">font-size</span><span class="o">:</span> <span class="mi">12</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>    <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>      <span class="na">text-decoration</span><span class="o">:</span> <span class="no">none</span><span class="err">;</span>
+</span><span class='line'>      <span class="na">&amp;</span><span class="o">:</span><span class="n">hover</span> <span class="err">{</span> <span class="no">border-width</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="err">}</span>
+</span><span class='line'>    <span class="err">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#header {
-  h1{
-    font-size: 26px;
-    font-weight: bold;
-  }
-  p {
-    font-size: 12px;
-    a {
-      text-decoration: none;
-      &amp;:hover { border-width: 1px }
-    }
-  }
-}
-</code></pre>
 
-<p>compile.css</p>
+<p><code>.less</code> 에서 한번 쓰인 <code>#heder</code> 선택기가 중복으로 적용됩니다.</p>
 
-<p>.less 에서 쓰인 한번 쓰인 #heder 선택기가 중복으로 적용됩니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">compile</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#header</span> <span class="nt">h1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">26px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#header</span> <span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">12px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#header</span> <span class="nt">p</span> <span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#header</span> <span class="nt">p</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> <span class="k">border-width</span><span class="o">:</span> <span class="m">1px</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#header h1 {
-  font-size: 26px;
-  font-weight: bold;
-}    
-#header p {
-  font-size: 12px;
-}
-#header p a {
-  text-decoration: none;
-}
-#header p a:hover { border-width: 1px }
-</code></pre>
 
 <h3>Functions &amp; Operations(함수와 연산)</h3>
 
 <p>연산은 색이나 숫자에 대해 덧셈, 뺄셈, 나눗셈, 곱셈을 할수 있습니다. 속성 사이에 복잡한 연산은 CSS의 호환성을 위해
 괄호 내에서만 실행 됩니다.</p>
 
-<p>example.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@the-border</span><span class="nd">:</span> <span class="nt">1px</span><span class="o">;</span>
+</span><span class='line'><span class="k">@base-color</span><span class="nd">:</span> <span class="nn">#111</span><span class="o">;</span>
+</span><span class='line'><span class="k">@red</span><span class="nd">:</span> <span class="nn">#842210</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">base-color</span> <span class="o">*</span> <span class="mi">3</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border-left</span><span class="o">:</span> <span class="o">@</span><span class="n">the-border</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border-right</span><span class="o">:</span> <span class="o">@</span><span class="n">the-border</span> <span class="o">*</span> <span class="mi">2</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nn">#footer</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">base-color</span> <span class="o">+</span> <span class="mh">#003300</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border-color</span><span class="o">:</span> <span class="nf">desaturate</span><span class="p">(</span> <span class="o">@</span><span class="nb">red</span><span class="o">,</span> <span class="mi">10</span><span class="kt">%</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@the-border: 1px;
-@base-color: #111;
-@red: #842210;
 
-#header {
-  color: @base-color * 3;
-  border-left: @the-border;
-  border-right: @the-border * 2;
-}
-#footer {
-  color: @base-color + #003300;
-  border-color: desaturate( @red, 10%);
-}
-</code></pre>
 
-<p>compile.css</p>
 
-<pre><code>#header {
-  color: #333;
-  border-left: 1px;
-  border-right: 2px;
-}    
-#footer {
-  color: #114411;
-  border-color: #7d2717
-}
-</code></pre>
+<figure class='code'><figcaption><span>lang: css </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// compile.css
+</span><span class='line'>
+</span><span class='line'>#header {
+</span><span class='line'>  color: #333;
+</span><span class='line'>  border-left: 1px;
+</span><span class='line'>  border-right: 2px;
+</span><span class='line'>}    
+</span><span class='line'>#footer {
+</span><span class='line'>  color: #114411;
+</span><span class='line'>  border-color: #7d2717
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>The Language</h2>
 
@@ -1897,340 +2036,628 @@ h2 {
 
 <p>LESS에서 변수는 실제로 상수로 기억되며 변수는 오직 한번만 정의 됩니다.</p>
 
-<p>example-01.less</p>
+<p><code>@nice-blue</code> 변수를 선언하고 + 연산을 합니다.</p>
 
-<p>@nice-blue 변수를 선언하고 + 연산을 합니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-01.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@nice-blue</span><span class="nd">:</span> <span class="nn">#5B83AD</span><span class="o">;</span>
+</span><span class='line'><span class="k">@light-blue</span><span class="nd">:</span> <span class="o">(@</span><span class="nt">nice-blue</span> <span class="o">+</span> <span class="nn">#111</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">#header</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">light-blue</span><span class="err">;</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@nice-blue: #5B83AD;
-@light-blue: (@nice-blue + #111);
 
-#header { color: @light-blue; }
-</code></pre>
 
-<p>example-01.css</p>
 
-<pre><code>#header { color: #6c94be; }
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-01</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#header</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#6c94be</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-02.less - 변수에 다른 변수가 정의 가능합니다.</p>
 
-<p>@var에 문자열 &#8216;fnord&#8217;는 @fnord로 치환 됩니다.</p>
+<p>변수에 다른 변수를 정의 가능합니다.</p>
 
-<pre><code>@fnord: "I am fnord";
-@var: 'fnord';
-content: @@var;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-02.less</span>
+</span><span class='line'><span class="c1">// @var에 문자열 &#39;fnord&#39;는 @fnord로 치환 됩니다.</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@fnord</span><span class="nd">:</span> <span class="s2">&quot;I am fnord&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="k">@var</span><span class="nd">:</span> <span class="s1">&#39;</span><span class="s2">fnord&#39;</span><span class="o">;</span>
+</span><span class='line'><span class="na">content</span><span class="o">:</span> <span class="o">@@</span><span class="n">var</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-02.css</p>
 
-<pre><code>content: "I am fnord"
-</code></pre>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-02</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">content</span><span class="o">:</span> <span class="s2">&quot;I am fnord&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Mixins</h3>
 
 <p>Mixin은 이름을 사용해 선언 할수 있고 클래스 처럼 동작 합니다.</p>
 
-<p>example-03.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-03.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.bordered</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border-top</span><span class="o">:</span> <span class="no">dotted</span> <span class="mi">1</span><span class="kt">px</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border-bottom</span><span class="o">:</span> <span class="no">solid</span> <span class="mi">2</span><span class="kt">px</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.bordered {
-  border-top: dotted 1px black;
-  border-bottom: solid 2px black;
-}
-</code></pre>
-
-<p>example-03.less</p>
 
 <p>클래스 이름을 사용해 속성을 포함 시킬수있습니다.</p>
 
-<pre><code>.bordered {
-  border-top: dotted 1px black;
-  border-bottom: solid 2px black;
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-03.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.bordered</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border-top</span><span class="o">:</span> <span class="no">dotted</span> <span class="mi">1</span><span class="kt">px</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border-bottom</span><span class="o">:</span> <span class="no">solid</span> <span class="mi">2</span><span class="kt">px</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#menu</span> <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="mh">#111</span><span class="err">;</span>
+</span><span class='line'>  <span class="nc">.bordered</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.post</span> <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span>
+</span><span class='line'>  <span class="nc">.bordered</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-#menu a {
-  color: #111;
-  .bordered;
-}
-.post a {
-  color: red;
-  .bordered;
-}
-</code></pre>
 
-<p>example-03.css</p>
+<p>선언된 <code>.bordered</code>는 <code>.css</code>에서 보이지 않으며 치환 된채로 컴파일 됩니다.</p>
 
-<p>선언된 .bordered는 .css에서 보이지 않으며 치환 된채로 컴파일 됩니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-03</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#menu</span> <span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#111</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-top</span><span class="o">:</span> <span class="k">dotted</span> <span class="m">1px</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-bottom</span><span class="o">:</span> <span class="k">solid</span> <span class="m">2px</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.post</span> <span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-top</span><span class="o">:</span> <span class="k">dotted</span> <span class="m">1px</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-bottom</span><span class="o">:</span> <span class="k">solid</span> <span class="m">2px</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#menu a {
-  color: #111;
-  border-top: dotted 1px black;
-  border-bottom: solid 2px black;
-}
-.post a {
-  color: red;
-  border-top: dotted 1px black;
-  border-bottom: solid 2px black;
-}
-</code></pre>
 
-<h3>Parametric Mixins</h3>
-
-<p>example-04.less</p>
+<h3>Mixins 인수 사용</h3>
 
 <p>클래스 처럼 믹스인 할수 있으며, 매개변수를 전달할수 있습니다.</p>
 
-<pre><code>.border-radius (@radius) {
-  border-radius: @radius;
-  -moz-border-radius: @radius;
-  -webkit-border-radius: @radius;
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-04.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.border-radius</span> <span class="o">(@</span><span class="nt">radius</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-moz-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-webkit-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.border-radius</span><span class="o">(</span><span class="nt">4px</span><span class="o">);</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.button</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.border-radius</span><span class="o">(</span><span class="nt">6px</span><span class="o">);</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-#header {
-  .border-radius(4px);
-}
-.button {
-  .border-radius(6px);
-}
-</code></pre>
 
-<p>example-04.css</p>
+<p><code>.button</code>의 <code>6px</code>, <code>#header</code>에 4px 값을 전달 받아 선언합니다.</p>
 
-<p>.button의 6px, #header에 4px 값을 전달 받아 선언합니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-04.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border-radius</span><span class="o">:</span> <span class="mi">4</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-moz-border-radius</span><span class="o">:</span> <span class="mi">4</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-webkit-border-radius</span><span class="o">:</span> <span class="mi">4</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.button</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border-radius</span><span class="o">:</span> <span class="mi">6</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-moz-border-radius</span><span class="o">:</span> <span class="mi">6</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-webkit-border-radius</span><span class="o">:</span> <span class="mi">6</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#header {
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-.button {
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-</code></pre>
 
-<p>example-05.less</p>
+<p>매개 변수가 유효한 mixin은 기본값 <code>5px</code>을 가질수 있습니다</p>
 
-<p>매개 변수가 유효한 mixin은 기본값을 가질수 있습니다</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-05.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">.border-radius</span><span class="err"> </span><span class="na">(@radius</span><span class="o">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-moz-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-webkit-border-radius</span><span class="o">:</span> <span class="o">@</span><span class="n">radius</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.border-radius</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.border-radius (@radius: 5px) {
-  border-radius: @radius;
-  -moz-border-radius: @radius;
-  -webkit-border-radius: @radius;
-}
-#header {
-  .border-radius;
-}
-</code></pre>
 
-<p>example-05.css</p>
+<p>기본 인수로 치환된 <code>.css</code></p>
 
-<p>매개 변수 전달 없이 기본값을 사용 합니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-05</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#header</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#header {
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-</code></pre>
 
-<p>example-06.less</p>
+<p>정의된 선언 블록을 다른 규칙 세트에 이용하고 싶을때 정의된 규칙 세트 자체는
+<code>.css</code>에 출력할 필요가 없을때 유용합니다.</p>
 
-<pre><code>.wrap () {
-    text-wrap: wrap;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    word-wrap: break-word;
-}
-pre { .wrap }
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-06.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.wrap</span> <span class="o">()</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">text-wrap</span><span class="o">:</span> <span class="n">wrap</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">white-space</span><span class="o">:</span> <span class="n">pre-wrap</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">white-space</span><span class="o">:</span> <span class="o">-</span><span class="n">moz-pre-wrap</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">word-wrap</span><span class="o">:</span> <span class="n">break-word</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nt">pre</span> <span class="err">{</span> <span class="nc">.wrap</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-06.css</p>
 
-<pre><code>pre {
-  text-wrap: wrap;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  word-wrap: break-word;
-}
-</code></pre>
 
-<h4>The @arguments varialbe</h4>
 
-<p>@arguments를 사용해서 개별적으로 파라미터를 사용 하지 않아도 됩니다.</p>
+<figure class='code'><figcaption><span>lang: css </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// example-06.css
+</span><span class='line'>
+</span><span class='line'>pre {
+</span><span class='line'>  text-wrap: wrap;
+</span><span class='line'>  white-space: pre-wrap;
+</span><span class='line'>  white-space: -moz-pre-wrap;
+</span><span class='line'>  word-wrap: break-word;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
-<p>example-07.less</p>
 
-<p>2px, 5px 두개의 인수를 전달 하면 순서대로 @x, @y에 적용 됩니다.</p>
+<h3>The @arguments varialbe</h3>
 
-<pre><code>.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
-  box-shadow: @arguments;
-  -moz-box-shadow: @arguments;
-  -webkit-box-shadow: @arguments;
-}
+<p><code>@arguments</code>를 사용해서 개별적으로 파라미터를 사용 하지 않아도 되며,
+<code>@x</code>: <code>2px</code>, <code>@y</code>:<code>5px</code>와 같이 선언된 순서와 전달된 순서로 매치 됩니다.</p>
 
-.box-shadow(2px, 5px);
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-07.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">.box-shadow</span><span class="err"> </span><span class="na">(@x</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span> <span class="o">@</span><span class="n">y</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span> <span class="o">@</span><span class="n">blur</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span><span class="o">,</span> <span class="o">@</span><span class="no">color</span><span class="o">:</span> <span class="mh">#000</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">box-shadow</span><span class="o">:</span> <span class="o">@</span><span class="n">arguments</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-moz-box-shadow</span><span class="o">:</span> <span class="o">@</span><span class="n">arguments</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-webkit-box-shadow</span><span class="o">:</span> <span class="o">@</span><span class="n">arguments</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.box-shadow</span><span class="o">(</span><span class="nt">2px</span><span class="o">,</span> <span class="nt">5px</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-07.css</p>
 
-<p>0, 0값에서 전달된 2px, 5px값으로 치환 되었습니다.</p>
+<p>0, 0값에서 전달된 2px, 5px값이 적용 됩니다.</p>
 
-<pre><code>.box-shadow: 2px 5px 1px #000;
--moz-box-shadow: 2px 5px 1px #000;
--webkit-box-shadow: 2px 5px 1px #000;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-07</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.box-shadow</span><span class="o">:</span> <span class="nt">2px</span> <span class="nt">5px</span> <span class="nt">1px</span> <span class="nf">#000</span><span class="o">;</span>
+</span><span class='line'><span class="nt">-moz-box-shadow</span><span class="o">:</span> <span class="nt">2px</span> <span class="nt">5px</span> <span class="nt">1px</span> <span class="nf">#000</span><span class="o">;</span>
+</span><span class='line'><span class="nt">-webkit-box-shadow</span><span class="o">:</span> <span class="nt">2px</span> <span class="nt">5px</span> <span class="nt">1px</span> <span class="nf">#000</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2>Pattern-matching and Guard expressions</h2>
 
-<p>mixin을 선언하고 조건문으로 인자를 비교해 같은 이름의 .mixin중에 참인 .mixin을 적용 합니다.</p>
+<h2>패턴 매칭과 Guard 표현</h2>
 
-<p>변경 기본 문법</p>
+<h3>기본 문법</h3>
 
-<p>basic-01.less</p>
+<p>mixin을 선언하고 조건문으로 인자를 비교해 같은 이름의 <code>.mixin</code>중에 참인 <code>.mixin</code>을 적용 합니다.</p>
 
-<pre><code>.mixin (@s, @color) {
-    ….
-}
-.class {
-  .mixin(@switch, #888);
-}
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// basic-01.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">s</span><span class="o">,</span> <span class="o">@</span><span class="nt">color</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>    <span class="err">…</span><span class="nc">.</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.class</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.mixin</span><span class="o">(@</span><span class="nt">switch</span><span class="o">,</span> <span class="nn">#888</span><span class="o">);</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>basic-02.less</p>
 
-<pre><code>.mixin (dark, @color) {
-  color: darken(@color, 10%);
-}
-.mixin (light, @color) {
-  color: lighten(@color, 10%);
-}
-.mixin (@), @color) {
-  display: block;
-}
-</code></pre>
+<h3>인수가 적용된 문법 표현</h3>
 
-<p>example-08.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// basic-02.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(</span><span class="nt">dark</span><span class="o">,</span> <span class="o">@</span><span class="nt">color</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">darken</span><span class="p">(</span><span class="o">@</span><span class="no">color</span><span class="o">,</span> <span class="mi">10</span><span class="kt">%</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(</span><span class="nt">light</span><span class="o">,</span> <span class="o">@</span><span class="nt">color</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">lighten</span><span class="p">(</span><span class="o">@</span><span class="no">color</span><span class="o">,</span> <span class="mi">10</span><span class="kt">%</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(@),</span> <span class="o">@</span><span class="nt">color</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">display</span><span class="o">:</span> <span class="no">block</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>.mixin이 3개가 선언 되었고 각 다른 조건문을 가지고 있습니다.</p>
 
-<pre><code>.mixin (dark, @color) {
-  color: darken(@color, 10%);
-}
-.mixin (light, @color) {
-  color: lighten(@color, 10%);
-}
-.mixin (@_, @color) {
-  display: block;
-}
+<h3>패턴 매칭과 Guard 표현 사용법</h3>
 
-@switch: light;
-.class {
-  .mixin(@switch, #888);
-}
-</code></pre>
+<p><code>.mixin</code>이 3개가 선언 되었고 각기 다른 조건문을 가지고 있습니다.</p>
 
-<p>example-08.css</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-08.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(</span><span class="nt">dark</span><span class="o">,</span> <span class="o">@</span><span class="nt">color</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">darken</span><span class="p">(</span><span class="o">@</span><span class="no">color</span><span class="o">,</span> <span class="mi">10</span><span class="kt">%</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(</span><span class="nt">light</span><span class="o">,</span> <span class="o">@</span><span class="nt">color</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">lighten</span><span class="p">(</span><span class="o">@</span><span class="no">color</span><span class="o">,</span> <span class="mi">10</span><span class="kt">%</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">_</span><span class="o">,</span> <span class="o">@</span><span class="nt">color</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">display</span><span class="o">:</span> <span class="no">block</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@switch</span><span class="nd">:</span> <span class="nt">light</span><span class="o">;</span>
+</span><span class='line'><span class="nc">.class</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.mixin</span><span class="o">(@</span><span class="nt">switch</span><span class="o">,</span> <span class="nn">#888</span><span class="o">);</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>호출시 조건문 light값을 충족하며 모든 값을 의미 하는 &#8216;@_&#8217;포함 하여 적용 됩니다.</p>
 
-<pre><code>.class {
-  color: #a2a2a2;
-  display: black;
-}
-</code></pre>
+<p>호출시 조건문의 light값을 충족하며 모든 값을 의미 하는 <code>@_</code>포함 하여 적용 됩니다.</p>
 
-<p>조건문으로 인수의 개수에 따라서 선택 할수도 있습니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-08</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.class</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#a2a2a2</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">display</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.mixin (@a) {
-  color: @a;
-}
-.mixin (@a, @b) {
-  color: fade(@a, @b);
-}
-</code></pre>
+
+<h3>인수의 개수검사</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">a</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">a</span><span class="o">,</span> <span class="o">@</span><span class="nt">b</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">fade</span><span class="p">(</span><span class="o">@</span><span class="n">a</span><span class="o">,</span> <span class="o">@</span><span class="n">b</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>Guards</h2>
 
-<p>가드는 값이나 변수의 개수가 아니라 식에 일치 시킵니다.</p>
+<p>가드는 값이나 변수의 개수가 아니라 식에 일치 시킵니다.
+<code>if</code>/<code>else</code> 대신 <code>when</code>을 사용 합니다. <code>@a</code>값을 비교하여 적용 하며 인자가 하나이므로 <code>color</code>는 전체에 적용 됩니다.</p>
 
-<p>example-09.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-09.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">.mixin</span><span class="err"> </span><span class="na">(@a)</span><span class="err"> </span><span class="na">when</span><span class="err"> </span><span class="na">(lightness(@a)</span><span class="err"> </span><span class="na">&gt;</span><span class="o">=</span> <span class="mi">50</span><span class="kt">%</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="nt">when</span> <span class="o">(</span><span class="nt">lightness</span><span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="o">&lt;</span> <span class="nt">50</span><span class="err">%</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="nb">white</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">a</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.class1</span> <span class="err">{</span> <span class="nc">.mixin</span><span class="o">(</span><span class="nn">#ddd</span><span class="o">)</span> <span class="err">}</span>
+</span><span class='line'><span class="nc">.class2</span> <span class="err">{</span> <span class="nc">.mixin</span><span class="o">(</span><span class="nn">#555</span><span class="o">)</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>if/else 대신 when을 사용 합니다. @a값을 비교하여 적용 하며 인자가 하나이므로 color는 전체에 적용 됩니다.</p>
 
-<pre><code>.mixin (@a) when (lightness(@a) &gt;= 50%) {
-  background-color: black;
-}
-.mixin (@a) when (lightness(@a) &lt; 50%) {
-  background-color: white;
-}
-.mixin (@a) {
-  color: @a;
-}
-.class1 { .mixin(#ddd) }
-.class2 { .mixin(#555) }
-</code></pre>
+<p>조건에 따른 적용과 전체 적용된 <code>color</code>입니다.</p>
 
-<p>example-09.css</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-09</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.class1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#ddd</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.class2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#555</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>값에 비교에 따른 적용과 전체 적용된 color 입니다.</p>
 
-<pre><code>.class1 {
-  color: #ddd;
-  background-color: black;
-}
-.class2 {
-  color: #555;
-  background-color: white;            
-}
-</code></pre>
-
-<p>가드 안에서는 비교식(>, >=, =, =&lt;, &lt;)을 사용 할수있습니다.</p>
-
-<p>basic.less</p>
+<h3>가드 안에서 비교식(>, >=, =, =&lt;, &lt;)</h3>
 
 <p>두개의 식은 같은 표현 입니다.</p>
 
-<pre><code>.truth (@a) when (@a) { … }
-.truth (@a) when (@a = true) { … }
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// basic.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.truth</span> <span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="nt">when</span> <span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span><span class='line'><span class="na">.truth</span><span class="err"> </span><span class="na">(@a)</span><span class="err"> </span><span class="na">when</span><span class="err"> </span><span class="na">(@a</span><span class="o"> =</span> <span class="n-Pseudo">true</span><span class="p">)</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-10.less</p>
 
 <p>아래의 식은 위에 basic.less값에 매치 되지 않습니다. 값이 &#8216;true&#8217;만 매치 됩니다.</p>
 
-<pre><code>.class {
-  .truth(40);
-}
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-10</span><span class="nc">.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.class</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">truth</span><span class="p">(</span><span class="m">40</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-11.less</p>
 
-<p>&#8216;or&#8217; 이중 조건은 &#8216;,&#8217;로 분류 됩니다. 작성된 조건의 범위를 벗어난 값을 호출시 컴파일 자체가 되지 않습니다.</p>
+<h3>조건문</h3>
 
-<pre><code>.mixin (@a) when (@a &gt; 10), (@a &lt; -10) { … }
-</code></pre>
+<ul>
+<li>= : 두 값이 같으면 참입니다.</li>
+<li>not : 두 값이 같지 않으면 참입니다.</li>
+<li>and : 모든 조건이 참이어야 합니다.</li>
+<li>,   : 모든 조건 값중에 하나만 참이면 참입니다.</li>
+</ul>
 
-<p>example-12.less</p>
 
-<p>인자의 값이 동등 한지 비교 가능 하며 대,소 또한 가능 합니다.</p>
+<h3>JavaScript &#8216;or&#8217;와 Less &#8216;,&#8217;</h3>
 
-<pre><code>@media: mobile;
+<p>JavaScript에서의 <code>or</code>와 같은 표현 조건중 하나만 참이어도 조건은 참입니다.
+작성이 주의할점은 조건의 범위를 벗어난 값을 호출시 컴파일 자체가 되지 않습니다.</p>
 
-.mixin (@a) when (@media = mobile) { … }
-.mixin (@a) when (@media = desktop) { … }
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-11.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="nt">when</span> <span class="o">(@</span><span class="nt">a</span> <span class="o">&gt;</span> <span class="nt">10</span><span class="o">),</span> <span class="o">(@</span><span class="nt">a</span> <span class="o">&lt;</span> <span class="nt">-10</span><span class="o">)</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-.max (@a, @b) when (@a &gt; @b) { width: @a }
-.max (@a, @b) when (@a &lt; @b) { width: @b }
-</code></pre>
 
-<p>매개변수가 number 인지 color인지 비교 할수 있습니다.</p>
+<h3>JavaScript &#8216;and&#8217;와 Less &#8216;and&#8217;</h3>
 
-<pre><code>.mixin (@a, @b: 0) when (isnumber(@b)) { … }
-.mixin (@a, @b: black) when (iscolor(@b)) { … }
-</code></pre>
+<p>추가 조건문 and는 숫자인지 비교하고 0보다 높은 값이어야 합니다.</p>
 
-<p>확인 가능한 is*형</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">a</span><span class="o">)</span> <span class="nt">when</span> <span class="o">(</span><span class="nt">isnumber</span><span class="o">(@</span><span class="nt">a</span><span class="o">))</span> <span class="nt">and</span> <span class="o">(@</span><span class="nt">a</span> <span class="o">&gt;</span> <span class="nt">0</span><span class="o">)</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>부정 조건문 not</h3>
+
+<p>0보다 크지 않을때 동작</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.mixin</span> <span class="o">(@</span><span class="nt">b</span><span class="o">)</span> <span class="nt">when</span> <span class="nt">not</span> <span class="o">(@</span><span class="nt">b</span> <span class="o">&gt;</span> <span class="nt">0</span><span class="o">)</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>인자비교및 대소 비교</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-12.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@media</span><span class="nd">:</span> <span class="nt">mobile</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">.mixin</span><span class="err"> </span><span class="na">(@a)</span><span class="err"> </span><span class="na">when</span><span class="err"> </span><span class="na">(@media</span><span class="o"> =</span> <span class="n">mobile</span><span class="p">)</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span><span class='line'><span class="na">.mixin</span><span class="err"> </span><span class="na">(@a)</span><span class="err"> </span><span class="na">when</span><span class="err"> </span><span class="na">(@media</span><span class="o"> =</span> <span class="n">desktop</span><span class="p">)</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">.max</span><span class="err"> </span><span class="na">(@a,</span><span class="err"> </span><span class="na">@b)</span><span class="err"> </span><span class="na">when</span><span class="err"> </span><span class="na">(@a</span><span class="err"> </span><span class="na">&gt;</span><span class="err"> </span><span class="na">@b)</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">width</span><span class="o">:</span> <span class="o">@</span><span class="n">a</span> <span class="err">}</span>
+</span><span class='line'><span class="na">.max</span><span class="err"> </span><span class="na">(@a,</span><span class="err"> </span><span class="na">@b)</span><span class="err"> </span><span class="na">when</span><span class="err"> </span><span class="na">(@a</span><span class="err"> </span><span class="na">&lt;</span><span class="err"> </span><span class="na">@b)</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">width</span><span class="o">:</span> <span class="o">@</span><span class="n">b</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>매개변수 number, color등 확인</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="na">.mixin</span><span class="err"> </span><span class="na">(@a,</span><span class="err"> </span><span class="na">@b</span><span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="n">when</span> <span class="p">(</span><span class="nf">isnumber</span><span class="p">(</span><span class="o">@</span><span class="n">b</span><span class="p">))</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span><span class='line'><span class="na">.mixin</span><span class="err"> </span><span class="na">(@a,</span><span class="err"> </span><span class="na">@b</span><span class="o">:</span> <span class="nb">black</span><span class="p">)</span> <span class="n">when</span> <span class="p">(</span><span class="nf">iscolor</span><span class="p">(</span><span class="o">@</span><span class="n">b</span><span class="p">))</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>확인 가능한 is*형</h3>
 
 <ul>
 <li>iscolor</li>
@@ -2244,272 +2671,424 @@ pre { .wrap }
 </ul>
 
 
-<p>추가 조건문 and는 숫자인지 비교하고 0보다 높은 값이어야 합니다.</p>
-
-<pre><code>.mixin (@a) when (isnumber(@a)) and (@a &gt; 0) { … }
-</code></pre>
-
-<p>부정 조건문 not 조건이 0보다 크지 않을때 동작 합니다.</p>
-
-<pre><code>.mixin (@b) when not (@b &gt; 0) { … }
-</code></pre>
-
-<h3>조건문</h3>
-
-<p>Less</p>
-
-<ul>
-<li>= : 두 값이 같으면 참입니다.</li>
-<li>not : 두 값이 같지 않으면 참입니다.</li>
-<li>and : 모든 조건이 참이어야 합니다.</li>
-<li>,   : 모든 조건 값중에 하나만 참이면 참입니다.</li>
-</ul>
-
-
-<h3>Nested rules</h3>
-
-<p>example-13.css</p>
+<h2>Nested 법칙</h2>
 
 <p>&amp; 콤비네이터를 사용한 상속을 통해서 간결하게 만들수 있습니다. 아래는 .css파일 입니다. 이를 .less로 바꾸어 보겠습니다.</p>
 
-<pre><code>#header { color: black; }
-#header .navigation {
-  font-size: 12px;
-}
-#header .logo {
-  width: 300px;
-}
-#header .logo:hover {
-  text-decoration: none;
-}
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-13</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#header</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nf">#header</span> <span class="nc">.navigation</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">12px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#header</span> <span class="nc">.logo</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#header</span> <span class="nc">.logo</span><span class="nd">:hover</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-13-01.less</p>
 
 <p>.css에서 반복 되던 #header를 한번만 선언 할수 있습니다.</p>
 
-<pre><code>#header {
-  color: black;
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-13-01.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nc">.navigation</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">font-size</span><span class="o">:</span> <span class="mi">12</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="nc">.logo</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">width</span><span class="o">:</span> <span class="mi">300</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">&amp;</span><span class="o">:</span><span class="n">hover</span> <span class="err">{</span> <span class="no">text-decoration</span><span class="o">:</span> <span class="no">none</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  .navigation {
-    font-size: 12px;
-  }
-  .logo {
-    width: 300px;
-    &amp;:hover { text-decoration: none; }
-  }
-}
-</code></pre>
-
-<p>example-13-02.less</p>
 
 <p>위와 결과는 같지만 더 간결한 문법을 보입니다.</p>
 
-<pre><code>#header { color: black;
-  .navigation { font-size: 12px }
-  .logo       { width: 300px;
-    &amp;:hover   { text-decoration: none }
-  }  
-}
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-13-02.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">#header</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">.navigation</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">font-size</span><span class="o">:</span> <span class="mi">12</span><span class="kt">px</span> <span class="err">}</span>
+</span><span class='line'>  <span class="na">.logo</span><span class="err">       </span><span class="na">{</span><span class="err"> </span><span class="na">width</span><span class="o">:</span> <span class="mi">300</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">&amp;</span><span class="o">:</span><span class="n">hover</span>   <span class="err">{</span> <span class="no">text-decoration</span><span class="o">:</span> <span class="no">none</span> <span class="err">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>example-14.less</p>
 
-<p>&amp; 콤비네이터를 사용한 또다른 형태 입니다.</p>
+<h3>&amp; 콤비네이터 사용</h3>
 
-<pre><code>.bordered {
-  &amp;.float { flat: left; }
-  .top {
-    margin: 5px;
-  }
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-14.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.bordered</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">&amp;.float</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">flat</span><span class="o">:</span> <span class="no">left</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="nc">.top</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">margin</span><span class="o">:</span> <span class="mi">5</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-14</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.bordered.float</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">flat</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.bordered.top</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">margin</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>향상된 &amp; 사용법</h3>
+
+<p><code>&amp;</code> 또다른 사용 법입니다. 모든 셀렉터의 조합을 만들어 줄수 있습니다.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-15.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.child</span><span class="o">,</span> <span class="nc">.sibling</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.parent</span> <span class="k">&amp;</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="k">&amp;</span> <span class="o">+</span> <span class="k">&amp;</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-15</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.parent.child</span><span class="o">,</span> <span class="nc">.parent.sibling</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.child</span> <span class="o">+</span> <span class="nc">.child</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.child</span> <span class="o">+</span> <span class="nc">.sibling</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.sibling</span> <span class="o">+</span> <span class="nc">.child</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.sibling</span> <span class="o">+</span> <span class="nc">.sibling</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>연산</h2>
+
+<p>숫자, 색, 변수를 연산 할수 있습니다.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-16.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@base</span><span class="nd">:</span> <span class="nt">5</span><span class="err">%</span><span class="o">;</span>
+</span><span class='line'><span class="k">@filler</span><span class="nd">:</span> <span class="o">(@</span><span class="nt">base</span> <span class="o">*</span> <span class="nt">2</span><span class="o">);</span>
+</span><span class='line'><span class="k">@other</span><span class="nd">:</span> <span class="o">(@</span><span class="nt">bae</span> <span class="o">+</span> <span class="o">@</span><span class="nt">filler</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">color</span><span class="o">:</span> <span class="p">(</span><span class="mh">#888</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="na">background-color</span><span class="o">:</span> <span class="p">(</span><span class="o">@</span><span class="n">base-color</span> <span class="o">+</span> <span class="mh">#111</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="na">height</span><span class="o">:</span> <span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="o">@</span><span class="n">filler</span><span class="p">)</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-16-01.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@var</span><span class="nd">:</span> <span class="o">(</span><span class="nt">1px</span> <span class="o">+</span> <span class="nt">5</span><span class="o">);</span> <span class="o">//</span> <span class="o">@</span><span class="nt">var</span><span class="nd">:</span> <span class="nt">6px</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-16-02.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">width</span><span class="o">:</span> <span class="p">((</span><span class="o">@</span><span class="n">var</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Color functions</h2>
+
+<h3>밝기 조절</h3>
+
+<pre><code>lighten(@color, 10%);
+darken(@color, 10%);
 </code></pre>
 
-<p>example-14.css</p>
+<h3>채도 조절</h3>
 
-<pre><code>.bordered.float {
-  flat: left;
-}
-.bordered.top {
-  margin: 5px;
-}
+<pre><code>saturate(@color, 10%);
+desaturate(@color, 10%);
 </code></pre>
 
-<h3>Advanced Usage of &amp;</h3>
+<h3>투명도</h3>
 
-<p>example-15.less</p>
-
-<p>&amp; 또다른 사용 법입니다. 모든 셀렉터의 조합을 만들어 줄수 있습니다.</p>
-
-<pre><code>.child, .sibling {
-  .parent &amp; {
-    color: black;
-  }
-  &amp; + &amp; {
-    color: red;
-  }
-}
+<pre><code>fadein(@color, 10%);
+fadeout(@color, 10%);
+fade(@color, 50%);
 </code></pre>
 
-<p>example-15.css</p>
+<h3>색장 조절</h3>
 
-<pre><code>.parent.child, .parent.sibling {
-  color: black;
-}
-
-.child + .child,
-.child + .sibling,
-.sibling + .child,
-.sibling + .sibling {
-  color: red;
-}
+<pre><code>spin(@color, 10);
+spin(@color, -10);
 </code></pre>
 
-<h3>Operations</h3>
+<h3>mix 사용법</h3>
 
-<p>example-16.less</p>
+<p><code>@color1</code>, 과 <code>@color2</code> 혼합된 값을 반환 합니다. <code>@weight</code>는 기본값 50%을 의미 합니다.</p>
 
-<p>숫자, 색, 변수 또한 연산을 할수 있습니다.</p>
-
-<pre><code>@base: 5%;
-@filler: (@base * 2);
-@other: (@bae + @filler);
-
-color: (#888 / 4);
-background-color: (@base-color + #111);
-height: (100% / 2 + @filler);
-</code></pre>
-
-<p>example-16-01.less</p>
-
-<pre><code>@var: (1px + 5); // @var: 6px
-</code></pre>
-
-<p>example-16-02.less</p>
-
-<pre><code>width: ((@var + 5) * 2);
-</code></pre>
-
-<h3>Color functions</h3>
-
-<ul>
-<li><p>밝기 조절</p>
-
-<p>  lighten(@color, 10%);
-  darken(@color, 10%);</p></li>
-<li><p>채도 조절</p>
-
-<p>  saturate(@color, 10%);
-  desaturate(@color, 10%);</p></li>
-<li><p>투명도</p>
-
-<p>  fadein(@color, 10%);
-  fadeout(@color, 10%);
-  fade(@color, 50%);</p></li>
-<li><p>색장 조절</p>
-
-<p>  spin(@color, 10);
-  spin(@color, -10);</p>
-
-<h1></h1></li>
-<li><p>@color1, 과 @color2 혼합된 값을 반환 합니다. @weight는 기본값을 의미 합니다.</p>
-
-<p>  mix(@color1, @color2, @weight);</p></li>
-<li><p>@color1 > 50% luma 일경우 @darkcolor 를 아니면 @lightcolor를 반환 합니다.
-  contrast(@color1, @darkcolor, @lightcolor;);</p></li>
-</ul>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">mix</span><span class="o">(@</span><span class="nt">color1</span><span class="o">,</span> <span class="o">@</span><span class="nt">color2</span><span class="o">,</span> <span class="o">@</span><span class="nt">weight</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>exampl1-17.less</p>
+<h3>color luma 비교</h3>
 
-<pre><code>@base: #f04615;
+<p><code>@color1</code> > 50% luma 일경우 <code>@darkcolor</code> 를 아니면 <code>@lightcolor</code>를 반환 합니다.</p>
 
-.class {
-  color: saturate(@base, 5%);
-  background-color: spin(lighten(@base, 25%), 8);
-}
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">contrast</span><span class="o">(@</span><span class="nt">color1</span><span class="o">,</span> <span class="o">@</span><span class="nt">darkcolor</span><span class="o">,</span> <span class="o">@</span><span class="nt">lightcolor</span><span class="o">;);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>색정보 알아내기</p>
 
-<pre><code>hue(@color);
-saturation(@color);
-lightness(@color);
-red(@color);
-green(@color);
-blue(@color);
-alpha(@color);
-luma(@color);
-</code></pre>
+<h3>color 사용법</h3>
 
-<p>새로운 색 구하기</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// exampl1-17.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@base</span><span class="nd">:</span> <span class="nn">#f04615</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.class</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">saturate</span><span class="p">(</span><span class="o">@</span><span class="n">base</span><span class="o">,</span> <span class="mi">5</span><span class="kt">%</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="nf">spin</span><span class="p">(</span><span class="nf">lighten</span><span class="p">(</span><span class="o">@</span><span class="n">base</span><span class="o">,</span> <span class="mi">25</span><span class="kt">%</span><span class="p">)</span><span class="o">,</span> <span class="mi">8</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>@new는 @old의 색을 유지하면서 자신의 채도 및 밝기를 정의</p>
 
-<pre><code>@new: hsl(hue(@old), 45%, 90%);
-</code></pre>
+<h3>color 정보 추출</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">hue</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="err">색상</span> <span class="err">반환</span>
+</span><span class='line'><span class="nt">saturation</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="err">채도값</span> <span class="err">반환</span>
+</span><span class='line'><span class="nt">lightness</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="err">밝기값</span> <span class="err">반환</span>
+</span><span class='line'><span class="nt">red</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="s1">&#39;</span><span class="s2">red&#39;</span><span class="err">값</span> <span class="err">반환</span>
+</span><span class='line'><span class="nt">green</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="err">`</span><span class="nt">green</span><span class="err">`값</span> <span class="err">반환</span>
+</span><span class='line'><span class="nt">blue</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="err">`</span><span class="nt">blue</span><span class="err">`값</span> <span class="err">반환</span>
+</span><span class='line'><span class="nt">alpha</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="err">`</span><span class="nt">alpha</span><span class="err">`값</span> <span class="err">반환</span>
+</span><span class='line'><span class="nt">luma</span><span class="o">(@</span><span class="nt">color</span><span class="o">)</span> <span class="o">//</span> <span class="err">`</span><span class="o">@</span><span class="nt">color</span><span class="err">`</span> <span class="err">`</span><span class="nt">luma</span><span class="err">`갑</span> <span class="err">반환</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>새로운 색 구하기</h3>
+
+<p><code>@new</code>는 <code>@old</code>의 색을 유지하면서 자신의 채도 및 밝기를 정의</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@new</span><span class="nd">:</span> <span class="nt">hsl</span><span class="o">(</span><span class="nt">hue</span><span class="o">(@</span><span class="nt">old</span><span class="o">),</span> <span class="nt">45</span><span class="err">%</span><span class="o">,</span> <span class="nt">90</span><span class="err">%</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Math functions</h3>
 
-<p>&#8216;2&#8217;를 반환 합니다</p>
+<p><code>1.67</code> 전달시 2를 반환 합니다</p>
 
 <pre><code>round(1.67);
 </code></pre>
 
-<p>&#8216;3&#8217;을 반환 합니다.</p>
+<p><code>2.4</code> 전달시 3을 반환 합니다.</p>
 
 <pre><code>ceil(2.4);
 </code></pre>
 
-<p>&#8216;2&#8217;를 반환 합니다.</p>
+<p><code>2.6</code> 전달시 &#8216;2&#8217;를 반환 합니다.</p>
 
 <pre><code>floor(2.6);
 </code></pre>
 
 <p>퍼센티지 구하기</p>
 
-<p>0.5는 50%를 반환 합니다.</p>
+<p><code>0.5</code>전달시 50%를 반환 합니다.</p>
 
 <pre><code>percentage(0.5)
 </code></pre>
 
 <h3>Namespaces</h3>
 
-<p>example-18.less</p>
+<p>Namespace를 가지고 Mixin 에서 선택 할수 있습니다.
+다음은 <code>#bundle</code> 에서 <code>.button</code>을 Mixin 하는 방법 입니다.</p>
 
-<p>Namespace를 가지고 Mixin 에서 선택 할수 있습니다. 다음은 #bundle 에서 .button을 Mixin 하는 방법 입니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-18.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#bundle</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.button</span> <span class="o">()</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">display</span><span class="o">:</span> <span class="no">block</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="no">solid</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">background-color</span><span class="o">:</span> <span class="n">grey</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">&amp;</span><span class="o">:</span><span class="n">hover</span> <span class="err">{</span> <span class="no">background-color</span><span class="o">:</span> <span class="nb">white</span> <span class="err">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="nc">.tab</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span><span class='line'>  <span class="nc">.citaion</span> <span class="err">{</span> <span class="err">…</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="ni">orange</span><span class="err">;</span>
+</span><span class='line'>  <span class="nn">#bundle</span> <span class="o">&gt;</span> <span class="nc">.button</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#bundle {
-  .button () {
-    display: block;
-    border: 1px solid black;
-    background-color: grey;
-    &amp;:hover { background-color: white }
-  }
-  .tab { … }
-  .citaion { … }
-}
 
-#header a {
-  color: orange;
-  #bundle &gt; .button;
-}
-</code></pre>
+<p><code>.tab</code>, <code>.citaion</code>은 적용 되지 않습니다.</p>
 
-<p>compile.css</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-18.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#header</span> <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="ni">orange</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">display</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="no">solid</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="n">grey</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nn">#header</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="mh">#ffffff</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>.tab, .citaion은 적용 되지 않습니다.</p>
-
-<pre><code>#header a {
-  color: orange;
-  display: black;
-  border: 1px solid black;
-  background-color: grey;
-}
-#header a:hover {
-  background-color: #ffffff;
-}
-</code></pre>
 
 <h3>Scope</h3>
 
@@ -2652,7 +3231,7 @@ background-image: url("@{base-url}/images/bg.png");
 </ul>
 
 
-<h2>CoffeeScript 설치</h2>
+<h3>CoffeeScript 설치</h3>
 
 <p>CoffeeScript - CoffeeScript is a little language that compiles into JavaScript</p>
 
@@ -2664,21 +3243,21 @@ background-image: url("@{base-url}/images/bg.png");
 <h3>npm - coffee-script 설치를 위한 패키지 매니저</h3>
 
 <p>coffee-script를 다운 받기 위해서는 npm이 필요 하고 별도로 설치 해야 하며
-npm 설치를 위한 파일은 아래의 링크에서 다운로드 받습니다.</p>
+<code>npm</code> 설치를 위한 파일은 아래의 링크에서 다운로드 받습니다.</p>
 
 <p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
 
 <h3>node-v.8.x.x.pkg 설치</h3>
 
 <p>개인 OS에 맞는 파일을 선택해 다운 받고 설치 합니다. 다음은 Mac 에서의
-.pkg 실행시 첫화면과 마지막 화면 입니다.</p>
+<code>.pkg</code> 실행시 첫화면과 마지막 화면 입니다.</p>
 
 <p><img src="https://lh5.googleusercontent.com/-eUicOa-fhtQ/UKXCFOGz27I/AAAAAAAAACE/9LBj6Kzdn-8/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-01.jpg" width="500" height="500" title="&#34;node.pkg 설치 시작&#34;" alt="&#34;node.pkg 설치 시작&#34;">
 <img src="https://lh5.googleusercontent.com/-Smr4TJfxMgI/UKXEkWDOYWI/AAAAAAAAACM/soEN5qpthGg/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-02.jpg" width="500" height="500" title="&#34;node.pkg 설치 끝&#34;" alt="&#34;node.pkg 설치 끝&#34;"></p>
 
 <h3>coffee-script 설치</h3>
 
-<p>npm을 사용해 coffee-script를 설치해 줍니다.</p>
+<p><code>npm</code>을 사용해 <code>coffee-script</code>를 설치해 줍니다.</p>
 
 <pre><code>hancho@hanjoui-MacBook-Pro:~$ sudo npm install -g coffee-script
 Password:
@@ -2689,22 +3268,20 @@ npm http 304 https://registry.npmjs.org/coffee-script
 coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 </code></pre>
 
-<h2>CoffeeScript 사용방법</h2>
+<h3>CoffeeScript 사용방법</h3>
 
-<ul>
-<li><p>CoffeeScript 시작하기</p>
+<h4>CoffeeScript 시작하기</h4>
 
-<p>  테스트를 위한 폴더를 생성후 style.less 파일을 만듭니다.</p>
+<pre><code>테스트를 위한 폴더를 생성후 `style.less` 파일을 만듭니다.
 
-<pre><code> $ mkdir Coffee-Start
- $ cd Coffee-Start
- $ touch style.coffee
-</code></pre></li>
-<li><p>style.coffee 작성</p></li>
-</ul>
+   $ mkdir Coffee-Start
+   $ cd Coffee-Start
+   $ touch style.coffee
+</code></pre>
 
+<h4>style.coffee 작성</h4>
 
-<p>coffee가 동작하는지 확인 하기 위해 테스트 파일를 작성합니다.</p>
+<p><code>coffee</code>가 동작 확인을 위해 테스트 파일를 작성합니다.</p>
 
 <figure class='code'><figcaption><span>style.coffee  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2718,29 +3295,27 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li><p>.coffee -> .js 변환하기</p>
+<h4>.coffee -> .js 변환하기</h4>
 
-<p>.coffee 파일 작성후 .js 파일로 변환합니다. 파일명은 style.coffee의 style.js로 변환됩니다.</p>
+<p>  .coffee 파일 작성후 .js 파일로 변환합니다. 파일명은 style.coffee의 style.js로 변환됩니다.</p>
 
-<pre><code>  $ coffee --compile style.coffee
-  $ ls
+<pre><code>    $ coffee --compile style.coffee
+    $ ls
+    style.coffee style.js
+</code></pre>
 
-  style.coffee style.js
-</code></pre></li>
-<li><p>.coffee -> .js 지켜보기</p>
+<h4>.coffee -> .js 지켜보기</h4>
 
-<p>.coffee -> .js 파일로 변화 하며 &#8211;watch 옵션으로 style.coffee 파일 내용이 갱신(저장) 될때마다
-.js 파일로 변환 시켜 주게 됩니다. 종료는 Ctrl + C 키로 할수있습니다.</p>
+<p>  <code>--watch</code> 옵션으로 style.coffee 파일 내용이 갱신(저장)시
+  <code>.js</code>파일로 변환 됩니다. 종료는 Ctrl + C 키로 할수있습니다.</p>
 
-<pre><code>  $ coffee --watch --compile style.coffee
-  11:55:26 - compiled style.coffee
-</code></pre></li>
-<li><p>coffeescript - .coffee 확인 하기</p></li>
-</ul>
+<pre><code>    $ coffee --watch --compile style.coffee
+    11:55:26 - compiled style.coffee
+</code></pre>
 
+<h4>coffeescript - .coffee 확인 하기</h4>
 
-<p>.html 파일 내에서 .js 파일로 변환 없이 .coffee를 검사 할수있습니다.</p>
+<p><code>.html</code> 파일 내에서 <code>.js</code> 파일로 변환 없이 .coffee를 검사 할수있습니다.</p>
 
 <figure class='code'><figcaption><span>coffee.html </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2774,12 +3349,9 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>coffeescript - .js 확인하기</li>
-</ul>
+<h4>coffeescript - .js 확인하기</h4>
 
-
-<p>.html 파일 내에서 변환된 .js 내용을 검사 할수있습니다.</p>
+<p><code>.html</code> 파일 내에서 변환된 <code>.js</code> 내용을 검사 할수있습니다.</p>
 
 <figure class='code'><figcaption><span>coffee.html </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2840,8 +3412,6 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 
 <h2>사용 환경</h2>
 
-<hr />
-
 <ul>
 <li>모델명    :     MacBook Pro</li>
 <li>모델 식별자:   MacBookPro8,1</li>
@@ -2854,22 +3424,20 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 
 <h2>Sass 설치</h2>
 
-<hr />
-
 <h3>Sass 공식 사이트</h3>
 
 <p>Sass의 공식 사이트 주소는 <a href="http://sass-lang.com/docs.html">Sass 사이트</a>입니다.</p>
 
 <h3>gem - Sass 설치를 위한 패키지 매니저</h3>
 
-<p>gem을 사용하려면 Ruby가 설치되어 있어야 합니다.
+<p><code>gem</code>을 사용하려면 Ruby가 설치되어 있어야 합니다.
 <a href="http://octopress.org/docs/setup/rvm/">gem 설치가이드</a></p>
 
 <h3>RVM 패키지 설치</h3>
 
 <p>ruby를 설치 하기전 ruby를 관리해주는 RVM 을 설치 합니다.
-처음 실행 시키면 &#8216;q&#8217;를 누르라고 나옵니다.
-&#8216;q&#8217; 입력후 설치 시간이 좀 걸리게 되며 아래와 같은 내용이
+처음 실행 시키면 <code>q</code>를 누르라고 나옵니다.
+<code>q</code> 입력후 설치 시간이 좀 걸리게 되며 아래와 같은 내용이
 나올때까지 기다려야 합니다.</p>
 
 <pre><code>$ curl -L https://get.rvm.io | bash -s stable --ruby
@@ -2897,7 +3465,7 @@ in all your open shell windows, in rare cases you need to reopen all shell windo
 
 <h3>Ruby 설치</h3>
 
-<p>RVM이 설치가 정상적으로 완료되면 rvm 을 사용해 루비를 설치해 줍니다.</p>
+<p>RVM이 설치가 정상적으로 완료되면 <code>rvm</code> 을 사용해 루비를 설치해 줍니다.</p>
 
 <pre><code>$ rvm install 1.9.3
 
@@ -2921,7 +3489,7 @@ Using /Users/hancho/.rvm/gems/ruby-1.9.3-p327
 <h4>ruby 최신 버전 적용</h4>
 
 <p>현재 보다 최신 버전이 있으면 최신 버전으로 적용 시켜 주게 됩니다.
-현재 사용하고 있는 버전이 최신이 아니었다면 위의 $ rvm use 1.x.x 사용
+현재 사용하고 있는 버전이 최신이 아니었다면 위의 <code>$ rvm use 1.x.x</code> 사용
 하는게 좋습니다.</p>
 
 <pre><code>$ rvm rubygems latest
@@ -2933,27 +3501,25 @@ Installation of rubygems completed successfully.
 
 <h3>Sass 설치</h3>
 
-<p>RVM과 Ruby가 정상적으로 설치되면 sass를 설치 할수 있습니다.</p>
+<p>RVM과 Ruby가 정상적으로 설치되면 <code>sass</code>를 설치 할수 있습니다.</p>
 
 <pre><code>$ gem install sass
 </code></pre>
 
-<h2>Sass 사용방법</h2>
+<h3>Sass 사용방법</h3>
 
-<ul>
-<li><p>Sass 따라 해보기</p>
+<h4>Sass 따라 해보기</h4>
 
-<p>  테스트 폴더를 생성후 style.scss 파일을 만듭니다.</p>
+<pre><code>테스트 폴더를 생성후 `style.scss` 파일을 만듭니다.
 
-<pre><code> $ mkdir Sass-Start
- $ cd Sass-Start
- $ touch style.scss
-</code></pre></li>
-<li><p>style.scss 파일 작성</p></li>
-</ul>
+   $ mkdir Sass-Start
+   $ cd Sass-Start
+   $ touch style.scss
+</code></pre>
 
+<h4>style.scss 파일 작성</h4>
 
-<p>sass가 동작 하는지 확인 하기 위해 테스트 파일를 작성합니다.</p>
+<p>sass 동작 확인을 위해 테스트 파일를 작성합니다.</p>
 
 <figure class='code'><figcaption><span>style.scss  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2983,14 +3549,11 @@ Installation of rubygems completed successfully.
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>.scss -> .css 변환하기</li>
-</ul>
+<h4>.scss -> .css 변환하기</h4>
 
-
-<p>작성된 .scss 파일을 .css 파일로 변환합니다. 다음은 .scss 파일이 변경
-되었을시 재입력 없이 변경 되는 명령어 입니다.  .scss 파일이 변경되는
-시점에(저장시) .css 변환을 자동으로 해주므로 수정 사항이 많을시 사용해
+<p>작성된 <code>.scss</code> 파일을 <code>.css</code> 파일로 변환합니다. 다음은 <code>.scss</code> 파일이 변경
+되었을시 재입력 없이 변경 되는 명령어 입니다. <code>.scss</code> 파일이 변경되는
+시점에(저장시) <code>.css</code> 변환을 자동으로 해주므로 수정 사항이 많을시 사용해
 주면 좋습니다.</p>
 
 <pre><code>$ sass --watch style.scss:style.css
@@ -3025,8 +3588,8 @@ Installation of rubygems completed successfully.
 
 <h3>npm - LESS 설치를 위한 패키지 매니저</h3>
 
-<p>LESS를 다운 받기 위해서는 npm이 필요 하고 별도로 설치를 해주어야 하며
-npm 설치를 위한 필요한 파일은 아래의 링크에서 다운로드 받을수 있습니다.</p>
+<p>LESS를 다운 받기 위해서는 <code>npm</code>이 필요 하고 별도로 설치를 해주어야 하며
+<code>npm</code> 설치를 위한 필요한 파일은 아래의 링크에서 다운로드 받을수 있습니다.</p>
 
 <p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
 
@@ -3040,27 +3603,25 @@ npm 설치를 위한 필요한 파일은 아래의 링크에서 다운로드 받
 
 <h3>LESS 설치</h3>
 
-<p>정상적으로 패키지 설치가 완료 되면 npm을 사용해 LESS를 설치 합니다.</p>
+<p>정상적으로 패키지 설치가 완료 되면 <code>npm</code>을 사용해 LESS를 설치 합니다.</p>
 
 <pre><code>$ npm install -g less
 </code></pre>
 
-<h2>LESS 사용방법</h2>
+<h3>LESS 사용방법</h3>
 
-<ul>
-<li><p>LESS 시작하기</p>
+<h4>LESS 시작하기</h4>
 
-<p>  테스트 폴더를 생성하고 style.less 파일을 만듭니다.</p>
+<pre><code>테스트 폴더를 생성하고 style.less 파일을 만듭니다.
 
-<pre><code> $ mkdir Less-Start
- $ cd Less-Start
- $ touch style.less
-</code></pre></li>
-<li><p>style.less 작성</p></li>
-</ul>
+   $ mkdir Less-Start
+   $ cd Less-Start
+   $ touch style.less
+</code></pre>
 
+<h4>style.less 작성</h4>
 
-<p>less가 동작하는지 확인 하기 위한 테스트 파일를 작성합니다.</p>
+<p><code>less</code>의 동작 확인을 위한 테스트 파일를 작성합니다.</p>
 
 <figure class='code'><figcaption><span>style.less  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -3082,28 +3643,25 @@ npm 설치를 위한 필요한 파일은 아래의 링크에서 다운로드 받
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li><p>.less -> .css 미리보기</p>
+<h4>.less -> .css 미리보기</h4>
 
-<p>  .less 작성후 변환하기전 .css 미리 보기를 할수 있습니다.</p>
+<pre><code>`.less` 작성후 변환하기전 `.css` 미리 보기를 할수 있습니다.
 
-<pre><code> $ lessc styles.less
+   $ lessc styles.less
 
- #header {
-   color: #6cc4be;
- }
-</code></pre></li>
-<li><p>.less -> .css 변환하기</p>
+   #header {
+     color: #6cc4be;
+   }
+</code></pre>
 
-<p>  작성이 완료되면 .less 파일을 .css 파일로 변환하여 줍니다.</p>
+<h4>.less -> .css 변환하기</h4>
 
-<pre><code> $ lessc styles.less &gt; styles.css
- $ ls
+<pre><code>작성이 완료되면 `.less` 파일을 `.css` 파일로 변환하여 줍니다.
 
- styles.less styles css
-</code></pre></li>
-</ul>
-
+   $ lessc styles.less &gt; styles.css
+   $ ls
+   styles.less styles css
+</code></pre>
 ]]></content>
   </entry>
   
@@ -3963,16 +4521,6 @@ else {
     <id>http://rumidier.github.com/blog/2012/07/12/list-write</id>
     <content type="html"><![CDATA[<p><a href="https://gist.github.com/3095879">List-write.tt</a>
 <a href="https://gist.github.com/3095901">List-write-action</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[list-view]]></title>
-    <link href="http://rumidier.github.com/blog/2012/07/12/list-view/"/>
-    <updated>2012-07-12T13:41:00+09:00</updated>
-    <id>http://rumidier.github.com/blog/2012/07/12/list-view</id>
-    <content type="html"><![CDATA[<p><a href="https://gist.github.com/3095846">List-view-action</a>
-<a href="https://gist.github.com/3095858">List-view.tt</a></p>
 ]]></content>
   </entry>
   

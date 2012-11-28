@@ -5,16 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Meadow - Meadows of wild horses</title>
+  <title>Perl - Meadows of wild horses</title>
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="[잡담]
-매일 매일 똑같은 모듈만 만지작 거리니까
-진사마가 Furl을 사용해 보라고 권하였다..
-그래도 빨리 하나 써서 주어야 하니까 그건 다음에..
-크리스마스때&#8230;!!?
-">
+  <meta name="description" content="해당 되는 파일의 이름을 찾아 그 안에서 정규 표현식에 해당 되는 문자열을 치환 해주는 기능 1
+$ perl -pi -e &#39;s/scripts/scripts\.coffee/g&#39; `find . -name &#39;*.tt&#39;` ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rumidier.github.com/blog/2012/05/18/meadow/">
+  <link rel="canonical" href="http://rumidier.github.com/blog/2012/11/27/perl/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -72,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Meadow</h1>
+      <h1 class="entry-title">Perl</h1>
     
     
       <p class="meta">
@@ -88,7 +84,7 @@
   
 
 
-<time datetime="2012-05-18T19:37:00+09:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+<time datetime="2012-11-27T15:29:00+09:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -97,11 +93,14 @@
   </header>
 
 
-<div class="entry-content"><p>[잡담]
-매일 매일 똑같은 모듈만 만지작 거리니까
-진사마가 Furl을 사용해 보라고 권하였다..
-그래도 빨리 하나 써서 주어야 하니까 그건 다음에..
-크리스마스때&#8230;!!?</p>
+<div class="entry-content"><p>해당 되는 파일의 이름을 찾아 그 안에서 정규 표현식에 해당 되는 문자열을 치환 해주는 기능</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>perl -pi -e <span class="s1">&#39;s/scripts/scripts\.coffee/g&#39;</span> <span class="sb">`</span>find . -name <span class="s1">&#39;*.tt&#39;</span><span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
 
 
@@ -124,12 +123,12 @@
   
 
 
-<time datetime="2012-05-18T19:37:00+09:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+<time datetime="2012-11-27T15:29:00+09:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/meadow/'>meadow</a>
+    <a class='category' href='/blog/categories/perl/'>perl</a>
   
 </span>
 
@@ -138,7 +137,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/05/18/meadow/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/05/18/meadow/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rumidier.github.com/blog/2012/11/27/perl/" data-via="rumidier" data-counturl="http://rumidier.github.com/blog/2012/11/27/perl/" >Tweet</a>
   
   
   
@@ -147,10 +146,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/15/php/" title="Previous Post: PHP">&laquo; PHP</a>
+        <a class="basic-alignment left" href="/blog/2012/11/26/sass/" title="Previous Post: Sass">&laquo; Sass</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/05/22/jquery/" title="Next Post: jQuery">jQuery &raquo;</a>
       
     </p>
   </footer>
@@ -254,8 +251,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rumidier.github.com/blog/2012/05/18/meadow/';
-        var disqus_url = 'http://rumidier.github.com/blog/2012/05/18/meadow/';
+        var disqus_identifier = 'http://rumidier.github.com/blog/2012/11/27/perl/';
+        var disqus_url = 'http://rumidier.github.com/blog/2012/11/27/perl/';
         var disqus_script = 'embed.js';
       
     (function () {

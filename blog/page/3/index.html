@@ -9,7 +9,9 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="청구 목록 페이지 List.pm - index /list/index.tt List Controller - Query option 등록 날짜 역순 출력을 위한 내림 차수 옵션을 준다. my %attr = ( 'order_by' =&gt; { -desc =&gt; 'me &hellip;">
+  <meta name="description" content="List-view-action
+List-view.tt
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +66,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-view/">List-view</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:41:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-view/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://gist.github.com/3095846">List-view-action</a>
+<a href="https://gist.github.com/3095858">List-view.tt</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1650,97 +1691,6 @@ carton.lock
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/13/learn-jquery-5jang/">Learn jQuery 5장</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-13T17:29:00+09:00" pubdate data-updated="true">Jun 13<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/13/learn-jquery-5jang/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Source</h2>
-
-<p><a href="https://gist.github.com/2922803">예제.html</a></p>
-
-<p><a href="https://gist.github.com/2922807">예제 css </a></p>
-
-<p><a href="https://gist.github.com/2922804">예제 js  </a></p>
-
-<h2>본문</h2>
-
-<h2>속성 추가하기</h2>
-
-<p>id속성값을 개별적으로 attr()으로 적용 해주기 위해 each()를 사용하여 적용하여 주고 있다.
-index는 0부터 시작하여 증가한다.</p>
-
-<pre><code>$(document).ready(function() {
-  $('div.chapter a[href*=wikipedia]').each(function(index) {
-var $thisLink = $(this);
-$(this).attr({
-  'rel': 'external',
-  'id': 'wikilink-' + index,
-  'title': $thisLink.text() + '에 대한 자세한 정보는 위키 피디아에 있습니다.'
-});
-  });
-});
-</code></pre>
-
-<h2>앵커 삽입</h2>
-
-<p>앵커 위치를 정하기 위해 body에 prependTo()로 삽입한다.
-앵커 버튼이 굳이 다 있을 필요는 없고 화면 밖에 존재 부터 하기 위해
-p:gt(4) 5번째(0부터 시작) 문단 부터 적용 시킨다</p>
-
-<pre><code>$('&lt;a href="#top"&gt;맨 앞으로 돌아가기&lt;/a&gt;').insertAfter('div.chapter p:gt(4)');
-$('&lt;a id="top" name="top"&gt;&lt;/a&gt;').prependTo('body');
-</code></pre>
-
-<h2>주석 표시, 숫자 부여, 컨텍스트 연결</h2>
-
-<p>챕터가 끝난지점 후에 리스트 목록인 &gt;ol&lt;만들어준다.
-클래스가 footnote</p>
-
-<pre><code>$('&lt;ol id="notes"&gt;&lt;/ol&gt;').insertAfter('div.chapter');
-$('span.footnote').each(function(index) {
-  $(this).before('&lt;a href="#foot-note-' + (index+1) +
-'" id="context-' + (index+1) + '" class="context"&gt;&lt;sup&gt;'
-+ (index+1) + '&lt;/sup&gt;&lt;/a&gt;')
-  .appendTo('#notes')
-  .append( '&amp;nbsp;(&lt;a href="#context-' + (index+1) + '"&gt;context &lt;/a&gt;)' )
-  .wrap('&lt;li id="foot-note-' + (index+1) + '"&gt;&lt;/li&gt;');
-});
-</code></pre>
-
-<h2>Command Action</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1758,15 +1708,15 @@ $('span.footnote').each(function(index) {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/27/perl/">Perl</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/26/sass/">Sass</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
       </li>
     
   </ul>

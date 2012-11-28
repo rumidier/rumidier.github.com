@@ -109,7 +109,7 @@
 </ul>
 
 
-<h2>CoffeeScript 설치</h2>
+<h3>CoffeeScript 설치</h3>
 
 <p>CoffeeScript - CoffeeScript is a little language that compiles into JavaScript</p>
 
@@ -121,21 +121,21 @@
 <h3>npm - coffee-script 설치를 위한 패키지 매니저</h3>
 
 <p>coffee-script를 다운 받기 위해서는 npm이 필요 하고 별도로 설치 해야 하며
-npm 설치를 위한 파일은 아래의 링크에서 다운로드 받습니다.</p>
+<code>npm</code> 설치를 위한 파일은 아래의 링크에서 다운로드 받습니다.</p>
 
 <p><a href="http://nodejs.org/download/">npm 다운로드</a></p>
 
 <h3>node-v.8.x.x.pkg 설치</h3>
 
 <p>개인 OS에 맞는 파일을 선택해 다운 받고 설치 합니다. 다음은 Mac 에서의
-.pkg 실행시 첫화면과 마지막 화면 입니다.</p>
+<code>.pkg</code> 실행시 첫화면과 마지막 화면 입니다.</p>
 
 <p><img src="https://lh5.googleusercontent.com/-eUicOa-fhtQ/UKXCFOGz27I/AAAAAAAAACE/9LBj6Kzdn-8/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-01.jpg" width="500" height="500" title="&#34;node.pkg 설치 시작&#34;" alt="&#34;node.pkg 설치 시작&#34;">
 <img src="https://lh5.googleusercontent.com/-Smr4TJfxMgI/UKXEkWDOYWI/AAAAAAAAACM/soEN5qpthGg/%25252FUsers%25252Fhancho%25252FPictures%25252Fnode-02.jpg" width="500" height="500" title="&#34;node.pkg 설치 끝&#34;" alt="&#34;node.pkg 설치 끝&#34;"></p>
 
 <h3>coffee-script 설치</h3>
 
-<p>npm을 사용해 coffee-script를 설치해 줍니다.</p>
+<p><code>npm</code>을 사용해 <code>coffee-script</code>를 설치해 줍니다.</p>
 
 <pre><code>hancho@hanjoui-MacBook-Pro:~$ sudo npm install -g coffee-script
 Password:
@@ -146,22 +146,20 @@ npm http 304 https://registry.npmjs.org/coffee-script
 coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 </code></pre>
 
-<h2>CoffeeScript 사용방법</h2>
+<h3>CoffeeScript 사용방법</h3>
 
-<ul>
-<li><p>CoffeeScript 시작하기</p>
+<h4>CoffeeScript 시작하기</h4>
 
-<p>  테스트를 위한 폴더를 생성후 style.less 파일을 만듭니다.</p>
+<pre><code>테스트를 위한 폴더를 생성후 `style.less` 파일을 만듭니다.
 
-<pre><code> $ mkdir Coffee-Start
- $ cd Coffee-Start
- $ touch style.coffee
-</code></pre></li>
-<li><p>style.coffee 작성</p></li>
-</ul>
+   $ mkdir Coffee-Start
+   $ cd Coffee-Start
+   $ touch style.coffee
+</code></pre>
 
+<h4>style.coffee 작성</h4>
 
-<p>coffee가 동작하는지 확인 하기 위해 테스트 파일를 작성합니다.</p>
+<p><code>coffee</code>가 동작 확인을 위해 테스트 파일를 작성합니다.</p>
 
 <figure class='code'><figcaption><span>style.coffee  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -175,29 +173,27 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li><p>.coffee -> .js 변환하기</p>
+<h4>.coffee -> .js 변환하기</h4>
 
-<p>.coffee 파일 작성후 .js 파일로 변환합니다. 파일명은 style.coffee의 style.js로 변환됩니다.</p>
+<p>  .coffee 파일 작성후 .js 파일로 변환합니다. 파일명은 style.coffee의 style.js로 변환됩니다.</p>
 
-<pre><code>  $ coffee --compile style.coffee
-  $ ls
+<pre><code>    $ coffee --compile style.coffee
+    $ ls
+    style.coffee style.js
+</code></pre>
 
-  style.coffee style.js
-</code></pre></li>
-<li><p>.coffee -> .js 지켜보기</p>
+<h4>.coffee -> .js 지켜보기</h4>
 
-<p>.coffee -> .js 파일로 변화 하며 &#8211;watch 옵션으로 style.coffee 파일 내용이 갱신(저장) 될때마다
-.js 파일로 변환 시켜 주게 됩니다. 종료는 Ctrl + C 키로 할수있습니다.</p>
+<p>  <code>--watch</code> 옵션으로 style.coffee 파일 내용이 갱신(저장)시
+  <code>.js</code>파일로 변환 됩니다. 종료는 Ctrl + C 키로 할수있습니다.</p>
 
-<pre><code>  $ coffee --watch --compile style.coffee
-  11:55:26 - compiled style.coffee
-</code></pre></li>
-<li><p>coffeescript - .coffee 확인 하기</p></li>
-</ul>
+<pre><code>    $ coffee --watch --compile style.coffee
+    11:55:26 - compiled style.coffee
+</code></pre>
 
+<h4>coffeescript - .coffee 확인 하기</h4>
 
-<p>.html 파일 내에서 .js 파일로 변환 없이 .coffee를 검사 할수있습니다.</p>
+<p><code>.html</code> 파일 내에서 <code>.js</code> 파일로 변환 없이 .coffee를 검사 할수있습니다.</p>
 
 <figure class='code'><figcaption><span>coffee.html </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -231,12 +227,9 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>coffeescript - .js 확인하기</li>
-</ul>
+<h4>coffeescript - .js 확인하기</h4>
 
-
-<p>.html 파일 내에서 변환된 .js 내용을 검사 할수있습니다.</p>
+<p><code>.html</code> 파일 내에서 변환된 <code>.js</code> 내용을 검사 할수있습니다.</p>
 
 <figure class='code'><figcaption><span>coffee.html </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -354,15 +347,15 @@ coffee-script@1.4.0 /usr/local/lib/node_modules/coffee-script
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/27/perl/">Perl</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/26/sass/">Sass</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
       </li>
     
   </ul>

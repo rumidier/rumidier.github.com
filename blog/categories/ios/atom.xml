@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-26T18:23:16+09:00</updated>
+  <updated>2012-11-28T20:14:15+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -63,11 +63,11 @@
 
 <h4>Xcode 실행후 > Xcode Preferences 선택 합니다.</h4>
 
-<p>{% img https://lh6.googleusercontent.com/-9lGHtlIr6t0/UK3bfp3Kn9I/AAAAAAAAACc/7g0GBCw6L24/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-01.jpg 500 500 "Xcode preferences 변경" %}</p>
+<p><img src="https://lh6.googleusercontent.com/-9lGHtlIr6t0/UK3bfp3Kn9I/AAAAAAAAACc/7g0GBCw6L24/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-01.jpg" width="500" height="500" title="&#34;Xcode preferences 변경&#34;" alt="&#34;Xcode preferences 변경&#34;"></p>
 
 <h4>Downloads->Components-> Command LIne Tools -> Install 클릭으로 설치 합니다.</h4>
 
-<p>{% img https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg 500 500 "Command Line Tools 설치" %}</p>
+<p><img src="https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg" width="500" height="500" title="&#34;Command Line Tools 설치&#34;" alt="&#34;Command Line Tools 설치&#34;"></p>
 
 <p>설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은
 <a href="http://docs.phonegap.com/en/2.2.0/guide_command-line_index.md.html#Command-Line%20Usage">Command-Line</a>에서 iOS 부분을 참고 하시면 됩니다.</p>
@@ -113,11 +113,11 @@ CordovaLib  cordova     start       start.xcodepro www
 
 <p>project_name.xcodeproj 파일을 클릭 하면 Xcode가 실행 됩니다. 실행후 컴파일 시간을 거친후 아래와 같이 <project_name> iPhone v.xx Simulator 선택 한후 Run(단축키 Command + R)을 실행 시켜 줍니다.</p>
 
-<p>{% img https://lh5.googleusercontent.com/-4i-P73CwMQ8/UK3xPWma-gI/AAAAAAAAAC0/nmMVo0_Hlkk/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-01.jpg 500 500 "Simulrator 실행" %}</p>
+<p><img src="https://lh5.googleusercontent.com/-4i-P73CwMQ8/UK3xPWma-gI/AAAAAAAAAC0/nmMVo0_Hlkk/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-01.jpg" width="500" height="500" title="&#34;Simulrator 실행&#34;" alt="&#34;Simulrator 실행&#34;"></p>
 
 <p>Run이 옳바르게 진행 되면 아래와 같은 iOS Simulator가 뜨게 됩니다.</p>
 
-<p>{% img https://lh4.googleusercontent.com/-6MXX5k5upE0/UK3xWeU51mI/AAAAAAAAAC8/zSRgxkGKQoc/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-02.jpg 500 500 "Simulrator 실행 화면" %}</p>
+<p><img src="https://lh4.googleusercontent.com/-6MXX5k5upE0/UK3xWeU51mI/AAAAAAAAAC8/zSRgxkGKQoc/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-02.jpg" width="500" height="500" title="&#34;Simulrator 실행 화면&#34;" alt="&#34;Simulrator 실행 화면&#34;"></p>
 ]]></content>
   </entry>
   

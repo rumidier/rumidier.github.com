@@ -9,7 +9,10 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Web - Catalyst Test Code 작성 Catalyst로 웹을 구축 하던중 테스트 코드를 작성을 부여 받았습니다. 테스트 코드를 진행 하기 위한 모듈을 적습니다. 모듈 Test::More 기본 적이 펄 테스트 코드 문법을 확인 할수 있습니다. &hellip;">
+  <meta name="description" content="user의 아이디를 가지고 elapsed_at 의 내용을 가져 오게 된다
+이 값은 2012-09-09 21:00:00 형식으로 되어 있으며
+2012 와 09 를 기준으로 값을 따로 가지게 하여년도별 월 횟수를나타나게
+해주었다 하지만 필요 없어 지움&#8230; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +67,124 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/18/month-split/">Month-split</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T15:30:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/18/month-split/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>user의 아이디를 가지고 elapsed_at 의 내용을 가져 오게 된다
+이 값은 2012-09-09 21:00:00 형식으로 되어 있으며
+2012 와 09 를 기준으로 값을 따로 가지게 하여년도별 월 횟수를나타나게
+해주었다 하지만 필요 없어 지움&#8230;</p>
+
+<p>controll</p>
+
+<pre><code>$cond = {} if %$cond;
+
+my $user_id;
+if ($id) {
+    $user_id = $user_info-&gt;id;
+}
+else {
+    $user_id = $c-&gt;user-&gt;id;
+}
+
+$cond-&gt;{'me.user_id'} = $user_id;
+
+my %attr            = ( 'order_by' =&gt; { -desc =&gt; 'me.elapsed_at' } );
+
+my $activity_search = $c-&gt;model('BikeMeDB')-&gt;resultset('Activity')-&gt;search($cond, \%attr);
+my $activities      = [ $activity_search-&gt;all ];
+my $activity_data   = {};
+
+for my $activity (@{ $activities }) {
+    my $year;
+    my $month;
+
+    my $elapsed = $activity-&gt;elapsed_at;
+    $year       = $activity-&gt;elapsed_at-&gt;year;
+    $month      = $activity-&gt;elapsed_at-&gt;month;
+
+    my @split_elapsed = split('-', $activity-&gt;elapsed_at, 3);
+
+    $activity_data-&gt;{$split_elapsed[0]}{$split_elapsed[1]}++;
+}
+
+my $year  = $c-&gt;req-&gt;params-&gt;{year};
+my $month = $c-&gt;req-&gt;params-&gt;{month};
+
+my $max_year  = '00000';
+my $max_month = '00';
+
+if ($year &amp;&amp; $month) {
+    $max_year  = $year;
+    $max_month = $month;
+}
+else {
+    foreach my $year (keys %$activity_data) {
+        if ($year gt $max_year) {
+            $max_year = $year;
+        }
+        else {
+            $max_month = '00';
+            last;
+        }
+
+        foreach my $month (keys $activity_data-&gt;{$year}) {
+            $max_month = $month if $month gt $max_month;
+        }
+    }
+}
+
+$cond = {} if %$cond;
+$cond-&gt;{'me.user_id'} = $user_id;
+$cond-&gt;{'me.elapsed_at'} = { 'like', "%"."$max_year"."-"."$max_month"."%" };
+
+$activity_search = $c-&gt;model('BikeMeDB')-&gt;resultset('Activity')-&gt;search($cond, \%attr);
+</code></pre>
+
+<p>view - 년-월</p>
+
+<pre><code>[% FOEACH year IN activity_data.keys.reverse %]
+    [% FOREACH month IN activity_data.$year.keys.sort.reverse %]
+  &lt;div class="btn"&gt;
+    &lt;a href="[% c.uri_for('/activities') %]?year=[% year %]&amp;month=[% month %]" class="btn btn-primary"&gt;[% year %]-[% month %] ([% activity_data.$year.$month %])&lt;/a&gt;
+&lt;/div&gt;
+    [% END %]
+[% END %]
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1070,45 +1191,6 @@ else {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/12/list-view/">List-view</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-12T13:41:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/12/list-view/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://gist.github.com/3095846">List-view-action</a>
-<a href="https://gist.github.com/3095858">List-view.tt</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1126,15 +1208,15 @@ else {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/27/perl/">Perl</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/26/sass/">Sass</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/22/phonegap/">Phonegap</a>
       </li>
     
   </ul>

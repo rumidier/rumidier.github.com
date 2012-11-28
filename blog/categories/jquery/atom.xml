@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-26T18:23:16+09:00</updated>
+  <updated>2012-11-28T20:14:15+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -126,27 +126,45 @@ css에 fontSize 적용</p>
 $speech.css('fontSize', num + unit);
 </code></pre>
 
-<p>{% codeblock css-part %}
-$('div.button').click(function() {
-  var $speech     = $('div.speech');
-  var currentSize = $speech.css('fontSize');
-  var num         = parseFloat(currentSize, 10);
-  var unit        = currentSize.slice(-2);</p>
-
-<p>  if (this.id == 'switcher-large') {</p>
-
-<pre><code>num *= 1.4;
-</code></pre>
-
-<p>  } else if (this.id == 'switcher-small') {</p>
-
-<pre><code>num /= 1.4;
-</code></pre>
-
-<p>  }
-  $speech.css('fontSize', num + unit);
-});
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>css-part </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('div.button').click(function() {
+</span><span class='line'>  var $speech     = $('div.speech');
+</span><span class='line'>  var currentSize = $speech.css('fontSize');
+</span><span class='line'>  var num         = parseFloat(currentSize, 10);
+</span><span class='line'>  var unit        = currentSize.slice(-2);&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  if (this.id == 'switcher-large') {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>num *= 1.4;
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  } else if (this.id == 'switcher-small') {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>num /= 1.4;
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }
+</span><span class='line'>  $speech.css('fontSize', num + unit);
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2>hide와 show</h2>
 
@@ -417,29 +435,49 @@ $(this).addClass('selected');
 
 <p>부분 코드</p>
 
-<p>{% codeblock 부분코드 - 01 %}
-$('#switcher .button').click(function(event) {
-  $('body').removeClass();</p>
-
-<p>  if (this.id == 'switcher-narrow') {</p>
-
-<pre><code>$('body').addClass('narrow');
-</code></pre>
-
-<p>  }
-  else if (this.id == 'switcher-large') {</p>
-
-<pre><code>$('body').addClass('large');
-</code></pre>
-
-<p>  }</p>
-
-<p>  $('#switcher .button').removeClass('selected');
-  $(this).addClass('selected');</p>
-
-<p>  event.stopPropagation();
-});
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>부분코드 - 01 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').click(function(event) {
+</span><span class='line'>  $('body').removeClass();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  if (this.id == 'switcher-narrow') {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>$('body').addClass('narrow');
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }
+</span><span class='line'>  else if (this.id == 'switcher-large') {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>$('body').addClass('large');
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  $('#switcher .button').removeClass('selected');
+</span><span class='line'>  $(this).addClass('selected');&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  event.stopPropagation();
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2>버튼 강조하기</h2>
 
@@ -447,16 +485,23 @@ $('#switcher .button').click(function(event) {
 
 <p>부분 코드</p>
 
-<p>{% codeblock 부분코드 %}
-  $('#switcher .button').hover(function() {</p>
-
-<pre><code>$(this).addClass('hover');
-}, function() {
-  $(this).removeClass('hover');
-</code></pre>
-
-<p>  });
-{% endcodeblock%}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>부분코드 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$('#switcher .button').hover(function() {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>$(this).addClass('hover');
+</span><span class='line'>}, function() {
+</span><span class='line'>  $(this).removeClass('hover');
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  });</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2>이벤트 핸들러</h2>
 
