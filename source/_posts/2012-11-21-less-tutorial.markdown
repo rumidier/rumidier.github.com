@@ -848,108 +848,151 @@ Namespace를 가지고 Mixin 에서 선택 할수 있습니다.
     
 ### Scope
 
-example-19.less
+`{ }`안에서 변수 재선언시 지역적으로 사용 됩니다.
 
-{ }안에서 변수 재선언시 지역적으로 사용 됩니다.
- 
-    @var: red;
+{% codeblock lang:sass %}
+// example-19.less
+
+@var: red;
+
+#page {
+  @var: white;
+  #header {
+    color: @var;
+  }
+}
+#footer {
+  color: @var;
+}
+{% endcodeblock %}
+
+`#page` `#hedaer`은 `{}`안에서 선언된 `@var`의값으로 치환되고 `#footer`은 전역 적인 `@var`의 값으로
+치환 됩니다.
+
+{% codeblock lang:css %}
+#page #header {
+  color: white;
+}
+#footer {
+  color: red;
+}
+{% endcodeblock %}
     
-    #page {
-      @var: white;
-      #header {
-        color: @var;
-      }
-    }
-    #footer {
-      color: @var;
-    }
-    
-### Comments
+### Less 주석 사용법
 
-example-20.less
+여러줄 주석 입니다. `.css` 변환시 에도 남아 있게 됩니다.
 
-여러줄 주석 입니다. .css 변환시 에도 남아 있게 됩니다.
+{% codeblock lang:sass %}
+// example-20.less
 
-    /* Hello, I'm a CSS-style comment */
-    .class { color: black }
-    
-example-21.less
+/* Hello, I'm a CSS-style comment */
+.class { color: black }
+{% endcodeblock %}
 
 한줄 주석입니다 .css변환시 보이지 않습니다.
 
-    // Hi, I'm a silent comment, I won't show up in your CSS
-    .class { color: white }
+{% codeblock lang:sass %}
+// example-21.less
+
+// Hi, I'm a silent comment, I won't show up in your CSS
+.class { color: white }
+{% endcodeblock %}
     
 ### Importing
 
-example-22.less
+만들어진 `.less` 파일과 `.css` 파일을 호출 할수있습니다.
 
-기존에 만들어진 .less 파일과 .css 파일을 불러서 사용 할수 있습니다.
+{% codeblock %}
+// example-22.less
 
-    @import "lib.less";
-    @import "lib";
-    
-    @import "lib.css";
+@import "lib.less";
+@import "lib";
+
+@import "lib.css";
+{% endcodeblock %}
     
 ### String interpolation
 
-example-23.less
+문자열을 `""` 안에서 불러 올수 있습니다.
 
-문자열을 "" 안에 불러 올수 있습니다.
+{% codeblock lang:sass %}
 
-    @base-url: "http://assets.fnord.com";
-    background-image: url("@{base-url}/images/bg.png");
+// example-23.less
+
+@base-url: "http://assets.fnord.com";
+background-image: url("@{base-url}/images/bg.png");
+{% endcodeblock %}
 
 ### Selector Interpolation
 
-example-25.less
-
 셀렉터 이름도 불러 올수 있습니다.
 
-    @name: blocked;
-    .@{name} {
-      color: black;
-    }
-    
-example-25.css
+{% codeblock lang:sass %}
+// example-25.less
 
-    .blocked {
-      color: black;
-    }
+@name: blocked;
+.@{name} {
+  color: black;
+}
+{% endcodeblock %}
+    
+`@{name}`은 `@name`의 값으로 치환 됩니다.
+
+{% codeblock lang:css %}
+// example-25.css
+
+.blocked {
+  color: black;
+}
+{% endcodeblock %}
     
 ### Escaping
 
-example-24.less
+{% codeblock lang:sass %}
+// example-24.less
 
-    .class {
-      filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
-    }
+.class {
+  filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
+}
+{% endcodeblock %}
     
-example-24.css
+{% codeblock lang:css %}
+// example-24.css
 
-    .class {
-      filter: ms:alwaysHasItsOwnSyntax.For.Stuff();
-    }
+.class {
+  filter: ms:alwaysHasItsOwnSyntax.For.Stuff();
+}
+{% endcodeblock %}
         
 ### JavaScript evaluation
 
-example-26.less
+{% codeblock lang:sass %}
+// example-26.less
 
-    @var: `"hello".toUpperCase() + '!'`;
+@var: `"hello".toUpperCase() + '!'`;
+{% endcodeblock %}
     
-compile
+{% codeblock lang:css %}
+// example-26.css
 
-    @var: "HELLO!";
+@var: "HELLO!";
+{% endcodeblock %}
     
-example-27.less
+{% codeblock lang:sass %}
+// example-27.less
 
-    @str: "hello";
-    @var: ~`"@{str}".toUpperCase() + '!'`;
+@str: "hello";
+@var: ~`"@{str}".toUpperCase() + '!'`;
+{% endcodeblock %}
     
-compile
+{% codeblock lang:sass %}
+// example-27.css
 
-    @var: HELLO!;
+@var: HELLO!;
+{% endcodeblock %}
     
 JavaScript환경에 액세스 할수 있습니다.
 
-    @height:`document.body.clientHeight`;
+{% codeblock lang:sass %}
+@height:`document.body.clientHeight`;
+{% endcodeblock %}

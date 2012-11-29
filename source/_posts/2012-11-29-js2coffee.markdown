@@ -1,0 +1,316 @@
+---
+layout: post
+title: "js2coffee"
+date: 2012-11-29 15:40
+comments: true
+categories: JavaScript JS CoffeeScript
+---
+# Javascript -> CoffeeScript
+
+## login.js
+
+기존 `login.js`
+
+{% codeblock lang:js %}
+// login.js
+
+$(document).ready(function) {
+  $("#login_username").focus();
+});
+{% endcodeblock %}
+
+`login.coffee` 작성
+
+{% codeblock lang:coffeescript %}
+ # login.coffee
+$ ->
+  $("#login_username").focus()
+{% endcodeblock %}
+
+컴파일된 `login.js`
+{% codeblock lang:js %}
+// login.js
+(functioni () {
+  $(function() {
+    return $("#login_username").focus();
+  });
+}).call(this);
+{% endcodeblock %}
+
+## list.js
+
+기존 `list.js`
+
+{% codeblock lang:js %}
+$(document).ready(function () {                                                                    
+  $('#head_checkbox').click(function() {
+    //find all checkboxes
+    var cbs = $("input:checkbox");
+    //화면상의 모든 Checkbox 를 찾아서 Head Checkbox 상태와 동기화 합니다. (대장이 체크면 쫄도 모두다 채크)
+    for (var i = 0; i < cbs.length; i++) {
+          if (cbs[i].type == "checkbox") {
+            cbs[i].checked = $(this).is(':checked');
+          }   
+    }
+  }); 
+
+  $('#do_delete').click(function() {
+    var selected_charges = []; 
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    }); 
+
+    location.href = '/list/delete/' + selected_charges;
+  }); 
+
+  $('#do_approval').click(function() {
+    var selected_charges = []; 
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    }); 
+
+    location.href = '/list/approval/' + selected_charges;
+  }); 
+
+  $('#do_refuse').click(function() {
+    var selected_charges = []; 
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    }); 
+
+    location.href = '/list/refuse/' + selected_charges;
+  });
+  $('#do_deposit').click(function() {                                                              
+    var selected_charges = [];
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    });
+
+    location.href = '/deposit/approval/' + selected_charges;
+  });
+
+  $('#do_export').click(function() {
+    var selected_charges = [];
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    });
+
+    location.href = '/deposit/export/' + selected_charges;
+  });
+
+  $('#do_cancel').click(function() {
+    var selected_charges = [];
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    });
+
+    location.href = '/deposit/cancel/' + selected_charges;
+  });
+  
+  window.prettyPrint && prettyPrint();
+  ${'#start_date'}.datepicker({
+    format: 'yyyy-mm-dd'
+  });
+  window.prettyPrint && prettyPrint();
+  ${'#end_date').datepicker({
+    format: 'yyyy-mm-dd'
+  });
+}); 
+{% endcodeblock %}
+
+기존 코드를 `.coffee` 파일로 수정 한것입니다.
+
+{% codeblock lang:coffeescript %}
+$ ->
+  $('#head_checkobx').click ->
+    flag = $(@).is(':checked')
+    $(':checkbox').each ->
+      if flag then $(@).attr('checked', 'checked')
+      else $(@).removeAttr('checked')
+
+  $('.btn').click ->
+    select_id = $(@).attr("id").substring(3)
+    selected_charges = []
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each ->
+      if $(@).attr('id') isnt undefined
+        selected_charges.push($(@).attr('id'))
+    location.href = "/list/#{select_id}/#{selected_charges}"
+
+  window.prettyPrint and prettyPrint()
+  $('#start_date, #end_date').datepicker
+    format: 'yyyy-mm-dd'
+{% endcodeblock %}
+
+### head_checkbox
+
+`#head_checkbox`는 최상의 checkbox 컨트롤러 이며 하위 checkbox 들을 조정 합니다.
+체크시 하위 모든 checkbox가 모두 클릭 되며 미클릭시 하위 checkbox 또한 미클릭으로 전환 합니다.
+
+{% codeblock lang:js %}
+$('#head_checkbox').click(function() {
+    //find all checkboxes
+    var cbs = $("input:checkbox");
+    //화면상의 모든 Checkbox 를 찾아서 Head Checkbox 상태와 동기화 합니다. (대장이 체크면 쫄도 모두다 채크)
+    for (var i = 0; i < cbs.length; i++) {
+          if (cbs[i].type == "checkbox") {
+            cbs[i].checked = $(this).is(':checked');
+          }   
+    }
+  });
+{% endcodeblock %}
+
+수정된 `head_checkbox` 코드
+
+{% codeblock lang:coffeescript %}
+$ ->
+  $('#head_checkbox').click ->
+    flag = $(@).is(':checked')
+    $(':checkbox').each ->
+      if flag then $(@).attr('checked', 'checked')
+      else $(@).removeAttr('checked')
+{% endcodeblock %}
+
+### .btn 클릭
+
+`#do_xxx`클릭시 발생되는 코드 입니다. 코드 중복상태가 많은 기존의 `.js` 입니다.
+
+{% codeblock lang:js %}
+$('#do_delete').click(function() {
+    var selected_charges = []; 
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    }); 
+
+    location.href = '/list/delete/' + selected_charges;
+  }); 
+….
+$('#do_approval')….
+$('#do_change')…
+…
+$('#do_cancel').click(function() {
+    var selected_charges = [];
+
+    $('#charge_list tr').filter(':has(:checkbox:checked)').each(function(){
+      if($(this).attr('id') !== undefined)
+        selected_charges.push($(this).attr('id'))
+    });
+
+    location.href = '/deposit/cancel/' + selected_charges;
+  });
+{% endcodeblock %}
+
+`#do_xxx`클릭시 개별적으로 선언 된것을 coffee로 수정 하면서 `.btn`클릭 이벤트 발생시
+아이디의 `#do_`제외한 문자열을 추출 하여 필요한 동작을 완성 하였습니다.
+
+{% codeblock lang:coffeescript %}
+$('.btn').click ->
+  select_id = $(@).attr("id").substring(3)
+  selected_charges = []
+  
+  $('#charge_list tr').filter(':has(:checkbox:checked)').each ->
+    if $(@).attr('id') isnt undefined
+      selected_charges.push($(@)).attr('id'))
+  location.href = "/deposit/${select_id}/${selected_charges}"
+{% endcodeblock %}
+
+### 반복 코드 중첩
+
+기존에 반복 되던 코드 `.js`
+
+{% codeblock lang:js %}
+window.prettyPrint && prettyPrint();
+${'#start_date'}.datepicker({
+  format: 'yyyy-mm-dd'
+});
+window.prettyPrint && prettyPrint();
+${'#end_date').datepicker({
+  format: 'yyyy-mm-dd'
+});
+{% endcodeblock %}
+
+중첩 시켜 짧게 만드는 `.coffee`
+
+{% codeblock lang:coffeescript %}
+window.prettyPrint && prettyPrint();
+$('#start_date, #end_date').datepicker
+{% endcodeblock %}
+
+## list_write.js
+
+기존 `list_write.js`
+
+{% codeblock lang:js %}
+$(document).ready(functoiin() {
+  $('#title').focus();
+});
+{% endcodeblock %}
+
+수정 `list_write.coffee`
+
+{% codeblock lang:coffeescript %}
+$ ->
+  $('#title').focus()
+{% endcodeblock %}
+
+## write_validation.js
+
+기존 `write_validation.js`
+
+{% codeblock lang:js %}
+$(document).ready(function() {
+ $('#w_form').validate({
+   rules: {
+     title: {
+       required: true,
+     },  
+     amount: {
+       required: true,
+       number: true
+     }   
+   },  
+  messages: {
+    title: {
+        required: "제목을 입력해 주세요"
+    },  
+    amount: {
+        required: "금액을 입력해 주세요",
+        number: "숫자만 입력해 주세요"
+    }   
+  }
+ });
+});
+{% endcodeblock %}
+
+수정 `write_validatioin.coffee`
+
+{% codeblock lang:coffeescript %}
+$ ->
+  $('#w_form').validation
+    rules:
+      title:
+        required: true
+      amount:
+        required: true
+        number: true
+    messages:
+      title:
+        required: "제목을 입력해 주세요"
+      amount:
+        required: "금액을 입력해 주세요"
+        number: "숫자만 입력해 주세요"
+{% endcodeblock %}

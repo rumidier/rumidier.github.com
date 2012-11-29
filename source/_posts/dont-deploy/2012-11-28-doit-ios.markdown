@@ -1,0 +1,82 @@
+## Phonegap - iOS
+
+### Virture Univercity 시작하기
+
+###  주의 사항
+
+현재 작성된 내용은 Do It! 쉽게 배우는 웹앱&하이브리드앱 예제를 토대로 작성된 글입니다. 책과의 버전 문제로 추가및 변경된 내용이 있으므로 참고 하시기 바랍니다.
+다음은 책의 카페 주소 입니다. [Do It! 공식 카페](http://www.hmaps.net/)
+
+### 새로운 폴더 생성 하기
+
+{% codeblock lang:bash %}
+$ mkdir virture
+$ cd ~/you-codorva-path/Cordova/lib/ios/bin
+$ ./create <you-project-path> <package-name> <project_name>
+{% endcodeblock %}
+
+### 앱 만들기
+
+#### X-code 실행하기
+
+프로젝트의 폴더를 Finder로 검색해 `.xcodeproj` 파일을 실행 시킵니다.
+
+#### www 파일 수정
+
+Cordova로 생성된 `www/`에서 최신 버전의 Cordova-x.x.x.js 파일을 제외 하고 모든 파일을 [Do It! 예제 17-2](hmaps.net)의 파일로 교체해 줍니다.
+ 
+#### script cordova-x.x.x.js 추가하기
+
+`www/index.html` 파일을 엽니다.
+
+{% codeblock lang:bash %}
+$ vi www/index.html
+{% endcodeblock %} 
+
+아래와 같이 `.js`를 추가해 주도록 합니다.
+
+{% codeblock lang:html %}
+<head>
+…
+<script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"></script>
+...
+</head>
+{% endcodeblock %}
+
+#### Cordova.plist 수정
+
+다음의 추가사항은 Jquery Mobile이 CDN을 통해 외부 접속 때 사용하는 주소로 폰갭에서 접속할수 있도록 허가해 주는 것입니다. 
+
+아래와 같이 `Resources/splash/Cordova.plist`으로 이동 합니다.
+
+{% img https://lh4.googleusercontent.com/-S32Ve0tjtn8/ULXa6sMM9OI/AAAAAAAAAGU/XFBXYqQSiIg/%25252FUsers%25252Fhancho%25252FPictures%25252Fcordova-plist.jpg 600 600 "Cordova.plist 설정" %}
+
+화면 중앙 우측 하단에 보게 되면 `Key`값 `ExternalHosts`있습니다.
+좌측에 `화살표`를 클릭하여 방향을 `아래`만든후 `+` 버튼을 누르게 되면 `item 0`이라는 새로운 줄이 생성 됩니다. 다음과 같이 명시해 줍니다.
+
+{% img https://lh6.googleusercontent.com/-4ytazQmYifY/ULXcQ8iBNrI/AAAAAAAAAGc/rpq8PKfmLDk/%25252FUsers%25252Fhancho%25252FPictures%25252Fcodorva-externalHosts.jpg 600 600 "ExternalHosts 추가" %}
+
+#### 홈화면 아이콘과 기타 화면 교체
+
+cordova의 아이콘은 `www/res/icon/ios` 시작화면은 `www/res/splash` 밑에 `.png`형식으로 존재 합니다. 이를 교체 합니다. [Do it! 예제](hmaps.net)(테스트는 Do it! 쉽게 배우는 dnpqdoq&하이브리드앱 예제 18-2 부분을 가져와 사용 하였습니다.)
+
+##### 사진 파일 규격
+
+     종류       |       파일 이름      |      해상도
+     아이콘             icon.png           57 x 57
+     아이콘             icon-72.png        72 x 72
+     아이콘             icon@2.png         114 x 114
+     시작화면          default.png         320 x 480
+     시작화면          default@2x.png      640 X 960
+     
+#### 실행하기
+
+`Ctrl + R`이나 `Run`버튼을 클릭 하여 실행 시킵니다.
+
+예제 아이콘
+
+{% img https://lh5.googleusercontent.com/-o6m9b2wigtc/ULXmTPvD2eI/AAAAAAAAAGs/QxO0QeEelfc/%25252FUsers%25252Fhancho%25252FPictures%25252Fvu-main.jpg 400 400 "아이폰 메인" %}
+
+예제 컨텐츠
+
+{% img https://lh3.googleusercontent.com/-neihseZIroY/ULXmhDohPVI/AAAAAAAAAG0/y55XbY1jBxU/%25252FUsers%25252Fhancho%25252FPictures%25252Fvu-content.jpg 400 400 "아이폰 예제" %}

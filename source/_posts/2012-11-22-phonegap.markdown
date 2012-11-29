@@ -1,12 +1,10 @@
 ---
 layout: post
-title: "Phonegap"
+title: "Phonegap-iOS"
 date: 2012-11-22 19:06
 comments: true
 categories:  Phonegap JavaScript iOS
 ---
-
-# Phonegap - iOS
 
 ## 사용 환경
 
@@ -42,48 +40,48 @@ Xcode는 [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12
 
 #### Downloads->Components-> Command LIne Tools -> Install 클릭으로 설치 합니다.
 
-{% img https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg 500 500 "Command Line Tools 설치" %}
+{% img https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg 600 600 "Command Line Tools 설치" %}
 
-설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은
+설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은 공식 문서인
 [Command-Line](http://docs.phonegap.com/en/2.2.0/guide_command-line_index.md.html#Command-Line%20Usage)에서 iOS 부분을 참고 하시면 됩니다.
 
 ### Apache Cordova 다운로드
 
-다운로드된 파일은 .zip 파일이므로 압축을 풀어서 사용하시면 됩니다.
-
-- Cordova는 [Cordova-Down](http://phonegap.com/download)에서 다운 받을수 있습니다.
-- 다운 받은 폴더를 ~/CordovaLib-2.x.x 쓰기 편한 위치로 이동 시킵니다.
+다운로드된 파일은 .zip 파일이므로 압축 해제후 사용 할수 있으며 
+Cordova는 [Cordova-Down](http://phonegap.com/download)에서 다운 받을수 있습니다.
 
 ### 새로운 프로젝트 시작하기
 
 #### bin 폴더 열기
 
-새로운 프로젝트를 생성하기 위해서는 ./create 파일을 실행 해야 합니다. create 파일은
-lib/iOS/bin 폴더에 존재 합니다.
+새로운 프로젝트를 생성하기 위해서는 `./create` 파일을 실행 해야 합니다. create 파일은
+`lib/iOS/bin` 폴더에 존재 합니다.
 
-- lib/ios/bin 폴더로 직접 이동 해서 사용할수 있습니다.
-- ~/CordovalLib-2.2/lib/ios/bin 폴더를 Terminal.app에 드래그 하면 bin 폴더로 바로 이동 할수 있습니다.
+`~/you-cordova-path/lib/ios/bin` 폴더로 직접 이동 해서 사용할수도 있고
+`~/you-cordova-path/lib/ios/bin` 폴더를 `Terminal.app`에 드래그하면 `bin` 폴더를 연후 사용할수도 있습니다.
 
 #### create 실행하기
 
+{% codeblock lang:bash %}
+$ ./create <project_folder_path> <package_name> <project_name>
 
-    $ ./create <project_folder_path> <package_name> <project_name>
-    
-    $ mkdir project_folder_path/new_folder_name
-    $ ./create <project_folder_path> pheonegap.start start
-    $ cd ~/project_folder_path
-    $ ls
-    
-    CordovaLib	cordova		start		start.xcodepro www
+$ mkdir project_folder_path/new_folder_name
+$ ./create <project_folder_path> pheonegap.start start
+$ cd ~/project_folder_path
+$ ls
+CordovaLib	cordova		start		start.xcodepro www
+{% endcodeblock %}
 
 ### Simulator 실행하기
 
 #### project_name.xcodeproj 실행
 
-project_name.xcodeproj 파일을 클릭 하면 Xcode가 실행 됩니다. 실행후 컴파일 시간을 거친후 아래와 같이 <project_name> iPhone v.xx Simulator 선택 한후 Run(단축키 Command + R)을 실행 시켜 줍니다. 
+project_name.xcodeproj 파일을 클릭 하면 Xcode가 실행 됩니다.
+실행후 컴파일 시간을 거친후 아래와 같이 `Run` 우측에
+`project_name > iPhone v.xx Simulator` 선택 한후 `Run`(단축키 Command + R)을 실행 시켜 줍니다. 
 
-{% img https://lh5.googleusercontent.com/-4i-P73CwMQ8/UK3xPWma-gI/AAAAAAAAAC0/nmMVo0_Hlkk/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-01.jpg 500 500 "Simulrator 실행" %}
+{% img https://lh5.googleusercontent.com/-4i-P73CwMQ8/UK3xPWma-gI/AAAAAAAAAC0/nmMVo0_Hlkk/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-01.jpg 700 700 "Simulrator 실행" %}
     
-Run이 옳바르게 진행 되면 아래와 같은 iOS Simulator가 뜨게 됩니다. 
+Run이 진행 되면 아래와 같은 iOS Simulator를 확인 할수 있습니다.
 
 {% img https://lh4.googleusercontent.com/-6MXX5k5upE0/UK3xWeU51mI/AAAAAAAAAC8/zSRgxkGKQoc/%25252FUsers%25252Fhancho%25252FPictures%25252FSimulator-02.jpg 500 500 "Simulrator 실행 화면" %}
