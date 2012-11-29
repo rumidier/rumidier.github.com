@@ -9,8 +9,8 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="List-view-action
-List-view.tt
+  <meta name="description" content="List-write.tt
+List-write-action
 ">
   
 
@@ -66,6 +66,45 @@ List-view.tt
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/12/list-write/">List-write</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T13:49:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/12/list-write/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://gist.github.com/3095879">List-write.tt</a>
+<a href="https://gist.github.com/3095901">List-write-action</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1506,191 +1545,6 @@ connect_info =&gt; {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/15/catalyst/">Catalyst</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-15T17:56:00+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/15/catalyst/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>init catalyst project in silex</h1>
-
-<p>카탈리스트 시작을 위해 Helper를 준비합니다.</p>
-
-<pre><code>$ git clone git://github.com/aanoaa/Catalyst-Helper-View-TTSilex.git
-...
-$ git clone git://github.com/aanoaa/Catalyst-Helper-Carton.git
-...
-$ cd Catalyst-Helper-View-TTSilex/
-$ git checkout develop
-$ dzil build
-...
-$ cd Catalyst-Helper-View-TTSilex-v0.0.1/
-$ perl Makefile.PL
-...
-$ make &amp;&amp; make install
-...
-$ cd ../../Catalyst-Helper-Carton/
-$ dzil build
-$ cd Catalyst-Helper-Carton-v0.0.1/
-$ perl Makefile.PL
-...
-$ make &amp;&amp; make install
-</code></pre>
-
-<p>catalyst.pl을 사용 하여  Foo::Web을 생성합니다.</p>
-
-<pre><code>$ cd ~/yourworkspace/
-$ catalyst.pl Foo::Web
-...
-</code></pre>
-
-<p>파일명을 수정하여 줍니다.</p>
-
-<pre><code>$ cd Foo-Web/
-$ mv foo_web.psgi app.psgi
-</code></pre>
-
-<p>스크립트를 사용하게 되면 .conf.new 파일이 생성이 되며 .conf파일에 붙여줍니다.</p>
-
-<pre><code>$ script/foo_web_create.pl view Bootstrap TTSilex
-...
-$ vi foo_web.conf &lt;&lt;--- foo_web.conf.new
-</code></pre>
-
-<p>카툰을 설치 하고 Make 파일에 추가 하라는 메세지가 나옵니다.</p>
-
-<pre><code>$ script/foo_web_create.pl Carton
-...
-$ vim Makefile.PL    # add dependencies
-</code></pre>
-
-<p>위의 단계에서 명시된 모듈 및 추가 필요 모듈</p>
-
-<pre><code>//명시
-requires "Starman";
-requires "Devel::Cover";
-requires "Perl::Metrics::Lite";
-requires "TAP::Formatter::JUnit";
-
-//추가
-requires 'Catalyst::Plugin::Unicode::Encoding';
-requires "Catalyst::View::TT";
-</code></pre>
-
-<p>한글 인코딩 문제</p>
-
-<pre><code>$ lib/Foo/Web.pm
-
-use utf8;
-use Catalyst qw/
--Debug
-ConfigLoader
-Static::Simple
-#추가
-Unicode::Encoding
-/;
-</code></pre>
-
-<p>인스톨</p>
-
-<pre><code>$ carton install
-...
-</code></pre>
-
-<p>부분 인스톨</p>
-
-<pre><code>$ carton install &lt;모듈네임&gt; 합니다.
-</code></pre>
-
-<h2>Controller 생성</h2>
-
-<pre><code>$ script/foo_web_create.pl controller List
-
-$ cd lib/Foo/Web/Controller
-$ vi List.pm
-// 주석처리
-# $c-&gt;response-&gt;body('Matched Foo::Web::Controller::List in List.');
-</code></pre>
-
-<h2>View 생성</h2>
-
-<pre><code>$ mkdir root/templates/bootstap/src/list
-$ cd root/templates/bootstrap/src/list
-$ vi index.tt
-  &lt;p&gt;나는 지금 한글을 테스트 중입니다.&lt;/p&gt; 작성
-</code></pre>
-
-<h2>실행</h2>
-
-<pre><code>$ ./run
-</code></pre>
-
-<h2>.gitignore</h2>
-
-<pre><code># inspire by github/gitignore
-blib/
-.build/
-_build/
-cover_db/
-inc/
-Build
-Build.bat
-.last_cover_stats
-Makefile
-Makefile.old
-MANIFEST.bak
-META.yml
-MYMETA.yml
-nytprof.out
-pm_to_blib
-# custom
-local/
-.sass-cache/
-tt_cache/
-.carton/
-*.log
-session
-MYMETA.json
-carton.lock
-</code></pre>
-
-<h2>script/bootstrap.pl</h2>
-
-<p>이건 헬퍼 없습니다.
-프로젝트마다 손으로 복사합니다.</p>
-
-<p>https://gist.github.com/2761721</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1708,15 +1562,15 @@ carton.lock
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/29/js2coffee/">js2coffee</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/27/perl/">Perl</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/26/sass/">Sass</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
       </li>
     
   </ul>

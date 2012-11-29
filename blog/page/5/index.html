@@ -9,15 +9,8 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="셀렉터 :first :last :fisrt-child :last-child
-:only-child
-:nth-child(n)
-:nth-child(even|odd)
-:nth-child(Xn+Y)
-:even / :odd
-:eq(n)
-:gt(n)
-:lt(n) ">
+  <meta name="description" content="jQuery 정의 필터 셀렉터. 대상 엘리먼트를 식별해내는 데 강력한 기능을 준다. 셀렉터 :animated 현재 애니메이션이 적용되고 있는 엘리먼트를 선택한다.
+:button 모든 버튼을 선택한다.(input[type=submit], input[type=reset &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +65,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/22/jquery-dot-2-3/">jQuery.2-3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T17:06:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/22/jquery-dot-2-3/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>jQuery 정의 필터 셀렉터. 대상 엘리먼트를 식별해내는 데 강력한 기능을 준다.</h2>
+
+<p>셀렉터</p>
+
+<pre><code>:animated
+  현재 애니메이션이 적용되고 있는 엘리먼트를 선택한다.
+:button
+  모든 버튼을 선택한다.(input[type=submit], input[type=reset], input[type=button], button)
+:checkbox
+  체크박스 엘리먼트만 선택(input[type=checkbox])
+:checked
+  선택된 체크박스나 라디오 버튼만을 선택한다.
+:contains(foo)
+  텍스트 foo를 포함하는 엘리먼트만 선택한다.
+:disabled
+  인터페이스에서 비활서오하 상태인 모든 폼 엘리먼트를 선택한다.
+:enabled
+  인터페이스에서 활성화 상태인 모든 폼 엘리먼트를 선택한다.
+:file
+  모든 파일 엘리먼트를 선택한다.(input[type=file])
+:header
+  헤더 엘리먼트만 선택한다.
+:hidden
+  감춰진 엘리먼트만 선택한다
+:image
+  폼 이미지를 선택한다 (input[type=image])
+:input
+  폼엘리먼트만 선택(input, select, textarea, button)
+:not(filter)
+  필터의 값을 반대로 변경
+:parent
+  빈 엘리먼트를 제외하고, 텍트스도 포함해서 자식 엘리먼트를 가지는 엘리먼트를 선택한다.
+:password
+  패스워드 엘리먼트만 선택한다.(input[type=password])
+:radio
+  라디오 버튼 엘리먼트만 선택한다(input[type=radio])
+:reset
+  리셋 버튼을 선택한다.(input[type=reset]이나 button[type=reset])
+:selected
+  선택된 엘리먼트만 선택한다.
+:submit
+  전송 버튼을 선택한다.(button[type=submit]이나 input[type=submit])
+:text
+  텍스트 엘리먼트만 선택한다.(input[type=text])
+:visble
+  보이는(visible)엘리먼트만 선택한다.
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -712,128 +789,6 @@ done
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/11/25/param/">Param</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-25T17:43:00+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/11/25/param/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>매개변수 치환 구문</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th>매개변수 치환 구문</th>
-<th>결과                                                                </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>${param:-default} </td>
-<td>param이 널이면 default의 값                                         |</td>
-</tr>
-<tr>
-<td></td>
-<td>${#param}         </td>
-<td>param의 길이                                                        |</td>
-</tr>
-<tr>
-<td></td>
-<td>${param%word}     </td>
-<td>param의 끝에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분  |</td>
-</tr>
-<tr>
-<td></td>
-<td>${param%%word}    </td>
-<td>param의 끝에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분    |</td>
-</tr>
-<tr>
-<td></td>
-<td>${param#word}     </td>
-<td>param의 시작에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분|</td>
-</tr>
-<tr>
-<td></td>
-<td>${param##word}    </td>
-<td>param의 시작에서 word와 부합하는 가장 긴 부분을 제외한 나머지 부분  |</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>실습-매개변수 처리</p>
-
-<figure class='code'><figcaption><span>shell</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
-</span><span class='line'>
-</span><span class='line'>unset foo
-</span><span class='line'>echo ${foo:-bar}
-</span><span class='line'>
-</span><span class='line'>foo=fud
-</span><span class='line'>
-</span><span class='line'>echo ${foo:-bar}
-</span><span class='line'>foo=/usr/bin/X11/startx
-</span><span class='line'>echo ${foo#*/}
-</span><span class='line'>echo ${foo##*/}
-</span><span class='line'>
-</span><span class='line'>bar=/usr/local/etc/local/networks
-</span><span class='line'>echo ${bar%local*}
-</span><span class='line'>echo ${bar%%%local*}
-</span><span class='line'>
-</span><span class='line'>exit 0</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -851,15 +806,15 @@ done
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/29/js2coffee/">js2coffee</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/27/perl/">Perl</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/26/sass/">Sass</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/26/phonegap-android/">Phonegap-Android</a>
       </li>
     
   </ul>
