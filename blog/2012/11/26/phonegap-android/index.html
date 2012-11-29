@@ -12,7 +12,7 @@
   <meta name="description" content="사용 환경 모델명 : MacBook Pro
 모델 식별자: MacBookPro8,1
 메모리: 4 GB
-Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse Classic를 다운 받습니다. 다운 받은 파일은 . &hellip;">
+Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse 다운로드 이클립스 공식 사이트 Eclipse &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,72 +112,73 @@ Eclipse: v4.2.1 요구 환경 Eclipse 3.4+ Eclipse Classic 설치 Eclipse Classi
 </ul>
 
 
-<h3>Eclipse Classic 설치</h3>
+<h2>Eclipse Classic 설치</h2>
 
-<ul>
-<li><a href="http://www.eclipse.org/downloads/">Eclipse Classic</a>를 다운 받습니다.</li>
-</ul>
+<h3>Eclipse 다운로드</h3>
 
+<p>이클립스 공식 사이트 <a href="http://www.eclipse.org/downloads/">Eclipse Classic</a>에서 다운 받습니다.</p>
 
 <p><img src="https://lh4.googleusercontent.com/-eEEddA1zCKw/UK9H_HFMlMI/AAAAAAAAADM/apX-8h1nAGE/%25252FUsers%25252Fhancho%25252FPictures%25252Feeclipse-down-classic.jpg" width="500" height="500" title="&#34;Eclipse down&#34;" alt="&#34;Eclipse down&#34;"></p>
 
-<ul>
-<li><p>다운 받은 파일은 .tar.gz 압축 파일 이므로 압축 해제후 Eclipse 아이콘을 클릭 합니다.</p></li>
-<li><p>실행을 이어 나가면 다음과 같은 페이지가 나오며 &#8216;ok&#8217;를 클릭 합니다.</p></li>
-</ul>
+<h3>압축 해제및 실행</h3>
 
+<p>다운 받은 파일은 .tar.gz 압축 파일 이므로 압축 해제후 Eclipse 아이콘을 클릭 합니다.</p>
+
+<h3>Eclipse 실행</h3>
+
+<p>다음과 같은 페이지가 나오며 <code>ok</code>를 클릭 합니다.</p>
 
 <p><img src="https://lh4.googleusercontent.com/-GlTWPfVPvs0/UK9I7Ea48yI/AAAAAAAAADU/Isd5LGHAKGo/%25252FUsers%25252Fhancho%25252FPictures%25252Feclipse-install-01.jpg" width="500" height="500" title="&#34;Eclipse 설치&#34;" alt="&#34;Eclipse 설치&#34;"></p>
 
-<ul>
-<li>설치 완료</li>
-</ul>
+<h2>Android SDK 설치</h2>
 
+<h3>Android 다운로드</h3>
 
-<h3>Android SDK 설치</h3>
-
-<ul>
-<li><a href="http://developer.android.com/sdk/index.html">SDK</a>에서 다운로드 가능 합니다.</li>
-</ul>
-
+<p>안드로이드 개발 공식 사이트인 <a href="http://developer.android.com/sdk/index.html">SDK</a>에서 다운 받습니다.</p>
 
 <p><img src="https://lh5.googleusercontent.com/-4Kryzuug_wA/UK9KTEltWAI/AAAAAAAAADc/Ci-vVNhUJC0/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphone-android-01.jpg" width="500" height="500" title="&#34;SDK Down&#34;" alt="&#34;SDK Down&#34;"></p>
 
 <h3>Android SDK 환경 설정</h3>
 
-<p>파일 열기</p>
+<h4>파일 열기</h4>
 
-<pre><code>$ vi ~/.bash_profile
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vi ~/.bash_profile
+</span></code></pre></td></tr></table></div></figure>
 
-<p>.bash_profile 자신이 다운 받은 SDK파일의 경로를 추가해 줍니다.</p>
+
+<h4>.bash_profile 개인 SDK파일의 경로를 추가해 줍니다.</h4>
 
 <figure class='code'><figcaption><span>bash_profile </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=${PATH}:/Development/android-sdk-macosx/platform-tools:/Development/android-sdk-macosx/tools</span></code></pre></td></tr></table></div></figure>
 
 
-<p>설정 확인</p>
+<h4>설정 확인</h4>
 
-<pre><code>$ source ~/.bash_profile
-$ echo $PATH
-…./Users/han/Development/android-sdk-macosx/sdk/platform-tools:/Users/han/Development/android-sdk-macosx/tools….
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.bash_profile
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
+</span><span class='line'>…./Users/han/Development/android-sdk-macosx/sdk/platform-tools:/Users/han/Development/android-sdk-macosx/tools….
+</span></code></pre></td></tr></table></div></figure>
 
-<h3>Xcode Command Line Tools 설치</h3>
 
-<h5>Xcode 실행후 > Xcode Preferences 선택 합니다.</h5>
+<h2>Xcode Command Line Tools 설치</h2>
+
+<h3>Xcode 실행후 > Xcode Preferences 선택 합니다.</h3>
 
 <p><img src="https://lh6.googleusercontent.com/-9lGHtlIr6t0/UK3bfp3Kn9I/AAAAAAAAACc/7g0GBCw6L24/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-01.jpg" width="500" height="500" title="&#34;Command line 설치&#34;" alt="&#34;Command line 설치&#34;"></p>
 
-<h5>Downloads->Components-> Command Line Tools -> Install 클릭으로 설치 합니다.</h5>
+<h3>Downloads->Components-> Command Line Tools -> Install 클릭으로 설치 합니다.</h3>
 
 <p><img src="https://lh3.googleusercontent.com/-rAUx02VExcY/UK3br16WT8I/AAAAAAAAACk/1b5_-hdFebk/%25252FUsers%25252Fhancho%25252FPictures%25252Fxcode-line-tool-02.jpg" width="500" height="500" title="&#34;Command Line Tolls 설치&#34;" alt="&#34;Command Line Tolls 설치&#34;"></p>
 
 <p>설치가 끝나면 Terminal.app (iTerm)에서 커맨드 라인으로 작업을 할수가 있습니다. 자세한 사항은
 <a href="http://docs.phonegap.com/en/2.2.0/guide_command-line_index.md.html#Command-Line%20Usage">Command-Line</a>에서 iOS 부분을 참고 하시면 됩니다.</p>
 
-<h3>Apache Cordova 다운로드</h3>
+<h2>Apache Cordova 다운로드</h2>
 
 <p>다운로드된 파일은 .zip 파일이므로 압축을 풀어서 사용하시면 됩니다.</p>
 
@@ -187,119 +188,131 @@ $ echo $PATH
 </ul>
 
 
-<h3>새로운 프로젝트 시작하기</h3>
+<h2>새로운 프로젝트 시작하기</h2>
 
-<h5>bin 폴더 열기</h5>
+<h3>bin 폴더 열기</h3>
 
 <p>새로운 프로젝트를 생성하기 위해서는 ./create 파일을 실행 해야 합니다. create 파일은
 lib/android/bin 폴더에 존재 합니다.</p>
 
-<ul>
-<li>lib/ios/bin 폴더로 직접 이동 해서 사용할수 있습니다.</li>
-<li>~/CordovalLib-2.2/lib/android/bin 폴더를 Terminal.app에 드래그 하면 bin 폴더로 바로 이동 할수 있습니다.</li>
-</ul>
+<p>lib/ios/bin 폴더로 직접 이동 해서 사용할수 있습니다.
+또는 ~/CordovalLib-2.2/lib/android/bin 폴더를 Terminal.app에 드래그 하면 bin 폴더로 바로 이동 할수 있습니다.</p>
+
+<h3>create 실행하기</h3>
+
+<p>사용 방법</p>
+
+<figure class='code'><figcaption><span>lang: bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./create &lt;project_folder_path> &lt;package_name> &lt;project_name></span></code></pre></td></tr></table></div></figure>
 
 
-<h5>create 실행하기</h5>
+<h4>create 사용</h4>
 
-<pre><code>$ ./create &lt;project_folder_path&gt; &lt;package_name&gt; &lt;project_name&gt;
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>./create &lt;project_folder_path&gt; pheonegap.start start
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/project_folder_path
+</span><span class='line'><span class="nv">$ </span>ls
+</span><span class='line'>AndroidManifest.xml   cordova   project.properties
+</span><span class='line'>ant.properties          gen     res
+</span><span class='line'>assets                    libs      src
+</span><span class='line'>bin                   local.properties
+</span><span class='line'>build.xml               proguard-project.txt
+</span></code></pre></td></tr></table></div></figure>
 
-$ ./create &lt;project_folder_path&gt; pheonegap.start start
-$ cd ~/project_folder_path
-$ ls
 
-AndroidManifest.xml cordova   project.properties
-ant.properties                gen           res
-assets                        libs          src
-bin                           local.properties
-build.xml                     proguard-project.txt
-</code></pre>
+<h2>Eclipse 실행하기</h2>
 
-<h3>Simulator 실행하기</h3>
-
-<h4>SDK 지정 하기</h4>
+<h3>SDK 지정 하기</h3>
 
 <p>eclipse를 처음 실행 하게 되면 다음과 같이 SDK 폴더를 지정합니다.</p>
 
-<p><img src="https://lh4.googleusercontent.com/-ot4Vk-4u5_Y/ULLcJlNDr9I/AAAAAAAAADs/5Vx_AyDGqRo/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-file-mv.jpg" width="500" height="500" title="&#34;SDK 지정&#34;" alt="&#34;SDK 지정&#34;"></p>
+<p><img src="https://lh4.googleusercontent.com/-ot4Vk-4u5_Y/ULLcJlNDr9I/AAAAAAAAADs/5Vx_AyDGqRo/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-file-mv.jpg" width="700" height="700" title="&#34;SDK 지정&#34;" alt="&#34;SDK 지정&#34;"></p>
 
-<p>SDK 경로 수정은 &#8216;Command + ,&#8217; 사용해서 열수 있습니다.</p>
+<p>SDK 경로 수정은 <code>Command + ,</code> 사용해서 열수 있습니다.</p>
 
-<h4>Android SDK 매니저 설치</h4>
+<h3>Android SDK 매니저 설치</h3>
 
-<p>Android SDK 매니저 버튼을 클릭하거나 &#8216;Window -> Android SDK Mannager&#8217;를 클릭 합니다.</p>
+<p>Android SDK 매니저 버튼을 클릭하거나 <code>Window -&gt; Android SDK Mannager</code>를 클릭 합니다.</p>
 
 <p><img src="https://lh5.googleusercontent.com/-faBm7F2Gk0U/ULLhaJEOVKI/AAAAAAAAAD8/ei5iS_wI_C8/%25252FUsers%25252Fhancho%25252FPictures%25252FAndroid-sdk-man-01.jpg" width="100" height="100" title="&#34;Android SDK Mannager&#34;" alt="&#34;Android SDK Mannager&#34;"></p>
 
-<h4>SDK 패키지 선택</h4>
+<h3>SDK 패키지 선택</h3>
 
-<p>버전에 맞는 API 선택하고 install package 버튼을 클릭 합니다.</p>
+<p>모든 버전 보다는 현재 최신 버전과 Android 2.0대 까지만 있어도 충분 합니다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/-BpJep0rpajw/ULLidv8yTeI/AAAAAAAAAEE/fP0unxE902w/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-select.jpg" width="500" height="500" title="&#34;패키지 선택&#34;" alt="&#34;패키지 선택&#34;"></p>
+<p><img src="https://lh3.googleusercontent.com/-BpJep0rpajw/ULLidv8yTeI/AAAAAAAAAEE/fP0unxE902w/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-select.jpg" width="600" height="600" title="&#34;패키지 선택&#34;" alt="&#34;패키지 선택&#34;"></p>
 
-<h4>SDK 패키지 설치</h4>
+<h3>SDK 패키지 설치</h3>
 
-<p>체크된 패키지를 설치 합니다.</p>
+<p>체크된 패키지를 <code>Install</code>합니다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/-Lpn5YCOcQyM/ULLjgqCa5WI/AAAAAAAAAEM/PmE7fb1xD2E/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252FSDK-install.jpg" width="500" height="500" title="&#34;패키지 설치&#34;" alt="&#34;패키지 설치&#34;"></p>
 
-<h4>Android ADK Plugin 설치</h4>
+<h3>Android ADK Plugin 설치</h3>
 
-<p><a href="http://developer.android.com/sdk/installing/installing-adt.html">ADK Plugin</a>에서 다운 받고 설치 가이드를 확인 할수 있습니다.</p>
+<p>안드로이드 개발 공식문서 사이트인 <a href="http://developer.android.com/sdk/installing/installing-adt.html">ADK Plugin</a>에서 다운 받고 설치 가이드를 확인 할수 있습니다.</p>
 
-<h4>ADK 설치</h4>
+<h3>ADK 설치</h3>
 
-<h5>Help -> insall new software를 클릭 합니다.</h5>
+<h4>Help -> insall new software를 클릭 합니다.</h4>
 
-<p><img src="https://lh4.googleusercontent.com/-QR5gGvGIngA/ULLoh0ZOI4I/AAAAAAAAAEc/tL9uY_4jPxE/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-01.png" width="500" height="500" title="&#34;install ADK&#34;" alt="&#34;install ADK&#34;"></p>
+<p><img src="https://lh4.googleusercontent.com/-QR5gGvGIngA/ULLoh0ZOI4I/AAAAAAAAAEc/tL9uY_4jPxE/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-01.png" width="600" height="600" title="&#34;install ADK&#34;" alt="&#34;install ADK&#34;"></p>
 
-<h5>화면 오른쪽 위에 &#8216;add&#8217; 클릭</h5>
+<h4>화면 오른쪽 위에 &#8216;add&#8217; 클릭</h4>
 
-<p><img src="https://lh6.googleusercontent.com/-0NJRgGDaZJM/ULLo4vEJUzI/AAAAAAAAAEk/824uJ-URvMo/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-02.png" width="500" height="500" title="&#34;클릭 Add&#34;" alt="&#34;클릭 Add&#34;"></p>
+<p><img src="https://lh6.googleusercontent.com/-0NJRgGDaZJM/ULLo4vEJUzI/AAAAAAAAAEk/824uJ-URvMo/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-02.png" width="600" height="600" title="&#34;클릭 Add&#34;" alt="&#34;클릭 Add&#34;"></p>
 
-<h5>Add Repository 설정</h5>
+<h4>Repository 추가</h4>
 
-<p>Location에서 문제가 발생하면 &#8216;https&#8217;를 &#8216;http&#8217;로 사용하도록 합니다.</p>
+<p>Location에서 문제가 발생하면 <code>https</code> -> <code>http</code> 사용하도록 합니다.</p>
 
 <pre><code>Name: ADT Plugin
 Location: https://dl-ssl.google.com/android/eclipse/
 </code></pre>
 
-<p><img src="https://lh6.googleusercontent.com/-756En0wgbWg/ULLpdkrdeyI/AAAAAAAAAEs/tvSMuwiWP2o/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-03.png" width="500" height="500" title="&#34;Add Repository 설정&#34;" alt="&#34;Add Repository 설정&#34;"></p>
+<p><img src="https://lh6.googleusercontent.com/-756En0wgbWg/ULLpdkrdeyI/AAAAAAAAAEs/tvSMuwiWP2o/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-03.png" width="700" height="700" title="&#34;Add Repository 설정&#34;" alt="&#34;Add Repository 설정&#34;"></p>
 
 <h5>Available Software</h5>
 
-<p>Developer Tools과 필요한 프로그램을 클릭 한뒤 Next를 클릭합니다.</p>
+<p>Developer Tools과 필요한 프로그램을 클릭 한뒤 <code>Next</code>를 클릭합니다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/-gregw6cQ3dg/ULLqQ4ptnsI/AAAAAAAAAE0/5Z_M_28kDto/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-04.png" width="500" height="500" title="&#34;Software 선택&#34;" alt="&#34;Software 선택&#34;"></p>
 
 <h5>Install Details</h5>
 
-<p>인스톨 되는 정보를 확인후 &#8216;Next&#8217;를 클릭 합니다.</p>
+<p>인스톨 되는 정보를 확인후 <code>Next</code>를 클릭 합니다.</p>
 
-<p><img src="https://lh4.googleusercontent.com/-52_7il-K0S8/ULLrXNkRVLI/AAAAAAAAAE8/qN-lTWrhHhM/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-05.png" width="500" height="500" title="&#34;Show Details&#34;" alt="&#34;Show Details&#34;"></p>
+<p><img src="https://lh4.googleusercontent.com/-52_7il-K0S8/ULLrXNkRVLI/AAAAAAAAAE8/qN-lTWrhHhM/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-05.png" width="700" height="700" title="&#34;Show Details&#34;" alt="&#34;Show Details&#34;"></p>
 
 <h5>Review Lienses</h5>
 
-<p>라이센스 확인후 &#8216;Finish&#8217;를 클릭 합니다.</p>
+<p>라이센스 확인후 <code>Finish</code>를 클릭 합니다.</p>
 
-<p><img src="https://lh6.googleusercontent.com/-Yv_t0AQWpA0/ULLsKWQ2S-I/AAAAAAAAAFE/HwgarHXkDh0/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-06.png" width="500" height="500" title="&#34;Finish click&#34;" alt="&#34;Finish click&#34;"></p>
+<p><img src="https://lh6.googleusercontent.com/-Yv_t0AQWpA0/ULLsKWQ2S-I/AAAAAAAAAFE/HwgarHXkDh0/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-06.png" width="700" height="700" title="&#34;Finish click&#34;" alt="&#34;Finish click&#34;"></p>
 
 <h5>Security Warning</h5>
 
-<p>경고 화면이 나오게 되면 &#8216;Ok&#8217;를 클릭 하도록 합니다.</p>
+<p>경고 화면이 나오게 되면 <code>Ok</code>를 클릭 하도록 합니다.</p>
 
 <p><img src="https://lh6.googleusercontent.com/-6yjCMs_WoVE/ULLsmN2bdCI/AAAAAAAAAFM/X7PlH385Prw/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-07.png" width="500" height="500" title="&#34;Security Warning&#34;" alt="&#34;Security Warning&#34;"></p>
 
 <h5>Software Update</h5>
 
-<p>설치가 끝나면 &#8216;Yes&#8217;를 클릭하여 새로 eclipse를 시작 하도록 합니다.</p>
+<p>설치가 끝나면 <code>Yes</code>를 클릭하여 새로 eclipse를 시작 하도록 합니다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/-HzGam6KOJLE/ULLtUTbrgDI/AAAAAAAAAFU/bk2nSeaO2ns/%25252FUsers%25252Fhancho%25252FPictures%25252Fphoone%25252Fphonegap-eclipse-ADT-08.png" width="500" height="500" title="&#34;Software Update&#34;" alt="&#34;Software Update&#34;"></p>
 
 <h3>ADV(Android Virtual Device Manager)</h3>
 
-<p> ADV 버튼을 클릭하거나 &#8216;Window -> Anroid Virtual Devie Manger&#8217;를 클릭 합니다.</p>
+<p> <code>ADV</code> 버튼을 클릭하거나 <code>Window -&gt; Anroid Virtual Devie Manger</code>를 클릭 합니다.</p>
 
 <p> <img src="https://lh6.googleusercontent.com/-nObeGIzAtuc/ULLw2ta5CII/AAAAAAAAAFk/SO4WnHg0130/%25252FUsers%25252Fhancho%25252FPictures%25252FADV.jpg" width="80" height="80" title="&#34;ADV&#34;" alt="&#34;ADV&#34;"></p>
 
@@ -307,17 +320,17 @@ Location: https://dl-ssl.google.com/android/eclipse/
 
 <p>오른쪽 상단에 &#8216;New&#8217; 버튼을 클릭 합니다.</p>
 
-<p><img src="https://lh5.googleusercontent.com/-WgSKxxkSptI/ULLzFef9chI/AAAAAAAAAFs/YTf6Lq27rzA/%25252FUsers%25252Fhancho%25252FPictures%25252FADV-New.jpg" width="300" height="300" title="&#34;ADV New&#34;" alt="&#34;ADV New&#34;"></p>
+<p><img src="https://lh5.googleusercontent.com/-WgSKxxkSptI/ULLzFef9chI/AAAAAAAAAFs/YTf6Lq27rzA/%25252FUsers%25252Fhancho%25252FPictures%25252FADV-New.jpg" width="500" height="500" title="&#34;ADV New&#34;" alt="&#34;ADV New&#34;"></p>
 
 <h5>ADV Create</h5>
 
-<p>ADV 이름과 Device를 선택후 &#8216;ok&#8217;를 누릅니다.</p>
+<p>ADV 이름과 Device를 선택후 <code>ok</code>를 누릅니다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/-aY9paQ9DKgY/ULLzyLaMHyI/AAAAAAAAAF0/Fc5g96lajm4/%25252FUsers%25252Fhancho%25252FPictures%25252FADV-name.jpg" width="300" height="300" title="&#34;ADV Create&#34;" alt="&#34;ADV Create&#34;"></p>
+<p><img src="https://lh3.googleusercontent.com/-aY9paQ9DKgY/ULLzyLaMHyI/AAAAAAAAAF0/Fc5g96lajm4/%25252FUsers%25252Fhancho%25252FPictures%25252FADV-name.jpg" width="500" height="500" title="&#34;ADV Create&#34;" alt="&#34;ADV Create&#34;"></p>
 
 <h3>Eclipse 실행</h3>
 
-<ul>
+<ol>
 <li>Command line tools를 사용 하여 새로운 프로젝트를 만듭니다.</li>
 <li>다운 받은 eclipse폴더에서 eclipse를 실행 합니다.</li>
 <li>eclipse에서 &#8216;File->New->Project&#8217;를 클릭 합니다.</li>
@@ -325,14 +338,14 @@ Location: https://dl-ssl.google.com/android/eclipse/
 <li>우측 상단의 &#8216;Browse..&#8217; 클릭후 생성된 Cordova 프로젝트폴더를 엽니다.</li>
 <li>Root Directory 정의후 &#8216;Run&#8217;실행 후 ADV를 선택 해주면 Android화면이생성</li>
 <li>Phonegap Android는 컴파일 시간이 오래 걸리므로 기다려 주어야 합니다.</li>
-</ul>
+</ol>
 
 
-<h5>Android Cordova 화면</h5>
+<h3>Android Cordova 화면</h3>
 
 <p>완료된 Android 화면</p>
 
-<p><img src="https://lh5.googleusercontent.com/-ESLlihvURZM/ULL2fVXdK9I/AAAAAAAAAGE/x_qo6Fslssw/%25252FUsers%25252Fhancho%25252FPictures%25252Fphone-Android.jpg" width="300" height="300" title="&#34;안드로이드 Cordova&#34;" alt="&#34;안드로이드 Cordova&#34;"></p>
+<p><img src="https://lh5.googleusercontent.com/-ESLlihvURZM/ULL2fVXdK9I/AAAAAAAAAGE/x_qo6Fslssw/%25252FUsers%25252Fhancho%25252FPictures%25252Fphone-Android.jpg" width="500" height="500" title="&#34;안드로이드 Cordova&#34;" alt="&#34;안드로이드 Cordova&#34;"></p>
 </div>
 
 
@@ -378,7 +391,7 @@ Location: https://dl-ssl.google.com/android/eclipse/
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/11/22/phonegap/" title="Previous Post: Phonegap">&laquo; Phonegap</a>
+        <a class="basic-alignment left" href="/blog/2012/11/22/phonegap/" title="Previous Post: Phonegap-iOS">&laquo; Phonegap-iOS</a>
       
       
         <a class="basic-alignment right" href="/blog/2012/11/26/sass/" title="Next Post: Sass">Sass &raquo;</a>

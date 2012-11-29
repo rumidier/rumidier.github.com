@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-28T20:14:15+09:00</updated>
+  <updated>2012-11-29T15:18:04+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -2809,125 +2809,235 @@ spin(@color, -10);
 
 <h3>Scope</h3>
 
-<p>example-19.less</p>
+<p><code>{ }</code>안에서 변수 재선언시 지역적으로 사용 됩니다.</p>
 
-<p>{ }안에서 변수 재선언시 지역적으로 사용 됩니다.</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-19.less&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;@var</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">h1</span><span class="o">&gt;</span><span class="nt">page</span> <span class="err">{</span><span class="o">&lt;/</span><span class="nt">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;</span><span class="err">  </span><span class="na">@var</span><span class="o">:</span> <span class="nb">white</span><span class="err">;</span>
+</span><span class='line'>  <span class="nn">#header</span> <span class="err">{</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;pre&gt;&lt;code&gt;color</span><span class="o">:</span> <span class="o">@</span><span class="n">var</span><span class="err">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">code</span><span class="o">&gt;&lt;/</span><span class="nt">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">h1</span><span class="o">&gt;</span><span class="nt">footer</span> <span class="err">{</span><span class="o">&lt;/</span><span class="nt">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;</span><span class="err">  </span><span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">var</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>@var: red;
+<p><code>#page</code> <code>#hedaer</code>은 <code>{}</code>안에서 선언된 <code>@var</code>의값으로 치환되고 <code>#footer</code>은 전역 적인 <code>@var</code>의 값으로
+치환 됩니다.</p>
 
-#page {
-  @var: white;
-  #header {
-    color: @var;
-  }
-}
-#footer {
-  color: @var;
-}
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">h1</span><span class="o">&gt;</span><span class="nt">page</span> <span class="nf">#header</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">h1</span><span class="o">&gt;</span><span class="nt">footer</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<h3>Comments</h3>
+<h3>Less 주석 사용법</h3>
 
-<p>example-20.less</p>
+<p>여러줄 주석 입니다. <code>.css</code> 변환시 에도 남아 있게 됩니다.</p>
 
-<p>여러줄 주석 입니다. .css 변환시 에도 남아 있게 됩니다.</p>
-
-<pre><code>/* Hello, I'm a CSS-style comment */
-.class { color: black }
-</code></pre>
-
-<p>example-21.less</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-20.less&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;/&lt;</span><span class="nt">em</span><span class="o">&gt;</span> <span class="nt">Hello</span><span class="o">,</span> <span class="nt">I</span><span class="s1">&#39;</span><span class="s2">m a CSS-style comment &lt;/em&gt;/</span>
+</span><span class='line'><span class="na">.class</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="nb">black</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>한줄 주석입니다 .css변환시 보이지 않습니다.</p>
 
-<pre><code>// Hi, I'm a silent comment, I won't show up in your CSS
-.class { color: white }
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-21.less&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;//</span> <span class="nt">Hi</span><span class="o">,</span> <span class="nt">I</span><span class="s1">&#39;</span><span class="s2">m a silent comment, I won&#39;</span><span class="nt">t</span> <span class="nt">show</span> <span class="nt">up</span> <span class="nt">in</span> <span class="nt">your</span> <span class="nt">CSS</span>
+</span><span class='line'><span class="na">.class</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="nb">white</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Importing</h3>
 
-<p>example-22.less</p>
+<p>만들어진 <code>.less</code> 파일과 <code>.css</code> 파일을 호출 할수있습니다.</p>
 
-<p>기존에 만들어진 .less 파일과 .css 파일을 불러서 사용 할수 있습니다.</p>
-
-<pre><code>@import "lib.less";
-@import "lib";
-
-@import "lib.css";
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// example-22.less&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>@import "lib.less";
+</span><span class='line'>@import "lib";&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>@import "lib.css";</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>String interpolation</h3>
 
-<p>example-23.less</p>
+<p>문자열을 <code>""</code> 안에서 불러 올수 있습니다.</p>
 
-<p>문자열을 "" 안에 불러 올수 있습니다.</p>
-
-<pre><code>@base-url: "http://assets.fnord.com";
-background-image: url("@{base-url}/images/bg.png");
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;//</span> <span class="nt">example-23</span><span class="nc">.less</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;@base-url</span><span class="o">:</span> <span class="s2">&quot;http://assets.fnord.com&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="na">background-image</span><span class="o">:</span> <span class="sx">url(&quot;@{base-url}/images/bg.png&quot;)</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Selector Interpolation</h3>
 
-<p>example-25.less</p>
-
 <p>셀렉터 이름도 불러 올수 있습니다.</p>
 
-<pre><code>@name: blocked;
-.@{name} {
-  color: black;
-}
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-25.less&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;@name</span><span class="o">:</span> <span class="n">blocked</span><span class="err">;</span>
+</span><span class='line'><span class="nc">.</span><span class="o">@</span><span class="err">{</span><span class="nt">name</span><span class="err">}</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>example-25.css</p>
+<p><code>@{name}</code>은 <code>@name</code>의 값으로 치환 됩니다.</p>
 
-<pre><code>.blocked {
-  color: black;
-}
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-25</span><span class="nc">.css</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span><span class="nc">.blocked</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Escaping</h3>
 
-<p>example-24.less</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-24.less&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span><span class="nc">.class</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">filter</span><span class="o">:</span> <span class="o">~</span><span class="s2">&quot;ms:alwaysHasItsOwnSyntax.For.Stuff()&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>.class {
-  filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
-}
-</code></pre>
-
-<p>example-24.css</p>
-
-<pre><code>.class {
-  filter: ms:alwaysHasItsOwnSyntax.For.Stuff();
-}
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-24</span><span class="nc">.css</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span><span class="nc">.class</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">filter</span><span class="o">:</span> <span class="n">ms</span><span class="o">:</span><span class="n">alwaysHasItsOwnSyntax</span><span class="o">.</span><span class="n">For</span><span class="o">.</span><span class="n">Stuff</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>JavaScript evaluation</h3>
 
-<p>example-26.less</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-26.less&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;@var</span><span class="o">:</span> <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="nf">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s2">!&#39;</span><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>@var: `"hello".toUpperCase() + '!'`;
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-26</span><span class="nc">.css</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span><span class="k">@var</span><span class="o">:</span> <span class="s2">&quot;HELLO!&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>compile</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-27.less&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;@str</span><span class="o">:</span> <span class="s2">&quot;hello&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="k">@var</span><span class="nd">:</span> <span class="o">~&lt;</span><span class="nt">code</span><span class="o">&gt;</span><span class="s2">&quot;@{str}&quot;</span><span class="nc">.toUpperCase</span><span class="o">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s2">!&#39;</span><span class="o">&lt;/</span><span class="nt">code</span><span class="o">&gt;;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>@var: "HELLO!";
-</code></pre>
-
-<p>example-27.less</p>
-
-<pre><code>@str: "hello";
-@var: ~`"@{str}".toUpperCase() + '!'`;
-</code></pre>
-
-<p>compile</p>
-
-<pre><code>@var: HELLO!;
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-27.css&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">&lt;p&gt;@var</span><span class="o">:</span> <span class="n">HELLO</span><span class="o">!</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>JavaScript환경에 액세스 할수 있습니다.</p>
 
-<pre><code>@height:`document.body.clientHeight`;
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@height</span><span class="nd">:</span><span class="o">&lt;</span><span class="nt">code</span><span class="o">&gt;</span><span class="nt">document</span><span class="nc">.body.clientHeight</span><span class="o">&lt;/</span><span class="nt">code</span><span class="o">&gt;;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   

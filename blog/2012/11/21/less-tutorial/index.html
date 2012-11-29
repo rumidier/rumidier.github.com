@@ -1440,125 +1440,234 @@ spin(@color, -10);
 
 <h3>Scope</h3>
 
-<p>example-19.less</p>
+<p><code>{ }</code>안에서 변수 재선언시 지역적으로 사용 됩니다.</p>
 
-<p>{ }안에서 변수 재선언시 지역적으로 사용 됩니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-19.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@var</span><span class="nd">:</span> <span class="nt">red</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#page</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@var</span><span class="nd">:</span> <span class="nt">white</span><span class="o">;</span>
+</span><span class='line'>  <span class="nn">#header</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">var</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nn">#footer</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="o">@</span><span class="n">var</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@var: red;
 
-#page {
-  @var: white;
-  #header {
-    color: @var;
-  }
-}
-#footer {
-  color: @var;
-}
-</code></pre>
+<p><code>#page</code> <code>#hedaer</code>은 <code>{}</code>안에서 선언된 <code>@var</code>의값으로 치환되고 <code>#footer</code>은 전역 적인 <code>@var</code>의 값으로
+치환 됩니다.</p>
 
-<h3>Comments</h3>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#page</span> <span class="nf">#header</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#footer</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-20.less</p>
 
-<p>여러줄 주석 입니다. .css 변환시 에도 남아 있게 됩니다.</p>
+<h3>Less 주석 사용법</h3>
 
-<pre><code>/* Hello, I'm a CSS-style comment */
-.class { color: black }
-</code></pre>
+<p>여러줄 주석 입니다. <code>.css</code> 변환시 에도 남아 있게 됩니다.</p>
 
-<p>example-21.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-20.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* Hello, I&#39;m a CSS-style comment */</span>
+</span><span class='line'><span class="na">.class</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="nb">black</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>한줄 주석입니다 .css변환시 보이지 않습니다.</p>
 
-<pre><code>// Hi, I'm a silent comment, I won't show up in your CSS
-.class { color: white }
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-21.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Hi, I&#39;m a silent comment, I won&#39;t show up in your CSS</span>
+</span><span class='line'><span class="na">.class</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="nb">white</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Importing</h3>
 
-<p>example-22.less</p>
+<p>만들어진 <code>.less</code> 파일과 <code>.css</code> 파일을 호출 할수있습니다.</p>
 
-<p>기존에 만들어진 .less 파일과 .css 파일을 불러서 사용 할수 있습니다.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// example-22.less
+</span><span class='line'>
+</span><span class='line'>@import "lib.less";
+</span><span class='line'>@import "lib";
+</span><span class='line'>
+</span><span class='line'>@import "lib.css";</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@import "lib.less";
-@import "lib";
-
-@import "lib.css";
-</code></pre>
 
 <h3>String interpolation</h3>
 
-<p>example-23.less</p>
+<p>문자열을 <code>""</code> 안에서 불러 올수 있습니다.</p>
 
-<p>문자열을 &#8220;&#8221; 안에 불러 올수 있습니다.</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-23.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@base-url</span><span class="nd">:</span> <span class="s2">&quot;http://assets.fnord.com&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="na">background-image</span><span class="o">:</span> <span class="sx">url(&quot;@{base-url}/images/bg.png&quot;)</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@base-url: "http://assets.fnord.com";
-background-image: url("@{base-url}/images/bg.png");
-</code></pre>
 
 <h3>Selector Interpolation</h3>
 
-<p>example-25.less</p>
-
 <p>셀렉터 이름도 불러 올수 있습니다.</p>
 
-<pre><code>@name: blocked;
-.@{name} {
-  color: black;
-}
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-25.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@name</span><span class="nd">:</span> <span class="nt">blocked</span><span class="o">;</span>
+</span><span class='line'><span class="nc">.</span><span class="o">@</span><span class="err">{</span><span class="nt">name</span><span class="err">}</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-25.css</p>
 
-<pre><code>.blocked {
-  color: black;
-}
-</code></pre>
+<p><code>@{name}</code>은 <code>@name</code>의 값으로 치환 됩니다.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-25</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.blocked</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Escaping</h3>
 
-<p>example-24.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-24.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.class</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">filter</span><span class="o">:</span> <span class="o">~</span><span class="s2">&quot;ms:alwaysHasItsOwnSyntax.For.Stuff()&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.class {
-  filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
-}
-</code></pre>
 
-<p>example-24.css</p>
 
-<pre><code>.class {
-  filter: ms:alwaysHasItsOwnSyntax.For.Stuff();
-}
-</code></pre>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-24</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.class</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">filter</span><span class="o">:</span> <span class="n">ms</span><span class="o">:</span><span class="n">alwaysHasItsOwnSyntax</span><span class="o">.</span><span class="n">For</span><span class="o">.</span><span class="n">Stuff</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>JavaScript evaluation</h3>
 
-<p>example-26.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-26.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@var</span><span class="nd">:</span> <span class="err">`</span><span class="s2">&quot;hello&quot;</span><span class="nc">.toUpperCase</span><span class="o">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s2">!&#39;</span><span class="err">`</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@var: `"hello".toUpperCase() + '!'`;
-</code></pre>
 
-<p>compile</p>
 
-<pre><code>@var: "HELLO!";
-</code></pre>
 
-<p>example-27.less</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">example-26</span><span class="nc">.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@var</span><span class="o">:</span> <span class="s2">&quot;HELLO!&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@str: "hello";
-@var: ~`"@{str}".toUpperCase() + '!'`;
-</code></pre>
 
-<p>compile</p>
 
-<pre><code>@var: HELLO!;
-</code></pre>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-27.less</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@str</span><span class="nd">:</span> <span class="s2">&quot;hello&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="k">@var</span><span class="nd">:</span> <span class="o">~</span><span class="err">`</span><span class="s2">&quot;@{str}&quot;</span><span class="nc">.toUpperCase</span><span class="o">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s2">!&#39;</span><span class="err">`</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="c1">// example-27.css</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@var</span><span class="nd">:</span> <span class="nt">HELLO</span><span class="o">!;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>JavaScript환경에 액세스 할수 있습니다.</p>
 
-<pre><code>@height:`document.body.clientHeight`;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@height</span><span class="nd">:</span><span class="err">`</span><span class="nt">document</span><span class="nc">.body.clientHeight</span><span class="err">`</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
 
 
@@ -1607,7 +1716,7 @@ background-image: url("@{base-url}/images/bg.png");
         <a class="basic-alignment left" href="/blog/2012/11/19/coffee-script/" title="Previous Post: Coffee Script 시작하기">&laquo; Coffee Script 시작하기</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/11/22/phonegap/" title="Next Post: Phonegap">Phonegap &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/11/22/phonegap/" title="Next Post: Phonegap-iOS">Phonegap-iOS &raquo;</a>
       
     </p>
   </footer>
