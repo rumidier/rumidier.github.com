@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-29T18:28:47+09:00</updated>
+  <updated>2012-11-30T19:52:58+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -706,6 +706,8 @@
 <p>Xcode는 <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Mac App Store</a>에서 다운 받아 설치 할수 있습니다.</p>
 
 <h3>Xcode Command Line Tools 설치</h3>
+
+<p>기존의 OS에서 생성 하던 방식이 Cordova.2.2.0 버전에서 부터는 Command Line Tools로 변경 되었습니다.</p>
 
 <h4>Xcode 실행후 > Xcode Preferences 선택 합니다.</h4>
 

@@ -9,7 +9,16 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="CSS Extensions Nested Rules .scss 중첩 규칙의 일반적인 사용법 example-01.scss #main p { color: #00ff00; width: 97%; .redbox { boackground-color: #ff0000; color &hellip;">
+  <meta name="description" content="CSS의 확장 Sass Nested Rules .scss 중첩 규칙 - 1 example-01.scss1
+2
+3
+4
+5
+6
+7
+8
+9
+#main p { color: #00ff00; width: 97%; .redbox { boackground-color: #ff0000 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,278 +101,419 @@
   </header>
 
 
-<div class="entry-content"><h3>CSS Extensions</h3>
+<div class="entry-content"><h1>CSS의 확장 Sass</h1>
 
-<h4>Nested Rules</h4>
+<h2>Nested Rules</h2>
 
-<p>.scss 중첩 규칙의 일반적인 사용법</p>
+<h3><code>.scss</code> 중첩 규칙 - 1</h3>
 
-<p>example-01.scss</p>
+<figure class='code'><figcaption><span>example-01.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#main</span> <span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="mh">#00ff00</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="mi">97</span><span class="kt">%</span><span class="err">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nc">.redbox</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">boackground-color</span><span class="o">:</span> <span class="mh">#ff0000</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="mh">#0000</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#main p {
-  color: #00ff00;
-  width: 97%;
 
-  .redbox {
-    boackground-color: #ff0000;
-    color: #0000;
-  }
-}
-</code></pre>
+<p>컴파일된 <code>.css</code>    <code>#main p</code>를 <code>.redbox</code>가 상속 받으면 2칸 들여 쓰기 됩니다.</p>
 
-<p>example-01.css</p>
+<figure class='code'><figcaption><span>example-01.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#main</span> <span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#00ff00</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">wdth</span><span class="o">:</span> <span class="m">97</span><span class="o">%</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nf">#main</span> <span class="nt">p</span> <span class="nc">.redbox</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="m">#ff0000</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="m">#000000</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#main p {
-  color: #00ff00;
-  wdth: 97%; }
-  #main p .redbox {
-    background-color: #ff0000;
-    color: #000000; }
-</code></pre>
 
-<p>example-02.scss</p>
+<h3><code>.scss</code>  중첩 규칙 - 2</h3>
 
-<pre><code>#main {
-  width: 97%;
+<p>모든 selector에 <code>#main</code>이 상속 됩니다.</p>
 
-  p, div {
-    font-size: 2em;
-    a { font-weight: bold; }
-  }
-  pre { font-size: 3em; }
-}
-</code></pre>
+<figure class='code'><figcaption><span>example-02.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="mi">97</span><span class="kt">%</span><span class="err">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">p</span><span class="o">,</span> <span class="nt">div</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">font-size</span><span class="o">:</span> <span class="mi">2</span><span class="kt">em</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">a</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="na">pre</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">font-size</span><span class="o">:</span> <span class="mi">3</span><span class="kt">em</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-02.css</p>
 
-<pre><code>#mian {
-  width: 97%; }
-  #mian p, #main div {
-    font-size: 2em; }
-    #mian p a, #main div a {
-      font-weight: bold; }
-  #main pre {
-    font-size: 3em; }
-</code></pre>
 
-<h4>Referencing Parent Selectors: &amp;</h4>
 
-<p>&#8216;&amp;&#8217;를 사용함으로서 부모 셀렉터를 상속 받을수 있습니다.</p>
+<figure class='code'><figcaption><span>example-02.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#mian</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">97</span><span class="o">%</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nf">#mian</span> <span class="nt">p</span><span class="o">,</span> <span class="nf">#main</span> <span class="nt">div</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">font-size</span><span class="o">:</span> <span class="m">2em</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#mian</span> <span class="nt">p</span> <span class="nt">a</span><span class="o">,</span> <span class="nf">#main</span> <span class="nt">div</span> <span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nf">#main</span> <span class="nt">pre</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">font-size</span><span class="o">:</span> <span class="m">3em</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-03.scss</p>
 
-<pre><code>a {
-  font-weight: bold;
-  text-decoration: none;
-  &amp;:hover { text-decoration: underline; }
-  body.firefox &amp; { font-weight: normal; }
-}
-</code></pre>
+<h2>부모 셀렉터의 상속자: &amp;</h2>
 
-<p>example-03.css</p>
+<p><code>&amp;</code>를 사용함으로서 부모 셀렉터를 상속 받을수 있습니다.</p>
 
-<pre><code>a {
-  font-weight: bold;
-  text-decoration: none; }
-  a:hover {
-    text-decoration: underline; }
-  body.firefox a {
-    font-weight: normal; }
-</code></pre>
+<figure class='code'><figcaption><span>example-03.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">text-decoration</span><span class="o">:</span> <span class="no">none</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">&amp;</span><span class="o">:</span><span class="n">hover</span> <span class="err">{</span> <span class="no">text-decoration</span><span class="o">:</span> <span class="no">underline</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="na">body.firefox</span><span class="err"> </span><span class="na">&amp;</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">font-weight</span><span class="o">:</span> <span class="no">normal</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-04.scss</p>
 
-<pre><code>#main {
-  color: black;
-  a {
-    font-weight: bold;
-    &amp;:hover { color: red; }
-  }
-}
-</code></pre>
+<p><code>&amp;</code>은 부모 <code>a</code>를 상속 받습니다.</p>
 
-<p>example-04.css</p>
+<figure class='code'><figcaption><span>example-03.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">text-decoration</span><span class="o">:</span> <span class="k">underline</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">body</span><span class="nc">.firefox</span> <span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#main {
-  color: black; }
-  #main a {
-    font-weight: bold; }
-      #main a:hover {
-        color: red; }
-</code></pre>
 
-<h4>Nested Properties</h4>
+<p>상속자의 상위 상속자도 포함 됩니다.</p>
 
-<p>Nested의 또 다른 기능으로 특성들을 상속 합니다.</p>
+<figure class='code'><figcaption><span>example-04.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">&amp;</span><span class="o">:</span><span class="n">hover</span> <span class="err">{</span> <span class="no">color</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-05.scss</p>
 
-<pre><code>.funky {
-  font: {
-    family: fantasy;
-    size: 30em;
-    weight: bold;
-  }
-}
-</code></pre>
+<p>최상의 부모인 <code>#main</code>을 포함 합니다.</p>
 
-<p>example-05.css</p>
+<figure class='code'><figcaption><span>example-04.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#main</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nf">#main</span> <span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="nf">#main</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.funky {
-  font-family: fantasy;
-  font-szie: 30em;
-  font-weight: bold; }
-</code></pre>
 
-<p>example-06.scss</p>
+<h2>Nested Properties</h2>
 
-<pre><code>.funky {
-  font: 2px/3px {
-    family: fantasy;
-    size: 30em;
-    weight: bold;
-  }
-}
-</code></pre>
+<p>태그의 속성도 상속 합니다.</p>
 
-<p>example-06.css</p>
+<figure class='code'><figcaption><span>example-05.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.funky</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">family</span><span class="o">:</span> <span class="no">fantasy</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">size</span><span class="o">:</span> <span class="mi">30</span><span class="kt">em</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.funky {
-  font: 2px/3px;
-    font-family: fantasy;
-    font-size: 30em;
-    font-weight: bold; }
-</code></pre>
 
-<h4>Comments: /* */ and //</h4>
+<p><code>font</code>의 속성들이 상속 됩니다.</p>
 
-<p>example-07.scss</p>
+<figure class='code'><figcaption><span>example-05.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.funky</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-family</span><span class="o">:</span> <span class="k">fantasy</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font</span><span class="o">-</span><span class="n">szie</span><span class="o">:</span> <span class="m">30em</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>//한줄 주석으로 변환시 .css에 없고 /* */ 다중 주석 문으로 .css변환시에도 남아 있습니다.</p>
 
-<pre><code>/* multiple line
-   is not delete in css */
-body { color: black; }   
-// one line is delete in css
-a { color: green; }
-</code></pre>
+<p>개별 태그와 속성 상속 예 입니다.</p>
 
-<p>example-07.css</p>
+<figure class='code'><figcaption><span>example-06.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.funky</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font</span><span class="o">:</span> <span class="mi">2</span><span class="kt">px</span><span class="o">/</span><span class="mi">3</span><span class="kt">px</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">family</span><span class="o">:</span> <span class="no">fantasy</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">size</span><span class="o">:</span> <span class="mi">30</span><span class="kt">em</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>/* multiple line
-   is not delete in css */
-body { color: black; }
-a { color: green; }
-</code></pre>
 
-<h4>Variables: $</h4>
+<p>태그는 따로 선언 되었습니다.</p>
 
-<p>.scss의 변수는 $에 선언 합니다.</p>
+<figure class='code'><figcaption><span>example-06.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.funky</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font</span><span class="o">:</span> <span class="m">2px</span><span class="o">/</span><span class="m">3px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">font-family</span><span class="o">:</span> <span class="k">fantasy</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">font-size</span><span class="o">:</span> <span class="m">30em</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-08.scss</p>
 
-<pre><code>$width: 5em;
-#main {
-  width: $width;
-}
-</code></pre>
+<h2>주석: /* */ and //</h2>
 
-<p>example-08.css</p>
+<p>//한줄 주석으로 변환시 <code>.css</code>에 표시 되지않습니다.
+/* */ 다중 주석 문으로 .css변환시에도 남아 있습니다.</p>
 
-<pre><code>#main {
-  width: 5em;
-}
-</code></pre>
+<figure class='code'><figcaption><span>example-07.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="cm">/* multiple line</span>
+</span><span class='line'>    <span class="cm">is not delete in css */</span>
+</span><span class='line'><span class="na">body</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="c1">// one line is delete in css</span>
+</span><span class='line'><span class="na">a</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">color</span><span class="o">:</span> <span class="nb">green</span><span class="err">;</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h4>Strings</h4>
 
-<p>문자열은 #{$string}를 통해서 사용 할수 있습니다.</p>
 
-<p>example-09.scss</p>
 
-<pre><code>@mixin firefox-message($selector) {
-  body.firefox #{$selector}:before {
-    content: "Hi, Firefox users!";
-  }
-}
-@include firefox-message(".header");
-</code></pre>
+<figure class='code'><figcaption><span>example-07.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* multiple line</span>
+</span><span class='line'><span class="c">    is not delete in css */</span>
+</span><span class='line'><span class="nt">body</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">a</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-09.css</p>
 
-<pre><code>body.firefox .header:before {
-  content: "Hi, Firefox users!"; }
-</code></pre>
+<h2>변수: $</h2>
 
-<h4>Number Operations</h4>
+<p>변수 선언 기호는 <code>$</code>입니다.</p>
+
+<figure class='code'><figcaption><span>example-08.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$width</span><span class="o">:</span> <span class="mi">5</span><span class="kt">em</span><span class="err">;</span>
+</span><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="nv">$width</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>선언된 <code>$width: 5em</code>값이 적용 됩니다.</p>
+
+<figure class='code'><figcaption><span>example-08.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#main</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">5em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>문자열</h2>
+
+<p>변수 선언후 문자열에 <code>#{$string}</code>을 통해서 사용 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>example-09.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> firefox-message</span><span class="p">(</span><span class="nv">$selector</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nt">body</span><span class="nc">.firefox</span> <span class="nn">#</span><span class="err">{$</span><span class="nt">selector</span><span class="err">}</span><span class="nd">:before</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">content</span><span class="o">:</span> <span class="s2">&quot;Hi, Firefox users!&quot;</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="k">@include</span><span class="nd"> firefox-message</span><span class="p">(</span><span class="s2">&quot;.header&quot;</span><span class="p">)</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>$selector</code>에 인자로 <code>.header</code>을 받고 <code>#{$selector}</code>값에 대입 합니다.</p>
+
+<figure class='code'><figcaption><span>example-09.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span><span class="nc">.firefox</span> <span class="nc">.header</span><span class="nd">:before</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;Hi, Firefox users!&quot;</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>숫자 연산</h2>
 
 <p>in와 pt를 같이 사용하면 in로 변환되어 계산 됩니다.</p>
 
-<p>example-10.scss</p>
+<figure class='code'><figcaption><span>example-10.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="mi">1</span><span class="kt">in</span> <span class="o">+</span> <span class="mi">8</span><span class="kt">pt</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>p {
-  width: 1in + 8pt;
-}
-</code></pre>
 
-<p>example-10.css</p>
 
-<pre><code>p {
-  width: 1.111in }
-</code></pre>
 
-<h4>Division and /</h4>
+<figure class='code'><figcaption><span>example-10.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">1.111in</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-11.scss</p>
 
-<p>margin-left 처럼 다른 인자와 연산을 하지 않으면 .css변환시 표기대로 변환 됩니다.</p>
+<h2>나누기 와 /</h2>
 
-<pre><code>p {
-  font: 10px/8px;
-  $width: 1000px;
-  width: $width/2;
-  height: (500px/2);
-  margin-left: 5px + 8px/2px;
-}
-</code></pre>
+<p><code>margin-left</code> 처럼 다른 인수와 연산을 하지 않으면 <code>.css</code>변환시 표기대로 변환 됩니다.</p>
 
-<p>example-11.css</p>
+<figure class='code'><figcaption><span>example-11.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="o">/</span><span class="mi">8</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="nv">$width</span><span class="o">:</span> <span class="mi">1000</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="nv">$width</span><span class="o">/</span><span class="mi">2</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">height</span><span class="o">:</span> <span class="p">(</span><span class="mi">500</span><span class="kt">px</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">margin-left</span><span class="o">:</span> <span class="mi">5</span><span class="kt">px</span> <span class="o">+</span> <span class="mi">8</span><span class="kt">px</span><span class="o">/</span><span class="mi">2</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>p {
-  font: 10px/8px;
-  width: 500px;
-  height: 250px;
-  margin-left: 9px;
-}
-</code></pre>
 
-<p>example-12.scss</p>
+<p><code>font</code>의 값은 연산하지 않습니다.</p>
+
+<figure class='code'><figcaption><span>example-11.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font</span><span class="o">:</span> <span class="m">10px</span><span class="o">/</span><span class="m">8px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">500px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">height</span><span class="o">:</span> <span class="m">250px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">margin-left</span><span class="o">:</span> <span class="m">9px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>변수에 할당하여 연산할수도 있습니다.</p>
 
-<pre><code>p {
-  $font-size: 12px;
-  $line-height: 30px;
-  font: #{$font-size}/#{$line-height};
-}
-</code></pre>
+<figure class='code'><figcaption><span>example-12.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">$font-size</span><span class="o">:</span> <span class="mi">12</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">$line-height</span><span class="o">:</span> <span class="mi">30</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">font</span><span class="o">:</span> <span class="si">#{</span><span class="nv">$font-size</span><span class="si">}</span><span class="o">/</span><span class="si">#{</span><span class="nv">$line-height</span><span class="si">}</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-12.css</p>
 
-<pre><code>p {
-  font: 12px/30px; }
-</code></pre>
 
-<h4>Color Operations</h4>
 
-<p>example-13.scss</p>
+<figure class='code'><figcaption><span>example-12.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font</span><span class="o">:</span> <span class="m">12px</span><span class="o">/</span><span class="m">30px</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Color의 덧셈 입니다.</p>
 
-<pre><code>p {
-  color: #010203 + #040506;
-}
-</code></pre>
+<h2>Color 연산</h2>
+
+<h3>Color의 덧셈 입니다.</h3>
+
+<figure class='code'><figcaption><span>example-13.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="mh">#010203</span> <span class="o">+</span> <span class="mh">#040506</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>example-13.css</p>
 
@@ -371,1085 +521,1850 @@ a { color: green; }
   color: #050709; }
 </code></pre>
 
-<p>example-14.scss</p>
+<h3>Color의 곱셈 입니다.</h3>
 
-<p>Color의 곱셈 입니다.</p>
+<figure class='code'><figcaption><span>example-14.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="mh">#010203</span> <span class="o">*</span> <span class="mi">2</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>p {
-  color: #010203 * 2;
-}
-</code></pre>
 
-<p>example-14.css</p>
 
-<pre><code>p {
-  color: #020406; }
-</code></pre>
 
-<p>example-15.scss</p>
+<figure class='code'><figcaption><span>example-14.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#020406</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>rgba의 값들간에만 더하기를 합니다. 최소 값은 0이며 양측 덧셈 최대값은 255 입니다. 투명도가 동일 값이어야만 계산이 됩니다.</p>
 
-<pre><code>p {
-  color: rgba(255, 0, 0, 0.75) + rgba(0, 255, 0, 0.75);
-}
-</code></pre>
+<h3>rgba 덧셈</h3>
 
-<p>example-15.css</p>
+<p>최소 값은 0이며 양측 덧셈 최대값은 255 입니다. 투명도가 동일값(<code>0.75</code>) 이어야 계산이 됩니다.</p>
 
-<pre><code>p {
-  color: rgba(255, 255, 0, 0.75); }
-</code></pre>
+<figure class='code'><figcaption><span>example-15.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">rgba</span><span class="p">(</span><span class="mi">255</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="mf">.75</span><span class="p">)</span> <span class="o">+</span> <span class="nf">rgba</span><span class="p">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">255</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="mf">.75</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-16.scss</p>
 
-<p>opacify는 투명도값을 덧셈하고 transparentize는 0.5의 값을 0.25로 변경합니다.</p>
 
-<pre><code>$translucent-red: rgba(255, 0, 0, 0.5);
-p {
-  color: opacify($translucent-red, 0.3);
-  background-color: transparentize($translucent-red, 0.25);
-}
-</code></pre>
 
-<p>example-16.css</p>
+<figure class='code'><figcaption><span>example-15.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="o">,</span> <span class="m">255</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">.</span><span class="m">75</span><span class="p">);</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>p {
-  color: rgba(255, 0, 0, 0.8);
-  background-color: rgba(255, 0, 0, 0.25); }
-</code></pre>
 
-<h4>String Operations</h4>
+<p><code>opacify</code> 투명도값인 <code>0.5</code> + <code>0.3</code> 으로 계산 합니다.
+<code>transparentize</code>는 <code>0.5</code>의 값을 <code>0.25</code>로 변경합니다.</p>
 
-<p>example-17.scss</p>
+<figure class='code'><figcaption><span>example-16.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="na">$translucent-red</span><span class="o">:</span> <span class="nf">rgba</span><span class="p">(</span><span class="mi">255</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="mf">.5</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">opacify</span><span class="p">(</span><span class="nv">$translucent-red</span><span class="o">,</span> <span class="mi">0</span><span class="mf">.3</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="nf">transparentize</span><span class="p">(</span><span class="nv">$translucent-red</span><span class="o">,</span> <span class="mi">0</span><span class="mf">.25</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>문자열의 덧셈을 보여 주고 있습니다.</p>
 
-<pre><code>p {
-  cursor: e + -resize;
-}
-</code></pre>
 
-<p>example-17.css</p>
 
-<pre><code>p {
-  cursor: e-resize; }
-</code></pre>
+<figure class='code'><figcaption><span>example-16.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">.</span><span class="m">8</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">.</span><span class="m">25</span><span class="p">);</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-18.scss</p>
 
-<p>공백을 포함한 문자열의 덧셈을 보여 줍니다.</p>
+<h2>문자열 연산</h2>
 
-<pre><code>p:before {
-  content: "Foo " + Bar;
-  font-family: sans- + "serif";
-}
-</code></pre>
+<h3>문자열의 덧셈</h3>
 
-<p>example-18.css</p>
+<p>일반적인 문자열 덧셈</p>
 
-<pre><code>p:before {
-  content: "Foo Bar";
-  font-family: sans-serif; }
-</code></pre>
+<figure class='code'><figcaption><span>example-17.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">cursor</span><span class="o">:</span> <span class="n">e</span> <span class="o">+</span> <span class="o">-</span><span class="n">resize</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-19.scss</p>
 
-<p>px값과 auto 인자가 있을시 ( ) 없이도 px값 만 계산 합니다.</p>
 
-<pre><code>p {
-  margin: 3px + 4px auto;
-}
-</code></pre>
 
-<p>example-19.css</p>
+<figure class='code'><figcaption><span>example-17.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">cursor</span><span class="o">:</span> <span class="k">e-resize</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>p {
-  margin: 7px auto; }
-</code></pre>
 
-<p>example-20.scss</p>
+<p>공백을 포함한 문자열의 덧셈 <code>""</code>로 감싸주게 됩니다.</p>
 
-<p>문자열 치환도 가능 합니다.</p>
+<figure class='code'><figcaption><span>example-18.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span><span class="nd">:before</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">content</span><span class="o">:</span> <span class="s2">&quot;Foo &quot;</span> <span class="o">+</span> <span class="n">Bar</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">font-family</span><span class="o">:</span> <span class="n">sans-</span> <span class="o">+</span> <span class="s2">&quot;serif&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>p:before {
-  content: "I ate #{5 + 10} pies!";
-}
-</code></pre>
 
-<p>example-20.css</p>
 
-<pre><code>p:before {
-  content: "I ate 15 pies!"; }
-</code></pre>
 
-<p>example-21.scss</p>
+<figure class='code'><figcaption><span>example-18.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span><span class="nd">:before</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;Foo Bar&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-family</span><span class="o">:</span> <span class="k">sans-serif</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>px</code>값과 <code>auto</code> 인자가 있을시 ( ) 없이도 <code>px</code>값 만 계산 합니다.</p>
+
+<figure class='code'><figcaption><span>example-19.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">margin</span><span class="o">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="o">+</span> <span class="mi">4</span><span class="kt">px</span> <span class="no">auto</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-19.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">margin</span><span class="o">:</span> <span class="m">7px</span> <span class="k">auto</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>문자열 내에서 덧셈이 가능합니다.</p>
+
+<figure class='code'><figcaption><span>example-20.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span><span class="nd">:before</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">content</span><span class="o">:</span> <span class="s2">&quot;I ate </span><span class="si">#{</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">10</span><span class="si">}</span><span class="s2"> pies!&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-20.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span><span class="nd">:before</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;I ate 15 pies!&quot;</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>변수 값이 null일시 무시 합니다.</p>
 
-<pre><code>$value: null;
-  p:before {
-  content: "I ate #{$value} pies!";
-}
-</code></pre>
+<figure class='code'><figcaption><span>example-21.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$value</span><span class="o">:</span> <span class="n">null</span><span class="err">;</span>
+</span><span class='line'>  <span class="nt">p</span><span class="nd">:before</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">content</span><span class="o">:</span> <span class="s2">&quot;I ate </span><span class="si">#{</span><span class="nv">$value</span><span class="si">}</span><span class="s2"> pies!&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-21.css</p>
 
-<pre><code>p:before {
-  content: "I ate pies!"; }
-</code></pre>
 
-<h4>Parentheses</h4>
 
-<p>example-22.scss</p>
+<figure class='code'><figcaption><span>example-21.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span><span class="nd">:before</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;I ate pies!&quot;</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>( )우선 순위로 계산 합니다.</p>
 
-<pre><code>p {
-  width: 1em + (2em * 3);
-}
-</code></pre>
+<h2>Parentheses(괄호)</h2>
 
-<p>example-22.css</p>
+<p><code>( )</code>우선 순위로 계산 합니다.</p>
 
-<pre><code>p {
-  width: 7em;
-}
-</code></pre>
+<figure class='code'><figcaption><span>example-22.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="mi">1</span><span class="kt">em</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="kt">em</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h4>Functions</h4>
 
-<p>HSL ($hue, $saturation, $lightness), (색깔, 채도, 밝기)
-example-23.scss</p>
 
-<pre><code>p {
-  color: hsl(0, 100%, 50%);
-}
 
-example-23.css
+<figure class='code'><figcaption><span>example-22.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">7em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-p {
-  color: red; }
-</code></pre>
 
-<h4>Interpolation: #{}</h4>
+<h2>Functions(함수)</h2>
 
-<p>example-24.scss</p>
+<p><code>hsl ($hue, $saturation, $lightness)</code> 괄호의 값은 (색깔, 채도, 밝기)을 뜻합니다.</p>
 
-<p>문자 보간 하는 방법 입니다. foo와 border를 치환 합니다.</p>
+<figure class='code'><figcaption><span>example-23.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nf">hsl</span><span class="p">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="kt">%</span><span class="o">,</span> <span class="mi">50</span><span class="kt">%</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>$name: foo;
-$attr: border;
-p.#{$name} {
-  #{$attr}-color: blue;
-}
-</code></pre>
 
-<p>example-24.css</p>
 
-<pre><code>p.foo {
-  border-color: blue;
-}
-</code></pre>
 
-<p>example-25.scss</p>
+<figure class='code'><figcaption><span>example-23.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>px 값들 또한 보간할수 있습니다.</p>
 
-<pre><code>p {
-  $font-size: 12px;
-  $line-height: 30px;
-  font: #{$font-size} / #{$line-height};
-}
-</code></pre>
+<h2>Interpolation: #{} (보간법)</h2>
 
-<p>example-25.css</p>
+<p>문자 보간 하는 방법 입니다. <code>$name</code>값 <code>foo</code>와 <code>$attr</code>값 <code>border</code>을
+<code>#{$name}</code>, <code>#{$attr}</code>을 사용해 보간 합니다.</p>
 
-<pre><code>p { font: 12px / 30px; }
-</code></pre>
+<figure class='code'><figcaption><span>example-24.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$name</span><span class="o">:</span> <span class="n">foo</span><span class="err">;</span>
+</span><span class='line'><span class="nv">$attr</span><span class="o">:</span> <span class="no">border</span><span class="err">;</span>
+</span><span class='line'><span class="nt">p</span><span class="nc">.</span><span class="si">#{</span><span class="nv">$name</span><span class="si">}</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">#{$attr}-color</span><span class="o">:</span> <span class="nb">blue</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h4>Variable Defaults: !default</h4>
 
-<p>example-26.scss</p>
 
-<p>$content값이 참인지 분별하여 참이 아니면 &#8220;Second content?&#8221;값을 부여 합니다. 참이므로 $content는 &#8220;First..&#8221;가 됩니다.
-$new_content는 참이 아니므로 &#8220;First time…&#8221;을 출력 합니다.</p>
 
-<pre><code>$content: "First content";
-$content: "Second content?" !default;
-$new_content: "First time reference" !default;
+<figure class='code'><figcaption><span>example-24.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span><span class="nc">.foo</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-#main {
-  ccontent: $content;
-  new-content: $new_content;
-}
-</code></pre>
 
-<p>example-26.css</p>
+<p><code>px</code>값도 보간할수 있습니다.</p>
 
-<pre><code>#main {
-  content: "First content";
-  new-content: "First time reference";
-}
-</code></pre>
+<figure class='code'><figcaption><span>example-25.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">$font-size</span><span class="o">:</span> <span class="mi">12</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">$line-height</span><span class="o">:</span> <span class="mi">30</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">font</span><span class="o">:</span> <span class="si">#{</span><span class="nv">$font-size</span><span class="si">}</span> <span class="o">/</span> <span class="si">#{</span><span class="nv">$line-height</span><span class="si">}</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-27.scss</p>
 
-<p>$content의 값이 null이므로 !default가 동작 합니다.</p>
 
-<pre><code>$content: null;
-$content: "Non-null content" !default;
 
-#main {
-  content: $content;
-}
-</code></pre>
+<figure class='code'><figcaption><span>example-25.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span> <span class="k">font</span><span class="o">:</span> <span class="m">12px</span> <span class="o">/</span> <span class="m">30px</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-27.css</p>
 
-<pre><code>#main {
-  content: "Non-null content";
-}
-</code></pre>
+<h2>Variable Defaults: !default (기본 변수)</h2>
+
+<p><code>$content</code>값이 참인지 분별하여 거짓이면 <code>Second content?</code>값을 부여 합니다.
+참이므로 <code>$content</code>는 <code>First..</code>가 됩니다.
+<code>$new_content</code>는 거짓 이므로 &#8220;First time…&#8221;을 출력 합니다.</p>
+
+<figure class='code'><figcaption><span>example-26.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$content</span><span class="o">:</span> <span class="s2">&quot;First content&quot;</span><span class="err">;</span>
+</span><span class='line'><span class="nv">$content</span><span class="o">:</span> <span class="s2">&quot;Second content?&quot;</span> <span class="nv">!default</span><span class="err">;</span>
+</span><span class='line'><span class="nv">$new_content</span><span class="o">:</span> <span class="s2">&quot;First time reference&quot;</span> <span class="nv">!default</span><span class="err">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">ccontent</span><span class="o">:</span> <span class="nv">$content</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">new-content</span><span class="o">:</span> <span class="nv">$new_content</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-26.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#main</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;First content&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">new</span><span class="o">-</span><span class="k">content</span><span class="o">:</span> <span class="s2">&quot;First time reference&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>$content</code>의 값이 <code>null</code>이므로 <code>!default</code>가 동작 합니다.</p>
+
+<figure class='code'><figcaption><span>example-27.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$content</span><span class="o">:</span> <span class="n">null</span><span class="err">;</span>
+</span><span class='line'><span class="nv">$content</span><span class="o">:</span> <span class="s2">&quot;Non-null content&quot;</span> <span class="nv">!default</span><span class="err">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">content</span><span class="o">:</span> <span class="nv">$content</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-27.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#main</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;Non-null content&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>@-Rules and Directives</h2>
 
-<h4>import</h4>
+<h3>import</h3>
 
-<p>example-28.scss example</p>
+<p><code>.sass</code>, <code>.scss</code> 파일을 <code>@import</code>해서 작업 할수 있고 <code>.css</code>파일에 출력이 가능 합니다.</p>
 
-<pre><code>@import "foo.scss";
-or
-@import "foo";
-</code></pre>
+<figure class='code'><figcaption><span>example-28.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@import</span> <span class="s">&quot;foo.scss&quot;;</span>  <span class="s">//</span>  <span class="s">아래와</span> <span class="s">같은</span> <span class="s">의미</span> <span class="s">입니다.</span>
+</span><span class='line'><span class="k">@import</span> <span class="s">&quot;foo&quot;;</span>       <span class="s">//</span>  <span class="s">위와</span> <span class="s">같은</span> <span class="s">의미</span> <span class="s">입니다.</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example-28-01.scss example</p>
 
-<pre><code>@import "foo.css";
-@import "foo" screen;
-@import "http://foo.com/bar";
-@import url(foo);
-</code></pre>
+<p><code>.scss</code>, <code>.sass</code>외에도 <code>@import</code> 가능합니다.</p>
 
-<p>example-28-01.css</p>
+<figure class='code'><figcaption><span>example-28-01.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@import</span> <span class="s">&quot;foo.css&quot;;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s">&quot;foo&quot;</span> <span class="s">screen;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s">&quot;http://foo.com/bar&quot;;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s">url(foo);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@import "foo.css";
-@import "foo" screen;
-@import "http://foo.com/bar";
-@import url(foo);
-</code></pre>
 
-<h4>multiple import</h4>
 
-<p>여러개의 파일을 import할수 있습니다.</p>
 
-<pre><code>@import "rounded-corners", "text-shadow";
-</code></pre>
+<figure class='code'><figcaption><span>example-28-01.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@import</span> <span class="s2">&quot;foo.css&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;foo&quot;</span> <span class="nt">screen</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;http://foo.com/bar&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="nt">url</span><span class="o">(</span><span class="nt">foo</span><span class="o">)</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h4>interpolation #{}</h4>
 
-<p>unqoute를 사용함으로써 변환시 문자열에 &#8220;&#8221; 제거 할수 있습니다.</p>
+<h3>multiple import(다중 호출)</h3>
 
-<pre><code>$family: unquote("Droid-Sans");
-@import url("http://fonts.googleapis.com/css?family=\#{$family}");
-</code></pre>
+<p>여러개의 파일을 한번에 <code>@import</code>할수 있습니다.</p>
 
-<h4>Partials</h4>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@import</span> <span class="s">&quot;rounded-corners&quot;,</span> <span class="s">&quot;text-shadow&quot;;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>colors로 import를 하게 되면 기본적으로 .css 파일이 없는 상태에서 _color.scss파일을 import하게 되고 이도 없으면 비슷한 color.scss파일을 import합니다.</p>
 
-<pre><code>@import "colors";
-</code></pre>
+<h3>@import interpolation #{}</h3>
 
-<h4>Nested @import</h4>
+<p> interpolation is only for CSS imports. As such, it only works with url() imports.</p>
 
-<p>{ }에서 import를 하게 되면 selector 네임이 중첩 됩니다.</p>
+<p> &#8220;` sass example.scss
+$family: unquote(&#8220;Droid-Sans&#8221;);
+@import url(&#8220;http://fonts.googleapis.com/css?family=#{$family}&#8221;);</p>
 
-<p>example-29.scss</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">###</span> <span class="nt">Partials</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">`</span><span class="nt">colors</span><span class="err">`로</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`를</span> <span class="err">하게</span> <span class="err">되면</span> <span class="err">기본적으로</span> <span class="err">`</span><span class="nc">.css</span><span class="err">`</span> <span class="err">파일이</span> <span class="err">없는</span> <span class="err">상태에서</span>
+</span><span class='line'><span class="err">`</span><span class="nt">_color</span><span class="nc">.scss</span><span class="err">`파일을</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`하게</span> <span class="err">되고</span> <span class="err">이도</span> <span class="err">없으면</span> <span class="err">비슷한</span> <span class="err">`</span><span class="nt">color</span><span class="nc">.scss</span><span class="err">`파일을</span> <span class="nt">import</span><span class="err">합니다</span><span class="nc">.</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.example {
+
+<p> sass example.scss
+@import &#8220;colors&#8221;;</p>
+
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">###</span> <span class="nt">Nested</span> <span class="o">@</span><span class="nt">import</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">`{</span> <span class="err">}`에서</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`를</span> <span class="err">하게</span> <span class="err">되면</span> <span class="err">`</span><span class="nc">.example</span><span class="err">`을</span> <span class="err">불러</span> <span class="err">옵니다</span><span class="nc">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> sass _example.scss
+.example {
   color: red;
-}
-</code></pre>
+}</p>
 
-<p>example-29-01.scss</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="err">```</span> <span class="nt">sass</span> <span class="nt">example-29-01</span><span class="nc">.scss</span>
+</span><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@import</span><span class="s">:</span> <span class="s">&quot;example&quot;;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#main {
-  @import: "example";
-}
-</code></pre>
 
-<p>example-29-01.css</p>
 
-<pre><code>#main .example {
-  color: red;
-}
-</code></pre>
 
-<h4>@media</h4>
+<figure class='code'><figcaption><span>example-29-01.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#main</span> <span class="nc">.example</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.sidebar {
-  width: 300px;
-  @media screen and (orientation: landscape) {
-    width: 500px;
-  }
-}
-</code></pre>
 
-<p>compile</p>
+<h3>@media</h3>
 
-<pre><code>.sidebar {
-  width: 300px; }
-  @media screen and (orientation: landscape) {
-    .sidebar {
-    width: 500px; } }
-</code></pre>
+<p>상단의 <code>.sidebar</code>를 상속 해서 손쉽게 <code>@media</code>옵션과 아닌 옵션을 따로
+선언 할수 있습니다.</p>
 
-<p>@media .scss</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.sidebar</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="mi">300</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">orientation</span><span class="nd">:</span> <span class="nt">landscape</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">width</span><span class="o">:</span> <span class="mi">500</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@media screen {
-  .sidebar {
-    @media (orientation: landscape) {
-      width: 500px;
-    }
-  }
-}
-</code></pre>
 
-<p>compile</p>
 
-<pre><code>@media screen and (orientation: landscape) {
-  .sidebar {
-    width: 500px; } }
-}
-</code></pre>
 
-<p>@media .scss</p>
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.sidebar</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">orientation</span><span class="o">:</span> <span class="nt">landscape</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nc">.sidebar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">500px</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>$media: screen;
-$feature: -webkit-min-device-pixel-ratio;
-$value: 1.5;
 
-@media #{$media} and ($feature: $value) {
-  .sidebar {
-    width: 500px; } }
-}
-</code></pre>
+<p><code>@media</code>안에 <code>@media</code>를 합칠수 있습니다.</p>
 
-<p>compile</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@media</span> <span class="nt">screen</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.sidebar</span> <span class="err">{</span>
+</span><span class='line'>    <span class="k">@media</span> <span class="o">(</span><span class="nt">orientation</span><span class="nd">:</span> <span class="nt">landscape</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>      <span class="na">width</span><span class="o">:</span> <span class="mi">500</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>    <span class="err">}</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
-  .sidebar {
-    width: 500px; } }
-}
-</code></pre>
 
-<h4>@extend</h4>
 
-<p>markup</p>
 
-<pre><code>&lt;div class="error seriousError"&gt;
-  Oh no! You've been hacked!
-&lt;/div&gt;
-</code></pre>
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">orientation</span><span class="o">:</span> <span class="nt">landscape</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nc">.sidebar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">500px</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>styles -> 뭔가 문제가 있다는데?</p>
 
-<pre><code>.error {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.seriousError {
-  border-width: 3px;
-}
-</code></pre>
+<p><code>@media</code>에 SassScript 문법인 <code>#{}</code>를 사용 할수있습니다.</p>
 
-<p>다른 styles</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$media</span><span class="o">:</span> <span class="n">screen</span><span class="err">;</span>
+</span><span class='line'><span class="nv">$feature</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit-min-device-pixel-ratio</span><span class="err">;</span>
+</span><span class='line'><span class="nv">$value</span><span class="o">:</span> <span class="mi">1</span><span class="mf">.5</span><span class="err">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@media</span> <span class="nn">#</span><span class="err">{$</span><span class="nt">media</span><span class="err">}</span> <span class="nt">and</span> <span class="o">(</span><span class="err">$</span><span class="nt">feature</span><span class="nd">:</span> <span class="err">$</span><span class="nt">value</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.sidebar</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">width</span><span class="o">:</span> <span class="mi">500</span><span class="kt">px</span><span class="err">;</span> <span class="err">}</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.error {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.seriousError {
-  @extend .error;
-  border-width: 3px;
-}
-</code></pre>
 
-<p>markup</p>
 
-<pre><code>&lt;div class="error seriousError"&gt;
-  Oh no! You've been hacked!
-&lt;/div&gt;
-&lt;div class="seriousError intrusion"&gt;&lt;/div&gt;
-</code></pre>
+
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">-webkit-min-device-pixel-ratio</span><span class="o">:</span> <span class="nt">1</span><span class="nc">.5</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nc">.sidebar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">500px</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>@extend</h3>
+
+<figure class='code'><figcaption><span>markup.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;error seriousError&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  Oh no! You&#39;ve been hacked!
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>.error</code>, <code>.seriousError</code>이 개별적으로 선언 되어 있고 두개의 속성을 모두 가지기 위해서는
+클래스명을 두개다 선언해 주어야 합니다.</p>
+
+<figure class='code'><figcaption><span>error.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.error</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#f00</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#fdd</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.seriousError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>다음은 <code>.seriousError</code>만 선언 하여도 <code>.error</code>가지 같이 적용 될수 있도록
+수정한 코드 입니다.</p>
+
+<figure class='code'><figcaption><span>error.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.error</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="mh">#f00</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="mh">#fdd</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.seriousError</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nc">.error</span><span class="o">;</span>
+</span><span class='line'>  <span class="na">border-width</span><span class="o">:</span> <span class="mi">3</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>markup.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;error seriousError&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  Oh no! You&#39;ve been hacked!
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;seriousError intrusion&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>다른 스타일 추가</p>
 
-<pre><code>.error.intrusion {
-  background-image: url("/image/hacked.png");
-}
-</code></pre>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.error.intrusion</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">background-image</span><span class="o">:</span> <span class="sx">url(&quot;/image/hacked.png&quot;)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>How i Workd</p>
 
-<p>example</p>
+<p>사용법</p>
 
-<pre><code>.error {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.error.intrusion {
-  background-image: url("/image/hacked.png");
-}
-.seriousError {
-  @extend .error;
-  border-width: 3px;
-}
-</code></pre>
+<p><code>error.intrusion</code>을 정의해 주면 <code>@extend .error</code>에 같이 적용되어
+<code>.css</code>안에 <code>.seriousError</code>또한 생성 됩니다.</p>
 
-<p>compile</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.error</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="mh">#f00</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="mh">#fdd</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.error.intrusion</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">background-image</span><span class="o">:</span> <span class="sx">url(&quot;/image/hacked.png&quot;)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.seriousError</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nc">.error</span><span class="o">;</span>
+</span><span class='line'>  <span class="na">border-width</span><span class="o">:</span> <span class="mi">3</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.error, .seriousError {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.error.intrusion, .seriousError.intrusion {
-  background-image: url("/image/hacked.png");
-}
-.seriousError {
-  border-width: 3px;
-}
-</code></pre>
 
-<h4>Extending Complex Selectors</h4>
 
-<p>.scss example</p>
 
-<pre><code>.hoverlink {
-  @extend a:hover;
-}
-a:hover {
-  text-decoration: underline;
-}
-</code></pre>
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.error</span><span class="o">,</span> <span class="nc">.seriousError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#f00</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#fdd</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.error.intrusion</span><span class="o">,</span> <span class="nc">.seriousError.intrusion</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&quot;/image/hacked.png&quot;)</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.seriousError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>compile</p>
 
-<pre><code>a:hover, .hoverlink {
-  text-decoration: underline;
-}
-</code></pre>
+<h3>Extending Complex Selectors</h3>
 
-<p>.scss example</p>
+<p>Class selectors aren’t the only things that can be extended. It’s possible to extend any selector involving only a single element, such as .special.cool, a:hover, or a.user[href<sup>=&#8221;http://&#8221;]</sup></p>
 
-<pre><code>.hoverlink {
-  @extend a:hover;
-}
-.comment a.user:hover {
-  font-weight: bold;
-}
-</code></pre>
+<p>속성을 한곳에만 정의 하고 <code>@extend</code>를 사용하여 같이 사용 할수 있습니다.</p>
 
-<p>compile</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.hoverlink</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nt">a</span><span class="nd">:hover</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nt">a</span><span class="nd">:hover</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">text-decoration</span><span class="o">:</span> <span class="no">underline</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.comment a.user:hover, .comment .user.hoverlink {
-  font-weight: bold;
-}
-</code></pre>
 
-<h4>Multiple Extends</h4>
 
-<p>.scss</p>
 
-<pre><code>.error {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.attention {
-  font-size: 3em;
-  background-color: #ff0;
-}
-.seriousError {
-  @extend .error;
-  @extend .attention;
-  border-width: 3px;
-}
-</code></pre>
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">a</span><span class="nd">:hover</span><span class="o">,</span> <span class="nc">.hoverlink</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">text-decoration</span><span class="o">:</span> <span class="k">underline</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>.compile</p>
 
-<pre><code>.error, .seriousError {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.attention, .seriousError {
-  font-size: 3em;
-  background-color: #ff0;
-}
-.seriousError {
-  border-width: 3px;
-}
-</code></pre>
+<p><code>@extend a:hover</code>을 사용 하면 선택자에 <code>a.user:hover</code>에서 <code>a:hover</code>를 제외한 문자만을
+적용 합니다.</p>
 
-<h4>Chanining Extends</h4>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.hoverlink</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nt">a</span><span class="nd">:hover</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.comment</span> <span class="nt">a</span><span class="nc">.user</span><span class="nd">:hover</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example.scss</p>
 
-<pre><code>.error {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.seriousError {
-  @extend .error;
-  border-width: 3px;
-}
-.criticalError {
-  @extend .seriousError;
-  position: fixed;
-  top: 10%;
-  bottom: 10%;
-  left: 10%;
-  right: 10%;
-}
-</code></pre>
 
-<p>example.css</p>
 
-<pre><code>.error, .seriousError, .criticalEroor {
-  border: 1px #f00;
-  background-color: #fdd;
-}
-.seriousError, .criticalError {
-  border-width: 3px;
-}
-.criticalError {
-  position: fixed;
-  top: 10%;
-  bottom: 10%;
-  left: 10%;
-  right: 10%;
-}
-</code></pre>
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.comment</span> <span class="nt">a</span><span class="nc">.user</span><span class="nd">:hover</span><span class="o">,</span> <span class="nc">.comment</span> <span class="nc">.user.hoverlink</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h4>Selector Sequences</h4>
 
-<p>example.scss</p>
+<h3>Multiple Extends</h3>
 
-<pre><code>#fake-links .link {
-  @extend a;
-}
+<p><code>.seriousError</code>이 <code>.error</code>,<code>.attention</code> 두가지 속성 모두에 포함 됩니다.</p>
 
-a {
-  color: blue;
-  &amp;:hover {
-    text-decoration: underline;
-  }
-}
-</code></pre>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.error</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="mh">#f00</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="mh">#fdd</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.attention</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font-size</span><span class="o">:</span> <span class="mi">3</span><span class="kt">em</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="mh">#ff0</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.seriousError</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nc">.error</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nc">.attention</span><span class="o">;</span>
+</span><span class='line'>  <span class="na">border-width</span><span class="o">:</span> <span class="mi">3</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>example.css</p>
 
-<pre><code>a, #fake-links .link {
-  color: blue;
-}
-  a:hover, #fakelinks .link:hover {
-    text-decoration: underline;
-  }
-</code></pre>
 
-<h4>Merging Selector Sequences</h4>
+
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.error</span><span class="o">,</span> <span class="nc">.seriousError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#f00</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#fdd</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.attention</span><span class="o">,</span> <span class="nc">.seriousError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">3em</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#ff0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.seriousError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Chanining Extends(확장 연결)</h3>
+
+<p><code>criticalError</code>에서 <code>@extend .seriousError</code>함으로써 <code>.seriousError</code>에서 확장한 <code>@extend error</code>
+까지 연결되서 확장 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.error</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="mh">#f00</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="mh">#fdd</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.seriousError</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nc">.error</span><span class="o">;</span>
+</span><span class='line'>  <span class="na">border-width</span><span class="o">:</span> <span class="mi">3</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.criticalError</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nc">.seriousError</span><span class="o">;</span>
+</span><span class='line'>  <span class="na">position</span><span class="o">:</span> <span class="no">fixed</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">top</span><span class="o">:</span> <span class="mi">10</span><span class="kt">%</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">bottom</span><span class="o">:</span> <span class="mi">10</span><span class="kt">%</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">left</span><span class="o">:</span> <span class="mi">10</span><span class="kt">%</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">right</span><span class="o">:</span> <span class="mi">10</span><span class="kt">%</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.error</span><span class="o">,</span> <span class="nc">.seriousError</span><span class="o">,</span> <span class="nc">.criticalEroor</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#f00</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#fdd</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.seriousError</span><span class="o">,</span> <span class="nc">.criticalError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.criticalError</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">position</span><span class="o">:</span> <span class="k">fixed</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">top</span><span class="o">:</span> <span class="m">10</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">bottom</span><span class="o">:</span> <span class="m">10</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">left</span><span class="o">:</span> <span class="m">10</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">right</span><span class="o">:</span> <span class="m">10</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Selector Sequences</h3>
+
+<p><code>&amp;</code>상속은 <code>a</code>와 <code>#fake-links .link</code> 모두 상속을 받습니다.</p>
+
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#fake-links</span> <span class="nc">.link</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nt">a</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">blue</span><span class="err">;</span>
+</span><span class='line'>  <span class="k">&amp;</span><span class="nd">:hover</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">text-decoration</span><span class="o">:</span> <span class="no">underline</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">a</span><span class="o">,</span> <span class="nf">#fake-links</span> <span class="nc">.link</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>  <span class="nt">a</span><span class="nd">:hover</span><span class="o">,</span> <span class="nf">#fakelinks</span> <span class="nc">.link</span><span class="nd">:hover</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">text-decoration</span><span class="o">:</span> <span class="k">underline</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Merging Selector Sequences</h3>
 
 <p>두개의 다른 시퀀스를 @extend 할때는 첫번재 시퀀스, 첫번재 + 두번째 시퀀스, 두번째 시퀀스 + 첫번째 시퀀스를 한다. 마지막 셀렉터 .fakelink는 두번재 + 첫번재 시퀀스 뒤에 오게 됩니다.(왜?)</p>
 
-<p>example.scss</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#admin</span> <span class="nc">.tabbar</span> <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nn">#demo</span> <span class="nc">.overview</span> <span class="nc">.fakelink</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nt">a</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#admin .tabbar a {
-  font-weight: bold;
-}
-#demo .overview .fakelink {
-  @extend a;
-}
-</code></pre>
 
-<p>example.css</p>
 
-<pre><code>#admin .tabbar a,
-#admin .tabbar #demo .overview .fakelink,
-#demo .overview #admin .tabbar .fakelink {
-  font-weight: bold;
-}
-</code></pre>
+
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#admin</span> <span class="nc">.tabbar</span> <span class="nt">a</span><span class="o">,</span>
+</span><span class='line'><span class="nf">#admin</span> <span class="nc">.tabbar</span> <span class="nf">#demo</span> <span class="nc">.overview</span> <span class="nc">.fakelink</span><span class="o">,</span>
+</span><span class='line'><span class="nf">#demo</span> <span class="nc">.overview</span> <span class="nf">#admin</span> <span class="nc">.tabbar</span> <span class="nc">.fakelink</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>두개의 시퀀스에 같은 셀렉터가 있을때.</p>
 
-<p>example.scss</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#admin</span> <span class="nc">.tabbar</span> <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nn">#admin</span> <span class="nc">.overview</span> <span class="nc">.fakelink</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nt">a</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#admin .tabbar a {
-  font-weight: bold;
-}
-#admin .overview .fakelink {
-  @extend a;
-}
+
+
+
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#admin</span> <span class="nt">tabbar</span> <span class="nt">a</span><span class="o">,</span>
+</span><span class='line'><span class="nf">#admin</span> <span class="nc">.tabbar</span> <span class="nc">.overview</span> <span class="nt">fakelink</span><span class="o">,</span>
+</span><span class='line'><span class="nf">#admin</span> <span class="nc">.overview</span> <span class="nc">.tabbar</span> <span class="nc">.fakelink</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>@extend-Only Selectors</h3>
+
+<p>selector 이름만 확장 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#context</span> <span class="nt">a</span><span class="err">%</span><span class="nt">extreme</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">blue</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">font-size</span><span class="o">:</span> <span class="mi">2</span><span class="kt">em</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.notice</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="err">%</span><span class="nt">extreme</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#context</span> <span class="nt">a</span><span class="nc">.notice</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">2ex</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>The !optional Flag</h3>
+
+<p>에러 발생시키는건데 왜 쓰는지 잘 모르겠습니다.</p>
+
+<pre><code>Normally when you extend a selector, it’s an error if that @extend doesn’t work. For example, if you write a.important {@extend .notice}, it’s an error if there are no selectors that contain .notice. It’s also an error if the only selector containing .notice is h1.notice, since h1 conflicts with a and so no new selector would be generated.
+
+Sometimes, though, you want to allow an @extend not to produce any new selectors. To do so, just add the !optional flag after the selector.
 </code></pre>
 
-<p>example.css</p>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">a</span><span class="nc">.important</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@extend</span> <span class="nc">.notice</span> <span class="o">!</span><span class="nt">optional</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#admin tabbar a,
-#admin .tabbar .overview fakelink,
-#admin .overview .tabbar .fakelink {
-  font-weight: bold;
-}
+
+<h3>@extend in Directives</h3>
+
+<pre><code>There are some restrictions on the use of @extend within directives such as @media. Sass is unable to make CSS rules outside of the @media block apply to selectors inside it without creating a huge amount of stylesheet bloat by copying styles all over the place. This means that if you use @extend within @media (or other CSS directives), you may only extend selectors that appear within the same directive block
 </code></pre>
 
-<h4>@extend-Only Selectors</h4>
+<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@media</span> <span class="nt">print</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.error</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="mh">#f00</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">background-color</span><span class="o">:</span> <span class="mh">#fdd</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="nc">.seriousError</span> <span class="err">{</span>
+</span><span class='line'>    <span class="k">@extend</span> <span class="nc">.error</span><span class="o">;</span>
+</span><span class='line'>    <span class="na">border-width</span><span class="o">:</span> <span class="mi">3</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>(잘 모르겠음))
-example.scss</p>
 
-<pre><code>#context a%extreme {
-  color: blue;
-  font-weight: bold;
-  font-size: 2em;
-}
-.notice {
-  @extend %extreme;
-}
-</code></pre>
+<p>But this is an error:</p>
 
-<p>example.css</p>
+<figure class='code'><figcaption><span>example.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.error</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#f00</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">backgorund</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="m">#fdd</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@media</span> <span class="nt">print</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nc">.seriousError</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">//</span> <span class="n">INVALID</span> <span class="n">EXTEND</span><span class="o">:</span> <span class="o">.</span><span class="n">error</span> <span class="n">is</span> <span class="n">used</span> <span class="k">outside</span> <span class="n">of</span> <span class="n">the</span> <span class="s2">&quot;@media print&quot;</span> <span class="n">directive</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">extend</span> <span class="o">.</span><span class="n">error</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#context a.notice {
-  color: blue;
-  font-weight: bold;
-  font-size: 2ex;
-}
-</code></pre>
 
-<h4>The !optional Flag</h4>
+<h3>@debug</h3>
 
-<p>(잘 모르겠음)</p>
+<figure class='code'><figcaption><span>debug.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@debug</span> <span class="mi">10</span><span class="kt">em</span> <span class="o">+</span> <span class="mi">12</span><span class="kt">em</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h4>@extend in Directives</h4>
 
-<h4>@debug</h4>
 
-<h4>@warn</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Line 1 DEBUG: 22em
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>@warn</h3>
+
+<p><code>.css</code> 컴파일시 조건에 해당 하면 경고문 출력</p>
+
+<figure class='code'><figcaption><span>warn.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> adjust-location</span><span class="p">(</span><span class="nv">$x</span><span class="o">,</span> <span class="nv">$y</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@if</span> <span class="nf">unitless</span><span class="p">(</span><span class="nv">$x</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>    <span class="k">@warn</span> <span class="s2">&quot;Assuming </span><span class="si">#{</span><span class="nv">$x</span><span class="si">}</span><span class="s2"> to be in pixels&quot;</span><span class="err">;</span>
+</span><span class='line'>      <span class="nv">$x</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="o">*</span> <span class="nv">$x</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="k">@if</span> <span class="nf">unitless</span><span class="p">(</span><span class="nv">$y</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>    <span class="k">@warn</span> <span class="s2">&quot;Assuming </span><span class="si">#{</span><span class="nv">$y</span><span class="si">}</span><span class="s2"> to be in pixels&quot;</span><span class="err">;</span>
+</span><span class='line'>      <span class="nv">$y</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="o">*</span> <span class="nv">$y</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="na">position</span><span class="o">:</span> <span class="no">relative</span><span class="err">;</span> <span class="no">left</span><span class="o">:</span> <span class="nv">$x</span><span class="err">;</span> <span class="no">top</span><span class="o">:</span> <span class="nv">$y</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>Control Directives</h2>
 
-<h4>@if</h4>
-
-<p>example.scss</p>
-
-<pre><code>p {
-  @if 1 + 1 == 2 { border: 1px solid; }
-  @if 5 &lt; 3      { border: 2px dotted; }
-  @if nul        { border: 3px double; }
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>p {
-  border: 1px solid;
-  border: 3px double;
-}
-</code></pre>
-
-<h4>@if @else</h4>
-
-<p>example.scss</p>
-
-<pre><code>$type: monster;
-p {
-  @if $type == ocean {
-    color: blue;
-  } @else if $type == matador {
-    color: red;
-  } @else if $type == monster {
-    color: green;
-  } @else {
-    color: black;
-  }
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>p {
-  color: green;
-}
-</code></pre>
-
-<h4>@for</h4>
-
-<p>example.scss</p>
-
-<pre><code>@for $i from 1 through 3 {
-  .item-#{$i} { width: 2em * $i; }
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>.item-1 {
-  width: 2em;
-}
-.item-2 {
-  width: 4em;
-}
-.item-3 {
-  width: 6em;
-}
-</code></pre>
-
-<h4>@each</h4>
-
-<p>example.scss</p>
-
-<pre><code>@each $animal in puma, sea-slug, egret, salamander {
-  .#{$animal}-icon {
-    background-image: url('/images/#{animal}.png');
-  }
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>.puma-icon {
-  background-image: url('/images/puma.png');
-}
-.sea-slug {
-  background-image: url('/images/sea-slug.png');
-}
-.egret {
-  background-image: url('/images/egret.png');
-}
-.salamander {
-  background-image: url('/images/salamander.png');
-}
-</code></pre>
-
-<h4>@while</h4>
-
-<p>example.scss</p>
-
-<pre><code>$i: 6;
-@while $i &gt; 0 { 
-  .item-#{$i} { width: 2em * $i; }
-  $i: $i - 2;
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>.item-6 {
-  width: 12em;
-}
-.item-4 {
-  width: 8em;
-}
-.item-2 {
-  width: 4em;
-}
-</code></pre>
-
-<h3>Mixin Directives</h3>
-
-<h4>Defining a Mixin: @mixin</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin large-text {
-  font: {
-    family: Arial;
-    size: 20px;
-    weight: bold;
-  }
-  color: #ff0000;
-}
-</code></pre>
-
-<h5>Mixins contain parent reference</h5>
-
-<p>example.scss</p>
-
-<pre><code>@mixin clearfix {
-  display: inline-block;
-  &amp;:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-  }
-  * html &amp; { height: 1px }
-}
-</code></pre>
-
-<h4>Including a Mixin: @include</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin large-text {
-  font: {
-    family: Arial;
-    size: 20px;
-    weight: bold;
-  }
-  color: #ff0000;
-}
-
-.page-title {
-  @include large-text;
-  padding: 4px;
-  margin-top: 10px;
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>.page-title {
-  font-family: Arial;
-  font-size: 20px;
-  font-weight: bold;
-  color: #ff0000;
-  padding: 4px;
-  margin-top: 10px;
-}
-</code></pre>
-
-<p>example.scss</p>
-
-<pre><code>@mixin silly-links {
-  a {
-    color: blue;
-    background-color: red;
-  }
-}
-
-@include silly-links;
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>a {
-  color: blue;
-  background-color: red;
-}
-</code></pre>
-
-<h5>Mixin 안에 Mixin @include</h5>
-
-<p>example.scss</p>
-
-<pre><code>@mixin compound {
-  @include highlighted-background;
-  @include header-text;
-}
-
-@mixin highlighted-background { background-color: #fc0; }
-@mixin header-text { font-size: 20px; }
-</code></pre>
-
-<h4>Arguments</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin sexy-border($color, $witdh) {
-  border: {
-    color: $color;
-    width: $width;
-    style: dashed;
-  }
-}
-
-p { @include secy-border(blue, 1in); }
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>p {
-  border-color: blue;
-  border-width: 1in;
-  border-style: dashed;
-}
-</code></pre>
-
-<h5>Mixin default value</h5>
-
-<p>example.scss</p>
-
-<pre><code>@mixin sexy-border($color, $width: 1in) {
-  border: {
-    color: $color;
-    width: $width;
-    style: dashed;
-  }
-}
-p { @include sexy-border(blue); }
-h1 { @include sexy-border(blue, 2in); }
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>p {
-  border-color: blue;
-  border-width: 1in;
-  border-style: dashed;
-}
-h1 {
-  border-color: blue;
-  border-width: 2in;
-  border-style: dashed;
-}
-</code></pre>
-
-<h4>Keyword Arguments</h4>
-
-<p>example.scss</p>
-
-<pre><code>p { @include sexy-border($color: blue); }
-h1 { @include sexy-border($color: blue, $width: 2in); }
-</code></pre>
-
-<h4>Varialbe Arguments</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin box-shadow($shadows…) {
-  -moz-box-shadow: $shadows;
-  -webkit-box-shadow: $shadows;
-  box-shadow: $shadows;
-}
-.shadows {
-  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>.shadowed {
-  -moz-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
-  -webkit-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
-  box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
-}
-</code></pre>
-
-<h5>Variable arguments calling a mixin</h5>
-
-<p>example.scss</p>
-
-<pre><code>@mixin colors($text, $background, $border) {
-  color: $text;
-  background-color: $background;
-  border-color: $border;
-}
-
-$values: #ff0000, #00ff00, #0000ff;
-.primary {
-  @include colors($values…);
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>.primary {
-  color: #ff0000;
-  background-color: #00ff00;
-  border-color: #0000ff;
-}
-</code></pre>
-
-<h5>wrap mixin and add styles change argument</h5>
-
-<pre><code>@mixin wrapped-stylish-mixin($args…) {
-   font-weight: bold;
-   @include stylish-mixin($args…);
-}
-.stylish {
-  @include wrapped-stylish-mixin(#00ff00, $width: 100px);
-}
-</code></pre>
-
-<h4>Passing Content Blocks to a Mixin</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin apply-to-ie6-only {
-  * html {
-    @content;
-  }
-}
-@include apply-to-ie6-only {
-  #logo {
-    background-image: url(/logo.gif);
-  }
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>* html #logo {
-  background-image: url(/logo.gif);
-}
-</code></pre>
-
-<h4>Variable Scope and Content Blocks</h4>
-
-<p>example.scss</p>
-
-<pre><code>$color: white;
-  @mixin colors($color: blue) {
-  background-color: $color;
-  @content;
-  border-color: $color;
-}
-.colors {
-  @include colors { color: $color; }
-}
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>.colors {
-  background-color: blue;
-  color: white;
-  border-color: blue;
-}
-</code></pre>
-
-<p>example-02.scss</p>
-
-<pre><code>#sidebar {
-  $sidebar-width: 300px;
-  width: $sidebar-width;
-  @include smartphone {
-    width: $sidebar-width / 3;
-  }
-}
-</code></pre>
-
-<h4>Function Directives</h4>
-
-<p>example.scss</p>
-
-<pre><code>$grid-width: 40px;
-$gutter-width: 10px;
-
-@function grid-width($n) {
-  @return $n * $grid-width + ($n - 1) * $gutter-width;
-}
-
-#sidebar { width: grid-width(5); }
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>#sidebar {
-  width: 240px; }
-</code></pre>
+<h3>@if</h3>
+
+<figure class='code'><figcaption><span>if.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@if</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span> <span class="err">{</span> <span class="no">border</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="no">solid</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="k">@if</span> <span class="mi">5</span> <span class="o">&lt;</span> <span class="mi">3</span>      <span class="err">{</span> <span class="no">border</span><span class="o">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="no">dotted</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="k">@if</span> <span class="n">nul</span>        <span class="err">{</span> <span class="no">border</span><span class="o">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="no">double</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>if.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">3px</span> <span class="k">double</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>@if @else</h3>
+
+<figure class='code'><figcaption><span>if-else.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$type</span><span class="o">:</span> <span class="n">monster</span><span class="err">;</span>
+</span><span class='line'><span class="nt">p</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@if</span> <span class="nv">$type</span> <span class="o">==</span> <span class="n">ocean</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nb">blue</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">}</span><span class="err"> </span><span class="na">@else</span><span class="err"> </span><span class="na">if</span><span class="err"> </span><span class="na">$type</span><span class="o"> ==</span> <span class="n">matador</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">}</span><span class="err"> </span><span class="na">@else</span><span class="err"> </span><span class="na">if</span><span class="err"> </span><span class="na">$type</span><span class="o"> ==</span> <span class="n">monster</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nb">green</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span> <span class="o">@</span><span class="nt">else</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nb">black</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>if-else.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>@for</h3>
+
+<p><code>from</code>은 시작값 <code>through</code>는 최종 값입니다. <code>$i</code>값은 시작값 - 최종값 까지 1씩 더해 집니다.</p>
+
+<figure class='code'><figcaption><span>for.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@for</span> <span class="nv">$i</span> <span class="ow">from</span> <span class="mi">1</span> <span class="ow">through</span> <span class="mi">3</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">.item-#{$i}</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">width</span><span class="o">:</span> <span class="mi">2</span><span class="kt">em</span> <span class="o">*</span> <span class="nv">$i</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>for.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.item-1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">2em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.item-2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">4em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.item-3</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">6em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>@each</h3>
+
+<p><code>puma</code>, <code>sea-slug</code>, <code>egret</code>, <code>salamander</code>값들을 순서대로 <code>#{$animal}</code>값에 보간 합니다.</p>
+
+<figure class='code'><figcaption><span>each.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@each</span> <span class="err">$</span><span class="nt">animal</span> <span class="nt">in</span> <span class="nt">puma</span><span class="o">,</span> <span class="nt">sea-slug</span><span class="o">,</span> <span class="nt">egret</span><span class="o">,</span> <span class="nt">salamander</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nc">.</span><span class="si">#{</span><span class="nv">$animal</span><span class="si">}</span><span class="nc">-icon</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">background-image</span><span class="o">:</span> <span class="sx">url(&#39;/images/</span><span class="si">#{</span><span class="nv">$animal</span><span class="si">}</span><span class="sx">.png&#39;)</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>each.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.puma-icon</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&#39;/images/puma.png&#39;)</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.sea-slug</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&#39;/images/sea-slug.png&#39;)</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.egret</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&#39;/images/egret.png&#39;)</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.salamander</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&#39;/images/salamander.png&#39;)</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>@while</h3>
+
+<p>조건에 충족할때가지 반복 합니다.</p>
+
+<figure class='code'><figcaption><span>while.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$i</span><span class="o">:</span> <span class="mi">6</span><span class="err">;</span>
+</span><span class='line'><span class="k">@while</span> <span class="nv">$i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">.item-#{$i}</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">width</span><span class="o">:</span> <span class="mi">2</span><span class="kt">em</span> <span class="o">*</span> <span class="nv">$i</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>  <span class="nv">$i</span><span class="o">:</span> <span class="nv">$i</span> <span class="o">-</span> <span class="mi">2</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>while.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.item-6</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">12em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.item-4</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">8em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.item-2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">4em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Mixin Directives</h2>
+
+<h3>Defining a Mixin: @mixin</h3>
+
+<p><code>@mixin</code>을 정의 합니다. <code>@mixin</code> 이름을 <code>large-text</code>로 정희 하고 <code>large-text</code>로 호출 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>mixin.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> large-text</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">family</span><span class="o">:</span> <span class="n">Arial</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">size</span><span class="o">:</span> <span class="mi">20</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="mh">#ff0000</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Mixins 부모 속성 포함</h3>
+
+<figure class='code'><figcaption><span>mixin-parent.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> clearfix</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">display</span><span class="o">:</span> <span class="no">inline</span><span class="o">-</span><span class="no">block</span><span class="err">;</span>
+</span><span class='line'>  <span class="k">&amp;</span><span class="nd">:after</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">content</span><span class="o">:</span> <span class="s2">&quot;.&quot;</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">display</span><span class="o">:</span> <span class="no">block</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">height</span><span class="o">:</span> <span class="mi">0</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">clear</span><span class="o">:</span> <span class="no">both</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">visibility</span><span class="o">:</span> <span class="no">hidden</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="na">*</span><span class="err"> </span><span class="na">html</span><span class="err"> </span><span class="na">&amp;</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">height</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Mixin 호출: @include</h3>
+
+<p>선언된 Mixin은 @include로 불러 올수 있습니다.</p>
+
+<figure class='code'><figcaption><span>include.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> large-text</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">font</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">family</span><span class="o">:</span> <span class="n">Arial</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">size</span><span class="o">:</span> <span class="mi">20</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="mh">#ff0000</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.page-title</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> large-text</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">padding</span><span class="o">:</span> <span class="mi">4</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">margin-top</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>include.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.page-title</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-family</span><span class="o">:</span> <span class="n">Arial</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#ff0000</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">padding</span><span class="o">:</span> <span class="m">4px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">margin-top</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>mixin-02.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> silly-links</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nb">blue</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@include</span><span class="nd"> silly-links</span><span class="err">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>mixin-02.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Mixin 안에 Mixin @include</h3>
+
+<p>mixin 호출도 연계가 됩니다 <code>compound</code>를 호출 하면 <code>heighlighted-background</code>, <code>header-text</code>가 불립니다.</p>
+
+<figure class='code'><figcaption><span>mixin-in-mixin.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> compound</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> highlighted-background</span><span class="err">;</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> header-text</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@mixin</span><span class="nf"> highlighted-background</span> <span class="err">{</span> <span class="no">background-color</span><span class="o">:</span> <span class="mh">#fc0</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="k">@mixin</span><span class="nf"> header-text</span> <span class="err">{</span> <span class="no">font-size</span><span class="o">:</span> <span class="mi">20</span><span class="kt">px</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">a</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@inlucde</span> <span class="nt">compound</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>mixin-in-mixin.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#fc0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">20px</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Arguments</h3>
+
+<p><code>@mixin</code> 호출시 인자 전달이 가능 합니다.</p>
+
+<figure class='code'><figcaption><span>argument.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> sexy-border</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="nv">$witdh</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nv">$color</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">width</span><span class="o">:</span> <span class="nv">$width</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">style</span><span class="o">:</span> <span class="no">dashed</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">p</span> <span class="err">{</span> <span class="o">@</span><span class="nt">include</span> <span class="nt">secy-border</span><span class="o">(</span><span class="nt">blue</span><span class="o">,</span> <span class="nt">1in</span><span class="o">);</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>argument.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span> <span class="m">1in</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-style</span><span class="o">:</span> <span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Mixin default value</h3>
+
+<p>기본값을 선언해줄수 있고 인자 전달이 없으면 기본 인자를 사용합니다.</p>
+
+<figure class='code'><figcaption><span>mixin-default-value.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> sexy-border</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="nv">$width</span><span class="o">:</span> <span class="mi">1</span><span class="kt">in</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">border</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">color</span><span class="o">:</span> <span class="nv">$color</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">width</span><span class="o">:</span> <span class="nv">$width</span><span class="err">;</span>
+</span><span class='line'>    <span class="na">style</span><span class="o">:</span> <span class="no">dashed</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nt">p</span> <span class="err">{</span> <span class="o">@</span><span class="nt">include</span> <span class="nt">sexy-border</span><span class="o">(</span><span class="nt">blue</span><span class="o">);</span> <span class="err">}</span>
+</span><span class='line'><span class="nt">h1</span> <span class="err">{</span> <span class="o">@</span><span class="nt">include</span> <span class="nt">sexy-border</span><span class="o">(</span><span class="nt">blue</span><span class="o">,</span> <span class="nt">2in</span><span class="o">);</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>mixin-default-value.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span> <span class="m">1in</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-style</span><span class="o">:</span> <span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">h1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span> <span class="m">2in</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-style</span><span class="o">:</span> <span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Keyword Arguments</h3>
+
+<p>변수에 정의 하여 명시적으로 값을 전달 할수도 있습니다.</p>
+
+<figure class='code'><figcaption><span>keyword.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="na">p</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">@include</span><span class="err"> </span><span class="na">sexy-border($color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">)</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="na">h1</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">@include</span><span class="err"> </span><span class="na">sexy-border($color</span><span class="o">:</span> <span class="nb">blue</span><span class="o">,</span> <span class="nv">$width</span><span class="o">:</span> <span class="mi">2</span><span class="kt">in</span><span class="p">)</span><span class="err">;</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Varialbe Arguments</h3>
+
+<p>다수의 인자를 전달 받을때는 <code>...</code>을 사용 해야 합니다.</p>
+
+<figure class='code'><figcaption><span>variable-argument.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> box-shadow</span><span class="p">(</span><span class="nv">$shadows</span><span class="err">…</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">-moz-box-shadow</span><span class="o">:</span> <span class="nv">$shadows</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">-webkit-box-shadow</span><span class="o">:</span> <span class="nv">$shadows</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">box-shadow</span><span class="o">:</span> <span class="nv">$shadows</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.shadows</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> box-shadow</span><span class="p">(</span><span class="mi">0</span><span class="kt">px</span> <span class="mi">4</span><span class="kt">px</span> <span class="mi">5</span><span class="kt">px</span> <span class="mh">#666</span><span class="o">,</span> <span class="mi">2</span><span class="kt">px</span> <span class="mi">6</span><span class="kt">px</span> <span class="mi">10</span><span class="kt">px</span> <span class="mh">#999</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>variable-argument.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.shadowed</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="m">0px</span> <span class="m">4px</span> <span class="m">5px</span> <span class="m">#666</span><span class="o">,</span> <span class="m">2px</span> <span class="m">6px</span> <span class="m">10px</span> <span class="m">#999</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="m">0px</span> <span class="m">4px</span> <span class="m">5px</span> <span class="m">#666</span><span class="o">,</span> <span class="m">2px</span> <span class="m">6px</span> <span class="m">10px</span> <span class="m">#999</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="m">0px</span> <span class="m">4px</span> <span class="m">5px</span> <span class="m">#666</span><span class="o">,</span> <span class="m">2px</span> <span class="m">6px</span> <span class="m">10px</span> <span class="m">#999</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Variable arguments calling a mixin</h3>
+
+<p><code>@mixin</code> 호출시 인자 목록을 전달 할수있습니다.</p>
+
+<figure class='code'><figcaption><span>call-mixin.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> colors</span><span class="p">(</span><span class="nv">$text</span><span class="o">,</span> <span class="nv">$background</span><span class="o">,</span> <span class="nv">$border</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nv">$text</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="nv">$background</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">border-color</span><span class="o">:</span> <span class="nv">$border</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$values</span><span class="o">:</span> <span class="mh">#ff0000</span><span class="o">,</span> <span class="mh">#00ff00</span><span class="o">,</span> <span class="mh">#0000ff</span><span class="err">;</span>
+</span><span class='line'><span class="nc">.primary</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> colors</span><span class="p">(</span><span class="nv">$values</span><span class="err">…</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>call-mixin.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.primary</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#ff0000</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#00ff00</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span> <span class="m">#0000ff</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>wrap mixin and add styles change argument</h3>
+
+<p><code>@mixin</code>에 전달 되는 인자를 또다르 <code>@mixin</code>에 전달 할수 있습니다. 다음의 코드는 컴파일은 되지 않습니다. 컴파일을 하려면
+<code>@mixin stylist-mixin</code>을 선언해 주어야 합니다.</p>
+
+<figure class='code'><figcaption><span>warp-mixin.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> wrapped-stylish-mixin</span><span class="p">(</span><span class="nv">$args</span><span class="err">…</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">font-weight</span><span class="o">:</span> <span class="no">bold</span><span class="err">;</span>
+</span><span class='line'>    <span class="k">@include</span><span class="nd"> stylish-mixin</span><span class="p">(</span><span class="nv">$args</span><span class="err">…</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.stylish</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> wrapped-stylish-mixin</span><span class="p">(</span><span class="mh">#00ff00</span><span class="o">,</span> <span class="nv">$width</span><span class="o">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Passing Content Blocks to a Mixin</h3>
+
+<p><code>@content</code> <code>html</code>에 집어 널수도 있습니다.</p>
+
+<figure class='code'><figcaption><span>mixin-content.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@mixin</span><span class="nf"> apply-to-ie6-only</span> <span class="err">{</span>
+</span><span class='line'>  <span class="o">*</span> <span class="nt">html</span> <span class="err">{</span>
+</span><span class='line'>    <span class="k">@content</span><span class="o">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="k">@include</span><span class="nd"> apply-to-ie6-only</span> <span class="err">{</span>
+</span><span class='line'>  <span class="nn">#logo</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">background-image</span><span class="o">:</span> <span class="sx">url(/logo.gif)</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>mixin-content.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="o">*</span> <span class="nt">html</span> <span class="nn">#logo</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">background-image</span><span class="o">:</span> <span class="sx">url(/logo.gif)</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Variable Scope and Content Blocks</h3>
+
+<p>변수는 <code>{}</code>안에서 지역적으로 사용 됩니다.</p>
+
+<figure class='code'><figcaption><span>scope.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$color</span><span class="o">:</span> <span class="nb">white</span><span class="err">;</span>
+</span><span class='line'>  <span class="k">@mixin</span><span class="nf"> colors</span><span class="p">(</span><span class="nv">$color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">background-color</span><span class="o">:</span> <span class="nv">$color</span><span class="err">;</span>
+</span><span class='line'>  <span class="k">@content</span><span class="o">;</span>
+</span><span class='line'>  <span class="na">border-color</span><span class="o">:</span> <span class="nv">$color</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="nc">.colors</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> colors</span> <span class="err">{</span> <span class="no">color</span><span class="o">:</span> <span class="nv">$color</span><span class="err">;</span> <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>scope.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.colors</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>scope-02.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#sidebar</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">$sidebar-width</span><span class="o">:</span> <span class="mi">300</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>  <span class="na">width</span><span class="o">:</span> <span class="nv">$sidebar-width</span><span class="err">;</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> smartphone</span> <span class="err">{</span>
+</span><span class='line'>    <span class="na">width</span><span class="o">:</span> <span class="nv">$sidebar-width</span> <span class="o">/</span> <span class="mi">3</span><span class="err">;</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Function Directives</h3>
+
+<figure class='code'><figcaption><span>function.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="na">$grid-width</span><span class="o">:</span> <span class="mi">40</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'><span class="na">$gutter-width</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="err">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@function</span> <span class="nt">grid-width</span><span class="o">(</span><span class="err">$</span><span class="nt">n</span><span class="o">)</span> <span class="err">{</span>
+</span><span class='line'>  <span class="k">@return</span> <span class="err">$</span><span class="nt">n</span> <span class="o">*</span> <span class="err">$</span><span class="nt">grid-width</span> <span class="o">+</span> <span class="o">(</span><span class="err">$</span><span class="nt">n</span> <span class="nt">-</span> <span class="nt">1</span><span class="o">)</span> <span class="o">*</span> <span class="err">$</span><span class="nt">gutter-width</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">#sidebar</span><span class="err"> </span><span class="na">{</span><span class="err"> </span><span class="na">width</span><span class="o">:</span> <span class="nf">grid-width</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="err">;</span> <span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>function.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#sidebar</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">240px</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scss | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/scss/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-29T18:28:47+09:00</updated>
+  <updated>2012-11-30T19:52:58+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -18,278 +18,337 @@
     <link href="http://rumidier.github.com/blog/2012/11/26/sass/"/>
     <updated>2012-11-26T18:08:00+09:00</updated>
     <id>http://rumidier.github.com/blog/2012/11/26/sass</id>
-    <content type="html"><![CDATA[<h3>CSS Extensions</h3>
+    <content type="html"><![CDATA[<h1>CSS의 확장 Sass</h1>
 
-<h4>Nested Rules</h4>
+<h2>Nested Rules</h2>
 
-<p>.scss 중첩 규칙의 일반적인 사용법</p>
+<h3><code>.scss</code> 중첩 규칙 - 1</h3>
 
-<p>example-01.scss</p>
+<p>``` sass example-01.scss</p>
 
-<pre><code>#main p {
-  color: #00ff00;
-  width: 97%;
+<h1>main p {</h1>
 
-  .redbox {
-    boackground-color: #ff0000;
-    color: #0000;
-  }
+<p>  color: #00ff00;
+  width: 97%;</p>
+
+<p>  .redbox {</p>
+
+<pre><code>boackground-color: #ff0000;
+color: #0000;
+</code></pre>
+
+<p>  }
 }
-</code></pre>
+<code>
+컴파일된 `.css`    `#main p`를 `.redbox`가 상속 받으면 2칸 들여 쓰기 됩니다.
+</code> css example-01.css</p>
 
-<p>example-01.css</p>
+<h1>main p {</h1>
 
-<pre><code>#main p {
-  color: #00ff00;
+<p>  color: #00ff00;
   wdth: 97%; }
-  #main p .redbox {
-    background-color: #ff0000;
-    color: #000000; }
+  #main p .redbox {</p>
+
+<pre><code>background-color: #ff0000;
+color: #000000; }
 </code></pre>
 
-<p>example-02.scss</p>
+<p>```</p>
 
-<pre><code>#main {
-  width: 97%;
+<h3><code>.scss</code>  중첩 규칙 - 2</h3>
 
-  p, div {
-    font-size: 2em;
-    a { font-weight: bold; }
-  }
+<p>모든 selector에 <code>#main</code>이 상속 됩니다.</p>
+
+<p>``` sass example-02.scss</p>
+
+<h1>main {</h1>
+
+<p>  width: 97%;</p>
+
+<p>  p, div {</p>
+
+<pre><code>font-size: 2em;
+a { font-weight: bold; }
+</code></pre>
+
+<p>  }
   pre { font-size: 3em; }
 }
+```</p>
+
+<p>``` css example-02.css</p>
+
+<h1>mian {</h1>
+
+<p>  width: 97%; }
+  #mian p, #main div {</p>
+
+<pre><code>font-size: 2em; }
+#mian p a, #main div a {
+  font-weight: bold; }
 </code></pre>
 
-<p>example-02.css</p>
+<p>  #main pre {</p>
 
-<pre><code>#mian {
-  width: 97%; }
-  #mian p, #main div {
-    font-size: 2em; }
-    #mian p a, #main div a {
-      font-weight: bold; }
-  #main pre {
-    font-size: 3em; }
+<pre><code>font-size: 3em; }
 </code></pre>
 
-<h4>Referencing Parent Selectors: &amp;</h4>
+<p>```</p>
 
-<p>'&amp;'를 사용함으로서 부모 셀렉터를 상속 받을수 있습니다.</p>
+<h2>부모 셀렉터의 상속자: &amp;</h2>
 
-<p>example-03.scss</p>
+<p><code>&amp;</code>를 사용함으로서 부모 셀렉터를 상속 받을수 있습니다.</p>
 
-<pre><code>a {
+<p><code>sass example-03.scss
+a {
   font-weight: bold;
   text-decoration: none;
   &amp;:hover { text-decoration: underline; }
   body.firefox &amp; { font-weight: normal; }
 }
-</code></pre>
+</code></p>
 
-<p>example-03.css</p>
+<p><code>&amp;</code>은 부모 <code>a</code>를 상속 받습니다.</p>
 
-<pre><code>a {
+<p>``` css example-03.css
+a {
   font-weight: bold;
   text-decoration: none; }
-  a:hover {
-    text-decoration: underline; }
-  body.firefox a {
-    font-weight: normal; }
+  a:hover {</p>
+
+<pre><code>text-decoration: underline; }
 </code></pre>
 
-<p>example-04.scss</p>
+<p>  body.firefox a {</p>
 
-<pre><code>#main {
-  color: black;
-  a {
-    font-weight: bold;
-    &amp;:hover { color: red; }
-  }
+<pre><code>font-weight: normal; }
+</code></pre>
+
+<p>```</p>
+
+<p>상속자의 상위 상속자도 포함 됩니다.</p>
+
+<p>``` sass example-04.scss</p>
+
+<h1>main {</h1>
+
+<p>  color: black;
+  a {</p>
+
+<pre><code>font-weight: bold;
+&amp;:hover { color: red; }
+</code></pre>
+
+<p>  }
 }
+```</p>
+
+<p>최상의 부모인 <code>#main</code>을 포함 합니다.</p>
+
+<p>``` css example-04.css</p>
+
+<h1>main {</h1>
+
+<p>  color: black; }
+  #main a {</p>
+
+<pre><code>font-weight: bold; }
+  #main a:hover {
+color: red; }
 </code></pre>
 
-<p>example-04.css</p>
+<p>```</p>
 
-<pre><code>#main {
-  color: black; }
-  #main a {
-    font-weight: bold; }
-      #main a:hover {
-        color: red; }
+<h2>Nested Properties</h2>
+
+<p>태그의 속성도 상속 합니다.</p>
+
+<p>``` sass example-05.scss
+.funky {
+  font: {</p>
+
+<pre><code>family: fantasy;
+size: 30em;
+weight: bold;
 </code></pre>
 
-<h4>Nested Properties</h4>
-
-<p>Nested의 또 다른 기능으로 특성들을 상속 합니다.</p>
-
-<p>example-05.scss</p>
-
-<pre><code>.funky {
-  font: {
-    family: fantasy;
-    size: 30em;
-    weight: bold;
-  }
+<p>  }
 }
-</code></pre>
+```</p>
 
-<p>example-05.css</p>
+<p><code>font</code>의 속성들이 상속 됩니다.</p>
 
-<pre><code>.funky {
+<p><code>css example-05.css
+.funky {
   font-family: fantasy;
   font-szie: 30em;
   font-weight: bold; }
+</code></p>
+
+<p>개별 태그와 속성 상속 예 입니다.</p>
+
+<p>``` sass example-06.scss
+.funky {
+  font: 2px/3px {</p>
+
+<pre><code>family: fantasy;
+size: 30em;
+weight: bold;
 </code></pre>
 
-<p>example-06.scss</p>
-
-<pre><code>.funky {
-  font: 2px/3px {
-    family: fantasy;
-    size: 30em;
-    weight: bold;
-  }
+<p>  }
 }
+```</p>
+
+<p>태그는 따로 선언 되었습니다.</p>
+
+<p>``` css example-06.css
+.funky {
+  font: 2px/3px;</p>
+
+<pre><code>font-family: fantasy;
+font-size: 30em;
+font-weight: bold; }
 </code></pre>
 
-<p>example-06.css</p>
+<p>```</p>
 
-<pre><code>.funky {
-  font: 2px/3px;
-    font-family: fantasy;
-    font-size: 30em;
-    font-weight: bold; }
+<h2>주석: /* */ and //</h2>
+
+<p>//한줄 주석으로 변환시 <code>.css</code>에 표시 되지않습니다.
+/* */ 다중 주석 문으로 .css변환시에도 남아 있습니다.</p>
+
+<p>``` sass example-07.scss
+/* multiple line</p>
+
+<pre><code>is not delete in css */
 </code></pre>
 
-<h4>Comments: /* */ and //</h4>
-
-<p>example-07.scss</p>
-
-<p>//한줄 주석으로 변환시 .css에 없고 /* */ 다중 주석 문으로 .css변환시에도 남아 있습니다.</p>
-
-<pre><code>/* multiple line
-   is not delete in css */
-body { color: black; }   
+<p>body { color: black; }
 // one line is delete in css
 a { color: green; }
+```</p>
+
+<p>``` css example-07.css
+/* multiple line</p>
+
+<pre><code>is not delete in css */
 </code></pre>
 
-<p>example-07.css</p>
-
-<pre><code>/* multiple line
-   is not delete in css */
-body { color: black; }
+<p>body { color: black; }
 a { color: green; }
-</code></pre>
+```</p>
 
-<h4>Variables: $</h4>
+<h2>변수: $</h2>
 
-<p>.scss의 변수는 $에 선언 합니다.</p>
+<p>변수 선언 기호는 <code>$</code>입니다.</p>
 
-<p>example-08.scss</p>
+<p>``` sass example-08.scss
+$width: 5em;</p>
 
-<pre><code>$width: 5em;
-#main {
-  width: $width;
+<h1>main {</h1>
+
+<p>  width: $width;
 }
-</code></pre>
+```</p>
 
-<p>example-08.css</p>
+<p>선언된 <code>$width: 5em</code>값이 적용 됩니다.</p>
 
-<pre><code>#main {
-  width: 5em;
+<p>``` css example-08.css</p>
+
+<h1>main {</h1>
+
+<p>  width: 5em;
 }
+```</p>
+
+<h2>문자열</h2>
+
+<p>변수 선언후 문자열에 <code>#{$string}</code>을 통해서 사용 할수 있습니다.</p>
+
+<p>``` sass example-09.scss
+@mixin firefox-message($selector) {
+  body.firefox #{$selector}:before {</p>
+
+<pre><code>content: "Hi, Firefox users!";
 </code></pre>
 
-<h4>Strings</h4>
-
-<p>문자열은 #{$string}를 통해서 사용 할수 있습니다.</p>
-
-<p>example-09.scss</p>
-
-<pre><code>@mixin firefox-message($selector) {
-  body.firefox #{$selector}:before {
-    content: "Hi, Firefox users!";
-  }
+<p>  }
 }
 @include firefox-message(".header");
-</code></pre>
+```</p>
 
-<p>example-09.css</p>
+<p><code>$selector</code>에 인자로 <code>.header</code>을 받고 <code>#{$selector}</code>값에 대입 합니다.</p>
 
-<pre><code>body.firefox .header:before {
+<p><code>css example-09.css
+body.firefox .header:before {
   content: "Hi, Firefox users!"; }
-</code></pre>
+</code></p>
 
-<h4>Number Operations</h4>
+<h2>숫자 연산</h2>
 
 <p>in와 pt를 같이 사용하면 in로 변환되어 계산 됩니다.</p>
 
-<p>example-10.scss</p>
-
-<pre><code>p {
+<p><code>sass example-10.scss
+p {
   width: 1in + 8pt;
 }
-</code></pre>
+</code></p>
 
-<p>example-10.css</p>
-
-<pre><code>p {
+<p><code>css example-10.css
+p {
   width: 1.111in }
-</code></pre>
+</code></p>
 
-<h4>Division and /</h4>
+<h2>나누기 와 /</h2>
 
-<p>example-11.scss</p>
+<p><code>margin-left</code> 처럼 다른 인수와 연산을 하지 않으면 <code>.css</code>변환시 표기대로 변환 됩니다.</p>
 
-<p>margin-left 처럼 다른 인자와 연산을 하지 않으면 .css변환시 표기대로 변환 됩니다.</p>
-
-<pre><code>p {
+<p><code>sass example-11.scss
+p {
   font: 10px/8px;
   $width: 1000px;
   width: $width/2;
   height: (500px/2);
   margin-left: 5px + 8px/2px;
 }
-</code></pre>
+</code></p>
 
-<p>example-11.css</p>
+<p><code>font</code>의 값은 연산하지 않습니다.</p>
 
-<pre><code>p {
+<p><code>css example-11.css
+p {
   font: 10px/8px;
   width: 500px;
   height: 250px;
   margin-left: 9px;
 }
-</code></pre>
-
-<p>example-12.scss</p>
+</code></p>
 
 <p>변수에 할당하여 연산할수도 있습니다.</p>
 
-<pre><code>p {
+<p><code>sass example-12.scss
+p {
   $font-size: 12px;
   $line-height: 30px;
   font: #{$font-size}/#{$line-height};
 }
-</code></pre>
+</code></p>
 
-<p>example-12.css</p>
-
-<pre><code>p {
+<p><code>css example-12.css
+p {
   font: 12px/30px; }
-</code></pre>
+</code></p>
 
-<h4>Color Operations</h4>
+<h2>Color 연산</h2>
 
-<p>example-13.scss</p>
+<h3>Color의 덧셈 입니다.</h3>
 
-<p>Color의 덧셈 입니다.</p>
-
-<pre><code>p {
+<p><code>sass example-13.scss
+p {
   color: #010203 + #040506;
 }
-</code></pre>
+</code></p>
 
 <p>example-13.css</p>
 
@@ -297,402 +356,421 @@ a { color: green; }
   color: #050709; }
 </code></pre>
 
-<p>example-14.scss</p>
+<h3>Color의 곱셈 입니다.</h3>
 
-<p>Color의 곱셈 입니다.</p>
-
-<pre><code>p {
+<p><code>sass example-14.scss
+p {
   color: #010203 * 2;
 }
-</code></pre>
+</code></p>
 
-<p>example-14.css</p>
-
-<pre><code>p {
+<p><code>css example-14.css
+p {
   color: #020406; }
-</code></pre>
+</code></p>
 
-<p>example-15.scss</p>
+<h3>rgba 덧셈</h3>
 
-<p>rgba의 값들간에만 더하기를 합니다. 최소 값은 0이며 양측 덧셈 최대값은 255 입니다. 투명도가 동일 값이어야만 계산이 됩니다.</p>
+<p>최소 값은 0이며 양측 덧셈 최대값은 255 입니다. 투명도가 동일값(<code>0.75</code>) 이어야 계산이 됩니다.</p>
 
-<pre><code>p {
+<p><code>sass example-15.scss
+p {
   color: rgba(255, 0, 0, 0.75) + rgba(0, 255, 0, 0.75);
 }
-</code></pre>
+</code></p>
 
-<p>example-15.css</p>
-
-<pre><code>p {
+<p><code>css example-15.css
+p {
   color: rgba(255, 255, 0, 0.75); }
-</code></pre>
+</code></p>
 
-<p>example-16.scss</p>
+<p><code>opacify</code> 투명도값인 <code>0.5</code> + <code>0.3</code> 으로 계산 합니다.
+<code>transparentize</code>는 <code>0.5</code>의 값을 <code>0.25</code>로 변경합니다.</p>
 
-<p>opacify는 투명도값을 덧셈하고 transparentize는 0.5의 값을 0.25로 변경합니다.</p>
-
-<pre><code>$translucent-red: rgba(255, 0, 0, 0.5);
+<p><code>sass example-16.scss
+$translucent-red: rgba(255, 0, 0, 0.5);
 p {
   color: opacify($translucent-red, 0.3);
   background-color: transparentize($translucent-red, 0.25);
 }
-</code></pre>
+</code></p>
 
-<p>example-16.css</p>
-
-<pre><code>p {
+<p><code>css example-16.css
+p {
   color: rgba(255, 0, 0, 0.8);
   background-color: rgba(255, 0, 0, 0.25); }
-</code></pre>
+</code></p>
 
-<h4>String Operations</h4>
+<h2>문자열 연산</h2>
 
-<p>example-17.scss</p>
+<h3>문자열의 덧셈</h3>
 
-<p>문자열의 덧셈을 보여 주고 있습니다.</p>
+<p>일반적인 문자열 덧셈</p>
 
-<pre><code>p {
+<p><code>sass example-17.scss
+p {
   cursor: e + -resize;
 }
-</code></pre>
+</code></p>
 
-<p>example-17.css</p>
-
-<pre><code>p {
+<p><code>css example-17.css
+p {
   cursor: e-resize; }
-</code></pre>
+</code></p>
 
-<p>example-18.scss</p>
+<p>공백을 포함한 문자열의 덧셈 <code>""</code>로 감싸주게 됩니다.</p>
 
-<p>공백을 포함한 문자열의 덧셈을 보여 줍니다.</p>
-
-<pre><code>p:before {
+<p><code>sass example-18.scss
+p:before {
   content: "Foo " + Bar;
   font-family: sans- + "serif";
 }
-</code></pre>
+</code></p>
 
-<p>example-18.css</p>
-
-<pre><code>p:before {
+<p><code>css example-18.css
+p:before {
   content: "Foo Bar";
   font-family: sans-serif; }
-</code></pre>
+</code></p>
 
-<p>example-19.scss</p>
+<p><code>px</code>값과 <code>auto</code> 인자가 있을시 ( ) 없이도 <code>px</code>값 만 계산 합니다.</p>
 
-<p>px값과 auto 인자가 있을시 ( ) 없이도 px값 만 계산 합니다.</p>
-
-<pre><code>p {
+<p><code>sass example-19.scss
+p {
   margin: 3px + 4px auto;
 }
-</code></pre>
+</code></p>
 
-<p>example-19.css</p>
-
-<pre><code>p {
+<p><code>css example-19.css
+p {
   margin: 7px auto; }
-</code></pre>
+</code></p>
 
-<p>example-20.scss</p>
+<p>문자열 내에서 덧셈이 가능합니다.</p>
 
-<p>문자열 치환도 가능 합니다.</p>
-
-<pre><code>p:before {
+<p><code>sass example-20.scss
+p:before {
   content: "I ate #{5 + 10} pies!";
 }
-</code></pre>
+</code></p>
 
-<p>example-20.css</p>
-
-<pre><code>p:before {
+<p><code>css example-20.css
+p:before {
   content: "I ate 15 pies!"; }
-</code></pre>
-
-<p>example-21.scss</p>
+</code></p>
 
 <p>변수 값이 null일시 무시 합니다.</p>
 
-<pre><code>$value: null;
+<p><code>sass example-21.scss
+$value: null;
   p:before {
   content: "I ate #{$value} pies!";
 }
-</code></pre>
+</code></p>
 
-<p>example-21.css</p>
-
-<pre><code>p:before {
+<p><code>css example-21.css
+p:before {
   content: "I ate pies!"; }
-</code></pre>
+</code></p>
 
-<h4>Parentheses</h4>
+<h2>Parentheses(괄호)</h2>
 
-<p>example-22.scss</p>
+<p><code>( )</code>우선 순위로 계산 합니다.</p>
 
-<p>( )우선 순위로 계산 합니다.</p>
-
-<pre><code>p {
+<p><code>sass example-22.scss
+p {
   width: 1em + (2em * 3);
 }
-</code></pre>
+</code></p>
 
-<p>example-22.css</p>
-
-<pre><code>p {
+<p><code>css example-22.css
+p {
   width: 7em;
 }
-</code></pre>
+</code></p>
 
-<h4>Functions</h4>
+<h2>Functions(함수)</h2>
 
-<p>HSL ($hue, $saturation, $lightness), (색깔, 채도, 밝기)
-example-23.scss</p>
+<p><code>hsl ($hue, $saturation, $lightness)</code> 괄호의 값은 (색깔, 채도, 밝기)을 뜻합니다.</p>
 
-<pre><code>p {
+<p><code>sass example-23.scss
+p {
   color: hsl(0, 100%, 50%);
 }
+</code></p>
 
-example-23.css
-
+<p><code>css example-23.css
 p {
   color: red; }
-</code></pre>
+</code></p>
 
-<h4>Interpolation: #{}</h4>
+<h2>Interpolation: #{} (보간법)</h2>
 
-<p>example-24.scss</p>
+<p>문자 보간 하는 방법 입니다. <code>$name</code>값 <code>foo</code>와 <code>$attr</code>값 <code>border</code>을
+<code>#{$name}</code>, <code>#{$attr}</code>을 사용해 보간 합니다.</p>
 
-<p>문자 보간 하는 방법 입니다. foo와 border를 치환 합니다.</p>
-
-<pre><code>$name: foo;
+<p><code>sass example-24.scss
+$name: foo;
 $attr: border;
 p.#{$name} {
   #{$attr}-color: blue;
 }
-</code></pre>
+</code></p>
 
-<p>example-24.css</p>
-
-<pre><code>p.foo {
+<p><code>css example-24.css
+p.foo {
   border-color: blue;
 }
-</code></pre>
+</code></p>
 
-<p>example-25.scss</p>
+<p><code>px</code>값도 보간할수 있습니다.</p>
 
-<p>px 값들 또한 보간할수 있습니다.</p>
-
-<pre><code>p {
+<p><code>sass example-25.scss
+p {
   $font-size: 12px;
   $line-height: 30px;
   font: #{$font-size} / #{$line-height};
 }
-</code></pre>
+</code></p>
 
-<p>example-25.css</p>
+<p><code>css example-25.css
+p { font: 12px / 30px; }
+</code></p>
 
-<pre><code>p { font: 12px / 30px; }
-</code></pre>
+<h2>Variable Defaults: !default (기본 변수)</h2>
 
-<h4>Variable Defaults: !default</h4>
+<p><code>$content</code>값이 참인지 분별하여 거짓이면 <code>Second content?</code>값을 부여 합니다.
+참이므로 <code>$content</code>는 <code>First..</code>가 됩니다.
+<code>$new_content</code>는 거짓 이므로 "First time…"을 출력 합니다.</p>
 
-<p>example-26.scss</p>
-
-<p>$content값이 참인지 분별하여 참이 아니면 "Second content?"값을 부여 합니다. 참이므로 $content는 "First.."가 됩니다.
-$new_content는 참이 아니므로 "First time…"을 출력 합니다.</p>
-
-<pre><code>$content: "First content";
+<p>``` sass example-26.scss
+$content: "First content";
 $content: "Second content?" !default;
-$new_content: "First time reference" !default;
+$new_content: "First time reference" !default;</p>
 
-#main {
-  ccontent: $content;
+<h1>main {</h1>
+
+<p>  ccontent: $content;
   new-content: $new_content;
 }
-</code></pre>
+```</p>
 
-<p>example-26.css</p>
+<p>``` css example-26.css</p>
 
-<pre><code>#main {
-  content: "First content";
+<h1>main {</h1>
+
+<p>  content: "First content";
   new-content: "First time reference";
 }
-</code></pre>
+```</p>
 
-<p>example-27.scss</p>
+<p><code>$content</code>의 값이 <code>null</code>이므로 <code>!default</code>가 동작 합니다.</p>
 
-<p>$content의 값이 null이므로 !default가 동작 합니다.</p>
+<p>``` sass example-27.scss
+$content: null;
+$content: "Non-null content" !default;</p>
 
-<pre><code>$content: null;
-$content: "Non-null content" !default;
+<h1>main {</h1>
 
-#main {
-  content: $content;
+<p>  content: $content;
 }
-</code></pre>
+```</p>
 
-<p>example-27.css</p>
+<p>``` css example-27.css</p>
 
-<pre><code>#main {
-  content: "Non-null content";
+<h1>main {</h1>
+
+<p>  content: "Non-null content";
 }
-</code></pre>
+```</p>
 
 <h2>@-Rules and Directives</h2>
 
-<h4>import</h4>
+<h3>import</h3>
 
-<p>example-28.scss example</p>
+<p><code>.sass</code>, <code>.scss</code> 파일을 <code>@import</code>해서 작업 할수 있고 <code>.css</code>파일에 출력이 가능 합니다.</p>
 
-<pre><code>@import "foo.scss";
-or
-@import "foo";
-</code></pre>
+<p>``` sass example-28.scss</p>
 
-<p>example-28-01.scss example</p>
+<p>@import "foo.scss";  //  아래와 같은 의미 입니다.
+@import "foo";       //  위와 같은 의미 입니다.
+```</p>
 
-<pre><code>@import "foo.css";
+<p><code>.scss</code>, <code>.sass</code>외에도 <code>@import</code> 가능합니다.
+<code>sass example-28-01.scss
+@import "foo.css";
 @import "foo" screen;
 @import "http://foo.com/bar";
 @import url(foo);
-</code></pre>
+</code></p>
 
-<p>example-28-01.css</p>
-
-<pre><code>@import "foo.css";
+<p><code>css example-28-01.css
+@import "foo.css";
 @import "foo" screen;
 @import "http://foo.com/bar";
 @import url(foo);
-</code></pre>
+</code></p>
 
-<h4>multiple import</h4>
+<h3>multiple import(다중 호출)</h3>
 
-<p>여러개의 파일을 import할수 있습니다.</p>
+<p>여러개의 파일을 한번에 <code>@import</code>할수 있습니다.</p>
 
-<pre><code>@import "rounded-corners", "text-shadow";
-</code></pre>
+<p><code>sass example.scss
+@import "rounded-corners", "text-shadow";
+</code></p>
 
-<h4>interpolation #{}</h4>
+<h3>@import interpolation #{}</h3>
 
-<p>unqoute를 사용함으로써 변환시 문자열에 "" 제거 할수 있습니다.</p>
+<p> interpolation is only for CSS imports. As such, it only works with url() imports.</p>
 
-<pre><code>$family: unquote("Droid-Sans");
+<p> <code>sass example.scss
+$family: unquote("Droid-Sans");
 @import url("http://fonts.googleapis.com/css?family=\#{$family}");
-</code></pre>
+</code></p>
 
-<h4>Partials</h4>
+<h3>Partials</h3>
 
-<p>colors로 import를 하게 되면 기본적으로 .css 파일이 없는 상태에서 _color.scss파일을 import하게 되고 이도 없으면 비슷한 color.scss파일을 import합니다.</p>
+<p><code>colors</code>로 <code>@import</code>를 하게 되면 기본적으로 <code>.css</code> 파일이 없는 상태에서
+<code>_color.scss</code>파일을 <code>@import</code>하게 되고 이도 없으면 비슷한 <code>color.scss</code>파일을 import합니다.</p>
 
-<pre><code>@import "colors";
-</code></pre>
+<p><code>sass example.scss
+@import "colors";
+</code></p>
 
-<h4>Nested @import</h4>
+<h3>Nested @import</h3>
 
-<p>{ }에서 import를 하게 되면 selector 네임이 중첩 됩니다.</p>
+<p><code>{ }</code>에서 <code>@import</code>를 하게 되면 <code>.example</code>을 불러 옵니다.</p>
 
-<p>example-29.scss</p>
-
-<pre><code>.example {
+<p><code>sass \_example.scss
+.example {
   color: red;
 }
-</code></pre>
+</code></p>
 
-<p>example-29-01.scss</p>
+<p>``` sass example-29-01.scss</p>
 
-<pre><code>#main {
-  @import: "example";
+<h1>main {</h1>
+
+<p>  @import: "example";
 }
-</code></pre>
+```</p>
 
-<p>example-29-01.css</p>
+<p>``` css example-29-01.css</p>
 
-<pre><code>#main .example {
-  color: red;
+<h1>main .example {</h1>
+
+<p>  color: red;
 }
-</code></pre>
+```</p>
 
-<h4>@media</h4>
+<h3>@media</h3>
 
-<pre><code>.sidebar {
+<p>상단의 <code>.sidebar</code>를 상속 해서 손쉽게 <code>@media</code>옵션과 아닌 옵션을 따로
+선언 할수 있습니다.</p>
+
+<p>``` sass example.scss
+.sidebar {
   width: 300px;
-  @media screen and (orientation: landscape) {
-    width: 500px;
-  }
-}
+  @media screen and (orientation: landscape) {</p>
+
+<pre><code>width: 500px;
 </code></pre>
 
-<p>compile</p>
+<p>  }
+}
+```</p>
+
+<p>``` css example.css
+.sidebar {
+  width: 300px; }
+  @media screen and (orientation: landscape) {</p>
 
 <pre><code>.sidebar {
-  width: 300px; }
-  @media screen and (orientation: landscape) {
-    .sidebar {
-    width: 500px; } }
+width: 500px; } }
 </code></pre>
 
-<p>@media .scss</p>
+<p>```</p>
 
-<pre><code>@media screen {
-  .sidebar {
-    @media (orientation: landscape) {
-      width: 500px;
-    }
-  }
+<p><code>@media</code>안에 <code>@media</code>를 합칠수 있습니다.</p>
+
+<p>``` sass example.scss
+@media screen {
+  .sidebar {</p>
+
+<pre><code>@media (orientation: landscape) {
+  width: 500px;
 }
 </code></pre>
 
-<p>compile</p>
-
-<pre><code>@media screen and (orientation: landscape) {
-  .sidebar {
-    width: 500px; } }
+<p>  }
 }
+```</p>
+
+<p>``` css example.css
+@media screen and (orientation: landscape) {
+  .sidebar {</p>
+
+<pre><code>width: 500px; } }
 </code></pre>
 
-<p>@media .scss</p>
+<p>}
+```</p>
 
-<pre><code>$media: screen;
+<p><code>@media</code>에 SassScript 문법인 <code>#{}</code>를 사용 할수있습니다.</p>
+
+<p>``` sass example.scss
+$media: screen;
 $feature: -webkit-min-device-pixel-ratio;
-$value: 1.5;
+$value: 1.5;</p>
 
-@media #{$media} and ($feature: $value) {
-  .sidebar {
-    width: 500px; } }
-}
+<p>@media #{$media} and ($feature: $value) {
+  .sidebar {</p>
+
+<pre><code>width: 500px; } }
 </code></pre>
 
-<p>compile</p>
+<p>}
+```</p>
 
-<pre><code>@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
-  .sidebar {
-    width: 500px; } }
-}
+<p>``` css example.css
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  .sidebar {</p>
+
+<pre><code>width: 500px; } }
 </code></pre>
 
-<h4>@extend</h4>
+<p>}
+```</p>
 
-<p>markup</p>
+<h3>@extend</h3>
 
-<pre><code>&lt;div class="error seriousError"&gt;
+<p>``` html markup.html</p>
+
+<div class="error seriousError">
   Oh no! You've been hacked!
-&lt;/div&gt;
-</code></pre>
+</div>
 
-<p>styles -> 뭔가 문제가 있다는데?</p>
 
-<pre><code>.error {
+<p>```</p>
+
+<p><code>.error</code>, <code>.seriousError</code>이 개별적으로 선언 되어 있고 두개의 속성을 모두 가지기 위해서는
+클래스명을 두개다 선언해 주어야 합니다.</p>
+
+<p><code>css error.css
+.error {
   border: 1px #f00;
   background-color: #fdd;
 }
 .seriousError {
   border-width: 3px;
 }
-</code></pre>
+</code></p>
 
-<p>다른 styles</p>
+<p>다음은 <code>.seriousError</code>만 선언 하여도 <code>.error</code>가지 같이 적용 될수 있도록
+수정한 코드 입니다.</p>
 
-<pre><code>.error {
+<p><code>sass error.scss
+.error {
   border: 1px #f00;
   background-color: #fdd;
 }
@@ -700,28 +778,35 @@ $value: 1.5;
   @extend .error;
   border-width: 3px;
 }
-</code></pre>
+</code></p>
 
-<p>markup</p>
+<p>``` html markup.html</p>
 
-<pre><code>&lt;div class="error seriousError"&gt;
+<div class="error seriousError">
   Oh no! You've been hacked!
-&lt;/div&gt;
-&lt;div class="seriousError intrusion"&gt;&lt;/div&gt;
-</code></pre>
+</div>
+
+
+<div class="seriousError intrusion"></div>
+
+
+<p>```</p>
 
 <p>다른 스타일 추가</p>
 
-<pre><code>.error.intrusion {
+<p><code>sass example.scss
+.error.intrusion {
   background-image: url("/image/hacked.png");
 }
-</code></pre>
+</code></p>
 
-<p>How i Workd</p>
+<p>사용법</p>
 
-<p>example</p>
+<p><code>error.intrusion</code>을 정의해 주면 <code>@extend .error</code>에 같이 적용되어
+<code>.css</code>안에 <code>.seriousError</code>또한 생성 됩니다.</p>
 
-<pre><code>.error {
+<p><code>sass example.scss
+.error {
   border: 1px #f00;
   background-color: #fdd;
 }
@@ -732,11 +817,10 @@ $value: 1.5;
   @extend .error;
   border-width: 3px;
 }
-</code></pre>
+</code></p>
 
-<p>compile</p>
-
-<pre><code>.error, .seriousError {
+<p><code>css example.css
+.error, .seriousError {
   border: 1px #f00;
   background-color: #fdd;
 }
@@ -746,49 +830,53 @@ $value: 1.5;
 .seriousError {
   border-width: 3px;
 }
-</code></pre>
+</code></p>
 
-<h4>Extending Complex Selectors</h4>
+<h3>Extending Complex Selectors</h3>
 
-<p>.scss example</p>
+<p>Class selectors aren’t the only things that can be extended. It’s possible to extend any selector involving only a single element, such as .special.cool, a:hover, or a.user[href<sup>="http://"]</sup></p>
 
-<pre><code>.hoverlink {
+<p>속성을 한곳에만 정의 하고 <code>@extend</code>를 사용하여 같이 사용 할수 있습니다.</p>
+
+<p><code>sass example.scss
+.hoverlink {
   @extend a:hover;
 }
 a:hover {
   text-decoration: underline;
 }
-</code></pre>
+</code></p>
 
-<p>compile</p>
-
-<pre><code>a:hover, .hoverlink {
+<p><code>css example.css
+a:hover, .hoverlink {
   text-decoration: underline;
 }
-</code></pre>
+</code></p>
 
-<p>.scss example</p>
+<p><code>@extend a:hover</code>을 사용 하면 선택자에 <code>a.user:hover</code>에서 <code>a:hover</code>를 제외한 문자만을
+적용 합니다.</p>
 
-<pre><code>.hoverlink {
+<p><code>sass example.scss
+.hoverlink {
   @extend a:hover;
 }
 .comment a.user:hover {
   font-weight: bold;
 }
-</code></pre>
+</code></p>
 
-<p>compile</p>
-
-<pre><code>.comment a.user:hover, .comment .user.hoverlink {
+<p><code>css example.css
+.comment a.user:hover, .comment .user.hoverlink {
   font-weight: bold;
 }
-</code></pre>
+</code></p>
 
-<h4>Multiple Extends</h4>
+<h3>Multiple Extends</h3>
 
-<p>.scss</p>
+<p><code>.seriousError</code>이 <code>.error</code>,<code>.attention</code> 두가지 속성 모두에 포함 됩니다.</p>
 
-<pre><code>.error {
+<p><code>sass example.scss
+.error {
   border: 1px #f00;
   background-color: #fdd;
 }
@@ -801,11 +889,10 @@ a:hover {
   @extend .attention;
   border-width: 3px;
 }
-</code></pre>
+</code></p>
 
-<p>.compile</p>
-
-<pre><code>.error, .seriousError {
+<p><code>css example.css
+.error, .seriousError {
   border: 1px #f00;
   background-color: #fdd;
 }
@@ -816,13 +903,15 @@ a:hover {
 .seriousError {
   border-width: 3px;
 }
-</code></pre>
+</code></p>
 
-<h4>Chanining Extends</h4>
+<h3>Chanining Extends(확장 연결)</h3>
 
-<p>example.scss</p>
+<p><code>criticalError</code>에서 <code>@extend .seriousError</code>함으로써 <code>.seriousError</code>에서 확장한 <code>@extend error</code>
+까지 연결되서 확장 할수 있습니다.</p>
 
-<pre><code>.error {
+<p><code>sass example.scss
+.error {
   border: 1px #f00;
   background-color: #fdd;
 }
@@ -838,11 +927,10 @@ a:hover {
   left: 10%;
   right: 10%;
 }
-</code></pre>
+</code></p>
 
-<p>example.css</p>
-
-<pre><code>.error, .seriousError, .criticalEroor {
+<p><code>css example.css
+.error, .seriousError, .criticalEroor {
   border: 1px #f00;
   background-color: #fdd;
 }
@@ -856,170 +944,282 @@ a:hover {
   left: 10%;
   right: 10%;
 }
-</code></pre>
+</code></p>
 
-<h4>Selector Sequences</h4>
+<h3>Selector Sequences</h3>
 
-<p>example.scss</p>
+<p><code>&amp;</code>상속은 <code>a</code>와 <code>#fake-links .link</code> 모두 상속을 받습니다.</p>
 
-<pre><code>#fake-links .link {
-  @extend a;
-}
+<p>``` sass example.scss</p>
 
-a {
+<h1>fake-links .link {</h1>
+
+<p>  @extend a;
+}</p>
+
+<p>a {
   color: blue;
-  &amp;:hover {
-    text-decoration: underline;
-  }
-}
+  &amp;:hover {</p>
+
+<pre><code>text-decoration: underline;
 </code></pre>
 
-<p>example.css</p>
+<p>  }
+}
+```</p>
 
-<pre><code>a, #fake-links .link {
+<p>``` css example.css
+a, #fake-links .link {
   color: blue;
 }
-  a:hover, #fakelinks .link:hover {
-    text-decoration: underline;
-  }
+  a:hover, #fakelinks .link:hover {</p>
+
+<pre><code>text-decoration: underline;
 </code></pre>
 
-<h4>Merging Selector Sequences</h4>
+<p>  }
+```</p>
+
+<h3>Merging Selector Sequences</h3>
 
 <p>두개의 다른 시퀀스를 @extend 할때는 첫번재 시퀀스, 첫번재 + 두번째 시퀀스, 두번째 시퀀스 + 첫번째 시퀀스를 한다. 마지막 셀렉터 .fakelink는 두번재 + 첫번재 시퀀스 뒤에 오게 됩니다.(왜?)</p>
 
-<p>example.scss</p>
+<p>``` sass example.scss</p>
 
-<pre><code>#admin .tabbar a {
-  font-weight: bold;
-}
-#demo .overview .fakelink {
-  @extend a;
-}
-</code></pre>
+<h1>admin .tabbar a {</h1>
 
-<p>example.css</p>
+<p>  font-weight: bold;
+}</p>
 
-<pre><code>#admin .tabbar a,
-#admin .tabbar #demo .overview .fakelink,
-#demo .overview #admin .tabbar .fakelink {
-  font-weight: bold;
+<h1>demo .overview .fakelink {</h1>
+
+<p>  @extend a;
 }
-</code></pre>
+```</p>
+
+<p>``` css example.css</p>
+
+<h1>admin .tabbar a,</h1>
+
+<h1>admin .tabbar #demo .overview .fakelink,</h1>
+
+<h1>demo .overview #admin .tabbar .fakelink {</h1>
+
+<p>  font-weight: bold;
+}
+```</p>
 
 <p>두개의 시퀀스에 같은 셀렉터가 있을때.</p>
 
-<p>example.scss</p>
+<p>``` sass example.scss</p>
 
-<pre><code>#admin .tabbar a {
-  font-weight: bold;
+<h1>admin .tabbar a {</h1>
+
+<p>  font-weight: bold;
+}</p>
+
+<h1>admin .overview .fakelink {</h1>
+
+<p>  @extend a;
 }
-#admin .overview .fakelink {
-  @extend a;
+```</p>
+
+<p>``` css example.css</p>
+
+<h1>admin tabbar a,</h1>
+
+<h1>admin .tabbar .overview fakelink,</h1>
+
+<h1>admin .overview .tabbar .fakelink {</h1>
+
+<p>  font-weight: bold;
 }
-</code></pre>
+```</p>
 
-<p>example.css</p>
+<h3>@extend-Only Selectors</h3>
 
-<pre><code>#admin tabbar a,
-#admin .tabbar .overview fakelink,
-#admin .overview .tabbar .fakelink {
-  font-weight: bold;
-}
-</code></pre>
+<p>selector 이름만 확장 할수 있습니다.</p>
 
-<h4>@extend-Only Selectors</h4>
+<p>``` sass example.scss</p>
 
-<p>(잘 모르겠음))
-example.scss</p>
+<h1>context a%extreme {</h1>
 
-<pre><code>#context a%extreme {
-  color: blue;
+<p>  color: blue;
   font-weight: bold;
   font-size: 2em;
 }
 .notice {
   @extend %extreme;
 }
-</code></pre>
+```</p>
 
-<p>example.css</p>
+<p>``` css example.css</p>
 
-<pre><code>#context a.notice {
-  color: blue;
+<h1>context a.notice {</h1>
+
+<p>  color: blue;
   font-weight: bold;
   font-size: 2ex;
 }
+```</p>
+
+<h3>The !optional Flag</h3>
+
+<p>에러 발생시키는건데 왜 쓰는지 잘 모르겠습니다.</p>
+
+<pre><code>Normally when you extend a selector, it’s an error if that @extend doesn’t work. For example, if you write a.important {@extend .notice}, it’s an error if there are no selectors that contain .notice. It’s also an error if the only selector containing .notice is h1.notice, since h1 conflicts with a and so no new selector would be generated.
+
+Sometimes, though, you want to allow an @extend not to produce any new selectors. To do so, just add the !optional flag after the selector.
 </code></pre>
 
-<h4>The !optional Flag</h4>
+<p><code>sass example.scss
+a.important {
+  @extend .notice !optional;
+}
+</code></p>
 
-<p>(잘 모르겠음)</p>
+<h3>@extend in Directives</h3>
 
-<h4>@extend in Directives</h4>
+<pre><code>There are some restrictions on the use of @extend within directives such as @media. Sass is unable to make CSS rules outside of the @media block apply to selectors inside it without creating a huge amount of stylesheet bloat by copying styles all over the place. This means that if you use @extend within @media (or other CSS directives), you may only extend selectors that appear within the same directive block
+</code></pre>
 
-<h4>@debug</h4>
+<p>``` sass example.scss
+@media print {
+  .error {</p>
 
-<h4>@warn</h4>
+<pre><code>border: 1px #f00;
+background-color: #fdd;
+</code></pre>
+
+<p>  }
+  .seriousError {</p>
+
+<pre><code>@extend .error;
+border-width: 3px;
+</code></pre>
+
+<p>  }
+}
+```
+But this is an error:</p>
+
+<p>``` css example.css
+.error {
+  border: 1px #f00;
+  backgorund-color: #fdd;
+}
+@media print {
+  .seriousError {</p>
+
+<pre><code>// INVALID EXTEND: .error is used outside of the "@media print" directive
+@extend .error;
+border-width: 3px;
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h3>@debug</h3>
+
+<p><code>sass debug.scss
+@debug 10em + 12em;
+</code></p>
+
+<p><code>bash
+Line 1 DEBUG: 22em
+</code></p>
+
+<h3>@warn</h3>
+
+<p><code>.css</code> 컴파일시 조건에 해당 하면 경고문 출력</p>
+
+<p>``` sass warn.scss
+@mixin adjust-location($x, $y) {
+  @if unitless($x) {</p>
+
+<pre><code>@warn "Assuming #{$x} to be in pixels";
+  $x: 1px * $x;
+</code></pre>
+
+<p>  }
+  @if unitless($y) {</p>
+
+<pre><code>@warn "Assuming #{$y} to be in pixels";
+  $y: 1px * $y;
+</code></pre>
+
+<p>  }
+  position: relative; left: $x; top: $y;
+}
+```</p>
 
 <h2>Control Directives</h2>
 
-<h4>@if</h4>
+<h3>@if</h3>
 
-<p>example.scss</p>
-
-<pre><code>p {
+<p><code>sass if.scss
+p {
   @if 1 + 1 == 2 { border: 1px solid; }
   @if 5 &lt; 3      { border: 2px dotted; }
   @if nul        { border: 3px double; }
 }
-</code></pre>
+</code></p>
 
-<p>example.css</p>
-
-<pre><code>p {
+<p><code>css if.css
+p {
   border: 1px solid;
   border: 3px double;
 }
-</code></pre>
+</code></p>
 
-<h4>@if @else</h4>
+<h3>@if @else</h3>
 
-<p>example.scss</p>
-
-<pre><code>$type: monster;
+<p>``` sass if-else.scss
+$type: monster;
 p {
-  @if $type == ocean {
-    color: blue;
-  } @else if $type == matador {
-    color: red;
-  } @else if $type == monster {
-    color: green;
-  } @else {
-    color: black;
-  }
-}
+  @if $type == ocean {</p>
+
+<pre><code>color: blue;
 </code></pre>
 
-<p>example.css</p>
+<p>  } @else if $type == matador {</p>
 
-<pre><code>p {
+<pre><code>color: red;
+</code></pre>
+
+<p>  } @else if $type == monster {</p>
+
+<pre><code>color: green;
+</code></pre>
+
+<p>  } @else {</p>
+
+<pre><code>color: black;
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p><code>css if-else.css
+p {
   color: green;
 }
-</code></pre>
+</code></p>
 
-<h4>@for</h4>
+<h3>@for</h3>
 
-<p>example.scss</p>
+<p><code>from</code>은 시작값 <code>through</code>는 최종 값입니다. <code>$i</code>값은 시작값 - 최종값 까지 1씩 더해 집니다.</p>
 
-<pre><code>@for $i from 1 through 3 {
+<p><code>sass for.scss
+@for $i from 1 through 3 {
   .item-#{$i} { width: 2em * $i; }
 }
-</code></pre>
+</code></p>
 
-<p>example.css</p>
-
-<pre><code>.item-1 {
+<p><code>css for.css
+.item-1 {
   width: 2em;
 }
 .item-2 {
@@ -1028,22 +1228,25 @@ p {
 .item-3 {
   width: 6em;
 }
-</code></pre>
+</code></p>
 
-<h4>@each</h4>
+<h3>@each</h3>
 
-<p>example.scss</p>
+<p><code>puma</code>, <code>sea-slug</code>, <code>egret</code>, <code>salamander</code>값들을 순서대로 <code>#{$animal}</code>값에 보간 합니다.</p>
+
+<p>``` sass each.scss</p>
 
 <pre><code>@each $animal in puma, sea-slug, egret, salamander {
   .#{$animal}-icon {
-    background-image: url('/images/#{animal}.png');
+    background-image: url('/images/#{$animal}.png');
   }
 }
 </code></pre>
 
-<p>example.css</p>
+<p>```</p>
 
-<pre><code>.puma-icon {
+<p><code>css each.css
+.puma-icon {
   background-image: url('/images/puma.png');
 }
 .sea-slug {
@@ -1055,22 +1258,22 @@ p {
 .salamander {
   background-image: url('/images/salamander.png');
 }
-</code></pre>
+</code></p>
 
-<h4>@while</h4>
+<h3>@while</h3>
 
-<p>example.scss</p>
+<p>조건에 충족할때가지 반복 합니다.</p>
 
-<pre><code>$i: 6;
-@while $i &gt; 0 { 
+<p><code>sass while.scss
+$i: 6;
+@while $i &gt; 0 {
   .item-#{$i} { width: 2em * $i; }
   $i: $i - 2;
 }
-</code></pre>
+</code></p>
 
-<p>example.css</p>
-
-<pre><code>.item-6 {
+<p><code>css while.css
+.item-6 {
   width: 12em;
 }
 .item-4 {
@@ -1079,64 +1282,73 @@ p {
 .item-2 {
   width: 4em;
 }
+</code></p>
+
+<h2>Mixin Directives</h2>
+
+<h3>Defining a Mixin: @mixin</h3>
+
+<p><code>@mixin</code>을 정의 합니다. <code>@mixin</code> 이름을 <code>large-text</code>로 정희 하고 <code>large-text</code>로 호출 할수 있습니다.</p>
+
+<p>``` sass mixin.scss
+@mixin large-text {
+  font: {</p>
+
+<pre><code>family: Arial;
+size: 20px;
+weight: bold;
 </code></pre>
 
-<h3>Mixin Directives</h3>
-
-<h4>Defining a Mixin: @mixin</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin large-text {
-  font: {
-    family: Arial;
-    size: 20px;
-    weight: bold;
-  }
+<p>  }
   color: #ff0000;
 }
+```</p>
+
+<h3>Mixins 부모 속성 포함</h3>
+
+<p>``` sass mixin-parent.scss
+@mixin clearfix {
+  display: inline-block;
+  &amp;:after {</p>
+
+<pre><code>content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
 </code></pre>
 
-<h5>Mixins contain parent reference</h5>
-
-<p>example.scss</p>
-
-<pre><code>@mixin clearfix {
-  display: inline-block;
-  &amp;:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-  }
+<p>  }
   * html &amp; { height: 1px }
 }
+```</p>
+
+<h3>Mixin 호출: @include</h3>
+
+<p>선언된 Mixin은 @include로 불러 올수 있습니다.</p>
+
+<p>``` sass include.scss
+@mixin large-text {
+  font: {</p>
+
+<pre><code>family: Arial;
+size: 20px;
+weight: bold;
 </code></pre>
 
-<h4>Including a Mixin: @include</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin large-text {
-  font: {
-    family: Arial;
-    size: 20px;
-    weight: bold;
-  }
+<p>  }
   color: #ff0000;
-}
+}</p>
 
-.page-title {
+<p>.page-title {
   @include large-text;
   padding: 4px;
   margin-top: 10px;
 }
-</code></pre>
+```</p>
 
-<p>example.css</p>
-
-<pre><code>.page-title {
+<p><code>css include.css
+.page-title {
   font-family: Arial;
   font-size: 20px;
   font-weight: bold;
@@ -1144,83 +1356,100 @@ p {
   padding: 4px;
   margin-top: 10px;
 }
+</code></p>
+
+<p>``` sass mixin-02.scss
+@mixin silly-links {
+  a {</p>
+
+<pre><code>color: blue;
+background-color: red;
 </code></pre>
 
-<p>example.scss</p>
+<p>  }
+}</p>
 
-<pre><code>@mixin silly-links {
-  a {
-    color: blue;
-    background-color: red;
-  }
-}
+<p>@include silly-links;
+```</p>
 
-@include silly-links;
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>a {
+<p><code>css mixin-02.css
+a {
   color: blue;
   background-color: red;
 }
-</code></pre>
+</code></p>
 
-<h5>Mixin 안에 Mixin @include</h5>
+<h3>Mixin 안에 Mixin @include</h3>
 
-<p>example.scss</p>
-
-<pre><code>@mixin compound {
+<p>mixin 호출도 연계가 됩니다 <code>compound</code>를 호출 하면 <code>heighlighted-background</code>, <code>header-text</code>가 불립니다.
+``` sass mixin-in-mixin.scss
+@mixin compound {
   @include highlighted-background;
   @include header-text;
-}
+}</p>
 
-@mixin highlighted-background { background-color: #fc0; }
-@mixin header-text { font-size: 20px; }
+<p>@mixin highlighted-background { background-color: #fc0; }
+@mixin header-text { font-size: 20px; }</p>
+
+<p>a {
+  @inlucde compound;
+}
+```</p>
+
+<p><code>css mixin-in-mixin.css
+a {
+  background-color: #fc0;
+  font-size: 20px }
+</code></p>
+
+<h3>Arguments</h3>
+
+<p><code>@mixin</code> 호출시 인자 전달이 가능 합니다.</p>
+
+<p>``` sass argument.scss
+@mixin sexy-border($color, $witdh) {
+  border: {</p>
+
+<pre><code>color: $color;
+width: $width;
+style: dashed;
 </code></pre>
 
-<h4>Arguments</h4>
+<p>  }
+}</p>
 
-<p>example.scss</p>
+<p>p { @include secy-border(blue, 1in); }
+```</p>
 
-<pre><code>@mixin sexy-border($color, $witdh) {
-  border: {
-    color: $color;
-    width: $width;
-    style: dashed;
-  }
-}
-
-p { @include secy-border(blue, 1in); }
-</code></pre>
-
-<p>example.css</p>
-
-<pre><code>p {
+<p><code>css argument.css
+p {
   border-color: blue;
   border-width: 1in;
   border-style: dashed;
 }
+</code></p>
+
+<h3>Mixin default value</h3>
+
+<p>기본값을 선언해줄수 있고 인자 전달이 없으면 기본 인자를 사용합니다.</p>
+
+<p>``` sass mixin-default-value.scss
+@mixin sexy-border($color, $width: 1in) {
+  border: {</p>
+
+<pre><code>color: $color;
+width: $width;
+style: dashed;
 </code></pre>
 
-<h5>Mixin default value</h5>
-
-<p>example.scss</p>
-
-<pre><code>@mixin sexy-border($color, $width: 1in) {
-  border: {
-    color: $color;
-    width: $width;
-    style: dashed;
-  }
+<p>  }
 }
 p { @include sexy-border(blue); }
 h1 { @include sexy-border(blue, 2in); }
-</code></pre>
+```</p>
 
-<p>example.css</p>
-
-<pre><code>p {
+<p><code>css mixin-default-value.css
+p {
   border-color: blue;
   border-width: 1in;
   border-style: dashed;
@@ -1230,21 +1459,23 @@ h1 {
   border-width: 2in;
   border-style: dashed;
 }
-</code></pre>
+</code></p>
 
-<h4>Keyword Arguments</h4>
+<h3>Keyword Arguments</h3>
 
-<p>example.scss</p>
+<p>변수에 정의 하여 명시적으로 값을 전달 할수도 있습니다.</p>
 
-<pre><code>p { @include sexy-border($color: blue); }
+<p><code>sass keyword.scss
+p { @include sexy-border($color: blue); }
 h1 { @include sexy-border($color: blue, $width: 2in); }
-</code></pre>
+</code></p>
 
-<h4>Varialbe Arguments</h4>
+<h3>Varialbe Arguments</h3>
 
-<p>example.scss</p>
+<p>다수의 인자를 전달 받을때는 <code>...</code>을 사용 해야 합니다.</p>
 
-<pre><code>@mixin box-shadow($shadows…) {
+<p><code>sass variable-argument.scss
+@mixin box-shadow($shadows…) {
   -moz-box-shadow: $shadows;
   -webkit-box-shadow: $shadows;
   box-shadow: $shadows;
@@ -1252,81 +1483,94 @@ h1 { @include sexy-border($color: blue, $width: 2in); }
 .shadows {
   @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
 }
-</code></pre>
+</code></p>
 
-<p>example.css</p>
-
-<pre><code>.shadowed {
+<p><code>css variable-argument.css
+.shadowed {
   -moz-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
   -webkit-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
   box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
 }
-</code></pre>
+</code></p>
 
-<h5>Variable arguments calling a mixin</h5>
+<h3>Variable arguments calling a mixin</h3>
 
-<p>example.scss</p>
+<p><code>@mixin</code> 호출시 인자 목록을 전달 할수있습니다.</p>
 
-<pre><code>@mixin colors($text, $background, $border) {
+<p>``` sass call-mixin.scss
+@mixin colors($text, $background, $border) {
   color: $text;
   background-color: $background;
   border-color: $border;
-}
+}</p>
 
-$values: #ff0000, #00ff00, #0000ff;
+<p>$values: #ff0000, #00ff00, #0000ff;
 .primary {
   @include colors($values…);
 }
-</code></pre>
+```</p>
 
-<p>example.css</p>
-
-<pre><code>.primary {
+<p><code>css call-mixin.css
+.primary {
   color: #ff0000;
   background-color: #00ff00;
   border-color: #0000ff;
 }
+</code></p>
+
+<h3>wrap mixin and add styles change argument</h3>
+
+<p><code>@mixin</code>에 전달 되는 인자를 또다르 <code>@mixin</code>에 전달 할수 있습니다. 다음의 코드는 컴파일은 되지 않습니다. 컴파일을 하려면
+<code>@mixin stylist-mixin</code>을 선언해 주어야 합니다.</p>
+
+<p>``` sass warp-mixin.scss
+@mixin wrapped-stylish-mixin($args…) {</p>
+
+<pre><code>font-weight: bold;
+@include stylish-mixin($args…);
 </code></pre>
 
-<h5>wrap mixin and add styles change argument</h5>
-
-<pre><code>@mixin wrapped-stylish-mixin($args…) {
-   font-weight: bold;
-   @include stylish-mixin($args…);
-}
+<p>}
 .stylish {
   @include wrapped-stylish-mixin(#00ff00, $width: 100px);
 }
+```</p>
+
+<h3>Passing Content Blocks to a Mixin</h3>
+
+<p><code>@content</code> <code>html</code>에 집어 널수도 있습니다.</p>
+
+<p>``` sass mixin-content.scss
+@mixin apply-to-ie6-only {
+  * html {</p>
+
+<pre><code>@content;
 </code></pre>
 
-<h4>Passing Content Blocks to a Mixin</h4>
-
-<p>example.scss</p>
-
-<pre><code>@mixin apply-to-ie6-only {
-  * html {
-    @content;
-  }
+<p>  }
 }
 @include apply-to-ie6-only {
-  #logo {
-    background-image: url(/logo.gif);
-  }
-}
+  #logo {</p>
+
+<pre><code>background-image: url(/logo.gif);
 </code></pre>
 
-<p>example.css</p>
+<p>  }
+}
+```</p>
 
-<pre><code>* html #logo {
+<p><code>sass  mixin-content.scss
+* html #logo {
   background-image: url(/logo.gif);
 }
-</code></pre>
+</code></p>
 
-<h4>Variable Scope and Content Blocks</h4>
+<h3>Variable Scope and Content Blocks</h3>
 
-<p>example.scss</p>
+<p>변수는 <code>{}</code>안에서 지역적으로 사용 됩니다.</p>
 
-<pre><code>$color: white;
+<p><code>sass scope.scss
+$color: white;
   @mixin colors($color: blue) {
   background-color: $color;
   @content;
@@ -1335,47 +1579,51 @@ $values: #ff0000, #00ff00, #0000ff;
 .colors {
   @include colors { color: $color; }
 }
-</code></pre>
+</code></p>
 
-<p>example.css</p>
-
-<pre><code>.colors {
+<p><code>css scope.css
+.colors {
   background-color: blue;
   color: white;
   border-color: blue;
 }
-</code></pre>
+</code></p>
 
-<p>example-02.scss</p>
+<p>``` sass scope-02.scss</p>
 
-<pre><code>#sidebar {
-  $sidebar-width: 300px;
+<h1>sidebar {</h1>
+
+<p>  $sidebar-width: 300px;
   width: $sidebar-width;
-  @include smartphone {
-    width: $sidebar-width / 3;
-  }
-}
+  @include smartphone {</p>
+
+<pre><code>width: $sidebar-width / 3;
 </code></pre>
 
-<h4>Function Directives</h4>
+<p>  }
+}
+```</p>
 
-<p>example.scss</p>
+<h3>Function Directives</h3>
 
-<pre><code>$grid-width: 40px;
-$gutter-width: 10px;
+<p>``` sass function.scss
+$grid-width: 40px;
+$gutter-width: 10px;</p>
 
-@function grid-width($n) {
+<p>@function grid-width($n) {
   @return $n * $grid-width + ($n - 1) * $gutter-width;
-}
+}</p>
 
-#sidebar { width: grid-width(5); }
-</code></pre>
+<h1>sidebar { width: grid-width(5); }</h1>
 
-<p>example.css</p>
+<p>```</p>
 
-<pre><code>#sidebar {
-  width: 240px; }
-</code></pre>
+<p>``` css function.css</p>
+
+<h1>sidebar {</h1>
+
+<p>  width: 240px; }
+```</p>
 ]]></content>
   </entry>
   
