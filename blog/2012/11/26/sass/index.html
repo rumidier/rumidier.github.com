@@ -515,11 +515,14 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>example-13.css</p>
 
-<pre><code>p {
-  color: #050709; }
-</code></pre>
+
+<figure class='code'><figcaption><span>example-13.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#050709</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Color의 곱셈 입니다.</h3>
 
@@ -801,7 +804,7 @@
 
 <p><code>$content</code>값이 참인지 분별하여 거짓이면 <code>Second content?</code>값을 부여 합니다.
 참이므로 <code>$content</code>는 <code>First..</code>가 됩니다.
-<code>$new_content</code>는 거짓 이므로 &#8220;First time…&#8221;을 출력 합니다.</p>
+<code>$new_content</code>는 거짓 이므로 <code>First time…</code>을 출력 합니다.</p>
 
 <figure class='code'><figcaption><span>example-26.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -915,44 +918,42 @@
 
 <p> interpolation is only for CSS imports. As such, it only works with url() imports.</p>
 
-<p> &#8220;` sass example.scss
-$family: unquote(&#8220;Droid-Sans&#8221;);
-@import url(&#8220;http://fonts.googleapis.com/css?family=#{$family}&#8221;);</p>
-
 <figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">###</span> <span class="nt">Partials</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">`</span><span class="nt">colors</span><span class="err">`로</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`를</span> <span class="err">하게</span> <span class="err">되면</span> <span class="err">기본적으로</span> <span class="err">`</span><span class="nc">.css</span><span class="err">`</span> <span class="err">파일이</span> <span class="err">없는</span> <span class="err">상태에서</span>
-</span><span class='line'><span class="err">`</span><span class="nt">_color</span><span class="nc">.scss</span><span class="err">`파일을</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`하게</span> <span class="err">되고</span> <span class="err">이도</span> <span class="err">없으면</span> <span class="err">비슷한</span> <span class="err">`</span><span class="nt">color</span><span class="nc">.scss</span><span class="err">`파일을</span> <span class="nt">import</span><span class="err">합니다</span><span class="nc">.</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$family</span><span class="o">:</span> <span class="nf">unquote</span><span class="p">(</span><span class="s2">&quot;Droid-Sans&quot;</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s">url(&quot;http://fonts.googleapis.com/css?family=\#{$family}&quot;);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> sass example.scss
-@import &#8220;colors&#8221;;</p>
+<h3>Partials</h3>
+
+<p><code>colors</code>로 <code>@import</code>를 하게 되면 기본적으로 <code>.css</code> 파일이 없는 상태에서
+<code>_color.scss</code>파일을 <code>@import</code>하게 되고 이도 없으면 비슷한 <code>color.scss</code>파일을 import합니다.</p>
 
 <figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">###</span> <span class="nt">Nested</span> <span class="o">@</span><span class="nt">import</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">`{</span> <span class="err">}`에서</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`를</span> <span class="err">하게</span> <span class="err">되면</span> <span class="err">`</span><span class="nc">.example</span><span class="err">`을</span> <span class="err">불러</span> <span class="err">옵니다</span><span class="nc">.</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@import</span> <span class="s">&quot;colors&quot;;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> sass _example.scss
-.example {
-  color: red;
-}</p>
+<h3>Nested @import</h3>
 
-<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><code>{ }</code>에서 <code>@import</code>를 하게 되면 <code>.example</code>을 불러 옵니다.</p>
+
+<figure class='code'><figcaption><span>\_example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="err">```</span> <span class="nt">sass</span> <span class="nt">example-29-01</span><span class="nc">.scss</span>
-</span><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.example</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-29-01.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#main</span> <span class="err">{</span>
 </span><span class='line'>  <span class="k">@import</span><span class="s">:</span> <span class="s">&quot;example&quot;;</span>
 </span><span class='line'><span class="err">}</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -2434,15 +2435,15 @@ Sometimes, though, you want to allow an @extend not to produce any new selectors
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/12/01/coffeescript-tutorial/">CoffeeScript Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/29/js2coffee/">js2coffee</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/27/perl/">Perl</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/26/sass/">Sass</a>
       </li>
     
   </ul>

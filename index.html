@@ -9,13 +9,12 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Javascript -> CoffeeScript login.js 기존 login.js 1
+  <meta name="description" content="coffeescript.org Functions 함수는 -&gt;로 정의 합니다. example-01.coffee1
 2
 3
 4
-5
-// login.js $(document).ready(function) { $(&quot;#login_username&quot;).focus();
-}); login &hellip;">
+square = (x) -&gt; x * x
+cube = (x) -&gt; square(x) * x alert cube(5) example- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +69,945 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/12/01/coffeescript-tutorial/">CoffeeScript Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-01T20:20:00+09:00" pubdate data-updated="true">Dec 1<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/12/01/coffeescript-tutorial/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>coffeescript.org</h1>
+
+<h2>Functions</h2>
+
+<p>함수는 <code>-&gt;</code>로 정의 합니다.</p>
+
+<figure class='code'><figcaption><span>example-01.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">square = </span><span class="nf">(x) -&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span>
+</span><span class='line'><span class="nv">cube   = </span><span class="nf">(x) -&gt;</span> <span class="nx">square</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">*</span> <span class="nx">x</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span> <span class="nx">cube</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-01.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">cube</span><span class="p">,</span> <span class="nx">square</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">square</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">cube</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">square</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">cube</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>함수 생성시 인자를 생성및 전달 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>example-02.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">fill = </span><span class="nf">(container, liquid = &quot;coffee&quot;) -&gt;</span>
+</span><span class='line'>  <span class="s">&quot;Filling the </span><span class="si">#{</span><span class="nx">container</span><span class="si">}</span><span class="s"> with </span><span class="si">#{</span><span class="nx">liquid</span><span class="si">}</span><span class="s">…&quot;</span>
+</span><span class='line'><span class="nx">alert</span> <span class="nx">fill</span><span class="p">(</span><span class="s">&quot;cup&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-2.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">fill</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">fill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">liquid</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">&quot;coffee&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="s2">&quot;Finling the &quot;</span> <span class="o">+</span> <span class="nx">container</span> <span class="o">+</span> <span class="s2">&quot; with &quot;</span> <span class="o">+</span> <span class="nx">liquid</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">fill</span><span class="p">(</span><span class="s2">&quot;cup&quot;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Objects and Arrays</h2>
+
+<p>Array는 &#8216;,&#8217;로 인자를 구분 하며 YAML과 같이 개행 문자로도 구분 가능 합니다.</p>
+
+<figure class='code'><figcaption><span>example-03.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">song = </span><span class="p">[</span><span class="s">&quot;do&quot;</span><span class="p">,</span> <span class="s">&quot;re&quot;</span><span class="p">,</span> <span class="s">&quot;mi&quot;</span><span class="p">,</span> <span class="s">&quot;fa&quot;</span><span class="p">,</span> <span class="s">&quot;so&quot;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">singers = </span><span class="p">{</span><span class="nv">Jagger: </span><span class="s">&quot;Rock&quot;</span><span class="p">,</span> <span class="nv">Elvis: </span><span class="s">&quot;Roll&quot;</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">bitlist = </span><span class="p">[</span>
+</span><span class='line'>  <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+</span><span class='line'><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">kids =</span>
+</span><span class='line'>  <span class="nv">brother:</span>
+</span><span class='line'>    <span class="nv">name: </span><span class="s">&quot;Max&quot;</span>
+</span><span class='line'>    <span class="nv">age: </span><span class="mi">11</span>
+</span><span class='line'>  <span class="nv">sister:</span>
+</span><span class='line'>    <span class="nv">name: </span><span class="s">&quot;Ida&quot;</span>
+</span><span class='line'>    <span class="nv">age: </span><span class="mi">9</span>
+</span><span class='line'><span class="nx">alert</span> <span class="nx">song</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&quot;…&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-03.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">bitlist</span><span class="p">,</span> <span class="nx">kids</span><span class="p">,</span> <span class="nx">singers</span><span class="p">,</span> <span class="nx">song</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">song</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="s2">&quot;re&quot;</span><span class="p">,</span> <span class="s2">&quot;mi&quot;</span><span class="p">,</span> <span class="s2">&quot;fa&quot;</span><span class="p">,</span> <span class="s2">&quot;so&quot;</span><span class="p">]</span>
+</span><span class='line'><span class="nx">singers</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">Jagger</span><span class="o">:</span> <span class="s2">&quot;Rokcer&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">Elvis</span><span class="o">:</span> <span class="s2">&quot;Roll&quot;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">bitlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">kids</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">brother</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Max&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">age</span><span class="o">:</span> <span class="mi">11</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">sister</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Ida&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">age</span><span class="o">:</span> <span class="mi">9</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">song</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot; … &quot;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-03-01.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;.account&#39;</span><span class="p">).</span><span class="nx">attr</span> <span class="k">class</span><span class="o">:</span> <span class="s">&#39;active&#39;</span>
+</span><span class='line'><span class="nx">log</span> <span class="nx">object</span><span class="p">.</span><span class="k">class</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Lexical Scoping and Variable Safety(지역변수)</h2>
+
+<p><code>changeNumbers = -&gt;</code>안에 <code>outer</code>값은 외부의 <code>outer</code>의 영향을 받지 않습니다. <code>alert outer</code>와 <code>alert inner</code>의 값은 각 <code>1</code>과 <code>10</code>입니다.</p>
+
+<figure class='code'><figcaption><span>example-04.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">outer = </span><span class="mi">1</span>
+</span><span class='line'><span class="nv">changeNumbers = </span><span class="o">-&gt;</span>
+</span><span class='line'>  <span class="nv">inner = </span><span class="o">-</span><span class="mi">1</span>
+</span><span class='line'>  <span class="nv">outer = </span><span class="mi">10</span>
+</span><span class='line'><span class="nv">inner = </span><span class="nx">changeNumbers</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span> <span class="nx">inner</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>If, Else, Unless, and Conditional Assignment</h2>
+
+<p><code>singing</code>값이 참일때 <code>mood = greatlyImproved</code>를 리턴 합니다.</p>
+
+<figure class='code'><figcaption><span>example-05-01.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">mood = </span><span class="nx">greatlyImproved</span> <span class="k">if</span> <span class="nx">singing</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>happy</code>와 <code>knowIt</code>두개의 값이 참일때와 아닐때를 분류 합니다.</p>
+
+<figure class='code'><figcaption><span>example-05-02.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">if</span> <span class="nx">happy</span> <span class="o">and</span> <span class="nx">knowIt</span>
+</span><span class='line'>  <span class="nx">clapsHands</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">chaChaCha</span><span class="p">()</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="nx">showIt</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>다른 언어의 3항 연산자와 같이 동작 합니다. <code>friday</code>값이 참일때는 <code>sue</code> 아닐때는 <code>jill</code>입니다.</p>
+
+<figure class='code'><figcaption><span>example-05-03.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">date = </span><span class="k">if</span> <span class="nx">friday</span> <span class="k">then</span> <span class="nx">sue</span> <span class="k">else</span> <span class="nx">jill</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Splats&#8230;</h2>
+
+<p><code>…</code>(점3개) Array를 잘라 낼수 있습니다. <code>awardMedals contenders…</code> <code>contenders</code>를 분할하여 <code>awardMedals</code>에 정의 됩니다. 여러개의 값이 있고 3개의 변수가 정의 되어 있을때 분할된 첫번째와 두번째는 개별 인자로 정의 되고 나머지 변수에 남은 Array값이 저장 됩니다.</p>
+
+<figure class='code'><figcaption><span>example-06.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">gold = silver = rest = </span><span class="s">&quot;unknown&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">awardMedals = </span><span class="nf">(first, second, others…) -&gt;</span>
+</span><span class='line'>  <span class="nv">gold   = </span><span class="nx">first</span>
+</span><span class='line'>  <span class="nv">silver = </span><span class="nx">second</span>
+</span><span class='line'>  <span class="nv">rest   = </span><span class="nx">others</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">contenders = </span><span class="p">[</span>
+</span><span class='line'>  <span class="s">&quot;Michael Phelps&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Liu Xiang&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Yao Ming&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Allyson Felix&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Shawn Johnson&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Roman Sebrle&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Guo Jingjing&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Tyson Gay&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Asafa Powell&quot;</span>
+</span><span class='line'>  <span class="s">&quot;Usain Bolt&quot;</span>
+</span><span class='line'><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">awardMedals</span> <span class="nx">contenders</span><span class="err">…</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span> <span class="s">&quot;Gold: &quot;</span> <span class="o">+</span> <span class="nx">gold</span>
+</span><span class='line'><span class="nx">alert</span> <span class="s">&quot;Silver: &quot;</span> <span class="o">+</span> <span class="nx">siliver</span>
+</span><span class='line'><span class="nx">alert</span> <span class="s">&quot;the Field: &quot;</span> <span class="o">+</span> <span class="nx">rest</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Loops and Comprehensions</h3>
+
+<p>Array의 값은 <code>in</code>으로 가져올수 있습니다 이를 <code>food</code>에 정의 하고 <code>eat</code>함수에 인자로 전달 합니다.
+<code>eat food</code>는 <code>.js</code>에서 <code>eat(food);</code> 변환됩니다.</p>
+
+<figure class='code'><figcaption><span>example-07.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">eat</span> <span class="nx">food</span> <span class="k">for</span> <span class="nx">food</span> <span class="k">in</span> <span class="p">[</span><span class="s">&#39;tast&#39;</span><span class="p">,</span> <span class="s">&#39;cheese&#39;</span><span class="p">,</span> <span class="s">&#39;wine&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Array값을 받을 변수 <code>dish</code>와 증가값 <code>i</code>정의 합니다. <code>i</code>는 <code>0</code>에서 <code>1</code>씩 증가 합니다.</p>
+
+<figure class='code'><figcaption><span>example-07-01.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">courses = </span><span class="p">[</span><span class="s">&#39;greens&#39;</span><span class="p">,</span> <span class="s">&#39;caviar&#39;</span><span class="p">,</span> <span class="s">&#39;truffles&#39;</span><span class="p">,</span> <span class="s">&#39;roast&#39;</span><span class="p">,</span> <span class="s">&#39;cake&#39;</span><span class="p">]</span>
+</span><span class='line'>  <span class="nx">menu</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">dish</span> <span class="k">for</span> <span class="nx">dish</span><span class="p">,</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">courses</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>by</code>는 반복문 실행시 1개씩이 아닌 2개씩 건너뜁니다.</p>
+
+<figure class='code'><figcaption><span>example-07-011.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">evens = </span><span class="p">(</span><span class="nx">x</span> <span class="k">for</span> <span class="nx">x</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="mi">10</span><span class="p">]</span> <span class="k">by</span> <span class="mi">2</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>반복문과 비교문을 같이 정의 합니다. <code>isnt</code>는 <code>for</code>문 안에서 <code>if !=</code>으로 변환 됩니다.</p>
+
+<figure class='code'><figcaption><span>example-07-02.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">foods = </span><span class="p">[</span><span class="s">&#39;broccoli&#39;</span><span class="p">,</span> <span class="s">&#39;spinach&#39;</span><span class="p">,</span> <span class="s">&#39;chocolate&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="nx">eat</span> <span class="nx">food</span> <span class="k">for</span> <span class="nx">food</span> <span class="k">in</span> <span class="nx">foods</span> <span class="k">when</span> <span class="nx">food</span> <span class="o">isnt</span> <span class="s">&#39;chocolate&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>name</code>의 길이가 <code>5</code> 미만인 값만을 반환 받습니다.</p>
+
+<figure class='code'><figcaption><span>example-07-03.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">shortNames = </span><span class="p">(</span><span class="nx">name</span> <span class="k">for</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">list</span> <span class="k">when</span> <span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>10..1</code>값들은 Array에 <code>push</code>해 반환 합니다. <code>countdown</code>값은 <code>10,9,8,7,6,5….1</code>값이 됩니다.</p>
+
+<figure class='code'><figcaption><span>example-08.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">countdown = </span><span class="p">(</span><span class="nx">num</span> <span class="k">for</span> <span class="nx">num</span> <span class="k">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">..</span><span class="mi">1</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>of</code>는 <code>key</code>: <code>value</code>를 반환 합니다. <code>yearsOld</code>의 key, value가 <code>chile``age</code>로 정의 됩니다.
+ <code>ages</code>는 문장 3개를 받습니다.(push)</p>
+
+<figure class='code'><figcaption><span>example-09.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">yearsOld = max: </span><span class="mi">10</span><span class="p">,</span> <span class="nv">ida: </span><span class="mi">9</span><span class="p">,</span> <span class="nv">tim: </span><span class="mi">11</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">ages = </span><span class="k">for</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">age</span> <span class="k">of</span> <span class="nx">yearOld</span>
+</span><span class='line'>  <span class="s">&quot;</span><span class="si">#{</span><span class="nx">child</span><span class="si">}</span><span class="s"> is </span><span class="si">#{</span><span class="nx">age</span><span class="si">}</span><span class="s">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>while</code>과 <code>until</code>을 사용 할수 있습니다.</p>
+
+<figure class='code'><figcaption><span>example-10.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># Econ 101</span>
+</span><span class='line'><span class="k">if</span> <span class="k">this</span><span class="p">.</span><span class="nx">studyingEconomics</span>
+</span><span class='line'>  <span class="nx">buy</span><span class="p">()</span> <span class="k">while</span> <span class="nx">supply</span> <span class="o">&gt;</span> <span class="nx">demand</span>
+</span><span class='line'>  <span class="nx">sell</span><span class="p">()</span> <span class="nx">until</span> <span class="nx">supply</span> <span class="o">&gt;</span> <span class="nx">demand</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-10-01.coffee  </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">`</span><span class="nx">num</span><span class="o">`</span><span class="err">값이</span> <span class="o">`</span><span class="mi">0</span><span class="o">`</span><span class="err">될때까지</span> <span class="err">횟수</span> <span class="err">만큼</span> <span class="err">문자열을</span> <span class="err">반환</span> <span class="err">합니다</span><span class="p">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Nursey Rhyme</span>
+</span><span class='line'><span class="nv">num = </span><span class="mi">6</span>
+</span><span class='line'><span class="nv">lyrics = </span><span class="k">while</span> <span class="nx">num</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="s">&quot;</span><span class="si">#{</span><span class="nx">num</span><span class="si">}</span><span class="s"> little monkeys, jumping on the bed.</span>
+</span><span class='line'><span class="s">  One fell out and bumped his head.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>coffeescript <code>do</code>의 대한 설명</p>
+
+<pre><code>When using a JavaScript loop to generate functions,
+it's common to insert a closure wrapper
+in order to ensure that loop variables are closed over,
+and all the generated functions don't just share the final values.
+CoffeeScript provides the `do` keyword,
+which immediately invokes a passed function, forwarding any arguments.     
+</code></pre>
+
+<figure class='code'><figcaption><span>example-11.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">for</span> <span class="nx">filename</span> <span class="k">in</span> <span class="nx">list</span>
+</span><span class='line'>  <span class="nx">do</span> <span class="nf">(filename) -&gt;</span>
+</span><span class='line'>    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">filename</span><span class="p">,</span> <span class="nf">(err, contents) -&gt;</span>
+</span><span class='line'>      <span class="nx">compile</span> <span class="nx">filename</span><span class="p">,</span> <span class="nx">contents</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Array Slicing and Splicing with Ranges</h2>
+
+<p><code>start</code>값은 <code>1, 2, 3</code>값을 반환 합니다.</p>
+
+<figure class='code'><figcaption><span>example-12.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">numbers = </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</span><span class='line'><span class="nv">start = </span><span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>...</code>은 <code>6</code>보다 작은값(6까지가 아님)까지 입니다.
+반환값은 <code>4,5,6</code>입니다.</p>
+
+<figure class='code'><figcaption><span>example-12-01.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">middle = </span><span class="nx">numbers</span><span class="p">[</span><span class="mi">3</span><span class="err">…</span><span class="mi">6</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>6</code>번째 자릿수 부터 가져 옵니다. 반환값은
+<code>7,8,9</code>입니다.</p>
+
+<figure class='code'><figcaption><span>example-12-02.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">end = </span><span class="nx">numbers</span><span class="p">[</span><span class="mi">6</span><span class="p">..]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>0</code>번째 부터 이므로 모든 값을 가져옵니다.</p>
+
+<figure class='code'><figcaption><span>example-12-03.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">copy = </span><span class="nx">numbers</span><span class="p">[..]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>numvers[3..6]</code> 자리에 값과 변경 합니다.</p>
+
+<figure class='code'><figcaption><span>example-13.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">numbers = </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</span><span class='line'><span class="nx">numbers</span><span class="p">[</span><span class="mi">3</span><span class="p">..</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Everything is an Expression (at least, as much as possible)</h2>
+
+<p><code>if</code>/<code>else if</code>/<code>else</code> 구문 입니다. 비교를 2번 할수 있습니다.
+<code>if~then~else</code>는 3항 연산자와 같이 쓸수 있습니다.</p>
+
+<figure class='code'><figcaption><span>example-14.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">grade = </span><span class="nf">(student) -&gt;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="nx">student</span><span class="p">.</span><span class="nx">excellentWork</span>
+</span><span class='line'>    <span class="s">&quot;A+&quot;</span>
+</span><span class='line'>  <span class="k">else</span> <span class="k">if</span> <span class="nx">student</span><span class="p">.</span><span class="nx">okayStuff</span>
+</span><span class='line'>    <span class="k">if</span> <span class="nx">student</span><span class="p">.</span><span class="nx">triedHard</span> <span class="k">then</span> <span class="s">&quot;B&quot;</span> <span class="k">else</span> <span class="s">&quot;B-&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="s">&quot;C&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">eldest = </span><span class="k">if</span> <span class="mi">24</span> <span class="o">&gt;</span> <span class="mi">21</span> <span class="k">then</span> <span class="s">&quot;Liz&quot;</span> <span class="k">else</span> <span class="s">&quot;Ike&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>변수 선언과 동시에 계산이 가능 합니다.</p>
+
+<figure class='code'><figcaption><span>example-15.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">six = </span><span class="p">(</span><span class="nv">one = </span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nv">two = </span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nv">three = </span><span class="mi">3</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>window</code>의 값을 <code>10</code>개 분할합니다.(slice)</p>
+
+<figure class='code'><figcaption><span>example-16.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">globals = </span><span class="p">(</span><span class="nx">name</span> <span class="k">for</span> <span class="nx">name</span> <span class="k">of</span> <span class="nb">window</span><span class="p">)[</span><span class="mi">0</span><span class="err">…</span><span class="mi">10</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>try/catch</h3>
+
+<p><code>try</code>계산 하고 error가 <code>catch</code>되면 <code>try</code>된 값이 아닌 <code>catch</code>값이 리턴 됩니다.</p>
+
+<figure class='code'><figcaption><span>example-17.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">alert</span><span class="p">(</span>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>    <span class="nx">nonexistent</span> <span class="o">/</span> <span class="nx">underfined</span>
+</span><span class='line'>  <span class="k">catch</span> <span class="nx">error</span>
+</span><span class='line'>    <span class="s">&quot;And the error is … ${error}&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Operators and Aliases</h3>
+
+<pre><code>CoffeeScript    |     JavaScript
+    is          |        ===
+   isnt         |        !==
+    not         |        !
+    and         |        &amp;&amp;
+    or          |        ||
+true, yes, on   |       true
+false, no, off  |       false
+   @, this      |       this
+    of          |       in
+    in          |   no JS equivalent
+</code></pre>
+
+<p><code>if (ignition === true)</code>와 같습니다.</p>
+
+<figure class='code'><figcaption><span>example-18-01.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">launch</span><span class="p">()</span> <span class="k">if</span> <span class="nx">ignition</span> <span class="o">is</span> <span class="kc">on</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>(band !== Spinaltap)</code>과 같습니다.</p>
+
+<figure class='code'><figcaption><span>example-18-02.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">volume = </span><span class="mi">10</span> <span class="k">if</span> <span class="nx">band</span> <span class="o">isnt</span> <span class="nx">SpinalTap</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>unless</code>와 중복 되어 if ( answer !== false)`와 같습니다.</p>
+
+<figure class='code'><figcaption><span>example-18-03.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">letTheWildRumpusBegin</span><span class="p">()</span> <span class="nx">unless</span> <span class="nx">answer</span> <span class="o">is</span> <span class="kc">no</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>if (car.speed &lt; limit)</code>일때 실행과 같습니다.</p>
+
+<figure class='code'><figcaption><span>example-18-04.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">if</span> <span class="nx">car</span><span class="p">.</span><span class="nx">speed</span> <span class="o">&lt;</span> <span class="nx">limit</span> <span class="k">then</span> <span class="nx">accelerate</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>if (pick === 47 || pick === 92 || pick == 13)</code>과 같습니다.</p>
+
+<figure class='code'><figcaption><span>example-18-05.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">winner = </span><span class="kc">yes</span> <span class="k">if</span> <span class="nx">pick</span> <span class="k">in</span> <span class="p">[</span><span class="mi">47</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>print(inspect("My name is this.name));</code>와 같습니다. <code>@</code>는 <code>.js</code>의 this를 의미 합니다.</p>
+
+<figure class='code'><figcaption><span>example-18-06.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">print</span> <span class="nx">inspect</span> <span class="s">&quot;My name is </span><span class="si">#{</span><span class="nx">@name</span><span class="si">}</span><span class="s">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>The Existential Operator</h2>
+
+<p>coffeescript에서 <code>?</code>은 <code>undefined</code>와 <code>null</code>값인지 비교 합니다.
+<code>speed ?= 15</code>는 <code>speed</code>가 <code>null</code>인지 검사 합니다.</p>
+
+<figure class='code'><figcaption><span>example-19.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">solipsism = </span><span class="kc">true</span> <span class="k">if</span> <span class="nx">mind</span><span class="o">?</span> <span class="o">and</span> <span class="kc">no</span> <span class="nx">world</span><span class="o">?</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">speed = </span><span class="mi">0</span>
+</span><span class='line'><span class="nx">speed</span> <span class="o">?=</span> <span class="mi">15</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>yeti</code>가 <code>undefiend</code>나 <code>null</code>이 아닐 경우 <code>yeti</code>값을 반환하고 아니라면 <code>bear</code> 를 반환 합니다.
+3항 연산자와 같은 형식 입니다.</p>
+
+<figure class='code'><figcaption><span>example-19-01.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">footprints = </span><span class="nx">yeti</span> <span class="o">?</span> <span class="s">&quot;bear&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>coffeescript의 <code>?.</code>과 <code>.</code></p>
+
+<pre><code>The accessor variant of the existential operator ?.
+can be used to soak up null references in a chain of properties.
+Use it instead of the dot accessor . in cases where the base value may be null or undefined.
+If all of the properties exist then you'll get the expected result,
+ if the chain is broken, undefined is returned instead of the TypeError that would be raised otherwise. 
+</code></pre>
+
+<figure class='code'><figcaption><span>example-20.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">zip = </span><span class="nx">lottery</span><span class="p">.</span><span class="nx">drawWinner</span><span class="o">?</span><span class="p">().</span><span class="nx">address</span><span class="o">?</span><span class="p">.</span><span class="nx">zipcode</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Classes, Inheritance, and Super</h3>
+
+<p><code>class</code>를 선언하고 불러 올수 있습니다.</p>
+
+<p><code>new [class name]</code>을 선언해서 class를 사용 합니다.
+사용된 <code>Snake</code>와 <code>Horse</code>에서 <code>extends Animal</code>을 사용 하였으므로
+<code>class Animal</code>을 사용 합니다.</p>
+
+<figure class='code'><figcaption><span>example-21.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nv">constructor: </span><span class="nf">(@name) -&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">move: </span><span class="p">(</span><span class="nx">meters</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span><span class='line'>    <span class="nx">alert</span> <span class="nx">@name</span> <span class="o">+</span> <span class="s">&quot; moved </span><span class="si">#{</span><span class="nx">meters</span><span class="si">}</span><span class="s">m.&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nx">Snake</span> <span class="k">extends</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nv">move: </span><span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">alert</span> <span class="s">&quot;Slithering…&quot;</span>
+</span><span class='line'>    <span class="k">super</span> <span class="mi">5</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nx">Horse</span> <span class="k">extends</span> <span class="nx">Animal</span>
+</span><span class='line'>    <span class="nv">move: </span><span class="o">-&gt;</span>
+</span><span class='line'>      <span class="nx">alert</span> <span class="s">&quot;Galloping…&quot;</span>
+</span><span class='line'>      <span class="k">super</span> <span class="mi">45</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">sam = </span><span class="k">new</span> <span class="nx">Snake</span> <span class="s">&quot;Sammy the Python&quot;</span>
+</span><span class='line'><span class="nv">tam = </span><span class="k">new</span> <span class="nx">Horse</span> <span class="s">&quot;Tommy the Palomino&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">sam</span><span class="p">.</span><span class="nx">move</span><span class="p">()</span>
+</span><span class='line'><span class="nx">tom</span><span class="p">.</span><span class="nx">move</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>prototype &#8216;::&#8217;</h3>
+
+<p><code>::</code>은 <code>.prototype.</code>의 줄임 표현 입니다.
+<code>String::dasherize</code>는 <code>String.prototype.dasherize</code>로 변환 됩니다.</p>
+
+<figure class='code'><figcaption><span>example-22.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nb">String</span><span class="o">::</span><span class="nv">dasherize = </span><span class="o">-&gt;</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/_/g</span><span class="p">,</span> <span class="s">&quot;-&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Destructuring Assignment</h3>
+
+<p>선언된 두개의 값을 교환 합니다.</p>
+
+<figure class='code'><figcaption><span>example-22.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">theBait = </span><span class="mi">1000</span>
+</span><span class='line'><span class="nv">theSwitch = </span><span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="nx">theBait</span><span class="p">,</span> <span class="nx">TheSwitch</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">theSwitch</span><span class="p">,</span> <span class="nx">theBait</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>여러값의 반환</h3>
+
+<p>리턴 값으로 <code>locatioin</code>, <code>72</code>, <code>Mostly Sunny</code>값 3개를 한번에 반환 합니다.</p>
+
+<figure class='code'><figcaption><span>example-23.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">weatherReport = </span><span class="nf">(location) -&gt;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nx">location</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="s">&quot;Mostly Sunny&quot;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="nx">city</span><span class="p">,</span> <span class="nx">temp</span><span class="p">,</span> <span class="nx">forecast</span><span class="p">]</span> <span class="o">=</span> <span class="nx">weatherReport</span> <span class="s">&quot;Berkeley, CA&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>object의 반환</h3>
+
+<p><code>futurists</code> object 값을 반환 합니다.</p>
+
+<figure class='code'><figcaption><span>example-24.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">futurists =</span>
+</span><span class='line'>  <span class="nv">sculptor: </span><span class="s">&quot;Umberto Boccioni&quot;</span>
+</span><span class='line'>  <span class="nv">painter: </span><span class="s">&quot;Vladimir Burliuk&quot;</span>
+</span><span class='line'>  <span class="nv">poet:</span>
+</span><span class='line'>    <span class="nv">name: </span><span class="s">&quot;F.T Marinetti&quot;</span>
+</span><span class='line'>    <span class="nv">address: </span><span class="p">[</span>
+</span><span class='line'>      <span class="s">&quot;Via Roma 42R&quot;</span>
+</span><span class='line'>      <span class="s">&quot;Bellagio, Italy 22021&quot;</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">{</span><span class="nv">poet: </span><span class="p">{</span><span class="nx">name</span><span class="p">,</span> <span class="nv">address: </span><span class="p">[</span><span class="nx">street</span><span class="p">,</span> <span class="nx">city</span><span class="p">]}}</span> <span class="o">=</span> <span class="nx">futurists</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>split</code>의 반환 값으로 <code>open</code>, <code>contents...</code> <code>close</code> 3군데로 나누어 받습니다. <code>contents...</code>값은 마지막 값 하나를 제외 하고 모든 값을 받습니다.</p>
+
+<figure class='code'><figcaption><span>example-25.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">tag = </span><span class="s">&quot;&lt;impossible&gt;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="nx">open</span><span class="p">,</span> <span class="nx">contents</span><span class="err">…</span><span class="p">,</span> <span class="nx">close</span><span class="p">]</span> <span class="o">=</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Function binding</h3>
+
+<p><code>-&gt;</code>함수 선언전의 <code>(customer, cart)</code>처럼 전달 인자를 정의 해줄수 있습니다.</p>
+
+<figure class='code'><figcaption><span>example-26.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">Account = </span><span class="nf">(customer, cart) -&gt;</span>
+</span><span class='line'>  <span class="vi">@customer = </span><span class="nx">customer</span>
+</span><span class='line'>  <span class="vi">@cart = </span><span class="nx">cart</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;.shopping_cart&#39;</span><span class="p">).</span><span class="nx">bind</span> <span class="s">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span><span class='line'>    <span class="nx">@customer</span><span class="p">.</span><span class="nx">purchase</span> <span class="nx">@cart</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Embedded JavaScript</h3>
+
+<p>coffeescript 안에서 JavaScript 사용하기 위해서는 backticks가 필요 합니다.</p>
+
+<figure class='code'><figcaption><span>example-27.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">hi = </span><span class="o">`</span><span class="nx">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">[</span><span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span> <span class="s">&quot;Hello JavaScript&quot;</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Switch/When/Else</h3>
+
+<p><code>day</code>값을 <code>when</code>으로 비교 하고 <code>when</code>에 해당 하지 않으면 <code>else</code>를 실행 합니다.</p>
+
+<figure class='code'><figcaption><span>example-28.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">switch</span> <span class="nx">day</span>
+</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;Mon&quot;</span> <span class="k">then</span> <span class="nx">go</span> <span class="nx">work</span>
+</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;Tue&quot;</span> <span class="k">then</span> <span class="nx">go</span> <span class="nx">relax</span>
+</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;Thu&quot;</span> <span class="k">then</span> <span class="nx">go</span> <span class="nx">iceFishing</span>
+</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;Fri&quot;</span><span class="p">,</span> <span class="s">&quot;Sat&quot;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="nx">day</span> <span class="o">is</span> <span class="nx">bingoDay</span>
+</span><span class='line'>      <span class="nx">go</span> <span class="nx">bingo</span>
+</span><span class='line'>      <span class="nx">go</span> <span class="nx">dancing</span>
+</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;Sun&quot;</span> <span class="k">then</span> <span class="nx">go</span> <span class="nx">church</span>
+</span><span class='line'>  <span class="k">else</span> <span class="nx">go</span> <span class="nx">work</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Try/Catch/Finally</h3>
+
+<p><code>try</code> 시도를 하고 결과 같으로 <code>catach</code>와 비교 하여 아니면 <code>finally</code>를 실행 합니다.</p>
+
+<figure class='code'><figcaption><span>example-29.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">try</span>
+</span><span class='line'>  <span class="nx">allHellBreaksLoose</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">catsAndDogsLivingTogether</span><span class="p">()</span>
+</span><span class='line'><span class="k">catch</span> <span class="nx">error</span>
+</span><span class='line'>  <span class="nx">print</span> <span class="nx">error</span>
+</span><span class='line'><span class="k">finally</span>
+</span><span class='line'>  <span class="nx">cleanUp</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Chained Comparisons</h3>
+
+<p><code>cholesterol</code>값이 <code>200</code>보다 작거나 <code>60</code>보다 큰지 검사합니다.</p>
+
+<figure class='code'><figcaption><span>example-30.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">cholesterol = </span><span class="mi">127</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">healthy = </span><span class="mi">200</span> <span class="o">&gt;</span> <span class="nx">cholesterol</span> <span class="o">&gt;</span> <span class="mi">60</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>String Interpolation, Block Strings, and Block Comments</h3>
+
+<p><code>#{}</code>은 문자열 보간입니다. <code>#{ number / number}</code>사용시 문자로 취급합니다.</p>
+
+<figure class='code'><figcaption><span>example-31.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">quthor = </span><span class="s">&quot;Wittgenstein&quot;</span>
+</span><span class='line'><span class="nv">quote  = </span><span class="s">&quot;A picture is a fact. -- </span><span class="si">#{</span> <span class="nx">author</span> <span class="si">}</span><span class="s">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">sentence = </span><span class="s">&quot;</span><span class="si">#{</span> <span class="mi">22</span><span class="o">/</span> <span class="mi">7</span> <span class="si">}</span><span class="s"> is a decent approximation of ㅠ&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>coffeescript 는 여러 문장의 개행을 인식 하지 않습니다.</p>
+
+<figure class='code'><figcaption><span>example.32</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">mobyDick = </span><span class="s">&quot;Call me Ishmael. Some years ago --</span>
+</span><span class='line'><span class="s">  never mind how long precisely -- having little</span>
+</span><span class='line'><span class="s">  or no money in my purse, and nothing particular</span>
+</span><span class='line'><span class="s">  to interset me on shore, I thought I would sail</span>
+</span><span class='line'><span class="s">  about a little and see the watery part of the</span>
+</span><span class='line'><span class="s">  world…&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Javascript 변환시 개행문자를 추가 하려면 <code>"""</code>사용해 주어야 합니다.</p>
+
+<figure class='code'><figcaption><span>example-33.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">html = </span><span class="s">&quot;&quot;&quot;</span>
+</span><span class='line'><span class="s">  &lt;strong&gt;</span>
+</span><span class='line'><span class="s">    cup of coffeescript</span>
+</span><span class='line'><span class="s">  &lt;/strong&gt;</span>
+</span><span class='line'><span class="s">  &quot;&quot;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>coffeescript의 여러줄 주석 입니다.</p>
+
+<figure class='code'><figcaption><span>example-34.coffee</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="cm">###</span>
+</span><span class='line'><span class="cm">CoffeeScript Compiler v1.4.0</span>
+</span><span class='line'><span class="cm">Released under the MIT License</span>
+</span><span class='line'><span class="cm">###</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Block Regular Expressions</h3>
+
+<pre><code>OPERATOR = /// ^ (
+  ?:[-=]&gt;
+   | [-+*/%&lt;&gt;&amp;|^!?=]=
+   | &gt;&gt;&gt;=?
+   |([-+:])\1
+   |([&amp;|&lt;&gt;])\2=?
+   |\?\.
+   |\.{2,3}
+) ///
+</code></pre>
+
+<h2>CoffeeScript Style Guide</h2>
+
+<p>CoffeeScript의 문법 사용법을 알려주는 사이트 주소 입니다.
+<a href="https://github.com/polarmobile/coffeescript-style-guide">CoffeeScript Style Guide</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1127,11 +2065,14 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>example-13.css</p>
 
-<pre><code>p {
-  color: #050709; }
-</code></pre>
+
+<figure class='code'><figcaption><span>example-13.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#050709</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Color의 곱셈 입니다.</h3>
 
@@ -1413,7 +2354,7 @@
 
 <p><code>$content</code>값이 참인지 분별하여 거짓이면 <code>Second content?</code>값을 부여 합니다.
 참이므로 <code>$content</code>는 <code>First..</code>가 됩니다.
-<code>$new_content</code>는 거짓 이므로 &#8220;First time…&#8221;을 출력 합니다.</p>
+<code>$new_content</code>는 거짓 이므로 <code>First time…</code>을 출력 합니다.</p>
 
 <figure class='code'><figcaption><span>example-26.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1527,44 +2468,42 @@
 
 <p> interpolation is only for CSS imports. As such, it only works with url() imports.</p>
 
-<p> &#8220;` sass example.scss
-$family: unquote(&#8220;Droid-Sans&#8221;);
-@import url(&#8220;http://fonts.googleapis.com/css?family=#{$family}&#8221;);</p>
-
 <figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">###</span> <span class="nt">Partials</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">`</span><span class="nt">colors</span><span class="err">`로</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`를</span> <span class="err">하게</span> <span class="err">되면</span> <span class="err">기본적으로</span> <span class="err">`</span><span class="nc">.css</span><span class="err">`</span> <span class="err">파일이</span> <span class="err">없는</span> <span class="err">상태에서</span>
-</span><span class='line'><span class="err">`</span><span class="nt">_color</span><span class="nc">.scss</span><span class="err">`파일을</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`하게</span> <span class="err">되고</span> <span class="err">이도</span> <span class="err">없으면</span> <span class="err">비슷한</span> <span class="err">`</span><span class="nt">color</span><span class="nc">.scss</span><span class="err">`파일을</span> <span class="nt">import</span><span class="err">합니다</span><span class="nc">.</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nv">$family</span><span class="o">:</span> <span class="nf">unquote</span><span class="p">(</span><span class="s2">&quot;Droid-Sans&quot;</span><span class="p">)</span><span class="err">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s">url(&quot;http://fonts.googleapis.com/css?family=\#{$family}&quot;);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> sass example.scss
-@import &#8220;colors&#8221;;</p>
+<h3>Partials</h3>
+
+<p><code>colors</code>로 <code>@import</code>를 하게 되면 기본적으로 <code>.css</code> 파일이 없는 상태에서
+<code>_color.scss</code>파일을 <code>@import</code>하게 되고 이도 없으면 비슷한 <code>color.scss</code>파일을 import합니다.</p>
 
 <figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">###</span> <span class="nt">Nested</span> <span class="o">@</span><span class="nt">import</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">`{</span> <span class="err">}`에서</span> <span class="err">`</span><span class="o">@</span><span class="nt">import</span><span class="err">`를</span> <span class="err">하게</span> <span class="err">되면</span> <span class="err">`</span><span class="nc">.example</span><span class="err">`을</span> <span class="err">불러</span> <span class="err">옵니다</span><span class="nc">.</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="k">@import</span> <span class="s">&quot;colors&quot;;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> sass _example.scss
-.example {
-  color: red;
-}</p>
+<h3>Nested @import</h3>
 
-<figure class='code'><figcaption><span>example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><code>{ }</code>에서 <code>@import</code>를 하게 되면 <code>.example</code>을 불러 옵니다.</p>
+
+<figure class='code'><figcaption><span>\_example.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="err">```</span> <span class="nt">sass</span> <span class="nt">example-29-01</span><span class="nc">.scss</span>
-</span><span class='line'><span class="nn">#main</span> <span class="err">{</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.example</span> <span class="err">{</span>
+</span><span class='line'>  <span class="na">color</span><span class="o">:</span> <span class="nb">red</span><span class="err">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>example-29-01.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#main</span> <span class="err">{</span>
 </span><span class='line'>  <span class="k">@import</span><span class="s">:</span> <span class="s">&quot;example&quot;;</span>
 </span><span class='line'><span class="err">}</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -5551,48 +6490,6 @@ Installation of rubygems completed successfully.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime Text2 Vim Mode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-12T12:21:00+09:00" pubdate data-updated="true">Nov 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/12/sublime-text2-vim-mode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>vim mode 경로</h3>
-
-<p>sublime text2 vim mode 설정하기</p>
-
-<p>http://www.sublimetext.com/docs/2/vintage.html</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -5608,15 +6505,15 @@ Installation of rubygems completed successfully.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/12/01/coffeescript-tutorial/">CoffeeScript Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/29/js2coffee/">js2coffee</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/27/perl/">Perl</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/26/sass/">Sass</a>
       </li>
     
   </ul>

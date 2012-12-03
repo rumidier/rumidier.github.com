@@ -9,9 +9,7 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="Net::Twitter 설치시 실패 서버에 모듈을 설치 하려고 하는데 자꾸 실패 하게 되었다.
-ssl도 있고 Dev도 있는데 왜??
-그건 libssl-dev가 없어서 였다
+  <meta name="description" content="vim mode 경로 sublime text2 vim mode 설정하기 http://www.sublimetext.com/docs/2/vintage.html
 ">
   
 
@@ -67,6 +65,48 @@ ssl도 있고 Dev도 있는데 왜??
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/12/sublime-text2-vim-mode/">Sublime Text2 Vim Mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-12T12:21:00+09:00" pubdate data-updated="true">Nov 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/12/sublime-text2-vim-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>vim mode 경로</h3>
+
+<p>sublime text2 vim mode 설정하기</p>
+
+<p>http://www.sublimetext.com/docs/2/vintage.html</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1104,96 +1144,6 @@ my @target_ids = split ',', $id;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/12/list-edit/">List-edit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-12T13:56:00+09:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/12/list-edit/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>청구 내역 수정</h2>
-
-<p><a href="https://gist.github.com/3095912">List-edit-action</a></p>
-
-<p>수정 되어야할 $edit_id를 받을수 있어햐 한다.</p>
-
-<pre><code>sub edit :Local :CaptureArgs(1) {
-my ( $self, $c, $edit_id ) = @_;
-</code></pre>
-
-<p>수정할 폼을 제출 했을때 업데이트 동작 혹은 정보 출력을 하여야 한다.</p>
-
-<pre><code>if ($c-&gt;req-&gt;method eq 'POST') {
-    my @messages;
-
-    push @messages, 'amount is invaild' if ($c-&gt;req-&gt;params-&gt;{amount} !~ /^\d+$/);
-    push @messages, 'title is required' unless ($c-&gt;req-&gt;params-&gt;{title});
-
-    if (@messages) {
-    $c-&gt;flash(
-        messages =&gt; @messages,
-        comment  =&gt; $c-&gt;req-&gt;params-&gt;{comment},
-        title    =&gt; $c-&gt;req-&gt;params-&gt;{title},
-        amount   =&gt; $c-&gt;req-&gt;params-&gt;{amount},
-    );
-
-    return $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$c-&gt;req-&gt;params-&gt;{charge_id}"));
-    }
-
-    my $time = strftime "%Y-%m-%d %H:%M:%S", localtime;
-    my %row = (
-    id         =&gt; $c-&gt;req-&gt;params-&gt;{charge_id},
-    amount     =&gt; $c-&gt;req-&gt;params-&gt;{amount},
-    user       =&gt; $c-&gt;req-&gt;params-&gt;{charge_user},
-    title      =&gt; $c-&gt;req-&gt;params-&gt;{title},
-    comment    =&gt; $c-&gt;req-&gt;params-&gt;{comment},
-    updated_on =&gt; "$time",
-    );
-    $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;update_or_create(\%row);
-
-    $c-&gt;res-&gt;redirect($c-&gt;uri_for("/list/view/$row{id}"));
-}
-else {
-    my $editer = $c-&gt;model('DonDB')-&gt;resultset('Charge')-&gt;find($edit_id);
-
-    $c-&gt;stash(
-    editer =&gt; $editer,
-    );
-}
-}
-</code></pre>
-
-<p><a href="https://gist.github.com/3095922">List-edit.tt</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1211,15 +1161,15 @@ else {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/12/01/coffeescript-tutorial/">CoffeeScript Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/29/js2coffee/">js2coffee</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/27/perl/">Perl</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/26/sass/">Sass</a>
       </li>
     
   </ul>

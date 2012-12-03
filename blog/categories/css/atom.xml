@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-30T19:52:58+09:00</updated>
+  <updated>2012-12-03T17:23:30+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -350,11 +350,10 @@ p {
 }
 </code></p>
 
-<p>example-13.css</p>
-
-<pre><code>p {
+<p><code>css example-13.css
+p {
   color: #050709; }
-</code></pre>
+</code></p>
 
 <h3>Color의 곱셈 입니다.</h3>
 
@@ -541,7 +540,7 @@ p { font: 12px / 30px; }
 
 <p><code>$content</code>값이 참인지 분별하여 거짓이면 <code>Second content?</code>값을 부여 합니다.
 참이므로 <code>$content</code>는 <code>First..</code>가 됩니다.
-<code>$new_content</code>는 거짓 이므로 "First time…"을 출력 합니다.</p>
+<code>$new_content</code>는 거짓 이므로 <code>First time…</code>을 출력 합니다.</p>
 
 <p>``` sass example-26.scss
 $content: "First content";
@@ -623,7 +622,7 @@ $content: "Non-null content" !default;</p>
 
 <p> interpolation is only for CSS imports. As such, it only works with url() imports.</p>
 
-<p> <code>sass example.scss
+<p><code>sass example.scss
 $family: unquote("Droid-Sans");
 @import url("http://fonts.googleapis.com/css?family=\#{$family}");
 </code></p>

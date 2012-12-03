@@ -9,8 +9,10 @@
   <meta name="author" content="rumidier">
 
   
-  <meta name="description" content="매개변수 치환 구문 매개변수 치환 구문
-결과 ${param:-default} param이 널이면 default의 값 | ${#param} param의 길이 | ${param%word} param의 끝에서 word와 부합하는 가장 짧은 부분을 제외한 나머지 부분 &hellip;">
+  <meta name="description" content="출력 재지정 $ cjpeg image.gif &gt; image.jpg 실습 #!/bin/sh
+for image in * .gif
+do cjpeg $image &gt; ${image%%gif}jpg
+done ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +67,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/25/cjpeg/">Cjpeg</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-25T18:05:00+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/11/25/cjpeg/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>출력 재지정</p>
+
+<pre><code>$ cjpeg image.gif &gt; image.jpg
+</code></pre>
+
+<p>실습</p>
+
+<pre><code>#!/bin/sh
+for image in * .gif
+do
+  cjpeg $image &gt; ${image%%gif}jpg
+done
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -859,15 +911,15 @@ key      : key 조합 (^컨트롤)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/12/01/coffeescript-tutorial/">CoffeeScript Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/29/js2coffee/">js2coffee</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/11/27/perl/">Perl</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/26/sass/">Sass</a>
       </li>
     
   </ul>

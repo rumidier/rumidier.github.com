@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Meadows of wild horses]]></title>
   <link href="http://rumidier.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://rumidier.github.com/"/>
-  <updated>2012-11-30T19:52:58+09:00</updated>
+  <updated>2012-12-03T17:23:30+09:00</updated>
   <id>http://rumidier.github.com/</id>
   <author>
     <name><![CDATA[rumidier]]></name>
@@ -12,6 +12,693 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CoffeeScript Tutorial]]></title>
+    <link href="http://rumidier.github.com/blog/2012/12/01/coffeescript-tutorial/"/>
+    <updated>2012-12-01T20:20:00+09:00</updated>
+    <id>http://rumidier.github.com/blog/2012/12/01/coffeescript-tutorial</id>
+    <content type="html"><![CDATA[<h1>coffeescript.org</h1>
+
+<h2>Functions</h2>
+
+<p>함수는 <code>-&gt;</code>로 정의 합니다.</p>
+
+<p>``` coffeescript example-01.coffee
+square = (x) -> x * x
+cube   = (x) -> square(x) * x</p>
+
+<p>alert cube(5)
+```</p>
+
+<p>``` js example-01.js
+var cube, square;</p>
+
+<p>square = function(x) {
+  return x * x;
+};</p>
+
+<p>cube = function(x) {
+  return square(x) * x;
+}
+alert(cube(5));
+```</p>
+
+<p>함수 생성시 인자를 생성및 전달 할수 있습니다.</p>
+
+<p><code>coffeescript example-02.coffee
+fill = (container, liquid = "coffee") -&gt;
+  "Filling the #{container} with #{liquid}…"
+alert fill("cup")
+</code></p>
+
+<p>``` js example-2.js
+var fill;</p>
+
+<p>fill = function(container, liquid) {
+  if (liquid == null) {</p>
+
+<pre><code>liquid = "coffee";
+</code></pre>
+
+<p>  } <br/>
+  return "Finling the " + container + " with " + liquid + "...";
+};</p>
+
+<p>alert(fill("cup"));
+```</p>
+
+<h2>Objects and Arrays</h2>
+
+<p>Array는 ','로 인자를 구분 하며 YAML과 같이 개행 문자로도 구분 가능 합니다.</p>
+
+<p>``` coffeescript example-03.coffee
+song = ["do", "re", "mi", "fa", "so"]</p>
+
+<p>singers = {Jagger: "Rock", Elvis: "Roll"}</p>
+
+<p>bitlist = [
+  1, 0, 0
+  0, 0, 1
+  1, 1, 0
+]</p>
+
+<p>kids =
+  brother:</p>
+
+<pre><code>name: "Max"
+age: 11
+</code></pre>
+
+<p>  sister:</p>
+
+<pre><code>name: "Ida"
+age: 9
+</code></pre>
+
+<p>alert song.join("…")
+```</p>
+
+<p>``` js example-03.js
+var bitlist, kids, singers, song;</p>
+
+<p>song = ["do", "re", "mi", "fa", "so"]
+singers = {
+  Jagger: "Rokcer",
+  Elvis: "Roll"
+};</p>
+
+<p>bitlist = [1, 0, 1, 0, 0, 1, 1 , 1, 0];</p>
+
+<p>kids = {
+  brother: {</p>
+
+<pre><code>name: "Max",
+age: 11
+</code></pre>
+
+<p>  },
+  sister: {</p>
+
+<pre><code>name: "Ida",
+age: 9
+</code></pre>
+
+<p>  }
+};
+alert(song.join(" … "));
+```</p>
+
+<p><code>coffeescript example-03-01.coffee
+$('.account').attr class: 'active'
+log object.class
+</code></p>
+
+<h2>Lexical Scoping and Variable Safety(지역변수)</h2>
+
+<p><code>changeNumbers = -&gt;</code>안에 <code>outer</code>값은 외부의 <code>outer</code>의 영향을 받지 않습니다. <code>alert outer</code>와 <code>alert inner</code>의 값은 각 <code>1</code>과 <code>10</code>입니다.</p>
+
+<p>``` coffeescript example-04.coffee
+outer = 1
+changeNumbers = ->
+  inner = -1
+  outer = 10
+inner = changeNumbers()</p>
+
+<p>alert inner
+```</p>
+
+<h2>If, Else, Unless, and Conditional Assignment</h2>
+
+<p><code>singing</code>값이 참일때 <code>mood = greatlyImproved</code>를 리턴 합니다.</p>
+
+<p><code>coffeescript example-05-01.coffee
+mood = greatlyImproved if singing
+</code></p>
+
+<p><code>happy</code>와 <code>knowIt</code>두개의 값이 참일때와 아닐때를 분류 합니다.</p>
+
+<p><code>coffeescript example-05-02.coffee
+if happy and knowIt
+  clapsHands()
+  chaChaCha()
+else
+  showIt()
+</code></p>
+
+<p>다른 언어의 3항 연산자와 같이 동작 합니다. <code>friday</code>값이 참일때는 <code>sue</code> 아닐때는 <code>jill</code>입니다.<br/>
+<code>coffeescript example-05-03.coffee
+date = if friday then sue else jill
+</code></p>
+
+<h2>Splats...</h2>
+
+<p><code>…</code>(점3개) Array를 잘라 낼수 있습니다. <code>awardMedals contenders…</code> <code>contenders</code>를 분할하여 <code>awardMedals</code>에 정의 됩니다. 여러개의 값이 있고 3개의 변수가 정의 되어 있을때 분할된 첫번째와 두번째는 개별 인자로 정의 되고 나머지 변수에 남은 Array값이 저장 됩니다.</p>
+
+<p>``` coffeescript example-06.coffee
+gold = silver = rest = "unknown"</p>
+
+<p>awardMedals = (first, second, others…) ->
+  gold   = first
+  silver = second
+  rest   = others</p>
+
+<p>contenders = [
+  "Michael Phelps"
+  "Liu Xiang"
+  "Yao Ming"
+  "Allyson Felix"
+  "Shawn Johnson"
+  "Roman Sebrle"
+  "Guo Jingjing"
+  "Tyson Gay"
+  "Asafa Powell"
+  "Usain Bolt"
+]</p>
+
+<p>awardMedals contenders…</p>
+
+<p>alert "Gold: " + gold
+alert "Silver: " + siliver
+alert "the Field: " + rest
+```</p>
+
+<h3>Loops and Comprehensions</h3>
+
+<p>Array의 값은 <code>in</code>으로 가져올수 있습니다 이를 <code>food</code>에 정의 하고 <code>eat</code>함수에 인자로 전달 합니다.
+<code>eat food</code>는 <code>.js</code>에서 <code>eat(food);</code> 변환됩니다.</p>
+
+<p><code>coffeescript example-07.coffee
+eat food for food in ['tast', 'cheese', 'wine']
+</code>
+Array값을 받을 변수 <code>dish</code>와 증가값 <code>i</code>정의 합니다. <code>i</code>는 <code>0</code>에서 <code>1</code>씩 증가 합니다.</p>
+
+<p><code>coffeescript example-07-01.coffee
+courses = ['greens', 'caviar', 'truffles', 'roast', 'cake']
+  menu i + 1, dish for dish, i in courses
+</code></p>
+
+<p><code>by</code>는 반복문 실행시 1개씩이 아닌 2개씩 건너뜁니다.</p>
+
+<p><code>coffeescript example-07-011.coffee
+evens = (x for x in [0..10] by 2)
+</code>
+반복문과 비교문을 같이 정의 합니다. <code>isnt</code>는 <code>for</code>문 안에서 <code>if !=</code>으로 변환 됩니다.</p>
+
+<p><code>coffeescript example-07-02.coffee
+foods = ['broccoli', 'spinach', 'chocolate']
+eat food for food in foods when food isnt 'chocolate'
+</code>
+<code>name</code>의 길이가 <code>5</code> 미만인 값만을 반환 받습니다.</p>
+
+<p><code>coffeescript example-07-03.coffee
+shortNames = (name for name in list when name.length &lt; 5)
+</code></p>
+
+<p><code>10..1</code>값들은 Array에 <code>push</code>해 반환 합니다. <code>countdown</code>값은 <code>10,9,8,7,6,5….1</code>값이 됩니다.</p>
+
+<p><code>coffeescript example-08.coffee
+countdown = (num for num in [10..1])
+</code></p>
+
+<p><code>of</code>는 <code>key</code>: <code>value</code>를 반환 합니다. <code>yearsOld</code>의 key, value가 <code>chile``age</code>로 정의 됩니다.
+ <code>ages</code>는 문장 3개를 받습니다.(push)</p>
+
+<p>``` coffeescript example-09.coffee
+yearsOld = max: 10, ida: 9, tim: 11</p>
+
+<p>ages = for child, age of yearOld
+  "#{child} is #{age}"
+```</p>
+
+<p><code>while</code>과 <code>until</code>을 사용 할수 있습니다.</p>
+
+<p>``` coffeescript example-10.coffee</p>
+
+<h1>Econ 101</h1>
+
+<p>if this.studyingEconomics
+  buy() while supply > demand
+  sell() until supply > demand
+```</p>
+
+<p>``` coffeescript example-10-01.coffee</p>
+
+<p><code>num</code>값이 <code>0</code>될때까지 횟수 만큼 문자열을 반환 합니다.</p>
+
+<h1>Nursey Rhyme</h1>
+
+<p>num = 6
+lyrics = while num -= 1
+  "#{num} little monkeys, jumping on the bed.
+  One fell out and bumped his head."
+```</p>
+
+<p>coffeescript <code>do</code>의 대한 설명</p>
+
+<pre><code>When using a JavaScript loop to generate functions,
+it's common to insert a closure wrapper
+in order to ensure that loop variables are closed over,
+and all the generated functions don't just share the final values.
+CoffeeScript provides the `do` keyword,
+which immediately invokes a passed function, forwarding any arguments.     
+</code></pre>
+
+<p>``` coffeescript example-11.coffee
+for filename in list
+  do (filename) -></p>
+
+<pre><code>fs.readFile filename, (err, contents) -&gt;
+  compile filename, contents.toString()
+</code></pre>
+
+<p>```</p>
+
+<h2>Array Slicing and Splicing with Ranges</h2>
+
+<p><code>start</code>값은 <code>1, 2, 3</code>값을 반환 합니다.
+<code>coffeescript example-12.coffee
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+start = numbers[0..2]
+</code></p>
+
+<p><code>...</code>은 <code>6</code>보다 작은값(6까지가 아님)까지 입니다.
+반환값은 <code>4,5,6</code>입니다.</p>
+
+<p><code>coffeescript example-12-01.coffee
+middle = numbers[3…6]
+</code></p>
+
+<p><code>6</code>번째 자릿수 부터 가져 옵니다. 반환값은
+<code>7,8,9</code>입니다.</p>
+
+<p><code>coffeescript example-12-02.coffee
+end = numbers[6..]
+</code></p>
+
+<p><code>0</code>번째 부터 이므로 모든 값을 가져옵니다.</p>
+
+<p><code>coffeescript example-12-03.coffee
+copy = numbers[..]
+</code></p>
+
+<p><code>numvers[3..6]</code> 자리에 값과 변경 합니다.</p>
+
+<p><code>coffeescript example-13.coffee
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+numbers[3..6] = [-3, -4, -5, -6]
+</code></p>
+
+<h2>Everything is an Expression (at least, as much as possible)</h2>
+
+<p><code>if</code>/<code>else if</code>/<code>else</code> 구문 입니다. 비교를 2번 할수 있습니다.
+<code>if~then~else</code>는 3항 연산자와 같이 쓸수 있습니다.</p>
+
+<p>``` coffeescript example-14.coffee
+grade = (student) ->
+  if student.excellentWork</p>
+
+<pre><code>"A+"
+</code></pre>
+
+<p>  else if student.okayStuff</p>
+
+<pre><code>if student.triedHard then "B" else "B-"
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>"C"
+</code></pre>
+
+<p>eldest = if 24 > 21 then "Liz" else "Ike"
+```</p>
+
+<p>변수 선언과 동시에 계산이 가능 합니다.</p>
+
+<p><code>coffeescript example-15.coffee
+six = (one = 1) + (two = 2) + (three = 3)
+</code></p>
+
+<p><code>window</code>의 값을 <code>10</code>개 분할합니다.(slice)</p>
+
+<p><code>coffeescript example-16.coffee
+globals = (name for name of window)[0…10]
+</code></p>
+
+<h3>try/catch</h3>
+
+<p><code>try</code>계산 하고 error가 <code>catch</code>되면 <code>try</code>된 값이 아닌 <code>catch</code>값이 리턴 됩니다.</p>
+
+<p>``` coffeescript example-17.coffee
+alert(
+  try</p>
+
+<pre><code>nonexistent / underfined
+</code></pre>
+
+<p>  catch error</p>
+
+<pre><code>"And the error is … ${error}"
+</code></pre>
+
+<p>)
+```</p>
+
+<h3>Operators and Aliases</h3>
+
+<pre><code>CoffeeScript    |     JavaScript
+    is          |        ===
+   isnt         |        !==
+    not         |        !
+    and         |        &amp;&amp;
+    or          |        ||
+true, yes, on   |       true
+false, no, off  |       false
+   @, this      |       this
+    of          |       in
+    in          |   no JS equivalent
+</code></pre>
+
+<p><code>if (ignition === true)</code>와 같습니다.</p>
+
+<p><code>coffeescript example-18-01.coffee
+launch() if ignition is on
+</code></p>
+
+<p><code>(band !== Spinaltap)</code>과 같습니다.</p>
+
+<p><code>coffeescript example-18-02.coffee
+volume = 10 if band isnt SpinalTap
+</code></p>
+
+<p><code>unless</code>와 중복 되어 if ( answer !== false)`와 같습니다.</p>
+
+<p><code>coffeescript example-18-03.coffee
+letTheWildRumpusBegin() unless answer is no
+</code></p>
+
+<p><code>if (car.speed &lt; limit)</code>일때 실행과 같습니다.</p>
+
+<p><code>coffeescript example-18-04.coffee
+if car.speed &lt; limit then accelerate()
+</code></p>
+
+<p><code>if (pick === 47 || pick === 92 || pick == 13)</code>과 같습니다.</p>
+
+<p><code>coffeescript example-18-05.coffee
+winner = yes if pick in [47, 92, 13]
+</code></p>
+
+<p><code>print(inspect("My name is this.name));</code>와 같습니다. <code>@</code>는 <code>.js</code>의 this를 의미 합니다.</p>
+
+<p><code>coffeescript example-18-06.coffee
+print inspect "My name is #{@name}"
+</code></p>
+
+<h2>The Existential Operator</h2>
+
+<p>coffeescript에서 <code>?</code>은 <code>undefined</code>와 <code>null</code>값인지 비교 합니다.
+<code>speed ?= 15</code>는 <code>speed</code>가 <code>null</code>인지 검사 합니다.</p>
+
+<p>``` coffeescript example-19.coffee
+solipsism = true if mind? and no world?</p>
+
+<p>speed = 0
+speed ?= 15
+```</p>
+
+<p><code>yeti</code>가 <code>undefiend</code>나 <code>null</code>이 아닐 경우 <code>yeti</code>값을 반환하고 아니라면 <code>bear</code> 를 반환 합니다.
+3항 연산자와 같은 형식 입니다.</p>
+
+<p><code>coffeescript example-19-01.coffee
+footprints = yeti ? "bear"
+</code>
+coffeescript의 <code>?.</code>과 <code>.</code></p>
+
+<pre><code>The accessor variant of the existential operator ?.
+can be used to soak up null references in a chain of properties.
+Use it instead of the dot accessor . in cases where the base value may be null or undefined.
+If all of the properties exist then you'll get the expected result,
+ if the chain is broken, undefined is returned instead of the TypeError that would be raised otherwise. 
+</code></pre>
+
+<p><code>coffeescript example-20.coffee
+zip = lottery.drawWinner?().address?.zipcode
+</code></p>
+
+<h3>Classes, Inheritance, and Super</h3>
+
+<p><code>class</code>를 선언하고 불러 올수 있습니다.</p>
+
+<p><code>new [class name]</code>을 선언해서 class를 사용 합니다.
+사용된 <code>Snake</code>와 <code>Horse</code>에서 <code>extends Animal</code>을 사용 하였으므로
+<code>class Animal</code>을 사용 합니다.</p>
+
+<p>``` coffeescript example-21.coffee
+class Animal
+  constructor: (@name) -></p>
+
+<p>  move: (meters) =></p>
+
+<pre><code>alert @name + " moved #{meters}m."
+</code></pre>
+
+<p>class Snake extends Animal
+  move: -></p>
+
+<pre><code>alert "Slithering…"
+super 5
+</code></pre>
+
+<p>class Horse extends Animal</p>
+
+<pre><code>move: -&gt;
+  alert "Galloping…"
+  super 45
+</code></pre>
+
+<p>sam = new Snake "Sammy the Python"
+tam = new Horse "Tommy the Palomino"</p>
+
+<p>sam.move()
+tom.move()
+```</p>
+
+<h3>prototype '::'</h3>
+
+<p><code>::</code>은 <code>.prototype.</code>의 줄임 표현 입니다.
+<code>String::dasherize</code>는 <code>String.prototype.dasherize</code>로 변환 됩니다.</p>
+
+<p><code>coffeescript example-22.coffee
+String::dasherize = -&gt;
+  this.replace /_/g, "-"
+</code></p>
+
+<h3>Destructuring Assignment</h3>
+
+<p>선언된 두개의 값을 교환 합니다.</p>
+
+<p>``` coffeescript example-22.coffee
+theBait = 1000
+theSwitch = 0</p>
+
+<p>[theBait, TheSwitch] = [theSwitch, theBait]
+```</p>
+
+<h3>여러값의 반환</h3>
+
+<p>리턴 값으로 <code>locatioin</code>, <code>72</code>, <code>Mostly Sunny</code>값 3개를 한번에 반환 합니다.</p>
+
+<p>``` coffeescript example-23.coffee
+weatherReport = (location) ->
+  [location, 72, "Mostly Sunny"]</p>
+
+<p>[city, temp, forecast] = weatherReport "Berkeley, CA"
+```</p>
+
+<h3>object의 반환</h3>
+
+<p><code>futurists</code> object 값을 반환 합니다.</p>
+
+<p>``` coffeescript example-24.coffee
+futurists =
+  sculptor: "Umberto Boccioni"
+  painter: "Vladimir Burliuk"
+  poet:</p>
+
+<pre><code>name: "F.T Marinetti"
+address: [
+  "Via Roma 42R"
+  "Bellagio, Italy 22021"
+]
+</code></pre>
+
+<p>{poet: {name, address: [street, city]}} = futurists
+```</p>
+
+<p><code>split</code>의 반환 값으로 <code>open</code>, <code>contents...</code> <code>close</code> 3군데로 나누어 받습니다. <code>contents...</code>값은 마지막 값 하나를 제외 하고 모든 값을 받습니다.</p>
+
+<p>``` coffeescript example-25.coffee
+tag = "<impossible>"</p>
+
+<p>[open, contents…, close] = tag.split("")
+```</p>
+
+<h3>Function binding</h3>
+
+<p><code>-&gt;</code>함수 선언전의 <code>(customer, cart)</code>처럼 전달 인자를 정의 해줄수 있습니다.
+``` coffeescript example-26.coffee
+Account = (customer, cart) ->
+  @customer = customer
+  @cart = cart</p>
+
+<p>  $('.shopping_cart').bind 'click', (event) =></p>
+
+<pre><code>@customer.purchase @cart
+</code></pre>
+
+<p>```</p>
+
+<h3>Embedded JavaScript</h3>
+
+<p>coffeescript 안에서 JavaScript 사용하기 위해서는 backticks가 필요 합니다.
+<code>coffeescript example-27.coffee
+hi = `function() {
+  return [document.title, "Hello JavaScript"].join(": ");
+}`
+</code></p>
+
+<h3>Switch/When/Else</h3>
+
+<p><code>day</code>값을 <code>when</code>으로 비교 하고 <code>when</code>에 해당 하지 않으면 <code>else</code>를 실행 합니다.</p>
+
+<p>``` coffeescript example-28.coffee
+switch day
+  when "Mon" then go work
+  when "Tue" then go relax
+  when "Thu" then go iceFishing
+  when "Fri", "Sat"</p>
+
+<pre><code>if day is bingoDay
+  go bingo
+  go dancing
+</code></pre>
+
+<p>  when "Sun" then go church
+  else go work
+```</p>
+
+<h3>Try/Catch/Finally</h3>
+
+<p><code>try</code> 시도를 하고 결과 같으로 <code>catach</code>와 비교 하여 아니면 <code>finally</code>를 실행 합니다.</p>
+
+<p><code>coffeescript example-29.coffee
+try
+  allHellBreaksLoose()
+  catsAndDogsLivingTogether()
+catch error
+  print error
+finally
+  cleanUp()
+</code></p>
+
+<h3>Chained Comparisons</h3>
+
+<p><code>cholesterol</code>값이 <code>200</code>보다 작거나 <code>60</code>보다 큰지 검사합니다.</p>
+
+<p>``` coffeescript example-30.coffee
+cholesterol = 127</p>
+
+<p>healthy = 200 > cholesterol > 60
+```</p>
+
+<h3>String Interpolation, Block Strings, and Block Comments</h3>
+
+<p><code>#{}</code>은 문자열 보간입니다. <code>#{ number / number}</code>사용시 문자로 취급합니다.</p>
+
+<p>``` coffeescript example-31.coffee
+quthor = "Wittgenstein"
+quote  = "A picture is a fact. -- #{ author }"</p>
+
+<p>sentence = "#{ 22/ 7 } is a decent approximation of ㅠ"
+```</p>
+
+<p>coffeescript 는 여러 문장의 개행을 인식 하지 않습니다.</p>
+
+<p><code>coffeescript example.32
+mobyDick = "Call me Ishmael. Some years ago --
+  never mind how long precisely -- having little
+  or no money in my purse, and nothing particular
+  to interset me on shore, I thought I would sail
+  about a little and see the watery part of the
+  world…"
+</code></p>
+
+<p>Javascript 변환시 개행문자를 추가 하려면 <code>"""</code>사용해 주어야 합니다.</p>
+
+<p>``` coffeescript example-33.coffee
+html = """</p>
+
+<pre><code>&lt;strong&gt;
+  cup of coffeescript
+&lt;/strong&gt;
+"""
+</code></pre>
+
+<p>```</p>
+
+<p>coffeescript의 여러줄 주석 입니다.</p>
+
+<p>``` coffeescript example-34.coffee</p>
+
+<pre><code>###
+CoffeeScript Compiler v1.4.0
+Released under the MIT License
+###
+</code></pre>
+
+<p>```</p>
+
+<h3>Block Regular Expressions</h3>
+
+<pre><code>OPERATOR = /// ^ (
+  ?:[-=]&gt;
+   | [-+*/%&lt;&gt;&amp;|^!?=]=
+   | &gt;&gt;&gt;=?
+   |([-+:])\1
+   |([&amp;|&lt;&gt;])\2=?
+   |\?\.
+   |\.{2,3}
+) ///
+</code></pre>
+
+<h2>CoffeeScript Style Guide</h2>
+
+<p>CoffeeScript의 문법 사용법을 알려주는 사이트 주소 입니다.
+<a href="https://github.com/polarmobile/coffeescript-style-guide">CoffeeScript Style Guide</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[js2coffee]]></title>
